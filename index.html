@@ -67,8 +67,10 @@ body {
 }
 .header-inner {
   max-width: 1600px; margin: 0 auto;
-  padding: 16px 32px;
-  display: flex; align-items: center; gap: 24px;
+  padding: 11px 20px;
+  display: flex; align-items: center; gap: 14px;
+  /* Si no cabe todo en una línea, baja a la siguiente: nada queda fuera de cuadro */
+  flex-wrap: wrap; row-gap: 9px;
 }
 .brand {
   display: flex; align-items: center; gap: 14px;
@@ -117,15 +119,18 @@ body {
   background: transparent;
   border: none;
   color: var(--text-2);
-  padding: 7px 14px;
+  padding: 6px 11px;
   font-family: inherit;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 400;
   border-radius: 6px;
   cursor: pointer;
   transition: all .15s ease;
-  display: inline-flex; align-items: center; gap: 7px;
+  display: inline-flex; align-items: center; gap: 6px;
+  white-space: nowrap;
 }
+/* En pantallas de laptop los iconos de las pestañas se van: pesan ancho y no aportan */
+@media (max-width: 1450px) { .tab svg { display: none; } }
 .tab:hover { color: var(--text); background: rgba(255,255,255,.6); }
 .tab.active {
   background: #fff;
@@ -136,20 +141,21 @@ body {
 .tab svg { width: 13px; height: 13px; }
 
 .header-actions {
-  display: flex; gap: 8px;
+  display: flex; gap: 6px; flex-wrap: wrap;
 }
 .btn {
   background: #fff;
   border: 1px solid var(--border);
   color: var(--text);
   font-family: inherit;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 400;
-  padding: 8px 14px;
+  padding: 7px 11px;
   border-radius: 6px;
   cursor: pointer;
-  display: inline-flex; align-items: center; gap: 6px;
+  display: inline-flex; align-items: center; gap: 5px;
   transition: all .15s ease;
+  white-space: nowrap;
 }
 .btn:hover { background: var(--bg-3); border-color: var(--border-2); }
 .btn svg { width: 13px; height: 13px; }
@@ -1328,17 +1334,12 @@ tr.row-highlighted {
 .auth-error { margin: 12px 0 0; font-size: 11.5px; color: #c0121d; line-height: 1.5; }
 .user-badge {
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 4px 10px 4px 4px; border-radius: 14px;
+  padding: 5px 12px; border-radius: 14px;
   background: var(--bg-3); border: 1px solid var(--border);
   font-size: 12px; color: var(--text-2); cursor: pointer;
 }
 .user-badge:hover { background: #fff; border-color: var(--accent-4); }
-.user-badge .user-avatar {
-  width: 22px; height: 22px; border-radius: 50%;
-  background: var(--accent-4); color: #fff;
-  font-weight: 600; font-size: 9.5px;
-  display: inline-flex; align-items: center; justify-content: center;
-}
+.user-badge #user-name { font-weight: 500; color: var(--text); }
 
 /* === SELECTOR DE COLUMNAS === */
 .cols-menu {
@@ -2025,8 +2026,7 @@ tr.row-highlighted {
     </nav>
 
     <div class="header-actions">
-      <span class="user-badge" id="user-badge" title="Cambiar de usuario o desconectar">
-        <span class="user-avatar" id="user-avatar">—</span>
+      <span class="user-badge" id="user-badge" title="Click para desconectar">
         <span id="user-name">—</span>
       </span>
       <span class="sync-indicator sync-loading" id="sync-indicator" title="Los cambios se guardan en este navegador">
@@ -2051,7 +2051,7 @@ tr.row-highlighted {
       </button>
       <button class="btn btn-ghost" id="btn-clear" title="Limpiar todos los filtros">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6M5 6l1 14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-14"/></svg>
-        Limpiar filtros
+        Limpiar
       </button>
       <button class="btn btn-primary" id="btn-new">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
@@ -3071,10 +3071,8 @@ function refrescarTodo() {
 }
 
 function updateUserBadge() {
-  const av = document.getElementById('user-avatar');
   const nm = document.getElementById('user-name');
   if (!userAuth) return;
-  if (av) av.textContent = (userAuth.iniciales || '—').slice(0, 2);
   if (nm) nm.textContent = nombreCorto(userAuth.iniciales);
   const badge = document.getElementById('user-badge');
   if (badge) badge.title = `${NOMBRES[userAuth.iniciales] || userAuth.iniciales} · click para desconectar`;
@@ -3085,7 +3083,9 @@ function mostrarAcceso(error) {
   // En la pantalla se ve el nombre completo; por dentro se sigue guardando la
   // inicial, que es con lo que están firmados los comentarios y el responsable.
   sel.innerHTML = '<option value="">— Selecciona tu nombre —</option>' +
-    RESPONSABLES.map(i => `<option value="${i}">${escapeHtml(NOMBRES[i] || i)}</option>`).join('');
+    RESPONSABLES.slice()
+      .sort((a, b) => (NOMBRES[a] || a).localeCompare(NOMBRES[b] || b, 'es'))
+      .map(i => `<option value="${i}">${escapeHtml(NOMBRES[i] || i)}</option>`).join('');
   document.getElementById('auth-error').textContent = error || '';
   document.getElementById('auth-overlay').classList.add('active');
 }
