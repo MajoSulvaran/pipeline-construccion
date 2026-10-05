@@ -467,6 +467,40 @@ body {
   border-color: #f5cf9a;
   color: #a16207;
 }
+.pill-bpr {
+  display: inline-block; margin-left: 5px; padding: 1px 6px; border-radius: 3px;
+  background: #0003aa; color: #fff; font-size: 9px; font-weight: 700; letter-spacing: .04em;
+  vertical-align: middle;
+}
+.bpr-switch {
+  display: flex; align-items: center; gap: 12px; cursor: pointer;
+  padding: 11px 14px; border-radius: 9px;
+  border: 1px solid var(--border); background: var(--bg-2);
+}
+.bpr-switch.on { border-color: var(--accent-4); background: #eef0ff; }
+.bpr-switch input { display: none; }
+.bpr-switch-riel {
+  width: 34px; height: 19px; border-radius: 10px; background: var(--border-2);
+  position: relative; flex: none; transition: background .15s;
+}
+.bpr-switch-riel i {
+  position: absolute; top: 2px; left: 2px; width: 15px; height: 15px; border-radius: 50%;
+  background: #fff; transition: left .15s; box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+.bpr-switch.on .bpr-switch-riel { background: var(--accent-4); }
+.bpr-switch.on .bpr-switch-riel i { left: 17px; }
+.bpr-switch-texto b { display: block; font-size: 12.5px; color: var(--text); }
+.bpr-switch-texto em { font-style: normal; font-size: 11px; color: var(--text-3); }
+.bpr-campos {
+  border-left: 3px solid var(--accent-4); padding-left: 12px !important; margin-top: -4px;
+}
+.bpr-campos-grid {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px 12px;
+}
+.bpr-campos-grid .field.full { grid-column: 1 / -1; }
+@media (max-width: 1100px) { .bpr-campos-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.unico-check { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--text); cursor: pointer; }
+.unico-check input { accent-color: var(--accent-4); width: 15px; height: 15px; }
 .pill-alt {
   display: inline-block; margin-left: 5px; padding: 1px 6px; border-radius: 3px;
   background: var(--surface-2); border: 1px solid var(--border-2); color: var(--text-2);
@@ -3120,6 +3154,13 @@ function migrarCampos(p) {
   if (p.jefatura === undefined) p.jefatura = null;
   if (p.gerente === undefined) p.gerente = null;
   if (p.obra_madre === undefined) p.obra_madre = null;
+  // Las obras que ya traían datos de detalle quedan marcadas para BPR solas
+  if (p.detalle_bpr === undefined) {
+    p.detalle_bpr = !!(num0(p.volumen_total) || num0(p.share_cemex) || num0(p.venta) || num0(p.ebitda) ||
+                       num0(p.longitud_km) || num0(p.duracion_meses) ||
+                       (Array.isArray(p.competidores) && p.competidores.length));
+  }
+  if (p.proveedor_unico === undefined) p.proveedor_unico = false;
   if (p.duracion_meses === undefined) p.duracion_meses = null;
   return p;
 }
@@ -3566,7 +3607,7 @@ function restoreSeed() {
   initStateFromSeed();
   state.projects.forEach(p => { if (!p.history) p.history = []; });
   migrarTodo();
-  saveLocalData('Restauró la base original');
+  saveState('Restauró la base original');
   populateFilters();
   renderTable();
   toast('Base original restaurada.', 'success');
@@ -3714,6 +3755,7 @@ const COLS_PIPELINE = [
   { k: 'estatus', t: 'Estatus', sort: 'estatus', def: true,
     td: p => `<span class="status-pill ${statusClass(p.estatus)}">${escapeHtml(statusShortName(p.estatus))}</span>` +
              (p.seguimiento ? '<span class="pill-seg" title="CEMEX no licita esta obra: se monitorea el proceso y se coloca volumen vía el contratista ganador">Seguimiento</span>' : '') +
+             (p.detalle_bpr ? '<span class="pill-bpr" title="Entra al BPR y al PDM">BPR</span>' : '') +
              (esCotizacionAlterna(p) ? `<span class="pill-alt" title="Misma obra que: ${escapeHtml((obraMadre(p) || {}).proyecto || '')} · no suma volumen">Cotización alterna</span>` : '') },
   { k: 'proyecto', t: 'Proyecto', sort: 'proyecto', def: true, fijo: true,
     td: p => `<div class="cell-project" title="${escapeHtml(p.proyecto || '')}">${escapeHtml(p.proyecto || '—')}</div>` },
@@ -4133,48 +4175,75 @@ function openModal(id = null) {
       </select>
     </div>
     <div class="field">
-      <label>Volumen total de la obra (K m³)</label>
-      <input id="m-voltotal" type="number" step="0.1" value="${p.volumen_total||''}" placeholder="Todo el concreto de la obra">
-    </div>
-    <div class="field">
       <label>Volumen CEMEX (K m³)</label>
       <input id="m-concreto" type="number" step="0.1" value="${p.concreto_total||''}">
     </div>
-    <div class="field">
-      <label>% CEMEX (competidor A)</label>
-      <input id="m-share" type="number" step="0.1" min="0" max="100" value="${p.share_cemex ?? ''}" placeholder="Se calcula con los volúmenes">
-    </div>
+
     <div class="field full">
-      <label>Competencia · CEMEX es el competidor A</label>
-      <div id="m-comps"></div>
-      <button type="button" class="comp-add" id="m-add-comp">+ Agregar competidor</button>
-      <datalist id="lista-clientes">
-        ${opcionesCliente().map(c => `<option value="${escapeHtml(c)}"></option>`).join('')}
-      </datalist>
+      <label class="bpr-switch ${p.detalle_bpr ? 'on' : ''}" id="m-bpr-label">
+        <input type="checkbox" id="m-bpr" ${p.detalle_bpr ? 'checked' : ''}>
+        <span class="bpr-switch-riel"><i></i></span>
+        <span class="bpr-switch-texto">
+          <b>Requiere información completa</b>
+          <em>Prende esto si la obra entra al BPR y al PDM. Se abren los campos de volumen total, competencia, venta y EBITDA.</em>
+        </span>
+      </label>
+    </div>
+
+    <div class="field full bpr-campos" id="m-bpr-campos" style="${p.detalle_bpr ? '' : 'display:none'}">
+      <div class="bpr-campos-grid">
+        <div class="field full">
+          <label class="unico-check">
+            <input type="checkbox" id="m-unico" ${p.proveedor_unico ? 'checked' : ''}>
+            <span>CEMEX es el único proveedor de concreto de la obra</span>
+          </label>
+          <p class="fi-ayuda">Si lo palomeas, el volumen total de la obra se iguala al de CEMEX y el market share queda en 100%. Úsalo solo cuando se sabe que no hay competencia, no cuando falta el dato.</p>
+        </div>
+        <div class="field">
+          <label>Volumen total de la obra (K m³)</label>
+          <input id="m-voltotal" type="number" step="0.1" value="${p.volumen_total||''}" placeholder="Todo el concreto de la obra">
+        </div>
+        <div class="field">
+          <label>% CEMEX (competidor A)</label>
+          <input id="m-share" type="number" step="0.1" min="0" max="100" value="${p.share_cemex ?? ''}" placeholder="Se calcula con los volúmenes">
+        </div>
+        <div class="field">
+          <label>Venta (M MXN)</label>
+          <input id="m-venta" type="number" step="0.1" value="${p.venta ?? ''}">
+        </div>
+        <div class="field">
+          <label>EBITDA (M MXN)</label>
+          <input id="m-ebitda" type="number" step="0.1" value="${p.ebitda ?? ''}">
+          <p class="fi-ayuda" id="m-margen"></p>
+        </div>
+        <div class="field full" id="m-comps-field">
+          <label>Competencia · CEMEX es el competidor A</label>
+          <div id="m-comps"></div>
+          <button type="button" class="comp-add" id="m-add-comp">+ Agregar competidor</button>
+        </div>
+        <div class="field full" id="m-aviso-perdida" style="display:none">
+          <div class="aviso-perdida">
+            <b>Obra perdida.</b> Captura contra quién se perdió: deja el volumen de CEMEX en cero
+            y pon el volumen o el porcentaje del competidor que la ganó. Así aparece en PDM.
+          </div>
+        </div>
+        <div class="field full" id="m-reparto"></div>
+        <div class="field" id="m-longitud-field">
+          <label>Longitud (km)</label>
+          <input id="m-longitud" type="number" step="0.1" value="${p.longitud_km||''}">
+        </div>
+        <div class="field">
+          <label>Duración (meses)</label>
+          <input id="m-duracion" type="number" step="1" min="1" value="${p.duracion_meses ?? ''}" placeholder="Para saber hasta qué año hay volumen">
+        </div>
+      </div>
       <datalist id="lista-competidores">
         ${COMPETIDORES_SUGERIDOS.map(c => `<option value="${escapeHtml(c)}"></option>`).join('')}
       </datalist>
     </div>
-    <div class="field full" id="m-aviso-perdida" style="display:none">
-      <div class="aviso-perdida">
-        <b>Obra perdida.</b> Captura contra quién se perdió: deja el volumen de CEMEX en cero
-        y pon el volumen o el porcentaje del competidor que la ganó. Así aparece en PDM.
-      </div>
-    </div>
-    <div class="field full" id="m-reparto"></div>
-    <div class="field">
-      <label>Venta (M MXN)</label>
-      <input id="m-venta" type="number" step="0.1" value="${p.venta ?? ''}">
-    </div>
-    <div class="field">
-      <label>EBITDA (M MXN)</label>
-      <input id="m-ebitda" type="number" step="0.1" value="${p.ebitda ?? ''}">
-      <p class="fi-ayuda" id="m-margen"></p>
-    </div>
-    <div class="field" id="m-longitud-field">
-      <label>Longitud (km)</label>
-      <input id="m-longitud" type="number" step="0.1" value="${p.longitud_km||''}">
-    </div>
+    <datalist id="lista-clientes">
+      ${opcionesCliente().map(c => `<option value="${escapeHtml(c)}"></option>`).join('')}
+    </datalist>
     <div class="field">
       <label>Año</label>
       <input id="m-anio" type="number" value="${p.anio||''}">
@@ -4188,10 +4257,6 @@ function openModal(id = null) {
           .map(x => `<option value="${x.id}" ${p.obra_madre === x.id ? 'selected' : ''}>${escapeHtml(x.proyecto)}</option>`).join('')}
       </select>
       <p class="fi-ayuda">Úsalo cuando la misma obra la cotizan varios clientes. La ligada no suma volumen, para no contar dos veces.</p>
-    </div>
-    <div class="field">
-      <label>Duración (meses)</label>
-      <input id="m-duracion" type="number" step="1" min="1" value="${p.duracion_meses ?? ''}" placeholder="Para saber hasta qué año hay volumen">
     </div>
     <div class="field">
       <label>Fecha Update</label>
@@ -4246,6 +4311,35 @@ function openModal(id = null) {
   [iVenta, iEbitda].forEach(el => el.addEventListener('input', pintarMargen));
   [iDur, iArr].forEach(el => el.addEventListener('input', pintarHasta));
   pintarMargen(); pintarHasta();
+
+  // ---- Información completa para BPR y PDM ----
+  const iBpr = document.getElementById('m-bpr');
+  const iUnico = document.getElementById('m-unico');
+  function pintarBpr() {
+    document.getElementById('m-bpr-campos').style.display = iBpr.checked ? '' : 'none';
+    document.getElementById('m-bpr-label').classList.toggle('on', iBpr.checked);
+  }
+  // Único proveedor: total = CEMEX, 100%, sin competidores
+  function aplicarUnico() {
+    const unico = iUnico.checked;
+    const iTot = document.getElementById('m-voltotal');
+    const iSh = document.getElementById('m-share');
+    [iTot, iSh].forEach(el => { el.disabled = unico; });
+    document.getElementById('m-comps-field').style.opacity = unico ? '.4' : '';
+    document.getElementById('m-comps-field').style.pointerEvents = unico ? 'none' : '';
+    if (unico) {
+      iTot.value = document.getElementById('m-concreto').value;
+      iSh.value = document.getElementById('m-concreto').value ? 100 : '';
+      compsEdit = [];
+      pintarComps();
+    }
+    pintarReparto();
+  }
+  iBpr.addEventListener('change', pintarBpr);
+  iUnico.addEventListener('change', aplicarUnico);
+  document.getElementById('m-concreto').addEventListener('input', () => { if (iUnico.checked) aplicarUnico(); });
+  pintarBpr();
+  if (iUnico.checked) aplicarUnico();
 
   // ---- Si la obra se perdió, hay que decir contra quién ----
   const iEstatus = document.getElementById('m-estatus');
@@ -4507,6 +4601,8 @@ function leerFormulario() {
     longitud_km: getNum('m-longitud'),
     anio: getNum('m-anio'),
     duracion_meses: getNum('m-duracion'),
+    detalle_bpr: document.getElementById('m-bpr').checked,
+    proveedor_unico: document.getElementById('m-bpr').checked && document.getElementById('m-unico').checked,
     obra_madre: get('m-obra-madre') || null,
     fecha_update: get('m-fecha') || today,
     fecha_arranque: get('m-arranque') || null,
@@ -4519,6 +4615,15 @@ function leerFormulario() {
     obra.fecha_update = today;
   }
   return obra;
+}
+
+function normalizarUnico(o) {
+  if (o.proveedor_unico) {
+    o.volumen_total = o.concreto_total;
+    o.share_cemex = o.concreto_total ? 100 : null;
+    o.competidores = [];
+  }
+  return o;
 }
 
 function saveModal() {
@@ -4571,6 +4676,8 @@ function saveModal() {
     longitud_km: getNum('m-longitud'),
     anio: getNum('m-anio'),
     duracion_meses: getNum('m-duracion'),
+    detalle_bpr: document.getElementById('m-bpr').checked,
+    proveedor_unico: document.getElementById('m-bpr').checked && document.getElementById('m-unico').checked,
     obra_madre: get('m-obra-madre') || null,
     fecha_update: get('m-fecha') || today,
     fecha_arranque: get('m-arranque') || null,
@@ -4587,6 +4694,7 @@ function saveModal() {
     updated.fecha_update = today;
   }
 
+  normalizarUnico(updated);
   // Antes de dar de alta, se avisa si ya hay una obra con nombre parecido
   const similares = buscarSimilares(updated.proyecto, state.editingId);
   if (similares.length) {
@@ -4681,7 +4789,8 @@ function renderDashboard() {
   const margen = venta > 0 && ebitda ? (ebitda / venta) * 100 : null;
   const conVenta = vigentes.filter(p => Number(p.venta) > 0).length;
 
-  const conVol = vigentes.filter(p => Number(p.volumen_total) > 0);
+  const conVol = vigentes.filter(p => p.detalle_bpr && Number(p.volumen_total) > 0);
+  const marcadasBpr = vigentes.filter(p => p.detalle_bpr).length;
   const conVolTotal = conVol.length;
   const volObra = conVol.reduce((s, p) => s + Number(p.volumen_total), 0);
   const volCx = conVol.reduce((s, p) => s + (volCemex(p) || 0), 0);
@@ -4716,7 +4825,7 @@ function renderDashboard() {
     <div class="kpi-card">
       <div class="kpi-label"><span class="dot" style="background:var(--accent-4)"></span>Market share</div>
       <div class="kpi-value">${shareCartera === null ? '—' : shareCartera.toFixed(0)}<span class="unit">%</span></div>
-      <div class="kpi-sub">${conVolTotal} de ${vigentes.length} obras con volumen de obra capturado</div>
+      <div class="kpi-sub">${conVolTotal} de ${marcadasBpr} obras BPR con volumen de obra</div>
     </div>
     <div class="kpi-card">
       <div class="kpi-label"><span class="dot" style="background:#14173d"></span>Para presentar al VP</div>
@@ -4731,9 +4840,14 @@ function renderDashboard() {
 }
 
 // Avance de captura: sin estos datos el BPR sale en TBC, así que conviene verlo
-function renderCaptura(data) {
+function renderCaptura(todas) {
   const cont = document.getElementById('captura-bpr');
   if (!cont) return;
+  const data = todas.filter(p => p.detalle_bpr);
+  if (!data.length) {
+    cont.innerHTML = '<p class="fi-ayuda" style="padding:6px 0">Ninguna obra marcada con información completa todavía. Se prende en Nueva Obra.</p>';
+    return;
+  }
   const total = data.length || 1;
   const filas = [
     { et: 'Volumen total de la obra', n: data.filter(p => Number(p.volumen_total) > 0).length,
@@ -6040,7 +6154,7 @@ function guardarFicha() {
   cerrarFicha();
   renderTable();
   renderLicitaciones();
-  toast('Ficha guardada. Ya aparece en la lista; usa Guardar arriba para dejarla dentro del archivo.', 'success');
+  toast('Ficha guardada para todo el equipo.', 'success');
 }
 
 // ==========================================================================
@@ -6082,7 +6196,7 @@ function datosPDM(data) {
 }
 
 function renderPDM() {
-  const data = datosUnicos(getFiltered());
+  const data = datosBPR();
   const d = datosPDM(data);
   const pct = v => d.mercado ? (v / d.mercado * 100) : 0;
   const kpi = (label, valor, unidad, sub, color) => `
@@ -6292,8 +6406,11 @@ function renderChartShare(data) {
 
 }
 
+// El BPR y el PDM solo trabajan con las obras marcadas para información completa
+function datosBPR() { return datosUnicos(getFiltered()).filter(p => p.detalle_bpr); }
+
 function renderBPR() {
-  const base = datosUnicos(getFiltered());
+  const base = datosBPR();
   // El mapa puede acotar la tabla sin tocar los filtros de arriba
   const data = state.bprEstado ? base.filter(x => x.estado === state.bprEstado) : base;
   tablaBPR(data, 'bpr-head', 'bpr-body', 'bpr-legend');
@@ -8021,6 +8138,8 @@ async function exportXlsx() {
     { h: 'Conv. técnica', w: 12, get: p => p.conversion_tecnica ? 'Sí' : 'No' },
     { h: 'Highlight', w: 10, get: p => p.highlight ? 'Sí' : 'No' },
     { h: 'En seguimiento', w: 13, get: p => p.seguimiento ? 'Sí' : 'No' },
+    { h: 'BPR', w: 7, get: p => p.detalle_bpr ? 'Sí' : 'No' },
+    { h: 'Proveedor único', w: 12, get: p => p.proveedor_unico ? 'Sí' : 'No' },
     { h: 'Fecha update', w: 13, get: p => p.fecha_update },
     { h: 'Programa', w: 18, get: p => p.programa, align: 'left' },
     { h: 'Comentario', w: 50, get: p => p.comentario, align: 'left' }
@@ -8326,7 +8445,7 @@ const CAMPOS_COMPARA = [
   'concreto_total', 'volumen_total', 'share_cemex', 'venta', 'longitud_km', 'anio', 'prioridad',
   'seguimiento',
   'programa', 'fecha_update', 'fecha_arranque', 'comentario', 'responsable',
-  'conversion_tecnica', 'highlight'
+  'conversion_tecnica', 'highlight', 'detalle_bpr', 'proveedor_unico'
 ];
 
 const ETIQUETA_CAMPO = {
@@ -8462,7 +8581,9 @@ const ALIAS_EXCEL = {
   jefatura: ['jefatura', 'jefe'], gerente: ['gerente'],
   modalidad: ['modalidad'], tipo_licitacion: ['tipo de licitacion'],
   highlight: ['presentacion vp', 'vp'], seguimiento: ['en seguimiento', 'seguimiento'],
-  conversion_tecnica: ['conv tecnica', 'conversion tecnica']
+  conversion_tecnica: ['conv tecnica', 'conversion tecnica'],
+  detalle_bpr: ['bpr', 'informacion completa'],
+  proveedor_unico: ['proveedor unico']
 };
 const INDICE_ALIAS = Object.fromEntries(
   Object.entries(ALIAS_EXCEL).flatMap(([campo, alias]) => alias.map(a => [a, campo])));
@@ -8471,7 +8592,7 @@ function campoPorAlias(h) { return INDICE_ALIAS[normEncabezado(h)] || null; }
 
 function valorDeExcel(campo, v) {
   if (v === null || v === undefined || v === '') return null;
-  if (['highlight', 'seguimiento', 'conversion_tecnica'].includes(campo)) {
+  if (['highlight', 'seguimiento', 'conversion_tecnica', 'detalle_bpr', 'proveedor_unico'].includes(campo)) {
     return ['si', 'sí', 'true', '1', 'x'].includes(String(v).trim().toLowerCase());
   }
   if (campo === 'estatus') {
@@ -8786,11 +8907,11 @@ function aplicarMerge() {
   });
 
   migrarTodo();
-  saveLocalData(`Consolidó ${agregadas} nuevas y ${actualizadas} actualizadas`);
+  saveState(`Consolidó ${agregadas} nuevas y ${actualizadas} actualizadas`);
   populateFilters();
   refrescarVistas();
   cerrarMerge();
-  toast(`${agregadas} obras agregadas · ${actualizadas} actualizadas. No olvides Guardar.`, 'success');
+  toast(`${agregadas} obras agregadas · ${actualizadas} actualizadas. Ya se guardaron para todo el equipo.`, 'success');
 }
 
 function cerrarMerge() {
@@ -8815,7 +8936,7 @@ function importJson() {
         state.projects = proyectos.map(p => ({ ...p, history: p.history || [] }));
         if (data.catalogs) state.catalogs = data.catalogs;
         migrarTodo();
-        saveLocalData('Importó un respaldo JSON');
+        saveState('Importó un respaldo JSON');
         populateFilters();
         renderTable();
         toast(`${proyectos.length} proyectos cargados.`, 'success');
