@@ -3237,6 +3237,12 @@ function anioFin(p) {
 function migrarTodo() {
   state.projects.forEach(p => { migrarEstatus(p); migrarClasificacion(p); migrarCompetidores(p); migrarCampos(p); });
   state.catalogs = state.catalogs || {};
+  if (!state.catalogs._cn_bpr_v1) {
+    state.projects.forEach(p => {
+      if (p.direccion === 'Cuentas Nacionales') p.detalle_bpr = true;
+    });
+    state.catalogs._cn_bpr_v1 = true;
+  }
   // Las iniciales las fija el equipo, no salen de los datos cargados
   state.catalogs.responsables = [...new Set([...RESPONSABLES,
     ...state.projects.map(p => p.responsable).filter(Boolean)])];
@@ -8985,6 +8991,7 @@ function aplicarMerge() {
     const e = { ...a.nuevas[i] };
     delete e._parecida;
     if (!e.direccion) e.direccion = dirPorDefecto;
+    if (e.direccion === 'Cuentas Nacionales' && e.detalle_bpr === undefined) e.detalle_bpr = true;
     if (!e.id || idsUsados.has(e.id)) e.id = uid();
     idsUsados.add(e.id);
     e.history = e.history || [];
