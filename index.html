@@ -1648,6 +1648,36 @@ tr.row-highlighted {
 .mrg-hint { flex: 1; font-size: 11px; color: var(--text-3); }
 .mrg-error { color: #c0121d; font-size: 12px; margin-top: 12px; }
 
+/* === AVANCE DE CAPTURA POR DIRECCIÓN === */
+.cap-dirs { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+@media (max-width: 760px) { .cap-dirs { grid-template-columns: 1fr; } }
+.cap-col { padding: 2px 14px 4px; min-width: 0; }
+.cap-col + .cap-col { border-left: 1px solid var(--border); }
+.cap-col:first-child { padding-left: 0; }
+.cap-col:last-child { padding-right: 0; }
+.cap-head {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 10px;
+  padding-bottom: 7px; margin-bottom: 4px; border-bottom: 2px solid var(--accent-4);
+}
+.cap-head b { display: block; font-size: 13.5px; font-weight: 600; color: var(--text); }
+.cap-head span { font-size: 10.5px; color: var(--text-3); }
+.cap-pc { font-size: 26px; font-weight: 300; line-height: 1; font-variant-numeric: tabular-nums; }
+.cap-pc em { font-style: normal; font-size: 13px; margin-left: 1px; }
+.cap-pc.vacio { color: var(--text-soft); }
+.cap-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) 90px 44px;
+  gap: 10px; align-items: center; padding: 4px 0;
+  border-bottom: 1px solid var(--border); cursor: default;
+}
+.cap-row:last-of-type { border-bottom: none; }
+.cap-lbl { font-size: 11.5px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cap-bar { height: 6px; background: var(--surface); border-radius: 3px; overflow: hidden; }
+.cap-bar i { display: block; height: 100%; border-radius: 3px; }
+.cap-num { text-align: right; font-size: 12px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+.cap-num em { font-style: normal; font-size: 10px; font-weight: 400; color: var(--text-3); }
+.cap-nota { margin: 5px 0 0; font-size: 10.5px; color: var(--text-3); }
+.cap-vacio { margin: 10px 0; font-size: 11.5px; color: var(--text-3); line-height: 1.6; }
+
 /* === AVANCE DE CAPTURA === */
 .captura-row {
   display: grid;
@@ -2077,6 +2107,18 @@ tr.row-highlighted {
 .bpr-resp { font-size: 10.5px; font-weight: 600; color: var(--text-2); }
 .bpr-table td.ctr, .bpr-table th.ctr { text-align: center; }
 
+.mrg-dir {
+  display: grid; grid-template-columns: auto 200px; gap: 4px 12px; align-items: center;
+  margin: 10px 0 2px; padding: 10px 12px; border-radius: 8px;
+  background: #eef0ff; border: 1px solid #d9dcf7;
+}
+.mrg-dir label { font-size: 12px; font-weight: 600; color: var(--accent-4); }
+.mrg-dir select {
+  padding: 6px 8px; border: 1px solid var(--border-2); border-radius: 6px;
+  font-family: inherit; font-size: 12px;
+}
+.mrg-dir span { grid-column: 1 / -1; font-size: 11px; color: var(--text-3); }
+
 /* === VISTA BPR === */
 .bpr-card {
   background: #fff;
@@ -2452,7 +2494,7 @@ tr.row-highlighted {
         <div class="chart-container"><canvas id="chart-anio"></canvas></div>
       </div>
       <div class="chart-card" style="grid-column: span 2">
-        <h3>Avance de captura</h3>
+        <h3>Avance de captura por dirección</h3>
         <p class="chart-desc">Qué tanto del portafolio ya tiene los datos que alimentan BPR, PDM y Presentación VP</p>
         <div id="captura-bpr"></div>
       </div>
@@ -3151,6 +3193,9 @@ function migrarCampos(p) {
   if (p.tipo_licitacion === undefined) p.tipo_licitacion = null;
   // Las direcciones regionales quedaron fuera: esas obras son de Construcción
   if (p.direccion && !DIRECCIONES.includes(p.direccion)) p.direccion = 'Construcción';
+  // Sin dirección = pipeline de Construcción (el original y lo capturado a mano).
+  // Lo de Cuentas Nacionales entró por Consolidar y ya trae su dirección.
+  if (!p.direccion) p.direccion = 'Construcción';
   if (p.jefatura === undefined) p.jefatura = null;
   if (p.gerente === undefined) p.gerente = null;
   if (p.obra_madre === undefined) p.obra_madre = null;
@@ -4043,7 +4088,7 @@ function openModal(id = null) {
     id: uid(),
     responsable: '', estatus: '01 - Proyecto',
     seguimiento: false, prospeccion: false, proyecto: '', segmento: '', subsegmento: '',
-    tipo: '', cliente: '', gerente: '', jefatura: '', direccion: '', modalidad: '',
+    tipo: '', cliente: '', gerente: '', jefatura: '', direccion: 'Construcción', modalidad: '',
     tipo_licitacion: '', venta: null, ebitda: null,
     duracion_meses: null,
     region: '', estado: '', concreto_total: null,
@@ -4843,40 +4888,75 @@ function renderDashboard() {
 function renderCaptura(todas) {
   const cont = document.getElementById('captura-bpr');
   if (!cont) return;
-  const data = todas.filter(p => p.detalle_bpr);
-  if (!data.length) {
-    cont.innerHTML = '<p class="fi-ayuda" style="padding:6px 0">Ninguna obra marcada con información completa todavía. Se prende en Nueva Obra.</p>';
-    return;
-  }
-  const total = data.length || 1;
-  const filas = [
-    { et: 'Volumen total de la obra', n: data.filter(p => Number(p.volumen_total) > 0).length,
-      nota: 'sin esto no hay market share' },
-    { et: 'Venta', n: data.filter(p => Number(p.venta) > 0).length, nota: '' },
-    { et: 'EBITDA', n: data.filter(p => Number(p.ebitda) > 0).length, nota: 'para el margen' },
-    { et: 'Dirección comercial', n: data.filter(p => p.direccion).length, nota: 'separa cuentas nacionales' },
-    { et: 'Duración', n: data.filter(p => Number(p.duracion_meses) > 0).length, nota: 'hasta qué año hay volumen' },
-    { et: 'Competencia identificada', n: data.filter(p => competidores(p).length > 0).length,
-      nota: 'competidor B en adelante' },
-    { et: 'Longitud (solo obra lineal)', n: data.filter(p => aplicaLongitud(p) && Number(p.longitud_km) > 0).length,
-      base: data.filter(aplicaLongitud).length, nota: 'trenes y carreteras' },
-    { et: 'Fecha estimada de arranque', n: data.filter(p => p.fecha_arranque).length, nota: '' }
+
+  // Infraestructura es la Dirección de Construcción. Las obras que no traen
+  // dirección capturada vienen del pipeline de Construcción y cuentan ahí.
+  const DIRS = [
+    { titulo: 'Infraestructura', sub: 'Dirección de Construcción',
+      es: p => !p.direccion || p.direccion === 'Construcción' },
+    { titulo: 'Cuentas Nacionales', sub: 'Dirección de Cuentas Nacionales',
+      es: p => p.direccion === 'Cuentas Nacionales' }
   ];
 
-  cont.innerHTML = filas.map(f => {
-    const base = f.base === undefined ? total : (f.base || 1);
-    const pc = Math.round((f.n / base) * 100);
-    const color = pc >= 80 ? 'var(--accent-4)' : (pc >= 40 ? 'var(--accent-3)' : 'var(--accent)');
+  const CAMPOS = [
+    { et: 'Volumen total de la obra', nota: 'Sin esto no hay market share',
+      ok: p => Number(p.volumen_total) > 0 },
+    { et: 'Venta', ok: p => Number(p.venta) > 0 },
+    { et: 'EBITDA', nota: 'Para el margen', ok: p => Number(p.ebitda) > 0 },
+    { et: 'Competencia identificada', nota: 'Competidor B en adelante, o único proveedor',
+      ok: p => competidores(p).length > 0 || p.proveedor_unico },
+    { et: 'Fecha estimada de arranque', ok: p => !!p.fecha_arranque },
+    { et: 'Duración', nota: 'Hasta qué año hay volumen', ok: p => Number(p.duracion_meses) > 0 },
+    { et: 'Longitud', nota: 'Solo trenes y carreteras', ok: p => Number(p.longitud_km) > 0,
+      aplica: aplicaLongitud }
+  ];
+
+  const color = pc => pc >= 80 ? 'var(--accent-4)' : (pc >= 40 ? 'var(--accent-3)' : 'var(--accent)');
+
+  cont.innerHTML = `<div class="cap-dirs">${DIRS.map(d => {
+    const todasDir = todas.filter(d.es);
+    const data = todasDir.filter(p => p.detalle_bpr);
+    const sinDir = d.titulo === 'Infraestructura' ? data.filter(p => !p.direccion).length : 0;
+
+    if (!data.length) {
+      return `
+        <div class="cap-col">
+          <div class="cap-head">
+            <div><b>${d.titulo}</b><span>${todasDir.length} obras en el pipeline · ninguna marcada BPR</span></div>
+            <div class="cap-pc vacio">—</div>
+          </div>
+          <p class="cap-vacio">Prende <b>Requiere información completa</b> en las obras que entran al BPR y aquí se mide su avance.</p>
+        </div>`;
+    }
+
+    const filas = CAMPOS.map(c => {
+      const base = c.aplica ? data.filter(c.aplica) : data;
+      if (!base.length) return null;
+      const n = base.filter(c.ok).length;
+      return { ...c, n, total: base.length, pc: Math.round(n / base.length * 100) };
+    }).filter(Boolean);
+
+    // Avance general: el promedio de lo que lleva cada campo
+    const general = Math.round(filas.reduce((t, f) => t + f.pc, 0) / filas.length);
+
     return `
-      <div class="captura-row">
-        <div class="captura-lbl">
-          ${escapeHtml(f.et)}
-          ${f.nota ? `<span>${escapeHtml(f.nota)}</span>` : ''}
+      <div class="cap-col">
+        <div class="cap-head">
+          <div>
+            <b>${d.titulo}</b>
+            <span>${data.length} obras BPR de ${todasDir.length} en el pipeline</span>
+          </div>
+          <div class="cap-pc" style="color:${color(general)}">${general}<em>%</em></div>
         </div>
-        <div class="captura-bar"><div style="width:${pc}%;background:${color}"></div></div>
-        <div class="captura-num">${f.n}<span>/${base === total ? total : base}</span></div>
+        ${filas.map(f => `
+          <div class="cap-row" title="${escapeHtml(f.nota || '')}">
+            <span class="cap-lbl">${escapeHtml(f.et)}</span>
+            <span class="cap-bar"><i style="width:${f.pc}%;background:${color(f.pc)}"></i></span>
+            <span class="cap-num">${f.n}<em>/${f.total}</em></span>
+          </div>`).join('')}
+        ${sinDir ? `<p class="cap-nota">${sinDir} obra(s) sin dirección capturada se cuentan aquí.</p>` : ''}
       </div>`;
-  }).join('');
+  }).join('')}</div>`;
 }
 
 // ==========================================================================
@@ -8112,6 +8192,7 @@ async function exportXlsx() {
   const cols = [
     { h: 'Proyecto', w: 44, get: p => p.proyecto, align: 'left' },
     { h: 'Estatus', w: 16, get: p => statusShortName(p.estatus), estatus: true },
+    { h: 'Dirección', w: 18, get: p => p.direccion },
     { h: 'Segmento', w: 15, get: p => p.segmento },
     { h: 'Subsegmento', w: 21, get: p => p.subsegmento },
     { h: 'Especialidad', w: 19, get: p => p.tipo },
@@ -8134,6 +8215,8 @@ async function exportXlsx() {
     { h: 'Asesor comercial', w: 22, get: p => NOMBRES[p.responsable] || p.responsable },
     { h: 'Jefatura', w: 20, get: p => NOMBRES[p.jefatura] || p.jefatura },
     { h: 'Gerente', w: 20, get: p => NOMBRES[p.gerente] || p.gerente },
+    { h: 'Modalidad', w: 18, get: p => p.modalidad },
+    { h: 'Tipo de licitación', w: 20, get: p => p.tipo_licitacion },
     { h: 'Presentación VP', w: 14, get: p => p.highlight ? 'Sí' : 'No' },
     { h: 'Conv. técnica', w: 12, get: p => p.conversion_tecnica ? 'Sí' : 'No' },
     { h: 'Highlight', w: 10, get: p => p.highlight ? 'Sí' : 'No' },
@@ -8843,8 +8926,17 @@ function pintarMerge(nombreArchivo) {
       </div>
     </li>`).join('');
 
+  const sinDir = a.nuevas.filter(n => !n.direccion).length;
   document.getElementById('merge-body').innerHTML = `
     <p style="font-size:12px;color:var(--text-2);margin:0 0 4px">Archivo leído: <b>${escapeHtml(nombreArchivo)}</b> · ${a.total} obras</p>
+    ${sinDir ? `
+    <div class="mrg-dir">
+      <label for="mrg-dir">Dirección para las ${sinDir} obra(s) nuevas que no traen una</label>
+      <select id="mrg-dir">
+        ${DIRECCIONES.map(d => `<option value="${d}" ${d === 'Cuentas Nacionales' ? 'selected' : ''}>${d}</option>`).join('')}
+      </select>
+      <span>Las que ya traen dirección en el archivo se respetan.</span>
+    </div>` : ''}
     <div class="mrg-resumen">
       <div class="mrg-stat nuevas"><b>${a.nuevas.length}</b><span>obras que no tienes${a.nuevas.filter(n => n._parecida).length ? ` · ${a.nuevas.filter(n => n._parecida).length} con nombre parecido` : ''}</span></div>
       <div class="mrg-stat cambios"><b>${a.cambios.length}</b><span>con datos distintos</span></div>
@@ -8886,9 +8978,13 @@ function aplicarMerge() {
   const idsUsados = new Set(state.projects.map(p => p.id));
   let agregadas = 0, actualizadas = 0;
 
+  const selDir = document.getElementById('mrg-dir');
+  const dirPorDefecto = selDir ? selDir.value : 'Cuentas Nacionales';
+
   marcados('nueva').forEach(i => {
     const e = { ...a.nuevas[i] };
     delete e._parecida;
+    if (!e.direccion) e.direccion = dirPorDefecto;
     if (!e.id || idsUsados.has(e.id)) e.id = uid();
     idsUsados.add(e.id);
     e.history = e.history || [];
