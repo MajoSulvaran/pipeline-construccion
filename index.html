@@ -2120,6 +2120,15 @@ tr.row-highlighted {
 .mrg-dir span { grid-column: 1 / -1; font-size: 11px; color: var(--text-3); }
 
 /* === VISTA BPR === */
+#view-bpr .bpr-split { align-items: stretch; }
+#view-bpr .bpr-card { display: flex; flex-direction: column; min-height: 0; height: 100%; }
+#view-bpr .bpr-scroll { flex: 1; min-height: 0; overflow: auto; }
+#view-bpr .bpr-table thead th { position: sticky; top: 0; z-index: 2; background: #fff; }
+#view-bpr .bpr-legend { flex: none; }
+#view-bpr .bpr-mapa { position: static !important; height: 100%; overflow-y: auto; }
+@media (max-width: 960px) {
+  #view-bpr .bpr-card, #view-bpr .bpr-mapa { height: auto; }
+}
 .bpr-card {
   background: #fff;
   border: 1px solid var(--border);
@@ -2344,6 +2353,10 @@ tr.row-highlighted {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg>
         Licitaciones
       </button>
+      <button class="tab" data-view="cap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>
+        Captura
+      </button>
       <button class="tab" data-view="pdm">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9-9v9z"/><path d="M12 3a9 9 0 0 1 9 9h-9z"/></svg>
         PDM
@@ -2514,6 +2527,11 @@ tr.row-highlighted {
       </aside>
       <div class="lic-detalle" id="lic-detalle"></div>
     </div>
+  </section>
+
+  <!-- ============ VISTA CAPTURA ============ -->
+  <section class="view" id="view-cap">
+    <div id="cap2-cont"></div>
   </section>
 
   <!-- ============ VISTA PDM ============ -->
@@ -3752,6 +3770,7 @@ function toast(msg, type='success') {
 // ==========================================================================
 function refrescarVistas() {
   renderTable();
+  if (document.getElementById('view-cap').classList.contains('active')) renderCapturaTab();
   if (document.getElementById('view-vp').classList.contains('active')) renderVP();
   if (document.getElementById('view-bpr').classList.contains('active')) renderBPR();
   if (document.getElementById('view-pdm').classList.contains('active')) renderPDM();
@@ -3810,6 +3829,8 @@ const COLS_PIPELINE = [
              (esCotizacionAlterna(p) ? `<span class="pill-alt" title="Misma obra que: ${escapeHtml((obraMadre(p) || {}).proyecto || '')} · no suma volumen">Cotización alterna</span>` : '') },
   { k: 'proyecto', t: 'Proyecto', sort: 'proyecto', def: true, fijo: true,
     td: p => `<div class="cell-project" title="${escapeHtml(p.proyecto || '')}">${escapeHtml(p.proyecto || '—')}</div>` },
+  { k: 'segmento', t: 'Segmento', sort: 'segmento', def: false,
+    td: p => `<span class="seg-dot seg-${segSlug(p.segmento)}"></span><span class="cell-sub">${escapeHtml(p.segmento || 'Por clasificar')}</span>` },
   { k: 'subsegmento', t: 'Subsegmento', sort: 'subsegmento', def: true,
     td: p => `<span class="seg-dot seg-${segSlug(p.segmento)}" title="${escapeHtml(p.segmento || 'Por clasificar')}"></span><span class="cell-sub">${escapeHtml(p.subsegmento || '—')}</span>` },
   { k: 'tipo', t: 'Especialidad', sort: 'tipo', def: false,
@@ -3929,7 +3950,7 @@ function renderTable() {
   }, { count: 0, concreto: 0, imp: 0 });
 
   document.getElementById('filter-summary').innerHTML =
-    `<strong>${sum.count}</strong> proyecto${sum.count===1?'':'s'} · <strong>${fmtNum(sum.concreto)}</strong> K m³ de concreto · <strong>${sum.imp}</strong> marcados importantes <span style="color:var(--text-soft);margin-left:8px">· doble-click para editar</span>`;
+    `<strong>${sum.count}</strong> proyecto${sum.count===1?'':'s'} · <strong>${fmtNum(sum.concreto)}</strong> K m³ de concreto · <strong>${sum.imp}</strong> para presentación VP <span style="color:var(--text-soft);margin-left:8px">· doble-click para editar</span>`;
 
   const cols = colsVisibles();
   document.getElementById('pipeline-head').innerHTML = `
@@ -4000,7 +4021,9 @@ function renderTable() {
 const FILTROS = [
   { id: 'estatus',   key: 'estatusSel',   label: 'Estatus',   campo: 'estatus',
     ops: () => ESTATUS, pastilla: true, atajo: { et: 'En curso', val: () => ESTATUS.slice(0, 5) } },
-  { id: 'segmento',  key: 'segmentoSel',  label: 'Segmento',  campo: 'segmento',  ops: () => SEGMENTOS },
+  { id: 'segmento',  key: 'segmentoSel',  label: 'Segmento',  campo: 'segmento',
+    ops: () => state.projects.some(p => !p.segmento) ? [...SEGMENTOS, 'Por clasificar'] : SEGMENTOS,
+    valor: p => p.segmento || 'Por clasificar' },
   { id: 'subseg',    key: 'subsegSel',    label: 'Subsegmento', campo: 'subsegmento',
     ops: () => {
       const seg = state.filters.segmentoSel || [];
@@ -6244,6 +6267,482 @@ function guardarFicha() {
 }
 
 // ==========================================================================
+// CAPTURA · SEGUIMIENTO DE LA INFORMACIÓN DE CADA OBRA
+// Para que cada asesor vea qué le falta y cada gerente sepa a quién buscar.
+// Mide todas las obras del pipeline; los datos de BPR solo cuentan en las
+// obras marcadas con "Requiere información completa".
+// ==========================================================================
+const CAMPOS_PERFIL = [
+  { et: 'Segmento y subsegmento', grupo: 'base', ok: p => !!(p.segmento && p.subsegmento) },
+  { et: 'Especialidad', grupo: 'base', ok: p => !!p.tipo },
+  { et: 'Cliente', grupo: 'base', ok: p => !!p.cliente },
+  { et: 'Estado', grupo: 'base', ok: p => !!p.estado },
+  { et: 'Asesor comercial', grupo: 'base', ok: p => !!p.responsable },
+  { et: 'Jefatura', grupo: 'base', ok: p => !!p.jefatura },
+  { et: 'Gerente', grupo: 'base', ok: p => !!p.gerente },
+  { et: 'Modalidad', grupo: 'base', ok: p => !!p.modalidad },
+  { et: 'Volumen CEMEX', grupo: 'base', ok: p => (volCemex(p) || 0) > 0,
+    aplica: p => !/^0[78]/.test(p.estatus || '') },
+  { et: 'Fecha de arranque', grupo: 'base', ok: p => !!p.fecha_arranque,
+    aplica: p => /^0[1-4]/.test(p.estatus || '') },
+  { et: 'Volumen total de la obra', grupo: 'bpr', ok: p => (num0(p.volumen_total) || 0) > 0 },
+  { et: 'Venta', grupo: 'bpr', ok: p => (num0(p.venta) || 0) > 0 },
+  { et: 'EBITDA', grupo: 'bpr', ok: p => (num0(p.ebitda) || 0) > 0 },
+  { et: 'Competencia', grupo: 'bpr', ok: p => competidores(p).length > 0 || p.proveedor_unico },
+  { et: 'Duración', grupo: 'bpr', ok: p => (num0(p.duracion_meses) || 0) > 0 },
+  { et: 'Longitud', grupo: 'bpr', ok: p => (num0(p.longitud_km) || 0) > 0, aplica: aplicaLongitud }
+];
+
+const DIAS_DESACTUALIZADA = 60;
+let capAgrupar = 'asesor';
+
+function diasSinActualizar(p) {
+  if (!p.fecha_update) return null;
+  const f = new Date(String(p.fecha_update).slice(0, 10) + 'T12:00:00');
+  if (isNaN(f)) return null;
+  return Math.max(0, Math.round((Date.now() - f.getTime()) / 86400000));
+}
+
+function calcularCaptura(data) {
+  const obras = data.map(p => {
+    const campos = CAMPOS_PERFIL.filter(c =>
+      (c.grupo === 'base' || p.detalle_bpr) && (!c.aplica || c.aplica(p)));
+    const faltan = campos.filter(c => !c.ok(p));
+    return {
+      id: p.id, proyecto: p.proyecto || '—', estatus: p.estatus || '', bpr: !!p.detalle_bpr,
+      direccion: p.direccion || '',
+      asesor: nombrePersona(p.responsable) || 'Sin asesor asignado',
+      jefatura: nombrePersona(p.jefatura) || 'Sin jefatura',
+      gerente: nombrePersona(p.gerente) || 'Sin gerente',
+      pc: campos.length ? Math.round((campos.length - faltan.length) / campos.length * 100) : 100,
+      faltan: faltan.map(c => ({ et: c.et, bpr: c.grupo === 'bpr' })),
+      dias: diasSinActualizar(p)
+    };
+  });
+
+  const porCampo = CAMPOS_PERFIL.map(c => {
+    const base = data.filter(p => (c.grupo === 'base' || p.detalle_bpr) && (!c.aplica || c.aplica(p)));
+    const n = base.filter(c.ok).length;
+    return { et: c.et, grupo: c.grupo, n, total: base.length,
+             pc: base.length ? Math.round(n / base.length * 100) : null };
+  }).filter(c => c.total);
+
+  const agrupar = clave => {
+    const m = new Map();
+    obras.forEach(o => {
+      const k = o[clave];
+      if (!m.has(k)) m.set(k, []);
+      m.get(k).push(o);
+    });
+    return [...m.entries()].map(([nombre, lista]) => ({
+      nombre,
+      obras: lista.length,
+      pc: Math.round(lista.reduce((t, o) => t + o.pc, 0) / lista.length),
+      faltantes: lista.reduce((t, o) => t + o.faltan.length, 0),
+      viejas: lista.filter(o => o.dias === null || o.dias > DIAS_DESACTUALIZADA).length,
+      bpr: lista.filter(o => o.bpr).length,
+      completas: lista.filter(o => o.pc === 100).length
+    })).sort((a, b) => a.pc - b.pc || b.obras - a.obras);
+  };
+
+  const bpr = obras.filter(o => o.bpr);
+  return {
+    obras: obras.sort((a, b) => a.pc - b.pc || (b.faltan.length - a.faltan.length)),
+    porCampo,
+    grupos: { asesor: agrupar('asesor'), jefatura: agrupar('jefatura'), gerente: agrupar('gerente') },
+    kpi: {
+      total: obras.length,
+      general: obras.length ? Math.round(obras.reduce((t, o) => t + o.pc, 0) / obras.length) : 0,
+      completas: obras.filter(o => o.pc === 100).length,
+      bpr: bpr.length,
+      bprCompletas: bpr.filter(o => o.pc === 100).length,
+      viejas: obras.filter(o => o.dias === null || o.dias > DIAS_DESACTUALIZADA).length,
+      sinAsesor: obras.filter(o => o.asesor === 'Sin asesor asignado').length
+    }
+  };
+}
+
+const colorCap = pc => pc >= 80 ? '#0003aa' : (pc >= 50 ? '#4b4fd6' : '#f22230');
+const COLOR_ESTATUS_CAP = {
+  '01': '#565b85', '02': '#4b4fd6', '03': '#2a2e8f', '04': '#15803d',
+  '05': '#0003aa', '06': '#14173d', '07': '#c0121d', '08': '#a16207'
+};
+
+function htmlCaptura(calc, filtrosTexto) {
+  const k = calc.kpi;
+  const esc = escapeHtml;
+  const barra = pc => `<span class="c2-bar"><i style="width:${pc}%;background:${colorCap(pc)}"></i></span>`;
+  const dias = d => d === null ? '<span class="c2-dias rojo">sin fecha</span>'
+    : `<span class="c2-dias ${d > DIAS_DESACTUALIZADA ? 'rojo' : ''}">${d === 0 ? 'hoy' : d + ' d'}</span>`;
+
+  const bloqueCampos = (titulo, grupo) => {
+    const filas = calc.porCampo.filter(c => c.grupo === grupo).sort((a, b) => a.pc - b.pc);
+    if (!filas.length) return '';
+    return `
+      <div class="c2-sub">${titulo}</div>
+      ${filas.map(c => `
+        <div class="c2-campo">
+          <span class="c2-et">${esc(c.et)}</span>
+          ${barra(c.pc)}
+          <span class="c2-n">${c.n}<em>/${c.total}</em></span>
+          <span class="c2-pc" style="color:${colorCap(c.pc)}">${c.pc}%</span>
+        </div>`).join('')}`;
+  };
+
+  const tablaGrupo = (clave, etiqueta) => `
+    <table class="c2-rank" data-rank="${clave}" style="${clave === capAgrupar ? '' : 'display:none'}">
+      <thead><tr>
+        <th>${etiqueta}</th><th class="n">Obras</th><th>Completitud</th>
+        <th class="n">Faltan</th><th class="n" title="Sin actualizar en más de ${DIAS_DESACTUALIZADA} días">Sin actualizar</th>
+        <th class="n">BPR</th>
+      </tr></thead>
+      <tbody>
+        ${calc.grupos[clave].map(g => `
+          <tr data-grupo="${esc(g.nombre)}">
+            <td class="c2-persona">${esc(g.nombre)}</td>
+            <td class="n">${g.obras}</td>
+            <td><span class="c2-avance">${barra(g.pc)}<b style="color:${colorCap(g.pc)}">${g.pc}%</b></span></td>
+            <td class="n">${g.faltantes}</td>
+            <td class="n ${g.viejas ? 'rojo' : ''}">${g.viejas}</td>
+            <td class="n">${g.bpr}</td>
+          </tr>`).join('')}
+      </tbody>
+    </table>`;
+
+  return `
+  <div class="cap2" data-agrupar="${capAgrupar}">
+    <div class="c2-resumen">
+      <div class="c2-top">
+        <div>
+          <b>Seguimiento de captura</b>
+          <span>${k.total} obras · corte ${new Date().toLocaleDateString('es-MX', { day: '2-digit', month: 'long', year: 'numeric' })}${filtrosTexto ? ' · ' + esc(filtrosTexto) : ''}</span>
+        </div>
+        <div class="c2-acciones">
+          <button type="button" data-cap-exp="html">HTML interactivo</button>
+          <button type="button" data-cap-exp="png">PNG</button>
+          <button type="button" data-cap-exp="jpg">JPG</button>
+        </div>
+      </div>
+
+      <div class="c2-kpis">
+        <div class="c2-kpi"><span>Completitud general</span><b style="color:${colorCap(k.general)}">${k.general}%</b><em>promedio de todas las obras</em></div>
+        <div class="c2-kpi"><span>Perfiles completos</span><b>${k.completas}</b><em>de ${k.total} obras</em></div>
+        <div class="c2-kpi"><span>BPR completas</span><b>${k.bprCompletas}</b><em>de ${k.bpr} marcadas BPR</em></div>
+        <div class="c2-kpi"><span>Sin actualizar</span><b class="${k.viejas ? 'rojo' : ''}">${k.viejas}</b><em>más de ${DIAS_DESACTUALIZADA} días sin movimiento</em></div>
+        <div class="c2-kpi"><span>Sin asesor</span><b class="${k.sinAsesor ? 'rojo' : ''}">${k.sinAsesor}</b><em>obras sin responsable directo</em></div>
+      </div>
+
+      <div class="c2-grid">
+        <section class="c2-card">
+          <h4>Qué falta por campo</h4>
+          <p class="c2-desc">Ordenado de lo que más falta a lo que menos</p>
+          ${bloqueCampos('Todas las obras', 'base')}
+          ${bloqueCampos('Solo obras BPR', 'bpr')}
+        </section>
+        <section class="c2-card">
+          <div class="c2-card-head">
+            <div>
+              <h4>¿Quién va cómo?</h4>
+              <p class="c2-desc">Click en una persona para ver solo sus obras abajo</p>
+            </div>
+            <div class="c2-toggle">
+              <button type="button" data-agrupa="asesor" class="${capAgrupar === 'asesor' ? 'on' : ''}">Asesor</button>
+              <button type="button" data-agrupa="jefatura" class="${capAgrupar === 'jefatura' ? 'on' : ''}">Jefatura</button>
+              <button type="button" data-agrupa="gerente" class="${capAgrupar === 'gerente' ? 'on' : ''}">Gerente</button>
+            </div>
+          </div>
+          <div class="c2-rank-wrap">
+            ${tablaGrupo('asesor', 'Asesor comercial')}
+            ${tablaGrupo('jefatura', 'Jefatura')}
+            ${tablaGrupo('gerente', 'Gerente')}
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <section class="c2-card c2-detalle">
+      <div class="c2-card-head">
+        <div>
+          <h4>Detalle por obra</h4>
+          <p class="c2-desc">Lo que le falta a cada obra para tener su perfil completo · de la más incompleta a la más completa</p>
+        </div>
+        <div class="c2-filtros">
+          <span class="c2-chip-sel" hidden></span>
+          <label class="c2-solo"><input type="checkbox" data-solo-bpr> Solo BPR</label>
+          <input type="search" data-buscar placeholder="Buscar obra o persona…">
+        </div>
+      </div>
+      <div class="c2-tabla-wrap">
+        <table class="c2-obras">
+          <thead><tr>
+            <th>Obra</th><th>Asesor comercial</th><th>Estatus</th><th>Avance</th>
+            <th class="n">Última act.</th><th>Lo que falta</th>
+          </tr></thead>
+          <tbody>
+            ${calc.obras.map(o => `
+              <tr data-id="${esc(o.id)}" data-asesor="${esc(o.asesor)}" data-jefatura="${esc(o.jefatura)}"
+                  data-gerente="${esc(o.gerente)}" data-bpr="${o.bpr ? 1 : 0}"
+                  data-texto="${esc((o.proyecto + ' ' + o.asesor + ' ' + o.jefatura + ' ' + o.gerente).toLowerCase())}">
+                <td class="c2-obra">${esc(o.proyecto)}${o.bpr ? '<span class="c2-bpr">BPR</span>' : ''}</td>
+                <td class="c2-persona">${esc(o.asesor)}</td>
+                <td><span class="c2-est"><i style="background:${COLOR_ESTATUS_CAP[o.estatus.slice(0, 2)] || '#8a8fb0'}"></i>${esc(o.estatus.replace(/^\d+\s*-\s*/, '') || '—')}</span></td>
+                <td><span class="c2-avance">${barra(o.pc)}<b style="color:${colorCap(o.pc)}">${o.pc}%</b></span></td>
+                <td class="n">${dias(o.dias)}</td>
+                <td>${o.faltan.length
+                  ? o.faltan.map(f => `<span class="c2-falta ${f.bpr ? 'bpr' : ''}">${esc(f.et)}</span>`).join('')
+                  : '<span class="c2-ok">Completo</span>'}</td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+      <p class="c2-pie">Rojo en "Última act.": más de ${DIAS_DESACTUALIZADA} días sin movimiento · Las etiquetas azules son datos del BPR</p>
+    </section>
+  </div>`;
+}
+
+// Interactividad sin dependencias: se usa en el tablero y se copia tal cual
+// dentro del HTML descargable, así funciona igual fuera del pipeline.
+function interactivoCaptura(root) {
+  let seleccion = null;
+  const filas = () => [...root.querySelectorAll('.c2-obras tbody tr')];
+  const chip = root.querySelector('.c2-chip-sel');
+  const buscar = root.querySelector('[data-buscar]');
+  const soloBpr = root.querySelector('[data-solo-bpr]');
+
+  function filtrar() {
+    const q = (buscar.value || '').toLowerCase().trim();
+    const campo = root.getAttribute('data-agrupar');
+    filas().forEach(tr => {
+      const ok = (!seleccion || tr.getAttribute('data-' + campo) === seleccion) &&
+                 (!soloBpr.checked || tr.getAttribute('data-bpr') === '1') &&
+                 (!q || tr.getAttribute('data-texto').indexOf(q) >= 0);
+      tr.style.display = ok ? '' : 'none';
+    });
+    root.querySelectorAll('.c2-rank tbody tr').forEach(tr =>
+      tr.classList.toggle('sel', tr.getAttribute('data-grupo') === seleccion));
+    if (seleccion) {
+      chip.hidden = false;
+      chip.innerHTML = '';
+      chip.appendChild(document.createTextNode(seleccion + ' '));
+      const x = document.createElement('button');
+      x.type = 'button'; x.textContent = '×';
+      x.onclick = () => { seleccion = null; filtrar(); };
+      chip.appendChild(x);
+    } else {
+      chip.hidden = true;
+    }
+  }
+
+  root.querySelectorAll('.c2-rank tbody tr').forEach(tr => {
+    tr.addEventListener('click', () => {
+      const g = tr.getAttribute('data-grupo');
+      seleccion = seleccion === g ? null : g;
+      filtrar();
+    });
+  });
+  root.querySelectorAll('[data-agrupa]').forEach(b => {
+    b.addEventListener('click', () => {
+      const clave = b.getAttribute('data-agrupa');
+      root.setAttribute('data-agrupar', clave);
+      root.querySelectorAll('[data-agrupa]').forEach(x => x.classList.toggle('on', x === b));
+      root.querySelectorAll('.c2-rank').forEach(t => {
+        t.style.display = t.getAttribute('data-rank') === clave ? '' : 'none';
+      });
+      seleccion = null;
+      filtrar();
+    });
+  });
+  buscar.addEventListener('input', filtrar);
+  soloBpr.addEventListener('change', filtrar);
+}
+
+const CSS_CAPTURA = `
+.cap2 { font-family: 'Outfit', system-ui, -apple-system, sans-serif; color: #14173d; font-variant-numeric: tabular-nums; }
+.cap2 .rojo { color: #c0121d !important; }
+.c2-top { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.c2-top b { display: block; font-size: 15px; font-weight: 600; }
+.c2-top span { font-size: 11px; color: #8a8fb0; }
+.c2-acciones { margin-left: auto; display: flex; gap: 6px; }
+.c2-acciones button {
+  font-family: inherit; font-size: 11.5px; padding: 5px 11px; border-radius: 7px; cursor: pointer;
+  border: 1px solid #e2e4f2; background: #fff; color: #565b85;
+}
+.c2-acciones button:hover { border-color: #0003aa; color: #0003aa; }
+.c2-kpis { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin-bottom: 10px; }
+.c2-kpi { background: #fff; border: 1px solid #e2e4f2; border-radius: 9px; padding: 9px 12px; }
+.c2-kpi span { display: block; font-size: 9.5px; letter-spacing: .07em; text-transform: uppercase; color: #8a8fb0; }
+.c2-kpi b { display: block; font-size: 24px; font-weight: 300; line-height: 1.15; margin-top: 2px; }
+.c2-kpi em { font-style: normal; font-size: 10.5px; color: #565b85; }
+.c2-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 10px; margin-bottom: 10px; }
+.c2-card { background: #fff; border: 1px solid #e2e4f2; border-radius: 10px; padding: 11px 14px; min-width: 0; }
+.c2-card h4 { margin: 0; font-size: 13px; font-weight: 600; }
+.c2-desc { margin: 1px 0 6px; font-size: 10.5px; color: #8a8fb0; }
+.c2-card-head { display: flex; align-items: flex-start; gap: 10px; justify-content: space-between; margin-bottom: 4px; }
+.c2-sub {
+  margin: 8px 0 3px; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase;
+  color: #0003aa; font-weight: 700; padding-bottom: 3px; border-bottom: 2px solid #0003aa;
+}
+.c2-campo {
+  display: grid; grid-template-columns: minmax(0, 1fr) 90px 50px 38px; gap: 8px; align-items: center;
+  padding: 3.5px 0; border-bottom: 1px solid #edeef8; font-size: 11.5px;
+}
+.c2-campo:last-child { border-bottom: none; }
+.c2-et { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.c2-bar { display: inline-block; width: 100%; min-width: 50px; height: 6px; background: #f3f4fb; border-radius: 3px; overflow: hidden; vertical-align: middle; }
+.c2-bar i { display: block; height: 100%; border-radius: 3px; }
+.c2-n { text-align: right; font-weight: 600; }
+.c2-n em, .c2-kpi em { font-style: normal; }
+.c2-n em { font-weight: 400; font-size: 10px; color: #8a8fb0; }
+.c2-pc { text-align: right; font-size: 11px; font-weight: 600; }
+.c2-toggle { display: inline-flex; background: #f3f4fb; border: 1px solid #e2e4f2; border-radius: 7px; padding: 2px; flex: none; }
+.c2-toggle button {
+  font-family: inherit; font-size: 11px; padding: 4px 9px; border: none; background: none;
+  border-radius: 5px; color: #565b85; cursor: pointer;
+}
+.c2-toggle button.on { background: #fff; color: #0003aa; font-weight: 600; box-shadow: 0 1px 2px rgba(20,23,61,.12); }
+.c2-rank-wrap { max-height: 330px; overflow: auto; }
+.c2-rank, .c2-obras { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+.c2-rank th, .c2-obras th {
+  position: sticky; top: 0; background: #fff; z-index: 1; text-align: left;
+  font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; color: #565b85; font-weight: 600;
+  padding: 5px 7px; border-bottom: 2px solid #0003aa; white-space: nowrap;
+}
+.c2-rank td, .c2-obras td { padding: 4px 7px; border-bottom: 1px solid #edeef8; vertical-align: middle; }
+.c2-rank .n, .c2-obras .n { text-align: right; }
+.c2-rank tbody tr { cursor: pointer; }
+.c2-rank tbody tr:hover td, .c2-obras tbody tr:hover td { background: #fafbff; }
+.c2-rank tbody tr.sel td { background: #eef0ff; }
+.c2-rank tbody tr.sel .c2-persona { color: #0003aa; font-weight: 600; }
+.c2-persona { white-space: nowrap; max-width: 210px; overflow: hidden; text-overflow: ellipsis; }
+.c2-avance { display: grid; grid-template-columns: minmax(50px, 1fr) 34px; gap: 6px; align-items: center; min-width: 110px; }
+.c2-avance b { font-size: 11px; text-align: right; }
+.c2-filtros { display: flex; align-items: center; gap: 8px; flex: none; }
+.c2-filtros input[type=search] {
+  font-family: inherit; font-size: 11.5px; padding: 5px 9px; width: 200px;
+  border: 1px solid #e2e4f2; border-radius: 7px; outline: none;
+}
+.c2-filtros input[type=search]:focus { border-color: #0003aa; }
+.c2-solo { font-size: 11.5px; color: #565b85; display: inline-flex; gap: 5px; align-items: center; cursor: pointer; white-space: nowrap; }
+.c2-solo input { accent-color: #0003aa; }
+.c2-chip-sel {
+  font-size: 11px; font-weight: 600; color: #0003aa; background: #eef0ff; border: 1px solid #d9dcf7;
+  border-radius: 12px; padding: 2px 4px 2px 10px; white-space: nowrap;
+}
+.c2-chip-sel button { border: none; background: none; color: #565b85; cursor: pointer; font-size: 13px; }
+.c2-tabla-wrap { max-height: 520px; overflow: auto; }
+.c2-obra { font-weight: 500; max-width: 300px; }
+.c2-bpr {
+  display: inline-block; margin-left: 6px; padding: 0 5px; border-radius: 3px;
+  background: #0003aa; color: #fff; font-size: 8.5px; font-weight: 700; vertical-align: middle;
+}
+.c2-est { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; font-size: 11px; color: #565b85; }
+.c2-est i { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+.c2-dias { font-size: 11px; color: #565b85; white-space: nowrap; }
+.c2-falta {
+  display: inline-block; margin: 1px 3px 1px 0; padding: 1px 6px; border-radius: 4px;
+  background: #f3f4fb; border: 1px solid #e2e4f2; font-size: 10px; color: #565b85; white-space: nowrap;
+}
+.c2-falta.bpr { background: #eef0ff; border-color: #d9dcf7; color: #0003aa; }
+.c2-ok { font-size: 10.5px; color: #15803d; font-weight: 600; }
+.c2-pie { margin: 6px 0 0; font-size: 10px; color: #8a8fb0; }
+@media (max-width: 1100px) {
+  .c2-kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .c2-grid { grid-template-columns: 1fr; }
+}
+`;
+
+function textoFiltrosActivos() {
+  const f = state.filters;
+  const partes = [];
+  FILTROS.forEach(fd => { const sel = f[fd.key] || []; if (sel.length) partes.push(`${fd.label}: ${sel.join(', ')}`); });
+  if (f.search) partes.push(`Búsqueda: ${f.search}`);
+  return partes.join(' · ');
+}
+
+(function inyectarCssCaptura() {
+  const st = document.createElement('style');
+  st.textContent = CSS_CAPTURA;
+  document.head.appendChild(st);
+})();
+
+function renderCapturaTab() {
+  const cont = document.getElementById('cap2-cont');
+  if (!cont) return;
+  const calc = calcularCaptura(datosUnicos(getFiltered()));
+  cont.innerHTML = htmlCaptura(calc, textoFiltrosActivos());
+  const root = cont.querySelector('.cap2');
+  interactivoCaptura(root);
+
+  // En el tablero, doble clic en una obra abre su ficha para completarla
+  root.querySelectorAll('.c2-obras tbody tr').forEach(tr =>
+    tr.addEventListener('dblclick', () => openModal(tr.getAttribute('data-id'))));
+  root.querySelectorAll('[data-agrupa]').forEach(b =>
+    b.addEventListener('click', () => { capAgrupar = b.getAttribute('data-agrupa'); }));
+  root.querySelectorAll('[data-cap-exp]').forEach(b =>
+    b.addEventListener('click', () => exportarCaptura(b.getAttribute('data-cap-exp'))));
+}
+
+async function exportarCaptura(formato) {
+  const root = document.querySelector('#cap2-cont .cap2');
+  if (!root) return;
+  const fecha = new Date().toISOString().slice(0, 10);
+
+  if (formato === 'html') {
+    const copia = root.cloneNode(true);
+    copia.querySelectorAll('.c2-acciones').forEach(x => x.remove());
+    copia.querySelectorAll('.c2-obras tbody tr').forEach(tr => { tr.style.display = ''; });
+    copia.querySelectorAll('.c2-rank tbody tr').forEach(tr => tr.classList.remove('sel'));
+    // El archivo abre siempre agrupado por asesor, sin filtros puestos
+    copia.setAttribute('data-agrupar', 'asesor');
+    copia.querySelectorAll('.c2-rank').forEach(t => { t.style.display = t.getAttribute('data-rank') === 'asesor' ? '' : 'none'; });
+    copia.querySelectorAll('[data-agrupa]').forEach(b => b.classList.toggle('on', b.getAttribute('data-agrupa') === 'asesor'));
+    const chipSel = copia.querySelector('.c2-chip-sel');
+    if (chipSel) { chipSel.hidden = true; chipSel.innerHTML = ''; }
+    const doc = `<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seguimiento de captura · ${fecha}</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body { margin: 0; background: #f3f4fb; padding: 18px 22px; }
+.c2-marca { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-family: 'Outfit', sans-serif; }
+.c2-marca i { width: 28px; height: 28px; border-radius: 8px; background: #f22230; color: #fff; display: grid; place-items: center; font-style: normal; font-weight: 700; }
+.c2-marca b { font-size: 16px; color: #14173d; font-weight: 500; }
+.c2-marca b span { color: #f22230; font-weight: 600; }
+${CSS_CAPTURA}
+</style></head><body>
+<div class="c2-marca"><i>P</i><b>Pipeline <span>Construcción</span></b></div>
+${copia.outerHTML}
+<script>(${interactivoCaptura.toString()})(document.querySelector('.cap2'));<\/script>
+</body></html>`;
+    download(new Blob([doc], { type: 'text/html' }), `Seguimiento_captura_${fecha}.html`);
+    toast('HTML descargado: se abre con doble clic y los filtros funcionan');
+    return;
+  }
+
+  if (!await asegurarLibreria('imagen')) return;
+  toast('Generando imagen…', 'warn');
+  const zona = root.querySelector('.c2-resumen');
+  const acciones = root.querySelector('.c2-acciones');
+  if (acciones) acciones.style.visibility = 'hidden';
+  // El ranking completo entra en la imagen, sin el límite de alto de pantalla
+  const wrap = root.querySelector('.c2-rank-wrap');
+  const altoPrevio = wrap.style.maxHeight;
+  wrap.style.maxHeight = 'none';
+  try {
+    const lienzo = await html2canvas(zona, { scale: 2, backgroundColor: '#f3f4fb', logging: false });
+    const tipo = formato === 'jpg' ? 'image/jpeg' : 'image/png';
+    lienzo.toBlob(b => {
+      download(b, `Seguimiento_captura_${fecha}.${formato}`);
+      toast('Imagen descargada');
+    }, tipo, 0.93);
+  } finally {
+    if (acciones) acciones.style.visibility = '';
+    wrap.style.maxHeight = altoPrevio;
+  }
+}
+
+// ==========================================================================
 // PDM · PARTICIPACIÓN DE MERCADO
 // Lee del pipeline: volumen total de cada obra, lo que trae CEMEX y lo que
 // traen los competidores. El "mercado mapeado" son las obras que ya tienen
@@ -6515,6 +7014,7 @@ function renderBPR() {
     `${data.length} obra(s) · agrupado por subsegmento · refleja los filtros activos`;
 
   renderBprMapa(base);
+  ajustarAltoBpr();
 }
 
 // Tabla del BPR: la usa también la pestaña de Presentación VP
@@ -6641,6 +7141,20 @@ function renderVP() {
     : 'Ninguna obra marcada todavía';
   tablaBPR(data, 'vp-head', 'vp-body', 'vp-legend');
 }
+
+// La vista ocupa justo lo que queda de pantalla: así la tabla hace scroll
+// por dentro y el mapa se queda completo a la vista todo el tiempo.
+function ajustarAltoBpr() {
+  const sp = document.querySelector('#view-bpr .bpr-split');
+  if (!sp) return;
+  if (window.innerWidth <= 960 || !document.getElementById('view-bpr').classList.contains('active')) {
+    sp.style.height = '';
+    return;
+  }
+  const arriba = sp.getBoundingClientRect().top + window.scrollY;
+  sp.style.height = Math.max(420, window.innerHeight - arriba - 10) + 'px';
+}
+window.addEventListener('resize', ajustarAltoBpr);
 
 function resaltarEstadoBpr(estado, on) {
   const g = document.querySelector(`#bpr-map [data-estado="${(estado || '').replace(/"/g, '')}"]`);
@@ -7450,6 +7964,12 @@ const VIEW_META = {
     icon: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>',
     showFilters: false
   },
+  cap: {
+    title: 'Seguimiento de captura',
+    subtitle: 'Qué le falta a cada obra y quién la tiene a cargo',
+    icon: '<path d="M9 11l3 3 8-8"/>',
+    showFilters: true
+  },
   pdm: {
     title: 'Participación de Mercado',
     subtitle: 'PDM · cuánto del volumen mapeado trae CEMEX y cuánto la competencia',
@@ -7482,6 +8002,7 @@ function switchView(name) {
   if (name === 'vp') renderVP();
   if (name === 'map') renderMap();
   if (name === 'pdm') renderPDM();
+  if (name === 'cap') renderCapturaTab();
   if (name === 'lic') renderLicitaciones();
 }
 
@@ -8478,7 +8999,7 @@ function construirHtmlActualizado() {
   ['#table-body', '#bpr-body', '#bpr-legend', '#kpi-grid', '#funnel-chart', '#mexico-map',
    '#map-top-estados', '#map-top-count', '#map-detail-panel', '#modal-body',
    '#captura-bpr', '#map-resumen', '#dup-body', '#vp-head', '#vp-body', '#vp-legend', '#pdm-kpis', '#pdm-tabla', '#pdm-barra', '#pdm-leyenda',
-   '#lic-items', '#lic-detalle', '#ficha-body',
+   '#lic-items', '#lic-detalle', '#ficha-body', '#cap2-cont',
    '#merge-body'].forEach(sel => {
     const el = clon.querySelector(sel);
     if (el) el.innerHTML = '';
@@ -9245,7 +9766,7 @@ function arrancarConDatos() {
   setSyncStatus('synced', meta.last_updated_by ? `por ${nombreCorto(meta.last_updated_by)}` : 'ahora');
   startPolling();
   if (sinClasificar) {
-    setTimeout(() => toast(`${sinClasificar} obra(s) quedaron sin segmento: filtra por "Por clasificar" en la tabla.`, 'error'), 800);
+    setTimeout(() => toast(`${sinClasificar} obra(s) sin segmento. Para encontrarlas: filtro Segmento, palomea "Por clasificar".`, 'error'), 800);
   }
 }
 
