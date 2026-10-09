@@ -4901,8 +4901,6 @@ function openModal(id = null) {
   iBpr.addEventListener('change', pintarBpr);
   iUnico.addEventListener('change', aplicarUnico);
   document.getElementById('m-concreto').addEventListener('input', () => { if (iUnico.checked) aplicarUnico(); });
-  pintarBpr();
-  if (iUnico.checked) aplicarUnico();
 
   // ---- Si la obra se perdió, hay que decir contra quién ----
   const iEstatus = document.getElementById('m-estatus');
@@ -4917,7 +4915,6 @@ function openModal(id = null) {
     }
   }
   iEstatus.addEventListener('change', avisoPerdida);
-  avisoPerdida();
 
   // ---- Cliente: lo cruza con el catálogo de cuentas nacionales ----
   const iCliente = document.getElementById('m-cliente');
@@ -5071,6 +5068,13 @@ function openModal(id = null) {
   });
   pintarComps();
   pintarReparto();
+
+  // ---- Estado inicial de los bloques que dependen de la competencia ----
+  // Va aquí, y no arriba, porque necesitan la lista de competidores ya creada:
+  // antes tronaba al editar obras con único proveedor o perdidas sin competidor.
+  pintarBpr();
+  if (iUnico.checked) aplicarUnico();
+  avisoPerdida();
 
   // ---- Equipos ----
   equiposEdit = JSON.parse(JSON.stringify(equiposDe(p)));
