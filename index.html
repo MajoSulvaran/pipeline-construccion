@@ -546,7 +546,20 @@ body {
 }
 /* --- equipos en el formulario --- */
 .eq-lista-filas { display: grid; gap: 6px; }
-.eq-fila { display: grid; grid-template-columns: minmax(0, 1fr) 80px auto 26px; gap: 8px; align-items: center; }
+.eq-enc, .eq-fila {
+  display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) 150px 150px;
+  gap: 8px; align-items: center;
+}
+.eq-enc span { font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); font-weight: 600; }
+.eq-cant-caja { display: flex; align-items: center; gap: 6px; }
+.eq-cant-caja select { width: 70px; }
+.eq-disp { font-style: normal; font-size: 10.5px; color: var(--text-3); white-space: nowrap; }
+.eq-fin { display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
+.fo-eq b small { font-weight: 400; color: var(--text-2); font-size: 11.5px; }
+@media (max-width: 900px) {
+  .eq-enc { display: none; }
+  .eq-fila { grid-template-columns: 1fr 1fr; }
+}
 .eq-combo { position: relative; }
 .eq-combo input { width: 100%; }
 .eq-tag { display: none; font-size: 10px; font-weight: 600; color: #a16207; background: #fff4e6;
@@ -656,6 +669,55 @@ body {
 .fo-ev.com b { font-weight: 400; color: var(--text-2); font-style: italic; }
 .fo-ver-mas { margin-top: 4px; border: none; background: none; color: var(--accent-4); font-family: inherit; font-size: 11.5px; font-weight: 600; cursor: pointer; padding: 2px 0; }
 .cell-alerta { color: #c0121d; font-weight: 700; }
+/* --- pestaña de equipos --- */
+.eqt { display: flex; flex-direction: column; gap: 10px; }
+.eqt-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.eqt-top p { margin: 0; font-size: 11.5px; color: var(--text-3); }
+.eqt-kpis { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+.eqt-kpi { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 10px 13px; border-top: 3px solid var(--accent-4); }
+.eqt-kpi span { display: block; font-size: 9.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--text-3); }
+.eqt-kpi b { display: block; font-size: 26px; font-weight: 300; color: var(--accent-4); line-height: 1.15; margin-top: 2px; }
+.eqt-kpi b.rojo { color: #c0121d; } .eqt-kpi b.ambar { color: #b45309; }
+.eqt-kpi em { font-style: normal; font-size: 10.5px; color: var(--text-2); line-height: 1.35; display: block; }
+.eqt-aviso { background: #fff4e6; border: 1px solid #f5cf9a; color: #8a4b07; border-radius: 8px; padding: 8px 12px; font-size: 11.5px; }
+.eqt-g2 { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr); gap: 10px; align-items: start; }
+.eqt-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; min-width: 0; }
+.eqt-card h4 { margin: 0; font-size: 13px; font-weight: 600; color: var(--text); }
+.eqt-desc { margin: 2px 0 8px; font-size: 10.5px; color: var(--text-3); }
+.eqt-chart { position: relative; }
+.eqt-mini { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1px 8px; padding: 5px 0; border-bottom: 1px solid #edeef8; font-size: 12px; }
+.eqt-mini b { font-weight: 500; }
+.eqt-mini span { font-weight: 700; color: var(--accent-4); white-space: nowrap; }
+.eqt-mini em { grid-column: 1 / -1; font-style: normal; font-size: 10.5px; color: var(--text-3); }
+.eqt-vacio { font-size: 11.5px; color: var(--text-3); margin: 4px 0; }
+.eqt-tabla-wrap { max-height: 520px; overflow: auto; }
+.eqt-tabla { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+.eqt-tabla th { position: sticky; top: 0; background: #fff; z-index: 1; text-align: left; font-size: 9.5px; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--text-2); font-weight: 600; padding: 6px 7px; border-bottom: 2px solid var(--accent-4); white-space: nowrap; }
+.eqt-tabla td { padding: 5px 7px; border-bottom: 1px solid #edeef8; vertical-align: middle; }
+.eqt-tabla td small { display: block; font-size: 10px; color: var(--text-3); }
+.eqt-tabla td small i { color: #b45309; font-style: normal; }
+.eqt-tabla .n { text-align: right; font-variant-numeric: tabular-nums; }
+.eqt-tabla .gris { color: var(--text-3); }
+.eqt-tabla .ambar { color: #b45309; font-weight: 600; }
+.eqt-tabla .rojo { color: #c0121d; font-weight: 700; }
+.eqt-tabla tbody tr[data-tipo] { cursor: pointer; }
+.eqt-tabla tbody tr:hover td { background: #fafbff; }
+.eqt-tabla tbody tr.sel td { background: #eef0ff; }
+.eqt-tabla tr.atenuada td { opacity: .55; }
+.eqt-tabla td.eco { font-size: 10px; color: var(--text-2); max-width: 220px; }
+.eqt-tabla .eqt-obra { cursor: pointer; }
+.eqt-senal { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10.5px; font-weight: 600; white-space: nowrap; }
+.eqt-senal.falta { background: #fde8ea; color: #c0121d; }
+.eqt-senal.revisar { background: #fff4e6; color: #b45309; }
+.eqt-senal.ok { background: #e8f6ee; color: #15803d; }
+.eqt-senal.sin { background: #f3f4fb; color: var(--text-3); }
+.eqt-det-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.eqt-sub { font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-4); font-weight: 700; margin: 4px 0 6px; }
+@media (max-width: 1150px) {
+  .eqt-kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .eqt-g2 { grid-template-columns: 1fr; }
+}
 .pill-ppto {
   display: inline-block; margin-left: 5px; padding: 1px 6px; border-radius: 3px;
   background: #e8f6ee; border: 1px solid #b7e2c8; color: #15803d;
@@ -2487,6 +2549,10 @@ tr.row-highlighted {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg>
         Licitaciones
       </button>
+      <button class="tab" data-view="eq">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17h2l2-5h8l2 5h4"/><circle cx="7.5" cy="17.5" r="2"/><circle cx="17.5" cy="17.5" r="2"/><path d="M9 12V7h5l3 5"/></svg>
+        Equipos
+      </button>
       <button class="tab" data-view="cap">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>
         Captura
@@ -2674,6 +2740,11 @@ tr.row-highlighted {
       </aside>
       <div class="lic-detalle" id="lic-detalle"></div>
     </div>
+  </section>
+
+  <!-- ============ VISTA EQUIPOS ============ -->
+  <section class="view" id="view-eq">
+    <div id="eqt-cont"></div>
   </section>
 
   <!-- ============ VISTA CAPTURA ============ -->
@@ -3492,7 +3563,13 @@ function sanearTipos(p) {
   if (p.equipos !== undefined && !Array.isArray(p.equipos)) p.equipos = [];
   if (Array.isArray(p.equipos)) {
     p.equipos = p.equipos.filter(e => e && typeof e === 'object' && e.tipo)
-      .map(e => ({ ...e, tipo: String(e.tipo), cantidad: Math.max(1, Number(e.cantidad) || 1) }));
+      .map(e => actualizarEquipoLegado({ ...e, tipo: String(e.tipo),
+        marca: e.marca === null || e.marca === undefined ? '' : String(e.marca),
+        modelo: e.modelo === null || e.modelo === undefined ? '' : String(e.modelo) }))
+      .map(e => ({ ...e, tipo: String(e.tipo),
+        marca: e.marca === null || e.marca === undefined ? '' : String(e.marca),
+        modelo: e.modelo === null || e.modelo === undefined ? '' : String(e.modelo),
+        cantidad: Math.max(1, Number(e.cantidad) || 1) }));
   }
   if (p.archivos !== undefined && !Array.isArray(p.archivos)) p.archivos = [];
   return p;
@@ -4193,6 +4270,7 @@ function toast(msg, type='success') {
 function refrescarVistas() {
   renderTable();
   if (document.getElementById('view-cap').classList.contains('active')) renderCapturaTab();
+  if (document.getElementById('view-eq').classList.contains('active')) renderEquiposTab();
   if (document.getElementById('view-vp').classList.contains('active')) renderVP();
   if (document.getElementById('view-bpr').classList.contains('active')) renderBPR();
   if (document.getElementById('view-pdm').classList.contains('active')) renderPDM();
@@ -7284,7 +7362,8 @@ ${copia.outerHTML}
 // nombre salga igual en todas las obras; si el equipo es rentado o no está
 // en el inventario de CEMEX, se puede escribir libre y queda marcado.
 // ==========================================================================
-const CATALOGO_EQUIPOS = [{"t":"Planta desalinizadora","c":"Calidad","n":2},{"t":"Camión revolvedor","c":"Camiones revolvedores","n":101},{"t":"Cama baja","c":"Equipo móvil","n":2},{"t":"Camión orquesta","c":"Equipo móvil","n":4},{"t":"Camión pipa","c":"Equipo móvil","n":3},{"t":"Camión quinta rueda","c":"Equipo móvil","n":2},{"t":"Camión tractor","c":"Equipo móvil","n":2},{"t":"Camión volteo","c":"Equipo móvil","n":9},{"t":"Grúa articulada","c":"Equipo móvil","n":6},{"t":"Generador","c":"Generación","n":4},{"t":"Cortadora","c":"Pavimentación","n":0},{"t":"Fresadora","c":"Pavimentación","n":2},{"t":"Fresadora (portátil)","c":"Pavimentación","n":2},{"t":"Guarnicionadora","c":"Pavimentación","n":1},{"t":"Láser","c":"Pavimentación","n":1},{"t":"Pavimentadora","c":"Pavimentación","n":18},{"t":"Perfilógrafo","c":"Pavimentación","n":4},{"t":"Retroexcavadora","c":"Pavimentación","n":2},{"t":"Rodillo","c":"Pavimentación","n":13},{"t":"Texturizadora","c":"Pavimentación","n":12},{"t":"Caseta","c":"Periféricos","n":0},{"t":"Contenedor marítimo","c":"Periféricos","n":0},{"t":"Grúa viajera","c":"Periféricos","n":1},{"t":"Remolque de volteo","c":"Periféricos","n":1},{"t":"Remolque rodillos","c":"Periféricos","n":1},{"t":"Dosificadora móvil","c":"Plantas","n":0},{"t":"Planta concretera","c":"Plantas","n":19},{"t":"Cargador frontal","c":"Producción","n":18},{"t":"Chiller (enfriador de agua)","c":"Producción","n":1},{"t":"Compresor","c":"Producción","n":1},{"t":"Medidor de fricción","c":"Producción","n":1},{"t":"Mezcladora de paletas","c":"Producción","n":3},{"t":"Motosoplador","c":"Producción","n":1},{"t":"Nu-meter","c":"Producción","n":2},{"t":"Trituradora de hielo","c":"Producción","n":3},{"t":"Planta de hielo","c":"Refrigeración","n":3},{"t":"Mezcladora","c":"Tren de reciclado","n":5},{"t":"Recicladora","c":"Tren de reciclado","n":5}];
+// Listado definitivo del pipeline (tipo, marca, modelo, unidades vigentes, 1 = por confirmar con Mtto)
+const CATALOGO_EQUIPOS = [{"t":"Pavimentadora","c":"Pavimentación","mm":[["Wirtgen","SP 1200",3,0],["Wirtgen","SP 1600",2,0],["Power Paver","SF 3000",2,0],["Power Paver","SF 2700",2,0],["Gomaco","Commander III",1,0],["Curb Fox","3000",1,0],["Vogele","Super 2100-3",1,0],["Terex Bid-Well","SP 3600",1,0]],"n":13},{"t":"Texturizadoras","c":"Pavimentación","mm":[["Wirtgen","TCM 1800",4,0],["Power Paver","TC 2700",4,0]],"n":8},{"t":"Tren de reciclado","c":"Tren de reciclado","mm":[["Wirtgen","WR2500 S",2,0],["Wirtgen","WM1000",2,0]],"n":4},{"t":"Fresadoras","c":"Pavimentación","mm":[["Diamond","Genérico",1,0],["Core Cut","Genérico",1,0]],"n":2},{"t":"Reglas Láser","c":"Pavimentación","mm":[["Somero","Genérico",1,0]],"n":1},{"t":"Perfilógrafos","c":"Pavimentación","mm":[["SIS","Genérico",4,0]],"n":4},{"t":"Medidores de fricción","c":"Pavimentación","mm":[["Mu-Meter","Genérico",1,0]],"n":1},{"t":"Nu Meter","c":"Pavimentación","mm":[["Genérico","Genérico",2,0]],"n":2},{"t":"Plantas Mezclado Central","c":"Plantas","mm":[["REX-CON","Model S",1,0],["CON-E-CO","400SLP",1,1],["Erie Strayer","MG-11C",1,0]],"n":3},{"t":"Plantas de Paletas","c":"Plantas","mm":[["FRUMECAR","Modul Mix C 3002",1,0],["FRUMECAR","Modul Mix C 3000",3,0],["Liebherr","DW 4.5 Twin Shaft Mixer",1,1]],"n":5},{"t":"Plantas Flujo Continuo CC","c":"Plantas","mm":[["IMER / ORU","LK130",2,0],["IMER / ORU","ROME B4V MC 300",1,0],["RAPIDMIX","RAPID MIX 600",1,0]],"n":4},{"t":"Planta Dosificadora Dry Batch","c":"Plantas","mm":[["Vince Hagan","HS-12400B",1,1],["Vince Hagan","Sin modelo",1,1],["Odisa","6000",2,1]],"n":4},{"t":"Retroexcavadoras","c":"Equipo de apoyo","mm":[["Genérico","Genérico",2,0]],"n":2},{"t":"Cargadores frontales","c":"Equipo de apoyo","mm":[["Genérico","Genérico",18,0]],"n":18},{"t":"Compresores","c":"Equipo de apoyo","mm":[["Genérico","Genérico",1,0]],"n":1},{"t":"Generadores","c":"Equipo de apoyo","mm":[["Genérico","Genérico",4,0]],"n":4},{"t":"Chillers (enfriadores de agua)","c":"Refrigeración","mm":[["Genérico","Genérico",1,1]],"n":1},{"t":"Plantas de hielo","c":"Refrigeración","mm":[["Genérico","Genérico",2,1]],"n":2},{"t":"Trituradoras de hielo","c":"Refrigeración","mm":[["Genérico","Genérico",3,1]],"n":3},{"t":"Motosopladores","c":"Equipo de apoyo","mm":[["Genérico","Genérico",1,1]],"n":1},{"t":"Camiones revolvedores","c":"Equipo móvil","mm":[["Genérico","Genérico",63,0]],"n":63},{"t":"Camiones orquesta","c":"Equipo móvil","mm":[["Genérico","Genérico",4,0]],"n":4},{"t":"Camiones pipa","c":"Equipo móvil","mm":[["Genérico","Genérico",8,0]],"n":8},{"t":"Grúas articuladas","c":"Equipo móvil","mm":[["Genérico","Genérico",5,0]],"n":5}];
 
 function normEq(v) {
   return (v || '').toString().toLowerCase().normalize('NFD')
@@ -7294,39 +7373,108 @@ function equipoDeCatalogo(nombre) {
   const n = normEq(nombre);
   return CATALOGO_EQUIPOS.find(e => normEq(e.t) === n) || null;
 }
+// Cada tipo trae sus combinaciones de marca y modelo con las unidades activas:
+// mm = [[marca, modelo, unidades], ...]
+function marcasDe(tipo) {
+  const c = equipoDeCatalogo(tipo);
+  if (!c) return [];
+  const m = new Map();
+  c.mm.forEach(([ma, , n]) => m.set(ma, (m.get(ma) || 0) + n));
+  return [...m.entries()].map(([marca, n]) => ({ marca, n }));
+}
+function modelosDe(tipo, marca) {
+  const c = equipoDeCatalogo(tipo);
+  if (!c) return [];
+  return c.mm.filter(([ma]) => normEq(ma) === normEq(marca)).map(([, modelo, n, conf]) => ({ modelo, n, conf: !!conf }));
+}
+// Unidades en inventario para lo que ya se eligió (tipo, tipo + marca, o los tres)
+function unidadesDisponibles(tipo, marca, modelo) {
+  const c = equipoDeCatalogo(tipo);
+  if (!c) return 0;
+  return c.mm.filter(([ma, mo]) =>
+    (!marca || normEq(ma) === normEq(marca)) &&
+    (modelo === undefined || modelo === null || !marca || normEq(mo) === normEq(modelo))
+  ).reduce((t, x) => t + x[2], 0);
+}
+// Rentado o externo: el tipo, la marca o el modelo no existen en la flota de CEMEX
+function esEquipoExterno(e) {
+  if (tipoPorDefinir(e)) return false;
+  const c = equipoDeCatalogo(e.tipo);
+  if (!c) return !!e.tipo;
+  if (e.marca && !marcasDe(e.tipo).some(x => normEq(x.marca) === normEq(e.marca))) return true;
+  if (e.marca && e.modelo && !modelosDe(e.tipo, e.marca).some(x => normEq(x.modelo) === normEq(e.modelo))) return true;
+  return false;
+}
+
+function completarUnico(e) {
+  const ma = marcasDe(e.tipo);
+  if (!e.marca && ma.length === 1) e.marca = ma[0].marca;
+  const mo = modelosDe(e.tipo, e.marca);
+  if (!e.modelo && mo.length === 1) e.modelo = mo[0].modelo;
+  return e;
+}
+
+// Nombres del catálogo anterior: lo ya capturado se pasa al listado definitivo
+const LEGADO_EQUIPOS = {
+  'cargador frontal': 'Cargadores frontales', 'camion revolvedor': 'Camiones revolvedores',
+  'camion orquesta': 'Camiones orquesta', 'camion pipa': 'Camiones pipa', 'grua articulada': 'Grúas articuladas',
+  'generador': 'Generadores', 'compresor': 'Compresores', 'retroexcavadora': 'Retroexcavadoras',
+  'texturizadora': 'Texturizadoras', 'fresadora': 'Fresadoras', 'fresadora portatil': 'Fresadoras',
+  'laser': 'Reglas Láser', 'perfilografo': 'Perfilógrafos', 'medidor de friccion': 'Medidores de fricción',
+  'nu meter': 'Nu Meter', 'chiller enfriador de agua': 'Chillers (enfriadores de agua)',
+  'planta de hielo': 'Plantas de hielo', 'trituradora de hielo': 'Trituradoras de hielo',
+  'motosoplador': 'Motosopladores', 'planta mezclado central': 'Plantas Mezclado Central',
+  'mezcladora': ['Tren de reciclado', 'Wirtgen', 'WM1000'], 'recicladora': ['Tren de reciclado', 'Wirtgen', 'WR2500 S'],
+  'camion volteo': 'Camiones volteo', 'rodillo': 'Rodillos'
+};
+// "Planta concretera" no dice si es de mezclado central, paletas, flujo continuo o dry batch
+function tipoPorDefinir(e) { return normEq(e && e.tipo) === 'planta concretera'; }
+
+function actualizarEquipoLegado(e) {
+  if (!e || !e.tipo || equipoDeCatalogo(e.tipo)) return e;
+  const m = LEGADO_EQUIPOS[normEq(e.tipo)];
+  if (!m) return e;
+  const [tipo, marca, modelo] = Array.isArray(m) ? m : [m];
+  e.tipo = tipo;
+  if (marca && (!e.marca || !marcasDe(tipo).some(x => normEq(x.marca) === normEq(e.marca)))) { e.marca = marca; e.modelo = modelo || ''; }
+  if (e.marca && !marcasDe(tipo).some(x => normEq(x.marca) === normEq(e.marca))) { e.marca = ''; e.modelo = ''; }
+  return completarUnico(e);
+}
+
 function equiposDe(p) {
   return (Array.isArray(p.equipos) ? p.equipos : []).filter(e => e && e.tipo && Number(e.cantidad) > 0);
 }
 function resumenEquipos(p, max) {
   const l = equiposDe(p);
   if (!l.length) return '';
-  const txt = l.map(e => `${e.tipo} ×${e.cantidad}`);
+  const txt = l.map(e => `${e.tipo}${e.marca ? ' ' + e.marca : ''}${e.modelo ? ' ' + e.modelo : ''} ×${e.cantidad}`);
   return max && txt.length > max ? txt.slice(0, max).join(' · ') + ` · +${txt.length - max}` : txt.join(' · ');
 }
 
-// Lista desplegable que filtra mientras se escribe
-function comboEquipo(input) {
+// Lista desplegable que siempre se abre al entrar al campo y se filtra mientras
+// se escribe. Si lo escrito no está en la lista, se puede usar como valor libre
+// (equipo rentado o fuera del inventario de CEMEX).
+function comboLista(input, opciones, alElegir, etiquetaLibre) {
   const caja = document.createElement('div');
   caja.className = 'eq-lista';
   input.parentElement.appendChild(caja);
   let activo = -1;
 
-  function opciones() {
+  function pintar() {
     const q = normEq(input.value);
-    const lista = CATALOGO_EQUIPOS.filter(e => !q || normEq(e.t).includes(q) || normEq(e.c).includes(q));
-    const exacto = CATALOGO_EQUIPOS.some(e => normEq(e.t) === q);
-    let html = '';
-    let fam = null;
-    lista.forEach((e, i) => {
-      if (e.c !== fam) { fam = e.c; html += `<div class="eq-fam">${escapeHtml(fam)}</div>`; }
-      html += `<div class="eq-op" data-i="${i}" data-v="${escapeHtml(e.t)}">
-        <span>${escapeHtml(e.t)}</span><em>${e.n} en inventario</em></div>`;
+    const todas = opciones();
+    const lista = todas.filter(o => !q || normEq(o.v).includes(q) || normEq(o.grupo || '').includes(q));
+    const exacto = todas.some(o => normEq(o.v) === q);
+    let html = '', grupo = null;
+    lista.forEach(o => {
+      if (o.grupo && o.grupo !== grupo) { grupo = o.grupo; html += `<div class="eq-fam">${escapeHtml(grupo)}</div>`; }
+      html += `<div class="eq-op" data-v="${escapeHtml(o.v)}"><span>${escapeHtml(o.etiqueta || o.v)}</span>${o.sub ? `<em>${escapeHtml(o.sub)}</em>` : ''}</div>`;
     });
-    if (input.value.trim() && !exacto) {
+    if (input.value.trim() && !exacto && etiquetaLibre) {
       html += `<div class="eq-op eq-libre" data-v="${escapeHtml(input.value.trim())}">
-        <span>Usar "${escapeHtml(input.value.trim())}"</span><em>rentado / fuera de inventario</em></div>`;
+        <span>Usar "${escapeHtml(input.value.trim())}"</span><em>${escapeHtml(etiquetaLibre)}</em></div>`;
     }
-    caja.innerHTML = html || '<div class="eq-fam">Sin coincidencias</div>';
+    caja.innerHTML = html || '<div class="eq-fam">Sin opciones: elige primero el campo anterior o escribe</div>';
     activo = -1;
     caja.querySelectorAll('.eq-op').forEach(op => op.addEventListener('mousedown', ev => {
       ev.preventDefault();
@@ -7334,25 +7482,18 @@ function comboEquipo(input) {
     }));
   }
   function elegir(v) {
-    const cat = equipoDeCatalogo(v);
-    input.value = cat ? cat.t : v;
+    const o = opciones().find(x => normEq(x.v) === normEq(v));
+    input.value = o ? o.v : v;
     caja.classList.remove('on');
-    marcar();
-    input.dispatchEvent(new Event('change'));
+    if (alElegir) alElegir();
   }
-  function marcar() {
-    const fila = input.closest('.eq-fila');
-    if (!fila) return;
-    const libre = input.value.trim() && !equipoDeCatalogo(input.value);
-    fila.classList.toggle('externo', !!libre);
-  }
-  input.addEventListener('focus', () => { opciones(); caja.classList.add('on'); });
-  input.addEventListener('input', () => { opciones(); caja.classList.add('on'); marcar(); });
+  input.addEventListener('focus', () => { pintar(); caja.classList.add('on'); });
+  input.addEventListener('input', () => { pintar(); caja.classList.add('on'); });
   input.addEventListener('blur', () => {
     setTimeout(() => caja.classList.remove('on'), 120);
-    const cat = equipoDeCatalogo(input.value);
-    if (cat) input.value = cat.t;
-    marcar();
+    const o = opciones().find(x => normEq(x.v) === normEq(input.value));
+    if (o && o.v !== input.value) input.value = o.v;
+    if (alElegir) alElegir();
   });
   input.addEventListener('keydown', ev => {
     const ops = [...caja.querySelectorAll('.eq-op')];
@@ -7360,8 +7501,8 @@ function comboEquipo(input) {
     if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') {
       ev.preventDefault();
       activo = (activo + (ev.key === 'ArrowDown' ? 1 : -1) + ops.length) % ops.length;
-      ops.forEach((o, i) => o.classList.toggle('act', i === activo));
-      ops[activo].scrollIntoView({ block: 'nearest' });
+      ops.forEach((o, k) => o.classList.toggle('act', k === activo));
+      if (ops[activo].scrollIntoView) ops[activo].scrollIntoView({ block: 'nearest' });
     } else if (ev.key === 'Enter') {
       ev.preventDefault();
       elegir((ops[activo] || ops[0]).dataset.v);
@@ -7369,7 +7510,6 @@ function comboEquipo(input) {
       caja.classList.remove('on');
     }
   });
-  marcar();
 }
 
 let equiposEdit = [];
@@ -7377,17 +7517,69 @@ let equiposEdit = [];
 function pintarEquiposForm() {
   const cont = document.getElementById('m-equipos');
   if (!cont) return;
-  if (!equiposEdit.length) equiposEdit = [{ tipo: '', cantidad: 1 }];
-  cont.innerHTML = equiposEdit.map((e, i) => `
-    <div class="eq-fila ${e.tipo && !equipoDeCatalogo(e.tipo) ? 'externo' : ''}">
-      <div class="eq-combo">
-        <input class="eq-tipo" value="${escapeHtml(e.tipo || '')}" placeholder="Escribe o elige el equipo…" autocomplete="off">
-      </div>
-      <input class="eq-cant" type="number" min="1" step="1" value="${e.cantidad || 1}" title="Cantidad">
-      <span class="eq-tag">Rentado / externo</span>
-      <button type="button" class="comp-del" data-eqdel="${i}" title="Quitar">×</button>
+  if (!equiposEdit.length) equiposEdit = [{ tipo: '', marca: '', modelo: '', cantidad: 1 }];
+  cont.innerHTML = `
+    <div class="eq-enc"><span>Tipo de equipo</span><span>Marca</span><span>Modelo</span><span>Cantidad</span><span></span></div>` +
+    equiposEdit.map((e, i) => `
+    <div class="eq-fila" data-i="${i}">
+      <div class="eq-combo"><input class="eq-tipo" value="${escapeHtml(e.tipo || '')}" placeholder="Elige o escribe el equipo…" autocomplete="off"></div>
+      <div class="eq-combo"><input class="eq-marca" value="${escapeHtml(e.marca || '')}" placeholder="Marca" autocomplete="off"></div>
+      <div class="eq-combo"><input class="eq-modelo" value="${escapeHtml(e.modelo || '')}" placeholder="Modelo" autocomplete="off"></div>
+      <div class="eq-cant-caja"><select class="eq-cant"></select><em class="eq-disp"></em></div>
+      <div class="eq-fin"><span class="eq-tag">Rentado / externo</span>
+        <button type="button" class="comp-del" data-eqdel="${i}" title="Quitar">×</button></div>
     </div>`).join('');
-  cont.querySelectorAll('.eq-tipo').forEach(comboEquipo);
+
+  cont.querySelectorAll('.eq-fila').forEach(fila => {
+    const iT = fila.querySelector('.eq-tipo'), iMa = fila.querySelector('.eq-marca');
+    const iMo = fila.querySelector('.eq-modelo'), sC = fila.querySelector('.eq-cant');
+    const disp = fila.querySelector('.eq-disp');
+    const previa = (equiposEdit[Number(fila.dataset.i)] || {}).cantidad || 1;
+
+    // La cantidad se ofrece hasta las unidades que hay en inventario para lo elegido
+    function actualizar() {
+      const e = { tipo: iT.value.trim(), marca: iMa.value.trim(), modelo: iMo.value.trim() };
+      const externo = esEquipoExterno(e);
+      fila.classList.toggle('externo', externo);
+      const cat = equipoDeCatalogo(e.tipo);
+      const n = cat && !externo ? unidadesDisponibles(e.tipo, e.marca, e.marca ? e.modelo : undefined) : 0;
+      const tope = n > 0 ? n : 20;
+      const actual = Number(sC.value) || previa;
+      let ops = '';
+      for (let k = 1; k <= tope; k++) ops += `<option value="${k}" ${k === actual ? 'selected' : ''}>${k}</option>`;
+      if (actual > tope) ops += `<option value="${actual}" selected>${actual} (más que el inventario)</option>`;
+      sC.innerHTML = ops;
+      disp.textContent = !e.tipo ? '' : tipoPorDefinir(e) ? 'tipo por definir' : externo || !cat ? 'rentado' : n > 0 ? `de ${n} en flota` : 'sin unidades vigentes';
+    }
+
+    comboLista(iT, () => CATALOGO_EQUIPOS.map(c => ({ v: c.t, grupo: c.c, sub: `${c.n} ${c.n === 1 ? 'vigente' : 'vigentes'}` })), () => {
+      // si cambió el tipo y la marca ya no le corresponde, se limpia
+      if (iMa.value && !marcasDe(iT.value).some(x => normEq(x.marca) === normEq(iMa.value)) && equipoDeCatalogo(iT.value)) {
+        iMa.value = ''; iMo.value = '';
+      }
+      // tipos con una sola marca y modelo (los "Genérico") se llenan solos
+      const e = completarUnico({ tipo: iT.value, marca: iMa.value, modelo: iMo.value });
+      iMa.value = e.marca || ''; iMo.value = e.modelo || '';
+      actualizar();
+    }, 'rentado / fuera de inventario');
+
+    comboLista(iMa, () => marcasDe(iT.value).map(x => ({ v: x.marca, etiqueta: x.marca || '(sin marca registrada)', sub: `${x.n} ${x.n === 1 ? 'vigente' : 'vigentes'}` })), () => {
+      if (iMo.value && !modelosDe(iT.value, iMa.value).some(x => normEq(x.modelo) === normEq(iMo.value)) && marcasDe(iT.value).length) {
+        iMo.value = '';
+      }
+      const mo = modelosDe(iT.value, iMa.value);
+      if (!iMo.value && mo.length === 1) iMo.value = mo[0].modelo;
+      actualizar();
+    }, 'marca rentada / fuera de inventario');
+
+    comboLista(iMo, () => modelosDe(iT.value, iMa.value).map(x => ({ v: x.modelo, etiqueta: x.modelo || '(sin modelo registrado)',
+      sub: `${x.n} ${x.n === 1 ? 'vigente' : 'vigentes'}${x.conf ? ' · por confirmar con Mtto' : ''}` })),
+      actualizar, 'modelo rentado / fuera de inventario');
+
+    sC.addEventListener('change', () => {});
+    actualizar();
+  });
+
   cont.querySelectorAll('[data-eqdel]').forEach(b => b.addEventListener('click', () => {
     equiposEdit = leerEquiposForm(true);
     equiposEdit.splice(Number(b.dataset.eqdel), 1);
@@ -7398,9 +7590,21 @@ function pintarEquiposForm() {
 function leerEquiposForm(conVacios) {
   const filas = [...document.querySelectorAll('#m-equipos .eq-fila')];
   const lista = filas.map(f => {
-    const tipo = f.querySelector('.eq-tipo').value.trim();
-    const cat = equipoDeCatalogo(tipo);
-    return { tipo: cat ? cat.t : tipo, cantidad: Math.max(1, Number(f.querySelector('.eq-cant').value) || 1), externo: !!tipo && !cat };
+    const tipoTxt = f.querySelector('.eq-tipo').value.trim();
+    const cat = equipoDeCatalogo(tipoTxt);
+    const e = {
+      tipo: cat ? cat.t : tipoTxt,
+      marca: f.querySelector('.eq-marca').value.trim(),
+      modelo: f.querySelector('.eq-modelo').value.trim(),
+      cantidad: Math.max(1, Number(f.querySelector('.eq-cant').value) || 1)
+    };
+    // la marca y el modelo se guardan como vienen en el catálogo
+    const ma = marcasDe(e.tipo).find(x => normEq(x.marca) === normEq(e.marca));
+    if (ma) e.marca = ma.marca;
+    const mo = modelosDe(e.tipo, e.marca).find(x => normEq(x.modelo) === normEq(e.modelo));
+    if (mo) e.modelo = mo.modelo;
+    e.externo = esEquipoExterno(e);
+    return e;
   });
   return conVacios ? lista : lista.filter(e => e.tipo);
 }
@@ -7602,14 +7806,14 @@ function leerLuca(wb) {
 const MAPA_RECURSOS = [
   [/planta concretera|planta de concreto/, 'Planta concretera'],
   [/pavimentadora/, 'Pavimentadora'],
-  [/cargador frontal/, 'Cargador frontal'],
-  [/camion orquesta/, 'Camión orquesta'],
-  [/grua hiab|grua articulada/, 'Grúa articulada'],
-  [/generador/, 'Generador'],
-  [/^crs? |camion revolvedor|^cr$/, 'Camión revolvedor'],
-  [/^cv |camion volteo/, 'Camión volteo'],
-  [/texturizadora/, 'Texturizadora'],
-  [/rodillo/, 'Rodillo'],
+  [/cargador frontal/, 'Cargadores frontales'],
+  [/camion orquesta/, 'Camiones orquesta'],
+  [/grua hiab|grua articulada/, 'Grúas articuladas'],
+  [/generador/, 'Generadores'],
+  [/^crs? |camion revolvedor|^cr$/, 'Camiones revolvedores'],
+  [/^cv |camion volteo/, 'Camiones volteo'],
+  [/texturizadora/, 'Texturizadoras'],
+  [/rodillo/, 'Rodillos'],
   [/silos?/, 'Silos horizontales']
 ];
 const RECURSO_NO = /maximo|promedio|capacidad|tiempo|^km|ciclos|terreno|premisas|fechas|conexion|direccion|^planta$/;
@@ -7674,7 +7878,11 @@ function leerPresupuesto(wb) {
     inicio: fecha(val('Fecha inicio suministros')),
     termino: fecha(val('Fecha termino suministros')),
     plazo_meses: numX(val('Plazo Suministro MR')),
-    equipos: Object.entries(equipos).map(([tipo, cantidad]) => ({ tipo, cantidad, externo: !equipoDeCatalogo(tipo) })),
+    equipos: Object.entries(equipos).map(([tipo, cantidad]) => {
+      const e = completarUnico({ tipo, marca: '', modelo: '', cantidad });
+      e.externo = esEquipoExterno(e);
+      return e;
+    }),
     productos: productos.sort((a, b) => b.v - a.v).slice(0, 8),
     ...pl
   };
@@ -7880,8 +8088,8 @@ function pintarFichaObra(p) {
         <h4>Equipos en el proyecto</h4>
         ${equipos.length ? equipos.map(e => {
           const c = equipoDeCatalogo(e.tipo);
-          return `<div class="fo-eq"><b>${esc(e.tipo)}</b><span>×${e.cantidad}</span>
-            <em class="${c ? '' : 'ext'}">${c ? esc(c.c) : 'Rentado / externo'}</em></div>`;
+          return `<div class="fo-eq"><b>${esc(e.tipo)}${e.marca || e.modelo ? `<small> · ${esc([e.marca, e.modelo].filter(Boolean).join(' '))}</small>` : ''}</b><span>×${e.cantidad}</span>
+            <em class="${esEquipoExterno(e) || tipoPorDefinir(e) ? 'ext' : ''}">${tipoPorDefinir(e) ? 'Tipo de planta por definir' : esEquipoExterno(e) ? 'Rentado / externo' : esc(c ? c.c : '')}</em></div>`;
         }).join('') : '<p class="fo-vacio">Sin equipos capturados.</p>'}
 
         <h4 style="margin-top:12px">Archivos</h4>
@@ -8032,6 +8240,333 @@ async function procesarArchivoObra(p, tipo, file) {
 }
 
 function esc2(v) { return escapeHtml(v === null || v === undefined ? '' : String(v)); }
+
+// ==========================================================================
+// EQUIPOS · FLOTA CONTRA DEMANDA DEL PIPELINE
+// Para decidir qué conservar, qué mover, qué rentar y qué revisar para
+// desincorporación: cruza la flota validada con Mantenimiento contra los
+// equipos que piden las obras del pipeline, según su etapa.
+// ==========================================================================
+// Una fila por tipo, marca y modelo de la validación de Mantenimiento.
+// tp = tipo del catálogo del pipeline al que pertenece (null si no se pide en presupuestos)
+const FLOTA_MTTO = [{"t":"Pavimentadora","ma":"Wirtgen","mo":"SP 1200","p":"Incluir","mot":"","nota":"","lista":4,"act":3,"vig":3,"ult":2026,"ecov":["PV0024","PV0045","PV0046"],"ecob":["PV0023"],"f":"Pavimentación","tp":"Pavimentadora"},{"t":"Pavimentadora","ma":"Wirtgen","mo":"SP 1600","p":"Incluir","mot":"","nota":"","lista":2,"act":2,"vig":2,"ult":2025,"ecov":["PV0032","PV0040"],"ecob":[],"f":"Pavimentación","tp":"Pavimentadora"},{"t":"Pavimentadora","ma":"Power Paver","mo":"SF 3000","p":"Incluir","mot":"","nota":"","lista":4,"act":2,"vig":2,"ult":2026,"ecov":["PV0038","PV0039"],"ecob":["PV0025","PV0037"],"f":"Pavimentación","tp":"Pavimentadora"},{"t":"Pavimentadora","ma":"Power Paver","mo":"SF 2700","p":"Incluir","mot":"","nota":"Además: 1 Propuesta de baja","lista":4,"act":1,"vig":2,"ult":null,"ecov":["PV0031","PV0033"],"ecob":["PV0030","PV0029"],"f":"Pavimentación","tp":"Pavimentadora"},{"t":"Pavimentadora","ma":"Gomaco","mo":"Commander III","p":"Incluir","mot":"","nota":"","lista":3,"act":1,"vig":1,"ult":2024,"ecov":["PV0036"],"ecob":["PV0034","PV0035"],"f":"Pavimentación","tp":"Pavimentadora"},{"t":"Pavimentadora","ma":"Gomaco","mo":"GHP-2800","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":1,"act":0,"vig":0,"ult":2026,"ecov":[],"ecob":["PV0042"],"f":"Pavimentación","tp":"Pavimentadora"},{"t":"Pavimentadora","ma":"Gomaco","mo":"GP4000","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":1,"act":0,"vig":0,"ult":null,"ecov":[],"ecob":["PV0043"],"f":"Pavimentación","tp":"Pavimentadora"},{"t":"Pavimentadora","ma":"Curb Fox","mo":"3000","p":"Incluir","mot":"","nota":"","lista":1,"act":1,"vig":1,"ult":2026,"ecov":["GD0001"],"ecob":[],"f":"Pavimentación","tp":"Pavimentadora"},{"t":"Pavimentadora","ma":"Vogele","mo":"Super 2100-3","p":"Incluir","mot":"","nota":"","lista":1,"act":1,"vig":1,"ult":2026,"ecov":["PV0044"],"ecob":[],"f":"Pavimentación","tp":"Pavimentadora"},{"t":"Pavimentadora","ma":"Terex Bid-Well","mo":"SP 3600","p":"Incluir","mot":"","nota":"","lista":1,"act":1,"vig":1,"ult":null,"ecov":["PV0041"],"ecob":[],"f":"Pavimentación","tp":"Pavimentadora"},{"t":"Pavimentadora","ma":"Terex","mo":"SF 2204 B","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":2,"act":0,"vig":0,"ult":null,"ecov":[],"ecob":["PV0027","PV0028"],"f":"Pavimentación","tp":"Pavimentadora"},{"t":"Pavimentadora","ma":"CMI / Terex","mo":"SF 2204","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":1,"act":0,"vig":0,"ult":null,"ecov":[],"ecob":["PV0020"],"f":"Pavimentación","tp":"Pavimentadora"},{"t":"Texturizadoras","ma":"Wirtgen","mo":"TCM 1800","p":"Incluir","mot":"","nota":"","lista":5,"act":4,"vig":4,"ult":2026,"ecov":["TX0007","TX0010","TX0023","TX0025"],"ecob":["TX0008"],"f":"Pavimentación","tp":"Texturizadoras"},{"t":"Texturizadoras","ma":"Power Paver","mo":"TC 2700","p":"Incluir","mot":"","nota":"","lista":7,"act":4,"vig":4,"ult":2025,"ecov":["TX0011","TX0017","TX0018","TX0020"],"ecob":["TX0019","TX0021","TX0022"],"f":"Pavimentación","tp":"Texturizadoras"},{"t":"Texturizadoras","ma":"Gomaco","mo":"TC 400B","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":2,"act":0,"vig":0,"ult":null,"ecov":[],"ecob":["TX0015","TX0016"],"f":"Pavimentación","tp":"Texturizadoras"},{"t":"Texturizadoras","ma":"Gomaco","mo":"TC 600","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":1,"act":0,"vig":0,"ult":null,"ecov":[],"ecob":["TX0024"],"f":"Pavimentación","tp":"Texturizadoras"},{"t":"Texturizadoras","ma":"Terex","mo":"TC 360RT","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":2,"act":0,"vig":0,"ult":null,"ecov":[],"ecob":["TX0013","TX0014"],"f":"Pavimentación","tp":"Texturizadoras"},{"t":"Tren de reciclado","ma":"Wirtgen","mo":"WR2500 S","p":"Incluir","mot":"","nota":"","lista":5,"act":2,"vig":2,"ult":2026,"ecov":["PR0007","PR0003"],"ecob":["PR0001","PR0005","PR0006"],"f":"Tren de reciclado","tp":"Tren de reciclado"},{"t":"Tren de reciclado","ma":"Wirtgen","mo":"WM1000","p":"Incluir","mot":"","nota":"","lista":5,"act":2,"vig":2,"ult":2026,"ecov":["MP0004","MP0005"],"ecob":["MP0001","MP0006","MP0007"],"f":"Tren de reciclado","tp":"Tren de reciclado"},{"t":"Fresadoras","ma":"Diamond","mo":"Genérico","p":"Incluir","mot":"","nota":"","lista":2,"act":1,"vig":1,"ult":2024,"ecov":["FR0003"],"ecob":["FR0007"],"f":"Pavimentación","tp":"Fresadoras"},{"t":"Fresadoras","ma":"Diamond","mo":"PC 6004 EC","p":"Confirmar","mot":"Manu la marcó como desincorporada (morado), pero en la lista MP está Activa (FR0009) y el historial la registra en obra en 2026. Fuera del listado hasta que Mtto confirme","nota":"","lista":1,"act":1,"vig":1,"ult":2026,"ecov":["FR0009"],"ecob":[],"f":"Pavimentación","tp":"Fresadoras"},{"t":"Fresadoras","ma":"Core Cut","mo":"Genérico","p":"Incluir","mot":"","nota":"","lista":3,"act":1,"vig":1,"ult":2025,"ecov":["FR0004"],"ecob":["FR0005","FR0008"],"f":"Pavimentación","tp":"Fresadoras"},{"t":"Reglas Láser","ma":"Somero","mo":"Genérico","p":"Incluir","mot":"","nota":"La lista solo trae MD0002 sin marca; Somero sale de la presentación","lista":1,"act":1,"vig":1,"ult":null,"ecov":["MD0002"],"ecob":[],"f":"Pavimentación","tp":"Reglas Láser"},{"t":"Perfilógrafos","ma":"SIS","mo":"Genérico","p":"Incluir","mot":"","nota":"","lista":5,"act":4,"vig":4,"ult":null,"ecov":["PG0009","PG0012","PG0013","PG0014"],"ecob":["PG0010"],"f":"Pavimentación","tp":"Perfilógrafos"},{"t":"Medidores de fricción","ma":"Mu-Meter","mo":"Genérico","p":"Incluir","mot":"","nota":"","lista":1,"act":1,"vig":1,"ult":null,"ecov":["MK6"],"ecob":[],"f":"Pavimentación","tp":"Medidores de fricción"},{"t":"Nu Meter","ma":"Genérico","mo":"Genérico","p":"Incluir","mot":"","nota":"","lista":2,"act":2,"vig":2,"ult":null,"ecov":["PF0001","PF0002"],"ecob":[],"f":"Pavimentación","tp":"Nu Meter"},{"t":"Plantas Mezclado Central","ma":"REX-CON","mo":"10YD3","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":1,"act":0,"vig":0,"ult":null,"ecov":[],"ecob":["PD0249"],"f":"Plantas","tp":"Plantas Mezclado Central"},{"t":"Plantas Mezclado Central","ma":"REX-CON","mo":"LOGO 10","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":1,"act":0,"vig":0,"ult":null,"ecov":[],"ecob":["PD0267"],"f":"Plantas","tp":"Plantas Mezclado Central"},{"t":"Plantas Mezclado Central","ma":"REX-CON","mo":"Model S","p":"Incluir","mot":"","nota":"","lista":1,"act":1,"vig":1,"ult":2025,"ecov":["PD0467"],"ecob":[],"f":"Plantas","tp":"Plantas Mezclado Central"},{"t":"Plantas Mezclado Central","ma":"REX-CON","mo":"12YD3","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":1,"act":0,"vig":0,"ult":2024,"ecov":[],"ecob":["PD0250"],"f":"Plantas","tp":"Plantas Mezclado Central"},{"t":"Plantas Mezclado Central","ma":"CON-E-CO","mo":"400SLP","p":"Confirmar","mot":"Ninguna unidad Activa: solo 1 Propuesta de baja","nota":"","lista":1,"act":0,"vig":1,"ult":2025,"ecov":["PD0555"],"ecob":[],"f":"Plantas","tp":"Plantas Mezclado Central"},{"t":"Plantas de Paletas","ma":"FRUMECAR","mo":"Modul Mix C 3002","p":"Incluir","mot":"","nota":"Manu cree que hay Frumecar de mezclado central; en la lista solo aparecen Modulmix como plantas de paletas. Confirmar con Mtto","lista":1,"act":1,"vig":1,"ult":2024,"ecov":["PD0564"],"ecob":[],"f":"Plantas","tp":"Plantas de Paletas"},{"t":"Plantas de Paletas","ma":"FRUMECAR","mo":"Modul Mix C 3000","p":"Incluir","mot":"","nota":"Manu cree que hay Frumecar de mezclado central; en la lista solo aparecen Modulmix como plantas de paletas. Confirmar con Mtto | Además: 1 Retirada","lista":3,"act":2,"vig":3,"ult":2026,"ecov":["PD0679","PD0680","PD0681"],"ecob":[],"f":"Plantas","tp":"Plantas de Paletas"},{"t":"Plantas de Paletas","ma":"IMER / ORU","mo":"MB 6750/4500 - 4.5 M3","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":1,"act":0,"vig":0,"ult":null,"ecov":[],"ecob":["MC0002"],"f":"Plantas","tp":"Plantas de Paletas"},{"t":"Plantas de Paletas","ma":"Liebherr","mo":"DW 4.5 Twin Shaft Mixer","p":"Confirmar","mot":"Ninguna unidad Activa: solo 1 Propuesta de baja","nota":"","lista":2,"act":0,"vig":1,"ult":2026,"ecov":["MC0003"],"ecob":["MC0001"],"f":"Plantas","tp":"Plantas de Paletas"},{"t":"Plantas Flujo Continuo CC","ma":"IMER / ORU","mo":"LK130","p":"Incluir","mot":"","nota":"","lista":2,"act":2,"vig":2,"ult":2025,"ecov":["PD0559","PD0560"],"ecob":[],"f":"Plantas","tp":"Plantas Flujo Continuo CC"},{"t":"Plantas Flujo Continuo CC","ma":"IMER / ORU","mo":"ROME B4V MC 300","p":"Incluir","mot":"","nota":"","lista":1,"act":1,"vig":1,"ult":2026,"ecov":["PD0561"],"ecob":[],"f":"Plantas","tp":"Plantas Flujo Continuo CC"},{"t":"Plantas Flujo Continuo CC","ma":"RAPIDMIX","mo":"RAPID MIX 600","p":"Confirmar","mot":"Ninguna unidad Activa: solo 1 Retirada","nota":"","lista":1,"act":0,"vig":1,"ult":2026,"ecov":["PD0533"],"ecob":[],"f":"Plantas","tp":"Plantas Flujo Continuo CC"},{"t":"Planta concretera (tipo por confirmar)","ma":"Erie Strayer","mo":"MG-11C","p":"Confirmar","mot":"Falta definir si es mezclado central, paletas o flujo continuo","nota":"","lista":1,"act":0,"vig":1,"ult":2026,"ecov":["PD0554"],"ecob":[],"f":"Plantas","tp":"Plantas Mezclado Central"},{"t":"Planta concretera (tipo por confirmar)","ma":"Erie Strayer","mo":"MG7747","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":1,"act":0,"vig":0,"ult":2025,"ecov":[],"ecob":["PD0307"],"f":"Plantas","tp":null},{"t":"Planta concretera (tipo por confirmar)","ma":"Erie Strayer","mo":"9YD3","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":1,"act":0,"vig":0,"ult":null,"ecov":[],"ecob":["PD0375"],"f":"Plantas","tp":null},{"t":"Planta concretera (tipo por confirmar)","ma":"Erie Strayer","mo":"250M3 2T4.5M3","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":1,"act":0,"vig":0,"ult":null,"ecov":[],"ecob":["PD0995"],"f":"Plantas","tp":null},{"t":"Planta concretera (tipo por confirmar)","ma":"Erie Strayer","mo":"Sin modelo","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":1,"act":0,"vig":0,"ult":2025,"ecov":[],"ecob":["PD0558"],"f":"Plantas","tp":null},{"t":"Planta concretera (tipo por confirmar)","ma":"Vince Hagan","mo":"HS-12400B","p":"Confirmar","mot":"Falta definir si es mezclado central, paletas o flujo continuo","nota":"","lista":2,"act":1,"vig":1,"ult":2026,"ecov":["PD0457"],"ecob":["PD0534"],"f":"Plantas","tp":"Planta Dosificadora Dry Batch"},{"t":"Planta concretera (tipo por confirmar)","ma":"Vince Hagan","mo":"Sin modelo","p":"Confirmar","mot":"Falta definir si es mezclado central, paletas o flujo continuo","nota":"","lista":1,"act":0,"vig":1,"ult":2025,"ecov":["PD0399"],"ecob":[],"f":"Plantas","tp":"Planta Dosificadora Dry Batch"},{"t":"Planta concretera (tipo por confirmar)","ma":"Odisa","mo":"6000","p":"Confirmar","mot":"Falta definir si es mezclado central, paletas o flujo continuo","nota":"","lista":3,"act":2,"vig":2,"ult":2026,"ecov":["PD0409","PD0496"],"ecob":["PD0288"],"f":"Plantas","tp":"Planta Dosificadora Dry Batch"},{"t":"Rodillos","ma":"Genérico","mo":"Genérico","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":14,"act":0,"vig":0,"ult":2024,"ecov":[],"ecob":["RD0005","RD0006","RD0010","RD0012","RD0017","RD0018","RD0019","RD0020","RD0021","RD0022","RD0023","RD0024","RD0016","RD0025"],"f":"Pavimentación","tp":null},{"t":"Cortadoras","ma":"Genérico","mo":"Genérico","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":7,"act":0,"vig":0,"ult":null,"ecov":[],"ecob":["CC0078","CC0088","CC0091","CC0094","CC0102","CC0103","CC0101"],"f":"Pavimentación","tp":null},{"t":"Retroexcavadoras","ma":"Genérico","mo":"Genérico","p":"Incluir","mot":"","nota":"","lista":3,"act":2,"vig":2,"ult":2026,"ecov":["RX0007","RX0008"],"ecob":["RX0006"],"f":"Equipo de apoyo","tp":"Retroexcavadoras"},{"t":"Cargadores frontales","ma":"Genérico","mo":"Genérico","p":"Incluir","mot":"","nota":"Además: 7 Retirada, 2 Propuesta de baja","lista":20,"act":9,"vig":18,"ult":2026,"ecov":["CF9203","CF9204","CF9205","CF9207","CF9208","CF9291","CF9293","CF9294","CF9316","CF9318","CF9319","CF9320","CF9321","CF9406","CF9407","CF9408","CF9409","CF9442"],"ecob":["CF0488","CF9202"],"f":"Equipo de apoyo","tp":"Cargadores frontales"},{"t":"Compresores","ma":"Genérico","mo":"Genérico","p":"Incluir","mot":"","nota":"","lista":6,"act":1,"vig":1,"ult":null,"ecov":["CN0181"],"ecob":["CN0087","CN0088","CN0178","CN0179","CN0180"],"f":"Equipo de apoyo","tp":"Compresores"},{"t":"Generadores","ma":"Genérico","mo":"Genérico","p":"Incluir","mot":"","nota":"Manu los marcó en verde en su resumen; confirmar qué significa | Además: 3 Retirada","lista":6,"act":1,"vig":4,"ult":2026,"ecov":["GN0219","GN0220","GN0221","GN0233"],"ecob":["GN0011","GN0009"],"f":"Equipo de apoyo","tp":"Generadores"},{"t":"Chillers (enfriadores de agua)","ma":"Genérico","mo":"Genérico","p":"Confirmar","mot":"Ninguna unidad Activa: solo 1 Proceso de traspaso","nota":"","lista":7,"act":0,"vig":1,"ult":null,"ecov":["CH0014"],"ecob":["CH0001","CH0002","CH0009","CH0010","CH0011","CH0013"],"f":"Refrigeración","tp":"Chillers (enfriadores de agua)"},{"t":"Plantas de hielo","ma":"Genérico","mo":"Genérico","p":"Confirmar","mot":"Ninguna unidad Activa: solo 2 Propuesta de baja","nota":"","lista":4,"act":0,"vig":2,"ult":2025,"ecov":["PH0006","PH0007"],"ecob":["PH0002","PH0001"],"f":"Refrigeración","tp":"Plantas de hielo"},{"t":"Trituradoras de hielo","ma":"Genérico","mo":"Genérico","p":"Confirmar","mot":"Ninguna unidad Activa: solo 3 Retirada","nota":"","lista":3,"act":0,"vig":3,"ult":2023,"ecov":["TH0004","TH0005","TH0006"],"ecob":[],"f":"Refrigeración","tp":"Trituradoras de hielo"},{"t":"Plantas desalinizadoras","ma":"Genérico","mo":"Genérico","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":2,"act":0,"vig":0,"ult":null,"ecov":[],"ecob":["PO0001","PO0002"],"f":"Plantas","tp":null},{"t":"Motosopladores","ma":"Genérico","mo":"Genérico","p":"Confirmar","mot":"Ninguna unidad Activa: solo 1 Proceso de traspaso","nota":"","lista":1,"act":0,"vig":1,"ult":null,"ecov":["SO0001"],"ecob":[],"f":"Equipo de apoyo","tp":"Motosopladores"},{"t":"Dosificadoras móviles","ma":"Genérico","mo":"Genérico","p":"Excluir","mot":"Todas sus unidades están en Baja o Proceso de baja","nota":"","lista":1,"act":0,"vig":0,"ult":null,"ecov":[],"ecob":["DM0004"],"f":"Plantas","tp":null},{"t":"Camiones revolvedores","ma":"Genérico","mo":"Genérico","p":"Incluir","mot":"","nota":"Además: 43 Retirada, 12 Propuesta de baja, 3 Proceso de traspaso","lista":180,"act":5,"vig":63,"ult":2026,"ecov":["CR2817","CR2844","CR2877","CR2883","CR2947","CR3023","CR3060","CR3069","CR3077","CR3094","CR3099","CR3102","CR3130","CR3187","CR3210","CR3242","CR4110","CR3438","CR3526","CR3527","CR3571","CR3623","CR3563","CR3658","CR4112","CR3757","CR4118","CR3762","CR3767","CR3775","CR3859","CR3932","CR3956","CR3960","CR3977","CR4091","CR4139","CR4140","CR4116","CR4158","CR4123","CR4165","CR4169","CR4196","CR4312","CR4413","CR4192","CR4199","CR4215","CR4224","CR4287","CR4304","CR4327","CR4332","CR4351","CR4364","CR4369","CR4397","CR4402","CR4409","CR4416","CR4468","CR4501"],"ecob":["CR2732","CR2738","CR2746","CR2749","CR2762","CR2764","CR2770","CR2788","CR2795","CR2804","CR2812","CR2816","CR2829","CR2832","CR2839","CR2843","CR2854","CR2857","CR2881","CR2894","CR2910","CR2911","CR2922","CR2931","CR2949","CR2986","CR2998","CR3016","CR3024","CR3028","CR3032","CR3033","CR3044","CR3046","CR3049","CR3053","CR3059","CR3064","CR3066","CR3070","CR3075","CR3076","CR3079","CR3096","CR3112","CR3122","CR3132","CR3147","CR3173","CR3174","CR3195","CR3207","CR3252","CR3262","CR3283","CR3287","CR3305","CR3319","CR3320","CR3326","CR3332","CR3339","CR3344","CR3354","CR3355","CR3358","CR3393","CR3396","CR3422","CR3414","CR3427","CR3431","CR3446","CR3473","CR3480","CR3458","CR3524","CR3539","CR3569","CR3592","CR3618","CR3631","CR3643","CR3644","CR3646","CR3654","CR3678","CR3683","CR3688","CR3690","CR3694","CR3695","CR3698","CR3704","CR3707","CR3760","CR3789","CR3783","CR3791","CR3790","CR3793","CR3856","CR3869","CR3873","CR3926","CR3953","CR3957","CR3992","CR3974","CR4024","CR4081","CR4083","CR3715","CR3740","CR3818","CR3857","CR3986"],"f":"Equipo móvil","tp":"Camiones revolvedores"},{"t":"Camiones orquesta","ma":"Genérico","mo":"Genérico","p":"Incluir","mot":"","nota":"Además: 1 Propuesta de baja","lista":4,"act":3,"vig":4,"ult":2026,"ecov":["CO0001","CO0003","CO0004","CO0006"],"ecob":[],"f":"Equipo móvil","tp":"Camiones orquesta"},{"t":"Camiones pipa","ma":"Genérico","mo":"Genérico","p":"Incluir","mot":"","nota":"Además: 3 Retirada","lista":9,"act":5,"vig":8,"ult":2026,"ecov":["CP0027","CP0028","CP0029","CP0030","CP0031","CP0033","CP0038","CP0039"],"ecob":["CP0051"],"f":"Equipo móvil","tp":"Camiones pipa"},{"t":"Grúas articuladas","ma":"Genérico","mo":"Genérico","p":"Incluir","mot":"","nota":"Además: 1 Retirada","lista":8,"act":4,"vig":5,"ult":2026,"ecov":["GA0006","GA0007","GA0008","GA0004","GA0009"],"ecob":["GA0003","GA0002","GA0005"],"f":"Equipo móvil","tp":"Grúas articuladas"},{"t":"Camiones quinta rueda","ma":"Genérico","mo":"Genérico","p":"Excluir","mot":"Manu: no se especifica con este detalle en presupuestos (naranja)","nota":"","lista":4,"act":1,"vig":2,"ult":2026,"ecov":["5R0073","5R0074"],"ecob":["5R0075","5R0076"],"f":"Equipo móvil","tp":null},{"t":"Camiones tractor","ma":"Genérico","mo":"Genérico","p":"Excluir","mot":"Manu: no se especifica con este detalle en presupuestos (naranja)","nota":"","lista":2,"act":0,"vig":2,"ult":null,"ecov":["TR2165","TR2228"],"ecob":[],"f":"Equipo móvil","tp":null},{"t":"Camiones volteo","ma":"Genérico","mo":"Genérico","p":"Excluir","mot":"Manu: no se especifica con este detalle en presupuestos (naranja)","nota":"","lista":10,"act":0,"vig":9,"ult":2026,"ecov":["CV9030","CV9031","CV9032","CV9033","CV9035","CV9036","CV9037","CV9034","CV9038"],"ecob":["CV9007"],"f":"Equipo móvil","tp":null},{"t":"Grúas viajeras","ma":"Genérico","mo":"Genérico","p":"Excluir","mot":"Manu: no se especifica con este detalle en presupuestos (naranja)","nota":"","lista":1,"act":1,"vig":1,"ult":null,"ecov":["GV0001"],"ecob":[],"f":"Equipo móvil","tp":null},{"t":"Camas bajas","ma":"Genérico","mo":"Genérico","p":"Excluir","mot":"Manu: no se especifica con este detalle en presupuestos (naranja)","nota":"","lista":2,"act":0,"vig":2,"ult":null,"ecov":["CB0001","CB0002"],"ecob":[],"f":"Equipo móvil","tp":null},{"t":"Remolques de rodillos","ma":"Genérico","mo":"Genérico","p":"Excluir","mot":"Manu: no se especifica con este detalle en presupuestos (naranja)","nota":"","lista":5,"act":2,"vig":2,"ult":2026,"ecov":["RR0003","RR0006"],"ecob":["RR0004","RR0005","RR0007"],"f":"Equipo móvil","tp":null},{"t":"Remolques de volteo","ma":"Genérico","mo":"Genérico","p":"Excluir","mot":"Manu: no se especifica con este detalle en presupuestos (naranja)","nota":"","lista":1,"act":0,"vig":1,"ult":null,"ecov":["RM0001"],"ecob":[],"f":"Equipo móvil","tp":null},{"t":"Casetas","ma":"Genérico","mo":"Genérico","p":"Excluir","mot":"Manu: no se especifica con este detalle en presupuestos (naranja)","nota":"","lista":7,"act":0,"vig":0,"ult":null,"ecov":[],"ecob":["CS0170","CS0180","CS0181","CS0182","CS0183","CS0184","CS0185"],"f":"Periféricos","tp":null},{"t":"Contenedores marítimos","ma":"Genérico","mo":"Genérico","p":"Excluir","mot":"Manu: no se especifica con este detalle en presupuestos (naranja)","nota":"","lista":4,"act":0,"vig":0,"ult":null,"ecov":[],"ecob":["AP0005","AP0006","AP0007","AP0008"],"f":"Periféricos","tp":null},{"t":"ARAN auscultación","ma":"ARAN","mo":"Genérico","p":"Excluir","mot":"Manu: desincorporado (morado); tampoco aparece en la lista MP","nota":"","lista":0,"act":0,"vig":0,"ult":null,"ecov":[],"ecob":[],"f":"Pavimentación","tp":null}];
+
+let eqDetalle = null;    // tipo abierto en el detalle
+
+function etapaEquipo(estatus) {
+  const c = String(estatus || '').slice(0, 2);
+  if (c === '04' || c === '05') return 'comp';
+  if (c === '02' || c === '03') return 'conc';
+  if (c === '01') return 'proy';
+  return null;
+}
+
+function calcularEquiposTab(obras) {
+  const tipos = {};
+  CATALOGO_EQUIPOS.forEach(c => {
+    tipos[c.t] = { t: c.t, f: c.c, lista: 0, vig: 0, ult: null, filas: [], conf: c.mm.some(x => x[3]),
+                   comp: 0, conc: 0, proy: 0, obras: [] };
+  });
+  FLOTA_MTTO.forEach(r => {
+    if (!r.tp || !tipos[r.tp]) return;
+    const t = tipos[r.tp];
+    t.lista += r.lista; t.vig += r.vig;
+    if (r.ult && (!t.ult || r.ult > t.ult)) t.ult = r.ult;
+    t.filas.push(r);
+  });
+
+  const externos = {};
+  let obrasConEquipo = 0, obrasVigentes = 0;
+  obras.forEach(p => {
+    const e = etapaEquipo(p.estatus);
+    if (e === 'comp' || e === 'conc') obrasVigentes++;
+    const lista = equiposDe(p);
+    if (lista.length && (e === 'comp' || e === 'conc')) obrasConEquipo++;
+    if (!e) return;
+    lista.forEach(q => {
+      const reg = { id: p.id, proyecto: p.proyecto, estatus: p.estatus, etapa: e, cantidad: Number(q.cantidad) || 0,
+                    marca: q.marca || '', modelo: q.modelo || '', arranque: p.fecha_arranque || null };
+      const t = tipos[q.tipo];
+      if (t && !esEquipoExterno(q)) {
+        t[e] += reg.cantidad;
+        t.obras.push(reg);
+        if ((e === 'comp' || e === 'conc') && q.marca && q.modelo) {
+          const ck = normEq(q.marca) + '|' + normEq(q.modelo);
+          t.demCombo = t.demCombo || {};
+          t.demCombo[ck] = (t.demCombo[ck] || 0) + reg.cantidad;
+        }
+      } else {
+        const k = tipoPorDefinir(q) ? 'Planta concretera · tipo por definir' : q.tipo + (q.marca ? ' · ' + q.marca : '');
+        if (!externos[k]) externos[k] = { k, unidades: 0, obras: [] };
+        externos[k].unidades += reg.cantidad;
+        externos[k].obras.push(reg);
+      }
+    });
+  });
+
+  const lista = Object.values(tipos).map(t => {
+    const dem = t.comp + t.conc;
+    // faltante por modelo: pedir 5 de un modelo con 3 vigentes falta aunque el tipo tenga 13
+    const vigCombo = {};
+    t.filas.forEach(r => { const ck = normEq(r.ma) + '|' + normEq(r.mo); vigCombo[ck] = (vigCombo[ck] || 0) + r.vig; });
+    t.vigCombo = vigCombo;
+    const faltaModelo = Object.entries(t.demCombo || {}).reduce((a, [ck, d]) => a + Math.max(0, d - (vigCombo[ck] || 0)), 0);
+    const falta = Math.max(dem - t.vig, faltaModelo, 0);
+    t.falta = falta;
+    let senal, clase;
+    if (falta > 0) {
+      senal = !t.vig ? 'Rentar: sin flota' : `Faltan ${falta}${faltaModelo > Math.max(0, dem - t.vig) ? ' del modelo pedido' : ''}`;
+      clase = 'falta';
+    }
+    else if (dem > 0) { senal = `Cubierto · sobran ${t.vig - dem}`; clase = 'ok'; }
+    else if (t.vig > 0 && (!t.ult || t.ult <= 2024)) { senal = 'Revisar desincorporación'; clase = 'revisar'; }
+    else if (t.vig > 0) { senal = 'Sin demanda en pipeline'; clase = 'sin'; }
+    else { senal = 'Sin flota vigente'; clase = 'sin'; }
+    return { ...t, dem, senal, clase };
+  });
+
+  const fuera = {};
+  FLOTA_MTTO.filter(r => !r.tp).forEach(r => {
+    if (!fuera[r.t]) fuera[r.t] = { t: r.t, f: r.f, lista: 0, vig: 0, ult: null, mot: r.mot };
+    fuera[r.t].lista += r.lista; fuera[r.t].vig += r.vig;
+    if (r.ult && (!fuera[r.t].ult || r.ult > fuera[r.t].ult)) fuera[r.t].ult = r.ult;
+  });
+
+  const familias = {};
+  FLOTA_MTTO.forEach(r => {
+    if (!familias[r.f]) familias[r.f] = { f: r.f, vig: 0, baja: 0 };
+    familias[r.f].vig += r.vig;
+    familias[r.f].baja += Math.max(0, r.lista - r.vig);
+  });
+
+  const totLista = FLOTA_MTTO.reduce((a, r) => a + r.lista, 0);
+  const totVig = FLOTA_MTTO.reduce((a, r) => a + r.vig, 0);
+  const vigPipe = lista.reduce((a, t) => a + t.vig, 0);
+  const faltante = lista.reduce((a, t) => a + t.falta, 0) +
+                   Object.values(externos).filter(x => !/por definir/.test(x.k)).reduce((a, x) => a + x.unidades, 0);
+  const revisar = lista.filter(t => t.clase === 'revisar');
+
+  return {
+    tipos: lista, externos: Object.values(externos).sort((a, b) => b.unidades - a.unidades),
+    fuera: Object.values(fuera).filter(x => x.vig > 0).sort((a, b) => b.vig - a.vig),
+    familias: Object.values(familias).sort((a, b) => (b.vig + b.baja) - (a.vig + a.baja)),
+    confirmar: FLOTA_MTTO.filter(r => r.p === 'Confirmar'),
+    kpi: {
+      totLista, totVig, vigPipe, baja: totLista - totVig,
+      comp: lista.reduce((a, t) => a + t.comp, 0), conc: lista.reduce((a, t) => a + t.conc, 0),
+      faltante, revisar: revisar.length, revisarUnidades: revisar.reduce((a, t) => a + t.vig, 0),
+      sinDemanda: lista.filter(t => t.dem === 0 && t.vig > 0).length,
+      obrasConEquipo, obrasVigentes
+    }
+  };
+}
+
+function renderEquiposTab() {
+  const cont = document.getElementById('eqt-cont');
+  if (!cont) return;
+  const x = calcularEquiposTab(datosUnicos(getFiltered()));
+  const k = x.kpi, esc = escapeHtml;
+  const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
+  const ult = u => u ? String(u) : 'sin registro';
+
+  // Orden de la tabla: primero lo que pide acción
+  const peso = { falta: 0, revisar: 1, ok: 2, sin: 3 };
+  const filas = x.tipos.slice().sort((a, b) => peso[a.clase] - peso[b.clase] || (b.dem - a.dem) || (b.vig - a.vig));
+
+  cont.innerHTML = `
+  <div class="eqt">
+    <div class="eqt-top">
+      <p>Flota validada con Mantenimiento contra los equipos que piden las obras del pipeline. La demanda respeta los filtros de arriba.</p>
+      <button type="button" class="btn btn-ghost btn-sm" id="eqt-png">Descargar PNG</button>
+    </div>
+    <div class="eqt-kpis">
+      <div class="eqt-kpi"><span>Flota vigente</span><b>${k.vigPipe}</b><em>unidades de los ${x.tipos.length} tipos que se piden en obra · ${k.totVig} en toda la lista</em></div>
+      <div class="eqt-kpi"><span>En baja o en proceso</span><b class="rojo">${k.baja}</b><em>${pct(k.baja, k.totLista)}% de las ${k.totLista} unidades de la lista MP</em></div>
+      <div class="eqt-kpi"><span>Comprometido</span><b>${k.comp}</b><em>unidades en obras contratadas o en ejecución</em></div>
+      <div class="eqt-kpi"><span>En concurso</span><b>${k.conc}</b><em>unidades en obras en licitación o negociación</em></div>
+      <div class="eqt-kpi"><span>Por conseguir</span><b class="${k.faltante ? 'rojo' : ''}">${k.faltante}</b><em>unidades por encima de la flota o rentadas</em></div>
+      <div class="eqt-kpi"><span>Revisar desincorporación</span><b class="${k.revisar ? 'ambar' : ''}">${k.revisarUnidades}</b><em>unidades en ${k.revisar} tipos sin demanda y sin obra desde 2024</em></div>
+    </div>
+    ${k.obrasVigentes && k.obrasConEquipo / k.obrasVigentes < 0.5 ? `
+      <div class="eqt-aviso"><b>${k.obrasConEquipo} de ${k.obrasVigentes}</b> obras en licitación, negociación, contratadas o en ejecución tienen sus equipos capturados.
+        La demanda se va a ver completa conforme cada obra capture sus equipos (en el formulario o subiendo el presupuesto).</div>` : ''}
+
+    <div class="eqt-g2">
+      <section class="eqt-card">
+        <h4>Flota vigente contra demanda del pipeline</h4>
+        <p class="eqt-desc">Por tipo de equipo · si la barra de demanda rebasa a la de flota, habrá que mover o rentar</p>
+        <div class="eqt-chart" style="height:${Math.max(260, filas.filter(t => t.vig || t.dem).length * 24 + 50)}px"><canvas id="eqt-chart-tipos"></canvas></div>
+      </section>
+      <section class="eqt-card">
+        <h4>Estado de la lista MP por familia</h4>
+        <p class="eqt-desc">Unidades vigentes contra las que están en baja o en proceso de baja</p>
+        <div class="eqt-chart" style="height:260px"><canvas id="eqt-chart-familias"></canvas></div>
+        <h4 style="margin-top:14px">Vigentes que no se piden en presupuestos</h4>
+        <p class="eqt-desc">Fuera del catálogo del pipeline: candidatos a ofrecer a operaciones o a revisar</p>
+        ${x.fuera.length ? x.fuera.map(r => `
+          <div class="eqt-mini"><b>${esc(r.t)}</b><span>${r.vig} ${r.vig === 1 ? 'vigente' : 'vigentes'}</span><em>último año en obra: ${ult(r.ult)}</em></div>`).join('')
+          : '<p class="eqt-vacio">Ninguno.</p>'}
+      </section>
+    </div>
+
+    <div class="eqt-g2">
+      <section class="eqt-card">
+        <h4>Balance por tipo de equipo</h4>
+        <p class="eqt-desc">Lo que pide acción va arriba · clic en un tipo para ver marcas, modelos, números económicos y las obras que lo piden</p>
+        <div class="eqt-tabla-wrap">
+          <table class="eqt-tabla">
+            <thead><tr><th>Tipo</th><th class="n">Vigentes</th><th class="n">En baja</th><th class="n">Últ. obra</th>
+              <th class="n">Comprom.</th><th class="n">Concurso</th><th>Señal</th></tr></thead>
+            <tbody>${filas.map(t => `
+              <tr data-tipo="${esc(t.t)}" class="${eqDetalle === t.t ? 'sel' : ''}">
+                <td><b>${esc(t.t)}</b><small>${esc(t.f)}${t.conf ? ' · <i>por confirmar con Mtto</i>' : ''}</small></td>
+                <td class="n">${t.vig}</td><td class="n gris">${Math.max(0, t.lista - t.vig)}</td>
+                <td class="n ${!t.ult || t.ult <= 2024 ? 'ambar' : ''}">${t.ult || '—'}</td>
+                <td class="n">${t.comp || '—'}</td><td class="n">${t.conc || '—'}</td>
+                <td><span class="eqt-senal ${t.clase}">${esc(t.senal)}</span></td>
+              </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="eqt-card">
+        <h4>Rentado o fuera de la flota</h4>
+        <p class="eqt-desc">Equipos que piden las obras y CEMEX no tiene</p>
+        ${x.externos.length ? x.externos.map(r => `
+          <div class="eqt-mini"><b>${esc(r.k)}</b><span>${r.unidades} u.</span><em>${r.obras.map(o => esc(o.proyecto)).slice(0, 3).join(' · ')}</em></div>`).join('')
+          : '<p class="eqt-vacio">Ninguna obra pide equipo fuera de la flota.</p>'}
+        <h4 style="margin-top:14px">Por confirmar con Mantenimiento</h4>
+        <p class="eqt-desc">Pendientes de la validación antes de darlos por buenos</p>
+        ${x.confirmar.map(r => `
+          <div class="eqt-mini"><b>${esc(r.t)} · ${esc(r.ma)} ${esc(r.mo)}</b><span>${r.vig} vig.</span><em>${esc(r.mot || r.nota || '')}</em></div>`).join('')}
+      </section>
+    </div>
+    <div id="eqt-detalle"></div>
+  </div>`;
+
+  dibujarEquiposTab(filas, x);
+  cont.querySelectorAll('.eqt-tabla tbody tr').forEach(tr => tr.addEventListener('click', () => {
+    eqDetalle = eqDetalle === tr.dataset.tipo ? null : tr.dataset.tipo;
+    cont.querySelectorAll('.eqt-tabla tbody tr').forEach(r => r.classList.toggle('sel', r.dataset.tipo === eqDetalle));
+    pintarDetalleEquipo(x);
+  }));
+  document.getElementById('eqt-png').addEventListener('click', exportarEquiposPng);
+  pintarDetalleEquipo(x);
+}
+
+function pintarDetalleEquipo(x) {
+  const caja = document.getElementById('eqt-detalle');
+  if (!caja) return;
+  const t = x.tipos.find(y => y.t === eqDetalle);
+  if (!t) { caja.innerHTML = ''; return; }
+  const esc = escapeHtml;
+  const eco = l => l && l.length ? esc(l.join(', ')) : '—';
+  const etq = { comp: 'Comprometido', conc: 'En concurso', proy: 'Proyecto' };
+  caja.innerHTML = `
+    <section class="eqt-card eqt-det">
+      <div class="eqt-det-head">
+        <div><h4>${esc(t.t)}</h4><p class="eqt-desc">${esc(t.f)} · ${t.vig} vigentes de ${t.lista} en la lista MP · último año en obra: ${t.ult || 'sin registro'}</p></div>
+        <button type="button" class="btn btn-ghost btn-sm" id="eqt-det-x">Cerrar</button>
+      </div>
+      <div class="eqt-g2">
+        <div>
+          <div class="eqt-sub">Marcas y modelos</div>
+          <table class="eqt-tabla">
+            <thead><tr><th>Marca · modelo</th><th class="n">Vig.</th><th class="n">Piden</th><th class="n">Lista</th><th class="n">Últ. obra</th><th>Económicos vigentes</th><th>En baja</th></tr></thead>
+            <tbody>${t.filas.map(r => `
+              <tr class="${r.p === 'Excluir' ? 'atenuada' : ''}">
+                <td><b>${esc(r.ma)} ${esc(r.mo)}</b>${r.p !== 'Incluir' ? `<small>${esc(r.p)}${r.mot ? ': ' + esc(r.mot) : ''}</small>` : ''}${r.nota ? `<small>${esc(r.nota)}</small>` : ''}</td>
+                <td class="n">${r.vig}</td>
+                <td class="n ${((t.demCombo || {})[normEq(r.ma) + '|' + normEq(r.mo)] || 0) > r.vig ? 'rojo' : ''}">${(t.demCombo || {})[normEq(r.ma) + '|' + normEq(r.mo)] || '—'}</td>
+                <td class="n gris">${r.lista}</td><td class="n">${r.ult || '—'}</td>
+                <td class="eco">${eco(r.ecov)}</td><td class="eco gris">${eco(r.ecob)}</td>
+              </tr>`).join('')}</tbody>
+          </table>
+        </div>
+        <div>
+          <div class="eqt-sub">Obras que lo piden</div>
+          ${t.obras.length ? `<table class="eqt-tabla">
+            <thead><tr><th>Obra</th><th>Etapa</th><th class="n">Cant.</th><th>Marca · modelo</th><th>Arranque</th></tr></thead>
+            <tbody>${t.obras.sort((a, b) => String(a.arranque || '9').localeCompare(String(b.arranque || '9'))).map(o => `
+              <tr class="eqt-obra" data-id="${esc(o.id)}"><td><b>${esc(o.proyecto)}</b></td><td>${etq[o.etapa]}</td><td class="n">${o.cantidad}</td>
+                <td>${esc([o.marca, o.modelo].filter(Boolean).join(' ') || '—')}</td><td>${esc(o.arranque || 'TBD')}</td></tr>`).join('')}</tbody>
+          </table>` : '<p class="eqt-vacio">Ninguna obra del pipeline lo tiene capturado con los filtros actuales.</p>'}
+        </div>
+      </div>
+    </section>`;
+  document.getElementById('eqt-det-x').addEventListener('click', () => {
+    eqDetalle = null;
+    document.querySelectorAll('.eqt-tabla tbody tr.sel').forEach(r => r.classList.remove('sel'));
+    caja.innerHTML = '';
+  });
+  caja.querySelectorAll('.eqt-obra').forEach(tr => tr.addEventListener('dblclick', () => abrirFichaObra(tr.dataset.id)));
+  if (caja.scrollIntoView) caja.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function dibujarEquiposTab(filas, x) {
+  if (typeof Chart === 'undefined') return;
+  const t = chartTheme();
+  const conDato = filas.filter(f => f.vig || f.dem).sort((a, b) => Math.max(b.vig, b.dem) - Math.max(a.vig, a.dem));
+  const tip = { backgroundColor: '#ffffff', borderColor: '#c9cce6', borderWidth: 1, padding: 9, titleColor: '#14173d', bodyColor: '#565b85' };
+  if (charts.eqtTipos) charts.eqtTipos.destroy();
+  charts.eqtTipos = new Chart(document.getElementById('eqt-chart-tipos'), {
+    type: 'bar',
+    data: {
+      labels: conDato.map(f => f.t),
+      datasets: [
+        { label: 'Flota vigente', data: conDato.map(f => f.vig), backgroundColor: '#c9cce6', stack: 'flota', borderRadius: 2 },
+        { label: 'Comprometido', data: conDato.map(f => f.comp), backgroundColor: '#0003aa', stack: 'demanda', borderRadius: 2 },
+        { label: 'En concurso', data: conDato.map(f => f.conc), backgroundColor: '#7b7fe8', stack: 'demanda', borderRadius: 2 }
+      ]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', align: 'end', labels: { boxWidth: 10, font: { size: 10 } } }, tooltip: tip },
+      scales: {
+        x: { stacked: true, grid: { color: t.grid }, ticks: { color: t.color, font: { size: 10 }, precision: 0 } },
+        y: { stacked: true, grid: { display: false }, ticks: { color: t.color, font: { size: 10.5 }, autoSkip: false } }
+      }
+    }
+  });
+  if (charts.eqtFam) charts.eqtFam.destroy();
+  charts.eqtFam = new Chart(document.getElementById('eqt-chart-familias'), {
+    type: 'bar',
+    data: {
+      labels: x.familias.map(f => f.f),
+      datasets: [
+        { label: 'Vigentes', data: x.familias.map(f => f.vig), backgroundColor: '#0003aa', stack: 's', borderRadius: 2 },
+        { label: 'En baja o en proceso', data: x.familias.map(f => f.baja), backgroundColor: '#f7a1a8', stack: 's', borderRadius: 2 }
+      ]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } }, tooltip: tip },
+      scales: {
+        x: { stacked: true, grid: { color: t.grid }, ticks: { color: t.color, font: { size: 10 }, precision: 0 } },
+        y: { stacked: true, grid: { display: false }, ticks: { color: t.color, font: { size: 10.5 } } }
+      }
+    }
+  });
+}
+
+async function exportarEquiposPng() {
+  if (!await asegurarLibreria('imagen')) return;
+  const zona = document.querySelector('#eqt-cont .eqt');
+  if (!zona) return;
+  toast('Generando imagen…', 'warn');
+  const boton = document.getElementById('eqt-png');
+  boton.style.visibility = 'hidden';
+  const muros = [...zona.querySelectorAll('.eqt-tabla-wrap')];
+  const alturas = muros.map(m => m.style.maxHeight);
+  muros.forEach(m => { m.style.maxHeight = 'none'; });
+  try {
+    const lienzo = await html2canvas(zona, { scale: 2, backgroundColor: '#f3f4fb', logging: false });
+    lienzo.toBlob(b => { download(b, `Equipos_flota_vs_pipeline_${new Date().toISOString().slice(0, 10)}.png`); toast('Imagen descargada'); }, 'image/png');
+  } finally {
+    boton.style.visibility = '';
+    muros.forEach((m, i) => { m.style.maxHeight = alturas[i]; });
+  }
+}
 
 // ==========================================================================
 // PDM · PARTICIPACIÓN DE MERCADO
@@ -9255,6 +9790,12 @@ const VIEW_META = {
     icon: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>',
     showFilters: false
   },
+  eq: {
+    title: 'Equipos',
+    subtitle: 'Flota validada con Mantenimiento contra la demanda del pipeline',
+    icon: '<path d="M3 17h2l2-5h8l2 5h4"/>',
+    showFilters: true
+  },
   cap: {
     title: 'Seguimiento de captura',
     subtitle: 'Qué le falta a cada obra y quién la tiene a cargo',
@@ -9294,6 +9835,7 @@ function switchView(name) {
   if (name === 'map') renderMap();
   if (name === 'pdm') renderPDM();
   if (name === 'cap') renderCapturaTab();
+  if (name === 'eq') renderEquiposTab();
   if (name === 'lic') renderLicitaciones();
 }
 
