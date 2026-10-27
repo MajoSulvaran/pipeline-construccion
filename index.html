@@ -3360,7 +3360,9 @@ const MODALIDADES = ['Suministro', 'Suministro y colocación', 'Construcción'];
 const LICITACIONES = ['Licitación de obra', 'Licitación llave en mano'];
 
 const RESPONSABLES = ['LCDC', 'DDLG', 'APC', 'JDDO', 'FRB', 'JMSS', 'YATG', 'MLR', 'ESRA', 'SAAH',
-                      'JMLG', 'HARH', 'MFRC', 'MJSA'];
+                      'JMLG', 'HARH', 'MFRC', 'MJSA',
+                      // Cuentas Nacionales e Institucionales
+                      'AJC', 'EAGH', 'GILP', 'NLAL', 'CARG', 'UCA', 'AMFL', 'VEGN', 'GCG', 'MJCC', 'AAL', 'MASJ'];
 
 // Nombre completo de cada quien: se usa para la pantalla de acceso y el encabezado
 const NOMBRES = {
@@ -3377,13 +3379,39 @@ const NOMBRES = {
   JMLG: 'José Miguel López Gosain',
   HARH: 'Hugo Alberto Ramírez Hanon',
   MFRC: 'María Fernanda Ramírez Castillo',
-  MJSA: 'María José Sulvarán Álvarez'
+  MJSA: 'María José Sulvarán Álvarez',
+  // Cuentas Nacionales e Institucionales (como aparecen en el directorio)
+  AJC:  'Alejandro Jimenez Correa',            // Gerente Comercial Sedena
+  EAGH: 'Erick Arturo Gonzalez Hernandez',     // Gerente Comercial
+  GILP: 'Guillermo Isauro Laserna Peraza',     // Gerente Comercial
+  NLAL: 'Nancy Lizbeth Acosta Lugo',           // Gerente de Ventas Institucionales
+  CARG: 'Carlos Antonio Ramos Galvan',         // Asesor Sedena
+  UCA:  'Uriel Cruz Acosta',                   // Jefe de Cuentas Nacionales
+  AMFL: 'Ana Maria Fragoso Lejarza',           // Jefe de Cuentas Nacionales
+  VEGN: 'Valeria Estefany Garcia Namour',      // Jefe de Cuentas Nacionales
+  GCG:  'Gerardo Castellanos Gomez',           // Jefe de Cuentas Nacionales
+  MJCC: 'Maria Jose Castro Cervantes',         // Jefe de Cuentas Nacionales
+  AAL:  'Armando Albarran Luna',               // Jefe de Cuentas Institucionales
+  MASJ: 'Maria De Los Angeles Salazar Jimenez' // Jefe de Cuentas Institucionales
 };
+
+// El catálogo de cuentas trae nombres cortos ("Erick Gonzalez"): se ligan a la
+// persona completa para que filtros, PDM y Captura no la cuenten como dos
+const ALIAS_PERSONAS = {
+  'alejandro jimenez': 'AJC', 'erick gonzalez': 'EAGH', 'guillermo laserna': 'GILP', 'nancy acosta': 'NLAL',
+  'uriel cruz': 'UCA', 'ana fragoso': 'AMFL', 'valeria garcia': 'VEGN', 'gerardo castellanos': 'GCG',
+  'maria jose castro': 'MJCC', 'armando albarran': 'AAL', 'angeles salazar': 'MASJ'
+};
+function claveAlias(v) {
+  return String(v).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z ]+/g, ' ').replace(/\s+/g, ' ').trim();
+}
 
 // El nombre puede venir como inicial vieja o como texto capturado
 function nombrePersona(v) {
   if (!v) return '';
-  return NOMBRES[v] || String(v);
+  if (NOMBRES[v]) return NOMBRES[v];
+  const a = ALIAS_PERSONAS[claveAlias(v)];
+  return a ? NOMBRES[a] : String(v);
 }
 
 // Para la tabla y el encabezado, donde no cabe el nombre completo
