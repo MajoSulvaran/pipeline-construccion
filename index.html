@@ -343,7 +343,7 @@ body {
 /* Los ocho filtros en un solo renglón, incluso en pantallas de 1280 */
 .filtros-multi {
   display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
+  grid-template-columns: repeat(9, minmax(0, 1fr));
   gap: 5px;
 }
 @media (max-width: 1050px) { .filtros-multi { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
@@ -732,6 +732,55 @@ body {
 }
 #aviso-version kbd { background: rgba(255,255,255,.15); border-radius: 3px; padding: 0 4px; font-family: inherit; }
 #aviso-version button { border: none; background: #f22230; color: #fff; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-family: inherit; font-weight: 600; flex: none; }
+/* Vista limpia: sin subtítulos descriptivos ni íconos de adorno */
+#view-title-p, #view-title-icon, .view-title-line,
+.chart-card .chart-desc, .eqt-desc, .eqt-top p, .c2-desc, .bpr-mapa-head p,
+.map-header > div > p:not(.map-resumen) { display: none !important; }
+.eqt-top { justify-content: flex-end !important; }
+
+/* Pestaña PDM: selector de vista y mapa con más espacio */
+.pdm-vistas { display: inline-flex; gap: 2px; padding: 3px; margin-bottom: 8px; background: var(--bg-3);
+  border: 1px solid var(--border); border-radius: 9px; }
+.pdm-vista { font-family: inherit; font-size: 12px; padding: 6px 14px; border: none; background: none;
+  border-radius: 7px; color: var(--text-2); cursor: pointer; }
+.pdm-vista.on { background: #fff; color: var(--accent-4); font-weight: 600; box-shadow: 0 1px 2px rgba(20,23,61,.12); }
+#view-bpr [hidden] { display: none !important; }
+#view-bpr .bpr-split { grid-template-columns: minmax(0, 1fr) clamp(340px, 33vw, 600px); }
+#view-bpr #bpr-map { height: clamp(320px, 54vh, 560px) !important; }
+
+/* Desglose del dashboard */
+.chart-card canvas { cursor: pointer; }
+.funnel-row, .kpi-card { cursor: pointer; }
+.dsg { max-width: 980px; }
+.dsg-body { display: block !important; }
+.dsg-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-bottom: 10px; }
+.dsg-kpis > div { background: var(--bg-3); border: 1px solid var(--border); border-radius: 9px; padding: 8px 12px; }
+.dsg-kpis span { display: block; font-size: 9.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--text-3); }
+.dsg-kpis b { font-size: 20px; font-weight: 400; color: var(--accent-4); }
+.dsg-kpis small { font-size: 11px; color: var(--text-3); }
+.dsg-sub { font-size: 10px; letter-spacing: .07em; text-transform: uppercase; color: var(--accent-4); font-weight: 700; margin: 10px 0 5px; }
+.dsg-est-fila { display: grid; grid-template-columns: 120px 1fr 150px; gap: 10px; align-items: center; padding: 3px 0; font-size: 11.5px; }
+.dsg-est-fila i { display: block; height: 8px; border-radius: 4px; background: #4b4fd6; }
+.dsg-est-fila b { font-weight: 500; text-align: right; color: var(--text-2); }
+.dsg-tabla { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+.dsg-tabla th { text-align: left; font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-2);
+  padding: 6px 7px; border-bottom: 2px solid var(--accent-4); white-space: nowrap; }
+.dsg-tabla td { padding: 5px 7px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.dsg-tabla td small { display: block; font-size: 10px; color: var(--text-3); }
+.dsg-tabla .n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.dsg-tabla tbody tr { cursor: pointer; }
+.dsg-tabla tbody tr:hover td { background: #fafbff; }
+.dsg-pc { display: inline-block; width: 46px; height: 6px; background: var(--bg-3); border-radius: 3px; margin-right: 6px; vertical-align: middle; overflow: hidden; }
+.dsg-pc i { display: block; height: 100%; background: var(--accent-4); }
+.dsg-mas { margin-top: 8px; border: none; background: none; color: var(--accent-4); font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
+
+/* Buscador dentro de los filtros con muchas opciones */
+.multi-buscar { width: calc(100% - 8px); margin: 4px; padding: 6px 9px; border: 1px solid var(--border-2); border-radius: 7px;
+  font-family: inherit; font-size: 12px; outline: none; }
+.multi-buscar:focus { border-color: var(--accent-4); }
+/* El nombre del proyecto usa todo el renglón */
+.field.full > .autocomp { width: 100%; display: block; }
+.field.full > .autocomp #m-proyecto { width: 100%; }
 .papelera-tabla { width: 100%; border-collapse: collapse; font-size: 12px; }
 .papelera-tabla th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-3); padding: 6px; border-bottom: 2px solid var(--accent-4); }
 .papelera-tabla td { padding: 6px; border-bottom: 1px solid var(--border); }
@@ -2539,7 +2588,7 @@ tr.row-highlighted {
       </button>
       <button class="tab" data-view="bpr">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 9v12"/></svg>
-        BPR
+        PDM
       </button>
       <button class="tab" data-view="map">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6v15l7-3 8 3 7-3V3l-7 3-8-3-7 3z"/><path d="M8 3v15M16 6v15"/></svg>
@@ -2556,10 +2605,6 @@ tr.row-highlighted {
       <button class="tab" data-view="cap">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>
         Captura
-      </button>
-      <button class="tab" data-view="pdm">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9-9v9z"/><path d="M12 3a9 9 0 0 1 9 9h-9z"/></svg>
-        PDM
       </button>
       </nav>
 
@@ -2630,10 +2675,6 @@ tr.row-highlighted {
       </div>
       <div class="filter-summary" id="filter-summary">—</div>
       <div class="chips-fila">
-        <div class="chip-toggle chip-conv" id="chip-conv">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
-          Conversiones
-        </div>
         <div class="chip-toggle chip-seg" id="chip-seg">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
           Seguimiento
@@ -2670,17 +2711,17 @@ tr.row-highlighted {
 
     <div class="chart-grid tres">
       <div class="chart-card">
-        <h3>Funnel por Estatus</h3>
+        <h3>Funnel por estatus</h3>
         <p class="chart-desc">Proyectos y volumen en cada etapa</p>
         <div class="funnel" id="funnel-chart"></div>
       </div>
       <div class="chart-card">
-        <h3>Volumen por Segmento</h3>
+        <h3>Volumen por segmento · K m³</h3>
         <p class="chart-desc">Los cuatro segmentos · entre paréntesis, obras</p>
         <div class="chart-container"><canvas id="chart-subseg"></canvas></div>
       </div>
       <div class="chart-card">
-        <h3>Ganadas y perdidas por subsegmento</h3>
+        <h3>Ganadas y perdidas por subsegmento · K m³</h3>
         <p class="chart-desc">De aquí sale la tasa de éxito</p>
         <div class="chart-container"><canvas id="chart-exito"></canvas></div>
       </div>
@@ -2688,17 +2729,17 @@ tr.row-highlighted {
 
     <div class="chart-grid tres">
       <div class="chart-card">
-        <h3>Volumen por Región</h3>
+        <h3>Volumen por región · K m³</h3>
         <p class="chart-desc">Concreto agregado (K m³)</p>
         <div class="chart-container"><canvas id="chart-region"></canvas></div>
       </div>
       <div class="chart-card">
-        <h3>Top Especialidades</h3>
+        <h3>Top 10 especialidades · K m³</h3>
         <p class="chart-desc">10 mayores por volumen</p>
         <div class="chart-container"><canvas id="chart-tipo"></canvas></div>
       </div>
       <div class="chart-card">
-        <h3>Carga por Asesor</h3>
+        <h3>Obras por asesor</h3>
         <p class="chart-desc">Proyectos activos por persona</p>
         <div class="chart-container"><canvas id="chart-resp"></canvas></div>
       </div>
@@ -2706,12 +2747,12 @@ tr.row-highlighted {
 
     <div class="chart-grid tres">
       <div class="chart-card">
-        <h3>Pipeline por Año</h3>
+        <h3>Pipeline por año</h3>
         <p class="chart-desc">Volumen contemplado por año</p>
         <div class="chart-container"><canvas id="chart-anio"></canvas></div>
       </div>
       <div class="chart-card" style="grid-column: span 2">
-        <h3>Equipo requerido vs. flota CEMEX</h3>
+        <h3>Equipo requerido vs. flota CEMEX · unidades</h3>
         <p class="chart-desc">Unidades por tipo según la etapa de la obra · la marca roja es la flota activa: si la barra la rebasa, habrá que rentar</p>
         <div class="chart-container" style="height:210px"><canvas id="chart-equipos"></canvas>
           <p class="eq-vacio" id="equipos-vacio" style="display:none">Todavía no hay equipos capturados. Se agregan en cada obra o se leen del presupuesto.</p></div>
@@ -2753,7 +2794,34 @@ tr.row-highlighted {
   </section>
 
   <!-- ============ VISTA PDM ============ -->
-  <section class="view" id="view-pdm">
+
+  <!-- ============ VISTA PRESENTACIÓN VP ============ -->
+  <section class="view" id="view-vp">
+    <div class="bpr-card">
+      <div class="bpr-head">
+        <div>
+          <h3>Obras para presentar al VP</h3>
+          <p id="vp-sub"></p>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="vp-pptx">Exportar láminas</button>
+      </div>
+      <div class="bpr-scroll">
+        <table class="bpr-table">
+          <thead id="vp-head"></thead>
+          <tbody id="vp-body"></tbody>
+        </table>
+      </div>
+      <div class="bpr-legend" id="vp-legend"></div>
+    </div>
+  </section>
+
+  <!-- ============ VISTA BPR ============ -->
+  <section class="view" id="view-bpr">
+    <div class="pdm-vistas">
+      <button type="button" class="pdm-vista on" data-pdmv="fichas">Fichas por subsegmento</button>
+      <button type="button" class="pdm-vista" data-pdmv="comp">Competidores</button>
+    </div>
+    <div id="pdmv-comp" hidden>
     <div class="pdm-kpis" id="pdm-kpis"></div>
 
     <div class="chart-card">
@@ -2788,31 +2856,8 @@ tr.row-highlighted {
         <div class="chart-container" id="cont-share"><canvas id="chart-share"></canvas></div>
       </div>
     </div>
-  </section>
-
-  <!-- ============ VISTA PRESENTACIÓN VP ============ -->
-  <section class="view" id="view-vp">
-    <div class="bpr-card">
-      <div class="bpr-head">
-        <div>
-          <h3>Obras para presentar al VP</h3>
-          <p id="vp-sub"></p>
-        </div>
-        <button class="btn btn-ghost btn-sm" id="vp-pptx">Exportar láminas</button>
-      </div>
-      <div class="bpr-scroll">
-        <table class="bpr-table">
-          <thead id="vp-head"></thead>
-          <tbody id="vp-body"></tbody>
-        </table>
-      </div>
-      <div class="bpr-legend" id="vp-legend"></div>
     </div>
-  </section>
-
-  <!-- ============ VISTA BPR ============ -->
-  <section class="view" id="view-bpr">
-    <div class="bpr-split">
+    <div class="bpr-split" id="pdmv-fichas">
 
       <div class="bpr-card">
         <div class="bpr-head">
@@ -2836,7 +2881,7 @@ tr.row-highlighted {
           <h3>Dónde está esa demanda</h3>
           <p>Click en un estado para acotar la tabla</p>
         </div>
-        <svg id="bpr-map" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid meet"></svg>
+        <svg id="bpr-map" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid meet"><title>Clic en un estado para acotar la tabla</title></svg>
         <div class="bpr-rank" id="bpr-rank"></div>
       </aside>
 
@@ -3979,12 +4024,9 @@ function startPolling() {
   document.addEventListener('visibilitychange', () => { if (!document.hidden) pollForChanges(); });
 }
 
+// Al sincronizar con lo que guardaron otros, se refresca la vista que se está viendo
 function refrescarTodo() {
-  renderTable();
-  if (document.getElementById('view-dashboard').classList.contains('active')) renderDashboard();
-  if (document.getElementById('view-bpr').classList.contains('active')) renderBPR();
-  if (document.getElementById('view-map').classList.contains('active')) renderMap();
-  if (document.getElementById('view-pdm').classList.contains('active')) renderPDM();
+  refrescarVistas();
   if (document.getElementById('view-lic').classList.contains('active')) renderLicitaciones();
 }
 
@@ -4123,7 +4165,7 @@ let state = {
   mapaOrden: 'top',  // top o bottom en el ranking del mapa
   filters: {
     search: '', estatus: '', segmento: '', subseg: '', tipo: '', region: '',
-    estatusSel: [], segmentoSel: [], subsegSel: [], direccionSel: [],
+    estatusSel: [], clienteSel: [], segmentoSel: [], subsegSel: [], direccionSel: [],
     regionSel: [], modalidadSel: [], licitacionSel: [], respSel: [],
     importante: false, conversion: false, highlight: false,
     seguimiento: false, prospeccion: false
@@ -4191,7 +4233,7 @@ function cambiosRelevantes(a, p) {
   }
   if (!!a.highlight !== !!p.highlight) ev.push({ tipo: 'marca', texto: p.highlight ? 'Se marcó para Presentación VP' : 'Se quitó de Presentación VP' });
   if (!!a.ppto_2027 !== !!p.ppto_2027) ev.push({ tipo: 'marca', texto: p.ppto_2027 ? 'Se incluyó en Ppto. 2027' : 'Se sacó de Ppto. 2027' });
-  if (!!a.detalle_bpr !== !!p.detalle_bpr) ev.push({ tipo: 'marca', texto: p.detalle_bpr ? 'Entró al BPR' : 'Salió del BPR' });
+  if (!!a.detalle_bpr !== !!p.detalle_bpr) ev.push({ tipo: 'marca', texto: p.detalle_bpr ? 'Se marcó como PDM · proyecto estratégico' : 'Dejó de ser PDM' });
   if ((a.obra_madre || '') !== (p.obra_madre || '') && p.obra_madre) {
     const m = state.projects.find(x => x.id === p.obra_madre);
     ev.push({ tipo: 'alterna', texto: `Se ligó como cotización alterna de "${m ? m.proyecto : 'otra obra'}"` });
@@ -4300,8 +4342,7 @@ function refrescarVistas() {
   if (document.getElementById('view-cap').classList.contains('active')) renderCapturaTab();
   if (document.getElementById('view-eq').classList.contains('active')) renderEquiposTab();
   if (document.getElementById('view-vp').classList.contains('active')) renderVP();
-  if (document.getElementById('view-bpr').classList.contains('active')) renderBPR();
-  if (document.getElementById('view-pdm').classList.contains('active')) renderPDM();
+  if (document.getElementById('view-bpr').classList.contains('active')) renderPdmTab();
   if (document.getElementById('view-dashboard').classList.contains('active')) renderDashboard();
   if (document.getElementById('view-map').classList.contains('active')) renderMap();
 }
@@ -4360,7 +4401,7 @@ const COLS_PIPELINE = [
       const tip = e ? `En ${statusShortName(p.estatus)} desde el ${new Date(e.ts).toLocaleDateString('es-MX')}${e.de ? ' · antes ' + statusShortName(e.de) : ''}` : 'Sin cambios de estatus registrados';
       return `<span class="status-pill ${statusClass(p.estatus)}" title="${escapeHtml(tip)}">${escapeHtml(statusShortName(p.estatus))}</span>` +
              (p.seguimiento ? '<span class="pill-seg" title="CEMEX no licita esta obra: se monitorea el proceso y se coloca volumen vía el contratista ganador">Seguimiento</span>' : '') +
-             (p.detalle_bpr ? '<span class="pill-bpr" title="Entra al BPR y al PDM">BPR</span>' : '') +
+             (p.detalle_bpr ? '<span class="pill-bpr" title="PDM · proyecto estratégico">PDM</span>' : '') +
              (p.ppto_2027 ? '<span class="pill-ppto" title="Considerada en el presupuesto 2027">Ppto 27</span>' : '') +
              (esCotizacionAlterna(p) ? `<span class="pill-alt" title="Misma obra que: ${escapeHtml((obraMadre(p) || {}).proyecto || '')} · no suma volumen">Cotización alterna</span>` : ''); } },
   { k: 'dias_etapa', t: 'Días en etapa', sort: null, def: false, num: true,
@@ -4369,14 +4410,14 @@ const COLS_PIPELINE = [
         : `<span class="${d > 90 && /^0[1-3]/.test(p.estatus || '') ? 'cell-alerta' : ''}" title="Desde el último cambio de estatus">${d}</span>`; } },
   { k: 'proyecto', t: 'Proyecto', sort: 'proyecto', def: true, fijo: true,
     td: p => `<div class="cell-project" title="${escapeHtml(p.proyecto || '')}">${escapeHtml(p.proyecto || '—')}</div>` },
+  { k: 'cliente', t: 'Cliente', sort: 'cliente', def: true,
+    td: p => `<div class="cell-cliente" title="${escapeHtml(p.cliente || '')}">${escapeHtml(p.cliente || '—')}</div>` },
   { k: 'segmento', t: 'Segmento', sort: 'segmento', def: false,
     td: p => `<span class="seg-dot seg-${segSlug(p.segmento)}"></span><span class="cell-sub">${escapeHtml(p.segmento || 'Por clasificar')}</span>` },
   { k: 'subsegmento', t: 'Subsegmento', sort: 'subsegmento', def: true,
     td: p => `<span class="seg-dot seg-${segSlug(p.segmento)}" title="${escapeHtml(p.segmento || 'Por clasificar')}"></span><span class="cell-sub">${escapeHtml(p.subsegmento || '—')}</span>` },
   { k: 'tipo', t: 'Especialidad', sort: 'tipo', def: false,
     td: p => `<span class="cell-mini">${escapeHtml(p.tipo || '—')}</span>` },
-  { k: 'cliente', t: 'Cliente', sort: 'cliente', def: true,
-    td: p => `<div class="cell-cliente" title="${escapeHtml(p.cliente || '')}">${escapeHtml(p.cliente || '—')}</div>` },
   { k: 'ficha', t: 'Ficha', sort: null, def: false,
     td: p => (state.fichas || []).some(f => f.proyecto_id === p.id)
       ? '<span class="pill-ficha">Sí</span>' : '<span class="cell-tbc">—</span>' },
@@ -4575,6 +4616,8 @@ function renderTable() {
 const FILTROS = [
   { id: 'estatus',   key: 'estatusSel',   label: 'Estatus',   campo: 'estatus',
     ops: () => ESTATUS, pastilla: true, atajo: { et: 'En curso', val: () => ESTATUS.slice(0, 5) } },
+  { id: 'cliente',   key: 'clienteSel',   label: 'Cliente',   campo: 'cliente',
+    ops: () => [...new Set(state.projects.map(p => p.cliente).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'es')) },
   { id: 'segmento',  key: 'segmentoSel',  label: 'Segmento',  campo: 'segmento', ops: () => SEGMENTOS },
   { id: 'subseg',    key: 'subsegSel',    label: 'Subsegmento', campo: 'subsegmento',
     ops: () => {
@@ -4624,7 +4667,9 @@ function pintarFiltros() {
     const menu = document.getElementById('menu-' + f.id);
     const sel = state.filters[f.key] || [];
     const ops = f.ops();
-    menu.innerHTML = ops.map(v => `
+    const buscable = ops.length > 12;
+    const qf = ((state.busqFiltros || {})[f.id] || '').toLowerCase();
+    menu.innerHTML = (buscable ? `<input type="search" class="multi-buscar" placeholder="Buscar…" value="${escapeHtml(qf)}">` : '') + ops.map(v => `
       <label class="multi-item">
         <input type="checkbox" value="${escapeHtml(v)}" ${sel.includes(v) ? 'checked' : ''}>
         ${f.pastilla
@@ -4637,8 +4682,17 @@ function pintarFiltros() {
         <button type="button" data-limpia="${f.id}">Todos</button>
       </div>`;
 
-    menu.querySelectorAll('input').forEach(chk => chk.addEventListener('change', () => {
-      state.filters[f.key] = [...menu.querySelectorAll('input:checked')].map(i => i.value);
+    const caja = menu.querySelector('.multi-buscar');
+    const filtrarOps = () => {
+      const q = (caja ? caja.value : '').toLowerCase().trim();
+      menu.querySelectorAll('.multi-item').forEach(it => { it.style.display = !q || it.textContent.toLowerCase().includes(q) ? '' : 'none'; });
+    };
+    if (caja) {
+      caja.addEventListener('input', () => { state.busqFiltros = { ...(state.busqFiltros || {}), [f.id]: caja.value }; filtrarOps(); });
+      filtrarOps();
+    }
+    menu.querySelectorAll('.multi-item input').forEach(chk => chk.addEventListener('change', () => {
+      state.filters[f.key] = [...menu.querySelectorAll('.multi-item input:checked')].map(i => i.value);
       if (f.id === 'segmento') state.filters.subsegSel = [];
       pintarFiltros(); refrescarVistas();
     }));
@@ -4847,8 +4901,8 @@ function openModal(id = null) {
         <input type="checkbox" id="m-bpr" ${p.detalle_bpr ? 'checked' : ''}>
         <span class="bpr-switch-riel"><i></i></span>
         <span class="bpr-switch-texto">
-          <b>Requiere información completa</b>
-          <em>Prende esto si la obra entra al BPR y al PDM. Se abren los campos de volumen total, competencia, venta y EBITDA.</em>
+          <b>PDM · proyecto estratégico</b>
+          <em>Prende esto si es un proyecto estratégico al que le damos seguimiento. Se abren los campos de volumen total, competencia, venta y EBITDA.</em>
         </span>
       </label>
     </div>
@@ -5175,6 +5229,8 @@ function openModal(id = null) {
   pintarComps();
   pintarReparto();
 
+  reordenarFormulario();
+
   // ---- Estado inicial de los bloques que dependen de la competencia ----
   // Va aquí, y no arriba, porque necesitan la lista de competidores ya creada:
   // antes tronaba al editar obras con único proveedor o perdidas sin competidor.
@@ -5312,6 +5368,42 @@ function normalizarUnico(o) {
     o.competidores = [];
   }
   return o;
+}
+
+// Primero lo general (qué obra es, en qué va, de quién es) y conforme se baja,
+// lo de detalle: responsables, datos de PDM, equipos y comentarios
+function reordenarFormulario() {
+  const body = document.querySelector('#modal-overlay .modal-body');
+  if (!body) return;
+  const bloque = id => {
+    let el = typeof id === 'string' ? document.getElementById(id) : id;
+    while (el && el.parentElement !== body) el = el.parentElement;
+    return el;
+  };
+  const seps = [...body.querySelectorAll(':scope > .resp-sep')];
+  const orden = [
+    'm-proyecto',
+    'm-estatus', 'm-direccion',
+    'm-segmento', 'm-subseg', 'm-tipo', 'm-cliente', 'm-region', 'm-estado',
+    'm-modalidad', 'm-licitacion',
+    'm-concreto', 'm-arranque', 'm-anio', 'm-fecha',
+    'm-conv',
+    seps[0], 'm-gerente', 'm-jefatura', 'm-asesor',
+    seps[1], 'm-gerente-com', 'm-resp',
+    'm-bpr', 'm-bpr-campos', 'm-comps-field', 'm-longitud-field', 'm-duracion',
+    'm-obra-madre',
+    'm-equipos',
+    'm-comentario'
+  ];
+  const vistos = new Set();
+  orden.forEach(id => {
+    const b = id && bloque(id);
+    if (!b || vistos.has(b)) return;
+    vistos.add(b);
+    body.appendChild(b);
+  });
+  // Lo que no está en la lista (el historial, avisos) se queda al final en su orden
+  [...body.children].filter(c => !vistos.has(c)).forEach(c => body.appendChild(c));
 }
 
 function conservarNoEditables(nuevo, previo) {
@@ -5537,7 +5629,7 @@ function renderDashboard() {
     <div class="kpi-card">
       <div class="kpi-label"><span class="dot" style="background:var(--accent-4)"></span>Market share</div>
       <div class="kpi-value">${shareCartera === null ? '—' : shareCartera.toFixed(0)}<span class="unit">%</span></div>
-      <div class="kpi-sub">${conVolTotal} de ${marcadasBpr} obras BPR con volumen de obra</div>
+      <div class="kpi-sub">${conVolTotal} de ${marcadasBpr} obras PDM con volumen de obra</div>
     </div>
     <div class="kpi-card">
       <div class="kpi-label"><span class="dot" style="background:#14173d"></span>Para presentar al VP</div>
@@ -5545,6 +5637,20 @@ function renderDashboard() {
       <div class="kpi-sub">${conversiones} conversiones técnicas · ${data.filter(p => p.ppto_2027).length} en Ppto. 2027</div>
     </div>
   `;
+
+  const tarjetas = [...document.querySelectorAll('#kpi-grid .kpi-card')];
+  const desgloses = [
+    () => abrirDesglose('Obras vigentes', vigentes),
+    () => abrirDesglose('Volumen vigente', vigentes),
+    () => abrirDesglose('Venta vigente', vigentes.filter(p => Number(p.venta) > 0),
+      { valor: p => Number(p.venta) || 0, unidad: 'M MXN', etiquetaValor: 'Venta' }),
+    () => abrirDesglose('EBITDA vigente', vigentes.filter(p => Number(p.ebitda) > 0),
+      { valor: p => Number(p.ebitda) || 0, unidad: 'M MXN', etiquetaValor: 'EBITDA' }),
+    () => abrirDesglose('Ganadas y perdidas', [...ganados, ...perdidas]),
+    () => abrirDesglose('Obras PDM con volumen de obra', conVol),
+    () => abrirDesglose('Para presentar al VP', data.filter(p => p.highlight === true))
+  ];
+  tarjetas.forEach((t, i) => { if (desgloses[i]) t.ondblclick = desgloses[i]; });
 
   renderFunnel(data);
   renderCaptura(data);
@@ -5590,10 +5696,10 @@ function renderCaptura(todas) {
       return `
         <div class="cap-col">
           <div class="cap-head">
-            <div><b>${d.titulo}</b><span>${todasDir.length} obras en el pipeline · ninguna marcada BPR</span></div>
+            <div><b>${d.titulo}</b><span>${todasDir.length} obras en el pipeline · ninguna marcada PDM</span></div>
             <div class="cap-pc vacio">—</div>
           </div>
-          <p class="cap-vacio">Prende <b>Requiere información completa</b> en las obras que entran al BPR y aquí se mide su avance.</p>
+          <p class="cap-vacio">Prende <b>PDM · proyecto estratégico</b> en las obras estratégicas y aquí se mide su avance.</p>
         </div>`;
     }
 
@@ -5612,7 +5718,7 @@ function renderCaptura(todas) {
         <div class="cap-head">
           <div>
             <b>${d.titulo}</b>
-            <span>${data.length} obras BPR de ${todasDir.length} en el pipeline</span>
+            <span>${data.length} obras PDM de ${todasDir.length} en el pipeline</span>
           </div>
           <div class="cap-pc" style="color:${color(general)}">${general}<em>%</em></div>
         </div>
@@ -7035,7 +7141,7 @@ function htmlCaptura(calc, filtrosTexto) {
       <thead><tr>
         <th>${etiqueta}</th><th class="n">Obras</th><th>Completitud</th>
         <th class="n">Faltan</th><th class="n" title="Sin actualizar en más de ${DIAS_DESACTUALIZADA} días">Sin actualizar</th>
-        <th class="n">BPR</th>
+        <th class="n">PDM</th>
       </tr></thead>
       <tbody>
         ${calc.grupos[clave].map(g => `
@@ -7068,7 +7174,7 @@ function htmlCaptura(calc, filtrosTexto) {
       <div class="c2-kpis">
         <div class="c2-kpi"><span>Completitud general</span><b style="color:${colorCap(k.general)}">${k.general}%</b><em>promedio de todas las obras</em></div>
         <div class="c2-kpi"><span>Perfiles completos</span><b>${k.completas}</b><em>de ${k.total} obras</em></div>
-        <div class="c2-kpi"><span>BPR completas</span><b>${k.bprCompletas}</b><em>de ${k.bpr} marcadas BPR</em></div>
+        <div class="c2-kpi"><span>PDM completas</span><b>${k.bprCompletas}</b><em>de ${k.bpr} marcadas PDM</em></div>
         <div class="c2-kpi"><span>Sin actualizar</span><b class="${k.viejas ? 'rojo' : ''}">${k.viejas}</b><em>más de ${DIAS_DESACTUALIZADA} días sin movimiento</em></div>
         <div class="c2-kpi"><span>Sin asesor</span><b class="${k.sinAsesor ? 'rojo' : ''}">${k.sinAsesor}</b><em>obras sin responsable directo</em></div>
       </div>
@@ -7078,7 +7184,7 @@ function htmlCaptura(calc, filtrosTexto) {
           <h4>Qué falta por campo</h4>
           <p class="c2-desc">Ordenado de lo que más falta a lo que menos</p>
           ${bloqueCampos('Todas las obras', 'base')}
-          ${bloqueCampos('Solo obras BPR', 'bpr')}
+          ${bloqueCampos('Solo obras PDM', 'bpr')}
         </section>
         <section class="c2-card">
           <div class="c2-card-head">
@@ -7109,7 +7215,7 @@ function htmlCaptura(calc, filtrosTexto) {
         </div>
         <div class="c2-filtros">
           <span class="c2-chip-sel" hidden></span>
-          <label class="c2-solo"><input type="checkbox" data-solo-bpr> Solo BPR</label>
+          <label class="c2-solo"><input type="checkbox" data-solo-bpr> Solo PDM</label>
           <input type="search" data-buscar placeholder="Buscar obra o persona…">
         </div>
       </div>
@@ -7124,7 +7230,7 @@ function htmlCaptura(calc, filtrosTexto) {
               <tr data-id="${esc(o.id)}" data-asesor="${esc(o.asesor)}" data-jefatura="${esc(o.jefatura)}"
                   data-gerente="${esc(o.gerente)}" data-bpr="${o.bpr ? 1 : 0}"
                   data-texto="${esc((o.proyecto + ' ' + o.asesor + ' ' + o.jefatura + ' ' + o.gerente).toLowerCase())}">
-                <td class="c2-obra">${esc(o.proyecto)}${o.bpr ? '<span class="c2-bpr">BPR</span>' : ''}</td>
+                <td class="c2-obra">${esc(o.proyecto)}${o.bpr ? '<span class="c2-bpr">PDM</span>' : ''}</td>
                 <td class="c2-persona">${esc(o.asesor)}</td>
                 <td><span class="c2-est"><i style="background:${COLOR_ESTATUS_CAP[o.estatus.slice(0, 2)] || '#8a8fb0'}"></i>${esc(o.estatus.replace(/^\d+\s*-\s*/, '') || '—')}</span></td>
                 <td><span class="c2-avance">${barra(o.pc)}<b style="color:${colorCap(o.pc)}">${o.pc}%</b></span></td>
@@ -7136,7 +7242,7 @@ function htmlCaptura(calc, filtrosTexto) {
           </tbody>
         </table>
       </div>
-      <p class="c2-pie">Rojo en "Última act.": más de ${DIAS_DESACTUALIZADA} días sin movimiento · Las etiquetas azules son datos del BPR</p>
+      <p class="c2-pie">Rojo en "Última act.": más de ${DIAS_DESACTUALIZADA} días sin movimiento · Las etiquetas azules son datos de PDM</p>
     </section>
   </div>`;
 }
@@ -7286,6 +7392,7 @@ const CSS_CAPTURA = `
 .c2-falta.bpr { background: #eef0ff; border-color: #d9dcf7; color: #0003aa; }
 .c2-ok { font-size: 10.5px; color: #15803d; font-weight: 600; }
 .c2-pie { margin: 6px 0 0; font-size: 10px; color: #8a8fb0; }
+.c2-desc { display: none; }
 @media (max-width: 1100px) {
   .c2-kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .c2-grid { grid-template-columns: 1fr; }
@@ -7658,7 +7765,9 @@ function dibujarEquiposDashboard(data, t) {
       tot[k][e] += Number(q.cantidad) || 0;
     });
   });
+  // Los camiones revolvedores se ven en la pestaña de Equipos: aquí aplastaban la escala del resto
   const tipos = Object.keys(tot)
+    .filter(k => normEq(k) !== 'camiones revolvedores')
     .sort((a, b) => (tot[b].comprometido + tot[b].potencial + tot[b].proyecto) - (tot[a].comprometido + tot[a].potencial + tot[a].proyecto))
     .slice(0, 12);
   const vacio = document.getElementById('equipos-vacio');
@@ -7666,6 +7775,12 @@ function dibujarEquiposDashboard(data, t) {
   if (charts.equipos) charts.equipos.destroy();
   if (!tipos.length) return;
   const inv = tipos.map(k => { const c = equipoDeCatalogo(k); return c ? c.n : null; });
+  setTimeout(() => desgloseEnGrafica(charts.equipos, i => {
+    const k = tipos[i];
+    const pide = p => equiposDe(p).filter(q => q.tipo === k).reduce((t, q) => t + (Number(q.cantidad) || 0), 0);
+    abrirDesglose(`Equipo · ${k}`, data.filter(p => etapa(p.estatus) && pide(p) > 0),
+      { valor: pide, unidad: 'u.', etiquetaValor: 'Unidades' });
+  }), 0);
   charts.equipos = new Chart(el, {
     data: {
       labels: tipos,
@@ -8047,7 +8162,7 @@ function pintarFichaObra(p) {
         <h2>${esc(p.proyecto || 'Sin nombre')}</h2>
         <div class="fo-pills">
           <span class="status-pill ${statusClass(p.estatus)}">${esc(statusShortName(p.estatus))}</span>
-          ${p.detalle_bpr ? '<span class="pill-bpr">BPR</span>' : ''}
+          ${p.detalle_bpr ? '<span class="pill-bpr">PDM</span>' : ''}
           ${p.highlight ? '<span class="pill-seg" style="background:#eef0ff;border-color:#d9dcf7;color:#0003aa">Presentación VP</span>' : ''}
           ${p.seguimiento ? '<span class="pill-seg">Seguimiento</span>' : ''}
           ${p.ppto_2027 ? '<span class="pill-ppto">Ppto. 2027</span>' : ''}
@@ -8405,7 +8520,10 @@ function renderEquiposTab() {
   <div class="eqt">
     <div class="eqt-top">
       <p>Flota validada con Mantenimiento contra los equipos que piden las obras del pipeline. La demanda respeta los filtros de arriba.</p>
-      <button type="button" class="btn btn-ghost btn-sm" id="eqt-png">Descargar PNG</button>
+      <span>
+        <button type="button" class="btn btn-ghost btn-sm" id="eqt-xlsx">Equipos por obra (Excel)</button>
+        <button type="button" class="btn btn-ghost btn-sm" id="eqt-png">Descargar PNG</button>
+      </span>
     </div>
     <div class="eqt-kpis">
       <div class="eqt-kpi"><span>Flota vigente</span><b>${k.vigPipe}</b><em>unidades de los ${x.tipos.length} tipos que se piden en obra · ${k.totVig} en toda la lista</em></div>
@@ -8479,6 +8597,7 @@ function renderEquiposTab() {
     pintarDetalleEquipo(x);
   }));
   document.getElementById('eqt-png').addEventListener('click', exportarEquiposPng);
+  document.getElementById('eqt-xlsx').addEventListener('click', exportarEquiposObra);
   pintarDetalleEquipo(x);
 }
 
@@ -8594,6 +8713,108 @@ async function exportarEquiposPng() {
     boton.style.visibility = '';
     muros.forEach((m, i) => { m.style.maxHeight = alturas[i]; });
   }
+}
+
+// ==========================================================================
+// DESGLOSE DEL DASHBOARD
+// Doble clic en una barra, renglón o indicador: se abre qué obras lo forman,
+// cuánto aporta cada una y cómo se reparte por estatus.
+// ==========================================================================
+let desgloseTodas = false;
+
+function abrirDesglose(titulo, obras, opciones) {
+  const op = opciones || {};
+  const valor = op.valor || (p => volCemex(p) || 0);
+  const unidad = op.unidad || 'K m³';
+  const esc = escapeHtml;
+  const lista = obras.slice().sort((a, b) => valor(b) - valor(a) || String(a.proyecto || '').localeCompare(String(b.proyecto || ''), 'es'));
+  const total = lista.reduce((t, p) => t + valor(p), 0);
+  const venta = lista.reduce((t, p) => t + (Number(p.venta) || 0), 0);
+  const conVenta = op.etiquetaValor !== 'Venta';   // si el valor ya es la venta, no se repite la columna
+  const fmtV = v => unidad === 'K m³' ? fmtNum(Math.round(v * 10) / 10) : fmtNum(Math.round(v));
+
+  // Reparto por estatus, en el orden del embudo
+  const porEst = {};
+  lista.forEach(p => {
+    const k = p.estatus || 'Sin estatus';
+    if (!porEst[k]) porEst[k] = { n: 0, v: 0 };
+    porEst[k].n++; porEst[k].v += valor(p);
+  });
+  const estatus = Object.keys(porEst).sort();
+  const maxEst = Math.max(...estatus.map(k => porEst[k].v), 1);
+
+  let ov = document.getElementById('desglose-overlay');
+  if (!ov) {
+    ov = document.createElement('div');
+    ov.id = 'desglose-overlay';
+    ov.className = 'modal-overlay';
+    document.body.appendChild(ov);
+    ov.addEventListener('click', e => { if (e.target === ov) ov.classList.remove('active'); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') ov.classList.remove('active'); });
+  }
+  const pintar = () => {
+    const visibles = desgloseTodas ? lista : lista.slice(0, 10);
+    ov.innerHTML = `
+      <div class="modal dsg">
+        <div class="modal-header">
+          <h2>${esc(titulo)}</h2>
+          <button class="modal-close" data-dsg-x>×</button>
+        </div>
+        <div class="modal-body dsg-body">
+          <div class="dsg-kpis">
+            <div><span>Obras</span><b>${lista.length}</b></div>
+            <div><span>${esc(op.etiquetaValor || 'Volumen CEMEX')}</span><b>${fmtV(total)} <small>${esc(unidad)}</small></b></div>
+            <div><span>Venta</span><b>${venta ? '$' + fmtNum(Math.round(venta)) + ' <small>M</small>' : '—'}</b></div>
+            ${op.referencia ? `<div><span>Del total del dashboard</span><b>${op.referencia > 0 ? Math.round(total / op.referencia * 100) : 0}<small>%</small></b></div>` : ''}
+          </div>
+          ${estatus.length > 1 ? `
+            <div class="dsg-sub">Por estatus</div>
+            <div class="dsg-est">${estatus.map(k => `
+              <div class="dsg-est-fila"><span class="status-pill ${statusClass(k)}">${esc(statusShortName(k))}</span>
+                <i style="width:${Math.max(2, porEst[k].v / maxEst * 100)}%"></i>
+                <b>${porEst[k].n} · ${fmtV(porEst[k].v)} ${esc(unidad)}</b></div>`).join('')}
+            </div>` : ''}
+          <div class="dsg-sub">${desgloseTodas || lista.length <= 10 ? 'Obras' : 'Las 10 que más aportan'}</div>
+          <table class="dsg-tabla">
+            <thead><tr><th>Obra</th><th>Estatus</th><th>Subsegmento</th><th>Asesor</th>
+              <th class="n">${esc(op.etiquetaValor || 'Vol. CEMEX')}</th><th class="n">Aporta</th>${conVenta ? '<th class="n">Venta</th>' : ''}</tr></thead>
+            <tbody>${visibles.map(p => `
+              <tr data-id="${esc(p.id)}">
+                <td><b>${esc(p.proyecto || '—')}</b>${p.cliente ? `<small>${esc(p.cliente)}</small>` : ''}</td>
+                <td><span class="status-pill ${statusClass(p.estatus)}">${esc(statusShortName(p.estatus))}</span></td>
+                <td>${esc(p.subsegmento || '—')}</td>
+                <td>${esc(asesorACargo(p) ? nombreCorto(asesorACargo(p)) : '—')}</td>
+                <td class="n">${fmtV(valor(p))}</td>
+                <td class="n"><span class="dsg-pc"><i style="width:${total ? valor(p) / total * 100 : 0}%"></i></span>${total ? Math.round(valor(p) / total * 100) : 0}%</td>
+                ${conVenta ? `<td class="n">${Number(p.venta) ? '$' + fmtNum(Math.round(p.venta)) : '—'}</td>` : ''}
+              </tr>`).join('')}
+            </tbody>
+          </table>
+          ${lista.length > 10 ? `<button type="button" class="dsg-mas" data-dsg-mas>${desgloseTodas ? 'Ver solo las 10 principales' : `Ver las ${lista.length}`}</button>` : ''}
+        </div>
+      </div>`;
+    ov.querySelector('[data-dsg-x]').addEventListener('click', () => ov.classList.remove('active'));
+    const mas = ov.querySelector('[data-dsg-mas]');
+    if (mas) mas.addEventListener('click', () => { desgloseTodas = !desgloseTodas; pintar(); });
+    ov.querySelectorAll('.dsg-tabla tbody tr').forEach(tr => tr.addEventListener('dblclick', () => {
+      ov.classList.remove('active');
+      abrirFichaObra(tr.dataset.id);
+    }));
+  };
+  desgloseTodas = false;
+  pintar();
+  ov.classList.add('active');
+}
+
+// Liga el doble clic de una gráfica con la función que arma su desglose
+function desgloseEnGrafica(chart, resolver) {
+  if (!chart || !chart.canvas) return;
+  chart.canvas.ondblclick = ev => {
+    const els = chart.getElementsAtEventForMode(ev, 'nearest', { intersect: true }, true);
+    if (!els.length) return;
+    resolver(els[0].index, els[0].datasetIndex);
+  };
+  chart.canvas.style.cursor = 'pointer';
 }
 
 // ==========================================================================
@@ -8848,6 +9069,21 @@ function renderChartShare(data) {
 // El BPR y el PDM solo trabajan con las obras marcadas para información completa
 function datosBPR() { return datosUnicos(getFiltered()).filter(p => p.detalle_bpr); }
 
+// Pestaña PDM: dos vistas, las fichas por subsegmento (con el mapa) y la competencia
+function renderPdmTab() {
+  const vista = state.pdmVista === 'comp' ? 'comp' : 'fichas';
+  document.getElementById('pdmv-fichas').hidden = vista !== 'fichas';
+  document.getElementById('pdmv-comp').hidden = vista !== 'comp';
+  document.querySelectorAll('[data-pdmv]').forEach(b => b.classList.toggle('on', b.dataset.pdmv === vista));
+  if (vista === 'comp') renderPDM(); else renderBPR();
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest && e.target.closest('[data-pdmv]');
+  if (!b) return;
+  state.pdmVista = b.dataset.pdmv;
+  renderPdmTab();
+});
+
 function renderBPR() {
   const base = datosBPR();
   // El mapa puede acotar la tabla sin tocar los filtros de arriba
@@ -8864,11 +9100,16 @@ function renderBPR() {
       state.bprEstado = null; renderBPR();
     });
   }
-  document.getElementById('bpr-sub').textContent =
-    `${data.length} obra(s) · agrupado por subsegmento · refleja los filtros activos`;
+  document.getElementById('bpr-sub').textContent = `${data.length} obras`;
 
   renderBprMapa(base);
   ajustarAltoBpr();
+}
+
+// Dentro de cada subsegmento: lo ganado primero, luego negociación, licitación y proyecto
+function rangoEstatusPdm(est) {
+  const c = String(est || '').slice(0, 2);
+  return { '04': 0, '05': 0, '06': 0, '03': 1, '02': 2, '01': 3, '07': 4, '08': 5 }[c] ?? 6;
 }
 
 // Tabla del BPR: la usa también la pestaña de Presentación VP
@@ -8943,7 +9184,7 @@ function tablaBPR(data, idHead, idBody, idLegend) {
 
   let html = '';
   ordenados.forEach(([nombre, obras]) => {
-    obras.sort((a, b) => (volCemex(b) || 0) - (volCemex(a) || 0));
+    obras.sort((a, b) => rangoEstatusPdm(a.estatus) - rangoEstatusPdm(b.estatus) || (volCemex(b) || 0) - (volCemex(a) || 0));
     html += filaAgregada(`${nombre} (${obras.length})`, obras, 'bpr-group');
 
     obras.forEach(x => {
@@ -8975,7 +9216,7 @@ function tablaBPR(data, idHead, idBody, idLegend) {
 
   document.getElementById(idLegend).innerHTML =
     'Los % de subtotal se pesan por volumen y solo consideran obras con volumen total capturado; las columnas de volumen suman todas.' +
-    '<br>La competencia se captura en <b>Nueva Obra</b> o <b>Consolidar</b> y se analiza en la pestaña <b>PDM</b>.';
+    '<br>La competencia se captura en <b>Nueva Obra</b> o <b>Consolidar</b> y se analiza en la vista <b>Competidores</b>.';
 
   // Interacción tabla ↔ mapa
   body.querySelectorAll('tr[data-id]').forEach(tr => {
@@ -8990,9 +9231,7 @@ function tablaBPR(data, idHead, idBody, idLegend) {
 // ==========================================================================
 function renderVP() {
   const data = datosUnicos(getFiltered()).filter(p => p.highlight);
-  document.getElementById('vp-sub').textContent = data.length
-    ? `${data.length} obra(s) marcadas para presentar · se prenden y apagan con el botón Presentación VP`
-    : 'Ninguna obra marcada todavía';
+  document.getElementById('vp-sub').textContent = `${data.length} obras`;
   tablaBPR(data, 'vp-head', 'vp-body', 'vp-legend');
 }
 
@@ -9001,7 +9240,7 @@ function renderVP() {
 function ajustarAltoBpr() {
   const sp = document.querySelector('#view-bpr .bpr-split');
   if (!sp) return;
-  if (window.innerWidth <= 960 || !document.getElementById('view-bpr').classList.contains('active')) {
+  if (window.innerWidth <= 960 || !document.getElementById('view-bpr').classList.contains('active') || sp.hidden) {
     sp.style.height = '';
     return;
   }
@@ -9108,7 +9347,7 @@ function renderFunnel(data) {
 
   const maxC = Math.max(...stats.map(s => s.count), 1);
   document.getElementById('funnel-chart').innerHTML = stats.map(s => `
-    <div class="funnel-row">
+    <div class="funnel-row" data-estatus="${escapeHtml(s.name)}">
       <div class="lbl">${escapeHtml(s.short)}</div>
       <div class="funnel-bar">
         <div class="fill" style="width:${(s.count/maxC*100).toFixed(0)}%"></div>
@@ -9117,6 +9356,11 @@ function renderFunnel(data) {
       <div class="num">${fmtNum(s.concreto)} K m³</div>
     </div>
   `).join('');
+  const volTotal = data.reduce((t, p) => t + (volCemex(p) || 0), 0);
+  document.querySelectorAll('#funnel-chart .funnel-row').forEach(r => {
+    r.ondblclick = () => abrirDesglose(`Estatus · ${statusShortName(r.dataset.estatus)}`,
+      data.filter(p => p.estatus === r.dataset.estatus), { referencia: volTotal });
+  });
 }
 
 function chartTheme() {
@@ -9189,6 +9433,12 @@ function renderCharts(data) {
     }
   });
 
+  const volTotal = data.reduce((t, p) => t + (volCemex(p) || 0), 0);
+  desgloseEnGrafica(charts.subseg, i => {
+    const k = segKeys[i];
+    abrirDesglose(`Segmento · ${k}`, data.filter(p => (p.segmento || 'Por clasificar') === k), { referencia: volTotal });
+  });
+
   // Ganadas contra perdidas por subsegmento
   const exito = {};
   data.forEach(x => {
@@ -9236,6 +9486,13 @@ function renderCharts(data) {
     }
   });
 
+  desgloseEnGrafica(charts.exito, (i, ds) => {
+    const k = claves[i];
+    const gana = ds === 0;
+    abrirDesglose(`${gana ? 'Ganadas' : 'Perdidas'} · ${k}`, data.filter(x => (x.subsegmento || 'Sin subsegmento') === k &&
+      (gana ? ['04 - Contratado', '05 - Ejecución', '06 - Terminado'].includes(x.estatus) : String(x.estatus || '').startsWith('07'))));
+  });
+
   // Region barras
   const regAgg = {};
   data.forEach(p => {
@@ -9262,6 +9519,11 @@ function renderCharts(data) {
         x: { grid: { display: false }}
       }
     }
+  });
+
+  desgloseEnGrafica(charts.region, i => {
+    const k = regSorted[i][0];
+    abrirDesglose(`Región · ${k}`, data.filter(p => (p.region || 'Sin asignar') === k), { referencia: volTotal });
   });
 
   // Top Especialidades
@@ -9293,6 +9555,11 @@ function renderCharts(data) {
     }
   });
 
+  desgloseEnGrafica(charts.tipo, i => {
+    const k = tipoSorted[i][0];
+    abrirDesglose(`Especialidad · ${k}`, data.filter(p => (p.tipo || 'Sin especialidad') === k), { referencia: volTotal });
+  });
+
   // Responsables
   const respAgg = {};
   data.forEach(p => {
@@ -9319,6 +9586,11 @@ function renderCharts(data) {
         x: { grid: { display: false }}
       }
     }
+  });
+
+  desgloseEnGrafica(charts.resp, i => {
+    const k = respSorted[i][0];
+    abrirDesglose(`Asesor · ${k}`, data.filter(p => (asesorACargo(p) ? nombreCorto(asesorACargo(p)) : 'Sin asignar') === k), { referencia: volTotal });
   });
 
   // Año
@@ -9366,6 +9638,10 @@ function renderCharts(data) {
         x: { grid: { display: false }}
       }
     }
+  });
+  desgloseEnGrafica(charts.anio, i => {
+    const k = anioSorted[i][0];
+    abrirDesglose(`Año ${k}`, data.filter(p => String(p.anio) === k), { referencia: volTotal });
   });
 }
 
@@ -9807,7 +10083,7 @@ const VIEW_META = {
     showFilters: true
   },
   bpr: {
-    title: 'Business Performance Review',
+    title: 'PDM',
     subtitle: 'BPR · Demanda estimada por subsegmento, participación de CEMEX y de la competencia',
     icon: '<path d="M3 3h18v18H3z"/><path d="M3 9h18M9 9v12"/>',
     showFilters: true
@@ -9828,12 +10104,6 @@ const VIEW_META = {
     title: 'Seguimiento de captura',
     subtitle: 'Qué le falta a cada obra y quién la tiene a cargo',
     icon: '<path d="M9 11l3 3 8-8"/>',
-    showFilters: true
-  },
-  pdm: {
-    title: 'Participación de Mercado',
-    subtitle: 'PDM · cuánto del volumen mapeado trae CEMEX y cuánto la competencia',
-    icon: '<path d="M21 12a9 9 0 1 1-9-9v9z"/><path d="M12 3a9 9 0 0 1 9 9h-9z"/>',
     showFilters: true
   },
   map: {
@@ -9858,10 +10128,9 @@ function switchView(name) {
   }
 
   if (name === 'dashboard') renderDashboard();
-  if (name === 'bpr') renderBPR();
+  if (name === 'bpr') renderPdmTab();
   if (name === 'vp') renderVP();
   if (name === 'map') renderMap();
-  if (name === 'pdm') renderPDM();
   if (name === 'cap') renderCapturaTab();
   if (name === 'eq') renderEquiposTab();
   if (name === 'lic') renderLicitaciones();
@@ -9893,8 +10162,12 @@ function exportData() {
       <span>Reporte ejecutivo · portada + KPIs + tabla + mapa</span>
     </button>
     <button class="export-opt" data-fmt="bpr" style="${optStyle}">
-      <span style="${tagStyle}color:var(--accent-4)">BPR</span>
+      <span style="${tagStyle}color:var(--accent-4)">PDM</span>
       <span>Demanda estimada por subsegmento · formato Dirección</span>
+    </button>
+    <button class="export-opt" data-fmt="equipos" style="${optStyle}">
+      <span style="${tagStyle}color:var(--accent-3)">XLSX</span>
+      <span>Equipos por obra · un renglón por obra y equipo</span>
     </button>
     <button class="export-opt" data-fmt="xlsx" style="${optStyle}">
       <span style="${tagStyle}color:var(--accent-3)">XLSX</span>
@@ -9927,6 +10200,7 @@ function exportData() {
       else if (fmt === 'bpr') exportBprPptx();
       else if (fmt === 'import') importJson();
       else if (fmt === 'papelera') abrirPapelera();
+      else if (fmt === 'equipos') exportarEquiposObra();
 
       else {
         const blob = new Blob([JSON.stringify({ projects: state.projects, _exported: new Date().toISOString() }, null, 2)], { type: 'application/json' });
@@ -10381,14 +10655,14 @@ function portada(pres, titulo, subtitulo) {
 // EXPORT BPR — una lámina por subsegmento, al estilo del reporte de Dirección
 // ==========================================================================
 async function exportBprPptx() {
-  toast('Preparando el BPR…', 'warn');
+  toast('Preparando el PDM…', 'warn');
   if (!await asegurarLibreria('pptx')) return;
   await new Promise(r => setTimeout(r, 100));
 
   const data = getFiltered();
   if (!data.length) { toast('No hay obras con los filtros activos', 'error'); return; }
 
-  const pres = crearPresentacion('BPR · Pipeline Construcción');
+  const pres = crearPresentacion('PDM · Pipeline Construcción');
   const fecha = new Date().toLocaleDateString('es-MX', { day: '2-digit', month: 'long', year: 'numeric' });
 
   // ---------- helpers de dato ----------
@@ -10555,8 +10829,8 @@ async function exportBprPptx() {
     }
   });
 
-  await pres.writeFile({ fileName: `BPR_Pipeline_${new Date().toISOString().slice(0,10)}.pptx` });
-  toast('Reporte BPR descargado');
+  await pres.writeFile({ fileName: `PDM_Pipeline_${new Date().toISOString().slice(0,10)}.pptx` });
+  toast('Reporte PDM descargado');
 }
 
 async function exportXlsx() {
@@ -10617,7 +10891,7 @@ async function exportXlsx() {
     { h: 'Conv. técnica', w: 12, get: p => p.conversion_tecnica ? 'Sí' : 'No' },
     { h: 'Highlight', w: 10, get: p => p.highlight ? 'Sí' : 'No' },
     { h: 'En seguimiento', w: 13, get: p => p.seguimiento ? 'Sí' : 'No' },
-    { h: 'BPR', w: 7, get: p => p.detalle_bpr ? 'Sí' : 'No' },
+    { h: 'PDM', w: 7, get: p => p.detalle_bpr ? 'Sí' : 'No' },
     { h: 'Ppto. 2027', w: 10, get: p => p.ppto_2027 ? 'Sí' : 'No' },
     { h: 'Proveedor único', w: 12, get: p => p.proveedor_unico ? 'Sí' : 'No' },
     { h: 'Fecha update', w: 13, get: p => p.fecha_update },
@@ -10730,7 +11004,7 @@ async function exportXlsx() {
     return (vol / tot) * 100;
   };
 
-  const ws2 = wb.addWorksheet('BPR por subsegmento', {
+  const ws2 = wb.addWorksheet('PDM por subsegmento', {
     views: [{ state: 'frozen', ySplit: 4 }],
     pageSetup: { orientation: 'landscape', fitToPage: true, fitToWidth: 1, fitToHeight: 0, printTitlesRow: '4:4' }
   });
@@ -10821,7 +11095,7 @@ async function exportXlsx() {
 
   const buf = await wb.xlsx.writeBuffer();
   download(new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
-           `Pipeline_BPR_${new Date().toISOString().slice(0,10)}.xlsx`);
+           `Pipeline_PDM_${new Date().toISOString().slice(0,10)}.xlsx`);
   toast('Excel descargado');
 }
 
@@ -10847,7 +11121,7 @@ async function exportXlsxSimple() {
   ]);
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet([headers, ...rows]), 'Pipeline');
-  XLSX.writeFile(wb, `Pipeline_BPR_${new Date().toISOString().slice(0,10)}.xlsx`);
+  XLSX.writeFile(wb, `Pipeline_PDM_${new Date().toISOString().slice(0,10)}.xlsx`);
   toast('Excel descargado (sin formato: la librería no cargó)', 'warn');
 }
 
@@ -11069,7 +11343,7 @@ const ALIAS_EXCEL = {
   modalidad: ['modalidad'], tipo_licitacion: ['tipo de licitacion'],
   highlight: ['presentacion vp', 'vp'], seguimiento: ['en seguimiento', 'seguimiento'],
   conversion_tecnica: ['conv tecnica', 'conversion tecnica'],
-  detalle_bpr: ['bpr', 'informacion completa'],
+  detalle_bpr: ['pdm', 'bpr', 'proyecto estrategico', 'informacion completa'],
   ppto_2027: ['ppto 2027', 'presupuesto 2027', 'ppto'],
   proveedor_unico: ['proveedor unico']
 };
@@ -11421,6 +11695,34 @@ function cerrarMerge() {
   analisisMerge = null;
 }
 
+async function exportarEquiposObra() {
+  if (!await asegurarLibreria('xlsx')) return;
+  const etq = { comp: 'Comprometido', conc: 'En concurso', proy: 'Proyecto' };
+  const filas = [];
+  datosUnicos(getFiltered()).forEach(p => {
+    const arranque = p.fecha_arranque ? String(p.fecha_arranque).slice(0, 7) : '';
+    let termino = p.fecha_termino ? String(p.fecha_termino).slice(0, 7) : '';
+    if (!termino && /^\d{4}-\d{2}/.test(arranque) && Number(p.duracion_meses) > 0) {
+      const d = new Date(arranque + '-15'); d.setMonth(d.getMonth() + Number(p.duracion_meses) - 1);
+      termino = d.toISOString().slice(0, 7);
+    }
+    equiposDe(p).forEach(e => filas.push({
+      'Obra': p.proyecto, 'Estatus': statusShortName(p.estatus), 'Etapa': etq[etapaEquipo(p.estatus)] || 'Fuera del pipeline vigente',
+      'Dirección': p.direccion || '', 'Segmento': p.segmento || '', 'Subsegmento': p.subsegmento || '', 'Cliente': p.cliente || '',
+      'Estado': p.estado || '', 'Arranque': arranque, 'Término': termino, 'Duración (meses)': Number(p.duracion_meses) || '',
+      'Tipo de equipo': e.tipo, 'Marca': e.marca || '', 'Modelo': e.modelo || '', 'Cantidad': Number(e.cantidad) || 0,
+      'Rentado / externo': esEquipoExterno(e) ? 'Sí' : 'No', 'Asesor': nombrePersona(asesorACargo(p)), 'ID obra': p.id
+    }));
+  });
+  if (!filas.length) { toast('Ninguna obra con los filtros actuales tiene equipos capturados.', 'warn'); return; }
+  const ws = XLSX.utils.json_to_sheet(filas);
+  ws['!cols'] = Object.keys(filas[0]).map(k => ({ wch: Math.min(40, Math.max(10, k.length + 2)) }));
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Equipos por obra');
+  XLSX.writeFile(wb, `Equipos_por_obra_${new Date().toISOString().slice(0, 10)}.xlsx`);
+  toast(`${filas.length} renglones descargados`);
+}
+
 function abrirPapelera() {
   const lista = (state.papelera || []).slice().reverse();
   let ov = document.getElementById('papelera-overlay');
@@ -11521,11 +11823,6 @@ function wire() {
     e.currentTarget.classList.toggle('active', state.filters.ppto);
     refrescarVistas();
   });
-  document.getElementById('chip-conv').addEventListener('click', e => {
-    state.filters.conversion = !state.filters.conversion;
-    e.currentTarget.classList.toggle('active', state.filters.conversion);
-    refrescarVistas();
-  });
 
   document.getElementById('chip-highlight').addEventListener('click', e => {
     state.filters.highlight = !state.filters.highlight;
@@ -11534,12 +11831,11 @@ function wire() {
   });
 
   document.getElementById('btn-clear').addEventListener('click', () => {
-    state.filters = { search:'', estatusSel:[], segmentoSel:[], subsegSel:[], direccionSel:[],
+    state.filters = { search:'', estatusSel:[], clienteSel:[], segmentoSel:[], subsegSel:[], direccionSel:[],
       regionSel:[], modalidadSel:[], licitacionSel:[], respSel:[],
       importante:false, conversion:false, highlight:false, seguimiento:false, prospeccion:false, ppto:false };
     document.getElementById('f-search').value = '';
     pintarFiltros();
-    document.getElementById('chip-conv').classList.remove('active');
     document.getElementById('chip-ppto').classList.remove('active');
     document.getElementById('chip-seg').classList.remove('active');
     document.getElementById('chip-highlight').classList.remove('active');
