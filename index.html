@@ -752,6 +752,7 @@ body {
 .chart-card canvas { cursor: pointer; }
 .funnel-row, .kpi-card { cursor: pointer; }
 .dsg { max-width: 980px; }
+.pdm-tabla tr.sin-dato td { color: var(--text-3); font-style: italic; }
 .dsg-body { display: block !important; }
 .dsg-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-bottom: 10px; }
 .dsg-kpis > div { background: var(--bg-3); border: 1px solid var(--border); border-radius: 9px; padding: 8px 12px; }
@@ -781,6 +782,151 @@ body {
 /* El nombre del proyecto usa todo el renglón */
 .field.full > .autocomp { width: 100%; display: block; }
 .field.full > .autocomp #m-proyecto { width: 100%; }
+#m-perdida-campos { grid-column: 1 / -1; background: #fdf2f3; border: 1px solid #f6c9cd; border-radius: 9px; padding: 10px 12px; }
+.perdida-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.perdida-grid .perdida-det { grid-column: 1 / -1; }
+.perdida-grid input, .perdida-grid select { width: 100%; }
+/* --- radar de licitaciones --- */
+#view-lic [hidden] { display: none !important; }
+.rad { display: flex; flex-direction: column; gap: 10px; }
+.rad-top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; }
+.rad-buscar { flex: 1 1 260px; min-width: 200px; font-family: inherit; font-size: 12.5px; padding: 7px 11px; border: 1px solid var(--border-2); border-radius: 8px; outline: none; }
+.rad-buscar:focus { border-color: var(--accent-4); }
+.rad-chips { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; }
+.rad-chip { font-family: inherit; font-size: 11.5px; padding: 5px 10px; border-radius: 16px; border: 1px solid var(--border-2); background: #fff; color: var(--text-2); cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+.rad-chip span { font-size: 10px; font-weight: 700; color: var(--text-3); }
+.rad-chip.on { background: #eef0ff; border-color: var(--accent-4); color: var(--accent-4); font-weight: 600; }
+.rad-chip.on span { color: var(--accent-4); }
+.rad-origen-sel { font-family: inherit; font-size: 11.5px; padding: 5px 8px; border: 1px solid var(--border-2); border-radius: 8px; background: #fff; }
+.rad-auto { font-size: 9.5px; font-weight: 700; padding: 2px 7px; border-radius: 4px; background: #e8f6ee; color: #15803d; }
+.rad-fuente-est { display: grid; grid-template-columns: 10px 1fr auto; gap: 7px; align-items: center; font-size: 11.5px; padding: 3px 0; }
+.rad-fuente-est i { width: 8px; height: 8px; border-radius: 50%; background: #d6d8e8; }
+.rad-fuente-est.ok i { background: #15803d; }
+.rad-fuente-est b { font-weight: 600; color: var(--accent-4); }
+.rad-tipo-sel { font-family: inherit; font-size: 11.5px; padding: 5px 8px; border: 1px solid var(--border-2); border-radius: 8px; background: #fff; }
+.rad-botones { display: flex; gap: 6px; margin-left: auto; }
+.rad-g { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 10px; align-items: start; }
+.rad-feed { display: flex; flex-direction: column; gap: 8px; }
+.rad-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 11px 14px; transition: box-shadow .2s, border-color .2s; }
+.rad-card.fav { border-left: 4px solid #f5b400; }
+.rad-card.resaltada { border-color: var(--accent-4); box-shadow: 0 0 0 3px #d9dcf7; }
+.rad-card-top { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.rad-tipo { font-size: 9.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; background: #f3f4fb; color: var(--text-2); }
+.rad-tipo.obra { background: #eef0ff; color: var(--accent-4); }
+.rad-fuente { font-size: 10.5px; color: var(--text-3); }
+.rad-nueva { font-size: 9.5px; font-weight: 700; padding: 2px 7px; border-radius: 4px; background: #fde8ea; color: #c0121d; }
+.rad-num { font-size: 10.5px; color: var(--text-3); font-variant-numeric: tabular-nums; }
+.rad-estrella { margin-left: auto; border: none; background: none; font-size: 18px; line-height: 1; color: #d6d8e8; cursor: pointer; padding: 0 2px; }
+.rad-estrella.on { color: #f5b400; }
+.rad-card h4 { margin: 6px 0 2px; font-size: 13.5px; font-weight: 600; line-height: 1.35; color: var(--text); }
+.rad-card mark { background: #fff2b3; color: inherit; padding: 0 1px; border-radius: 2px; }
+.rad-meta { margin: 0 0 6px; font-size: 11.5px; color: var(--text-2); }
+.rad-fechas { display: flex; flex-wrap: wrap; gap: 5px; }
+.rad-f { font-size: 10.5px; padding: 3px 8px; border-radius: 6px; background: #f3f4fb; color: var(--text-2); }
+.rad-f b { font-weight: 600; color: var(--text); }
+.rad-f.pronto { background: #fff4e6; color: #8a4b07; }
+.rad-f.urgente { background: #fde8ea; color: #c0121d; }
+.rad-f.urgente b, .rad-f.pronto b { color: inherit; }
+.rad-f.pasada { opacity: .5; text-decoration: line-through; }
+.rad-notas { margin: 7px 0 0; font-size: 11.5px; color: var(--text-2); line-height: 1.45; }
+.rad-envio { margin: 6px 0 0; font-size: 11px; color: var(--accent-4); background: #eef0ff; border-radius: 6px; padding: 4px 8px; }
+.rad-acc { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 8px; padding-top: 7px; border-top: 1px solid #edeef8; }
+.rad-acc a, .rad-acc button { font-family: inherit; font-size: 11.5px; color: var(--accent-4); background: none; border: none; padding: 0; cursor: pointer; text-decoration: none; font-weight: 500; }
+.rad-acc a:hover, .rad-acc button:hover { text-decoration: underline; }
+.rad-enviar { display: flex; gap: 6px; margin-top: 8px; }
+.rad-enviar select, .rad-enviar input { font-family: inherit; font-size: 12px; padding: 5px 8px; border: 1px solid var(--border-2); border-radius: 7px; }
+.rad-enviar input { flex: 1; }
+.rad-vacio { background: #fff; border: 1px dashed var(--border-2); border-radius: 10px; padding: 26px; text-align: center; color: var(--text-3); font-size: 12.5px; line-height: 1.6; }
+.rad-lado { display: flex; flex-direction: column; gap: 10px; position: sticky; top: 8px; }
+.rad-lado section { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
+.rad-lado h4 { margin: 0 0 6px; font-size: 12px; font-weight: 600; }
+.rad-sec-head { display: flex; justify-content: space-between; align-items: center; }
+.rad-sec-head button { border: none; background: none; color: var(--accent-4); font-family: inherit; font-size: 11px; cursor: pointer; }
+.rad-prox { display: grid; grid-template-columns: 38px 1fr auto; gap: 8px; align-items: center; padding: 6px 0; border-bottom: 1px solid #edeef8; cursor: pointer; font-size: 11px; }
+.rad-prox:last-child { border-bottom: none; }
+.rad-prox-dia { text-align: center; font-size: 9.5px; text-transform: uppercase; color: var(--text-3); line-height: 1.1; }
+.rad-prox-dia b { display: block; font-size: 16px; color: var(--accent-4); }
+.rad-prox span b { display: block; font-size: 10px; color: var(--text-3); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+.rad-prox em { font-style: normal; font-size: 10.5px; color: var(--text-3); white-space: nowrap; }
+.rad-prox.pronto em { color: #8a4b07; font-weight: 600; }
+.rad-prox.urgente em { color: #c0121d; font-weight: 700; }
+.rad-nada { margin: 0; font-size: 11px; color: var(--text-3); line-height: 1.5; }
+.rad-pals { display: flex; flex-wrap: wrap; gap: 5px; }
+.rad-pals span, .rad-pals button { font-family: inherit; font-size: 11px; padding: 3px 9px; border-radius: 12px; background: #eef0ff; color: var(--accent-4); border: 1px solid #d9dcf7; }
+.rad-pals.sug button { cursor: pointer; background: #fff; }
+.rad-fuente-link { display: block; font-size: 12px; color: var(--accent-4); text-decoration: none; padding: 4px 0; }
+.rad-fuente-link:hover { text-decoration: underline; }
+.rad-lbl { font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); font-weight: 600; display: block; margin-bottom: 4px; }
+.rad-modal { max-width: 860px; }
+.rad-pegar { background: #f7f8fc; border: 1px dashed var(--border-2); border-radius: 9px; padding: 10px 12px; }
+.rad-pegar textarea { width: 100%; font-family: inherit; font-size: 12px; }
+.rad-pegar-acc { display: flex; gap: 8px; align-items: center; margin-top: 6px; flex-wrap: wrap; }
+.rad-pegar-acc span { font-size: 11.5px; color: var(--accent-4); }
+.rad-archivo { cursor: pointer; }
+.rad-res-sub { margin: 0 0 8px; font-size: 12px; color: var(--text-3); }
+.rad-res-tabla { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+.rad-res-tabla th { text-align: left; font-size: 9.5px; letter-spacing: .05em; text-transform: uppercase; color: #fff; background: var(--accent-4); padding: 7px 8px; }
+.rad-res-tabla td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; white-space: nowrap; }
+.rad-res-tabla td small { display: block; font-size: 10px; color: var(--text-3); white-space: normal; }
+.rad-res-tabla td.req { white-space: normal; max-width: 320px; color: var(--text-2); }
+.rad-res-tabla td.rojo { color: #c0121d; font-weight: 700; }
+.rad-res-tabla td.gris { color: var(--text-3); }
+.btn-notif { position: relative; }
+.notif-n { position: absolute; top: -5px; right: -5px; min-width: 17px; height: 17px; padding: 0 4px; border-radius: 9px;
+  background: var(--accent); color: #fff; font-size: 10px; font-weight: 700; line-height: 17px; text-align: center; }
+#notif-panel { position: fixed; z-index: 260; width: 380px; max-height: 70vh; overflow-y: auto; background: #fff; border: 1px solid var(--border-2);
+  border-radius: 11px; box-shadow: 0 16px 40px rgba(20,23,61,.2); }
+.notif-head { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 13px; }
+.notif-head button, .notif-pie button { border: none; background: none; color: var(--accent-4); font-family: inherit; font-size: 11.5px; cursor: pointer; }
+.notif-item { display: grid; grid-template-columns: 20px 1fr; gap: 8px; padding: 9px 14px; border-bottom: 1px solid #edeef8; cursor: pointer; font-size: 12px; line-height: 1.4; }
+.notif-item:hover { background: #fafbff; }
+.notif-item i { font-style: normal; color: var(--accent-4); }
+.notif-item.fecha i { color: #c0121d; }
+.notif-vacio { margin: 0; padding: 16px 14px; font-size: 12px; color: var(--text-3); line-height: 1.5; }
+.notif-pie { padding: 8px 14px; text-align: center; }
+@media (max-width: 1100px) { .rad-g { grid-template-columns: 1fr; } .rad-lado { position: static; } }
+/* --- generador de fichas y ficha del ganador --- */
+.gen-modal { max-width: 900px; }
+.gen-body { display: block !important; }
+.gen-drop { display: flex; flex-direction: column; gap: 4px; align-items: center; text-align: center; padding: 22px; border: 2px dashed var(--border-2);
+  border-radius: 12px; background: #f7f8fc; cursor: pointer; }
+.gen-drop.sobre { border-color: var(--accent-4); background: #eef0ff; }
+.gen-drop b { font-size: 14px; color: var(--accent-4); }
+.gen-drop span { font-size: 12px; color: var(--text-3); max-width: 560px; line-height: 1.5; }
+#gen-lista { margin-top: 10px; display: flex; flex-direction: column; gap: 4px; }
+.gen-doc { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; padding: 6px 10px; background: #fff; border: 1px solid var(--border); border-radius: 7px; }
+.gen-doc span { color: var(--text-3); text-align: right; }
+.gen-doc span.error { color: #c0121d; }
+.gen-doc.ajena { border-color: #f5cf9a; background: #fff8ec; }
+.gen-res { margin-top: 12px; border: 2px solid var(--accent-4); border-radius: 11px; padding: 12px 14px; background: #fff; }
+.gen-res h4 { margin: 0; font-size: 15px; color: var(--accent-4); }
+.gen-sub { margin: 2px 0 8px; font-size: 11.5px; color: var(--text-3); }
+.gen-avisos p { margin: 0 0 5px; padding: 6px 10px; border-radius: 6px; background: #fff4e6; border: 1px solid #f5cf9a; color: #8a4b07; font-size: 11.5px; }
+.gen-datos { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; margin: 8px 0; }
+.gen-datos div { display: grid; grid-template-columns: 150px 1fr; gap: 8px; font-size: 12px; padding: 3px 0; border-bottom: 1px solid #edeef8; }
+.gen-datos span { color: var(--text-3); }
+.gen-fichas { display: flex; gap: 16px; flex-wrap: wrap; margin: 10px 0 6px; font-size: 12.5px; font-weight: 500; }
+.gen-fichas input { accent-color: var(--accent-4); }
+.gen-obra { display: flex; gap: 8px; align-items: center; font-size: 12px; color: var(--text-2); }
+.gen-obra select { flex: 1; font-family: inherit; padding: 5px 8px; border: 1px solid var(--border-2); border-radius: 7px; }
+.lic-tipo.ganador { background: #e8f6ee; color: #15803d; }
+.ficha-ganador-sello { flex-direction: column; gap: 4px; }
+.ficha-ganador-sello span { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; opacity: .8; }
+.ficha-ganador-sello b { font-size: 15px; line-height: 1.3; text-align: center; padding: 0 12px; color: #fff; }
+.ficha-ganador-sello span { color: #fff; }
+.ficha-tabla tr.ficha-ganadora td { background: #eef0ff; font-weight: 600; }
+.ficha-tabla th { white-space: nowrap; }
+.ficha-motivo { display: block; font-size: 10px; color: var(--text-3); font-weight: 400; max-width: 360px; }
+.ficha-res { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10.5px; font-weight: 700; }
+.ficha-res.ganador { background: #e8f6ee; color: #15803d; }
+.ficha-res.desechada { background: #fde8ea; color: #c0121d; }
+.ficha-res.noganó, .ficha-res.nogano { background: #f3f4fb; color: var(--text-3); }
+.ficha-hermanas { display: inline-flex; gap: 4px; margin-right: auto; }
+.ficha-hermanas button { font-family: inherit; font-size: 11.5px; padding: 4px 10px; border-radius: 14px; border: 1px solid #d9dcf7; background: #eef0ff; color: var(--accent-4); cursor: pointer; }
+.eg-tabla { width: 100%; border-collapse: collapse; font-size: 12px; }
+.eg-tabla th { text-align: left; font-size: 10px; text-transform: uppercase; color: var(--text-3); padding: 4px; }
+.eg-tabla td { padding: 3px; }
+.eg-tabla input:not([type=radio]) { width: 100%; font-family: inherit; font-size: 12px; padding: 4px 6px; border: 1px solid var(--border-2); border-radius: 6px; }
 .papelera-tabla { width: 100%; border-collapse: collapse; font-size: 12px; }
 .papelera-tabla th { text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-3); padding: 6px; border-bottom: 2px solid var(--accent-4); }
 .papelera-tabla td { padding: 6px; border-bottom: 1px solid var(--border); }
@@ -2632,6 +2778,10 @@ tr.row-highlighted {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>
         <span class="lbl">Copia</span>
       </button>
+      <button class="btn btn-ghost btn-notif" id="btn-notif" title="Notificaciones del radar de licitaciones">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        <span class="notif-n" style="display:none">0</span>
+      </button>
       <button class="btn btn-ghost" id="btn-export" title="Exportar a Excel, PowerPoint o JSON">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         <span class="lbl">Exportar</span>
@@ -2771,11 +2921,17 @@ tr.row-highlighted {
   <!-- ====== VIEW: MAP ====== -->
   <!-- ============ VISTA LICITACIONES ============ -->
   <section class="view" id="view-lic">
-    <div class="lic-split">
+    <div class="pdm-vistas">
+      <button type="button" class="pdm-vista on" data-licv="radar">Radar</button>
+      <button type="button" class="pdm-vista" data-licv="fichas">Fichas</button>
+    </div>
+    <div id="licv-radar"></div>
+    <div class="lic-split" id="licv-fichas" hidden>
       <aside class="lic-lista">
         <div class="lic-lista-head">
           <input type="text" id="lic-buscar" placeholder="Buscar ficha…">
           <button class="btn btn-primary btn-sm" id="lic-nueva">+ Nueva ficha</button>
+          <button class="btn btn-ghost btn-sm" id="lic-generar" title="Sube los archivos de una licitación y salen las fichas de proyecto, licitantes y ganador">Generar desde archivos</button>
         </div>
         <div class="lic-items" id="lic-items"></div>
       </aside>
@@ -2856,6 +3012,16 @@ tr.row-highlighted {
         <div class="chart-container" id="cont-share"><canvas id="chart-share"></canvas></div>
       </div>
     </div>
+      <div class="chart-grid" style="margin-top:14px">
+        <div class="chart-card">
+          <h3>Quién nos gana · obras perdidas</h3>
+          <div class="pdm-tabla-wrap"><table class="pdm-tabla" id="perd-ganadores"></table></div>
+        </div>
+        <div class="chart-card">
+          <h3>Por qué perdemos</h3>
+          <div class="pdm-tabla-wrap"><table class="pdm-tabla" id="perd-motivos"></table></div>
+        </div>
+      </div>
     </div>
     <div class="bpr-split" id="pdmv-fichas">
 
@@ -3035,7 +3201,7 @@ tr.row-highlighted {
 
 <div class="toast" id="toast"></div>
 
-<script id="catalogo-clientes" type="application/json">[{"c":"ABENGOA","n":"ABENGOA","id":"50173993","g":"Legal","jv":"Legal","ca":"","rs":["ABENGOA MEXICO"]},{"c":"ABITAT","n":"ABITAT","id":"50768998","g":"Nancy Acosta","jv":"Armando Albarrán","ca":"David Abarca","rs":["ARQUITECTURA HABITACIONAL E INDUSTRIAL SA DE CV"]},{"c":"AEROPUERTO DE TIJUANA","n":"AEROPUERTO DE TIJUANA","id":"51063105","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":[]},{"c":"ALDESA","n":"ALDESA","id":"50167776","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":["ALDESEM HOME SA DE CV","CONSTRUCCIONES ALDESEM SA DE CV","INGENIERIA Y SERVICIOS ADM","PROACON MEXICO SA DE CV"]},{"c":"ARA","n":"ARA","id":"50000309","g":"Nancy Acosta","jv":"Angeles Salazar","ca":"David Abarca","rs":["CONSORCIO ARA SAB DE CV","CONSORCIO DE INGENIERIA INTEGRAL SA DE CV","CONSTRUCTORA Y URBANIZADORA ARA SA DE CV","INMOBILIARIA EL GLOBO, SA DE CV","PROYECTOS URBANOS ECOLOGICOS"]},{"c":"AVEZANO","n":"CONSTRUCCION ESPECIALIZADA AVEZANO","id":"51143968","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["CONSTRUCCION ESPECIALIZADA AVEZANO"]},{"c":"CAMEX","n":"CAMEX","id":"51002441","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":["CEMENTOS ASFALTICOS MEXICANOS","MERIBO"]},{"c":"CAROLINA MORALES MARTINEZ","n":"CAROLINA MORALES MARTINEZ","id":"51138874","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":[]},{"c":"CARVID","n":"CARVID","id":"50005992","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["NEGOCIACION INDUSTRIAL CARVID SA DE CV"]},{"c":"CIMESA","n":"CIMENTACIONES MEXICANAS","id":"50715356","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":["CIMENTACIONES MEXICANAS","MEJORAMIENTO DE SUELOS MENARD"]},{"c":"CJD","n":"CJD","id":"50746684","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["CONSULTORIA JURIDICA Y DESARROLLO INMOBILIARIO SA DE CV"]},{"c":"COCONAL","n":"COCONAL","id":"50005268","g":"Nancy Acosta","jv":"Armando Albarrán","ca":"David Abarca","rs":[]},{"c":"CONSORCIO ARISTOS","n":"CONSORCIO ARISTOS","id":"51140712","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["ALFA PROVEEDORES Y CONTRATISTAS","INGENIERIA DISEÑO Y CONSTRUCCION DE PUENTES Y ESTRUCTURAS","PRESFORZA"]},{"c":"COPACHISA","n":"COPACHISA","id":"50972048","g":"Nancy Acosta","jv":"Armando Albarrán","ca":"David Abarca","rs":["CIVIL GPA,S.A.P.I. DE C.V.","COPACHISA VIVIENDA","COPACHISA, S.A. DE C.V.","DEMEK","GPAG2M CIVIL SAPI DE CV"]},{"c":"COSUIS","n":"COSUIS CONSTRUCTORA Y SUPERVISORA","id":"50393577","g":"Guillermo Laserna","jv":"María José Castro","ca":"David Abarca","rs":["COSUIS CONSTRUCTORA Y SUPERVISORA"]},{"c":"CROCSA","n":"CROCSA","id":"50014745","g":"Nancy Acosta","jv":"Armando Albarrán","ca":"David Abarca","rs":["CROCSA CORPORATIVO SA DE C V"]},{"c":"DIRECCION Y GERENCIA DE PROYECTOS M","n":"DIRECCION Y GERENCIA DE PROYECTOS M","id":"51144276","g":"Guillermo Laserna","jv":"María José Castro","ca":"David Abarca","rs":["CONSTRUOBRAS SANTANDER"]},{"c":"ECO - TRANSFORMA","n":"ECO - TRANSFORMA","id":"50965757","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":[]},{"c":"ELECNOR","n":"ELECNOR","id":"50174017","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["ELECNOR MEXICO","ELECNOR, S.A."]},{"c":"ESMA INSTALACIONES","n":"ESMA INSTALACIONES","id":"51028839","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["ALTAI GRUPO INMOBILIARIO","GREMIAL CONSTRUCCIONES","HUELLAS DE CRECIMIENTO LAND"]},{"c":"FREYSSINET","n":"FREYSSINET","id":"50765266","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":["FREYSSINET DE MEXICO","GEOQUEST MEXICO"]},{"c":"GAFSACOM","n":"GAFSACOM","id":"51136376","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":[]},{"c":"GENI CONSTRUCCION Y DISEÑO","n":"GENI CONSTRUCCION Y DISEÑO SA DE CV","id":"51054376","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":[]},{"c":"GFA DESARROLLADORES","n":"GFA DESARROLLADORES","id":"51145018","g":"Nancy Acosta","jv":"Armando Albarrán","ca":"David Abarca","rs":["BALTA PADS","GFM DESARROLLADORES"]},{"c":"GIA","n":"CONSTRUCTORA Y EDIFICADORA GIA","id":"50674541","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["CONSTRUCTORA Y EDIFICADORA GIA+A","INGENIERIA ARQUITECTURA SERVICIOS ADMINISTRATIVOS"]},{"c":"GLOBAL ENERGY SERVICES MEXICO, SA D","n":"GLOBAL ENERGY SERVICES MEXICO, SA D","id":"51014236","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["GES RENEWABLE ENERGY LATAM","GLOBAL ENERGY SERVICES MEXICO"]},{"c":"GRUPO CARSO","n":"GRUPO CARSO","id":"50001094","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":["CARSO INFRAESTRUCTURA Y CONSTRUCCION SA DE CV","CONSTRUCCIONES URVITEC","FCC CONSTRUCCION","FUNDACION CARLOS SLIM AC","FUNDACION INBURSA","OPERADORA CICSA"]},{"c":"GRUPO HYCSA","n":"GRUPO HYCSA","id":"50508556","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":["CALZADA CONSTRUCCIONES","CONSORCIO LIBRAMIENTO ORIENTE SLP","CONSTRUCCION Y SERVICIOS CARRETEROS CAMPECHE-MERIDA","CONSTRUCCIONES Y DRAGADOS DEL SURESTE","CONSTRUCCIONES Y VIAS MANTE TULA","GRUPO CONSTRUCTOR HYCLAM","HYCSA EDIFICACIONES Y PROYECTOS","HYCSARUBAU INFRAESTRUCTURAS","RC+RT DESARROLLOS"]},{"c":"GRUPO INDI","n":"GRUPO INDI","id":"50000969","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["CARGO CONNECTING","CONSTRUCCIONES LERMA","GAMI INGENIERIA E INSTALACIONES","INDUSTRIA DE INGENIERIA","KODIAK ARANZIA","TELECOMUNICACIONES Y CONSTRUCCIONES IP SA DE CV"]},{"c":"GRUPO MEXICO","n":"GRUPO MEXICO","id":"50980989","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["Eólica El Retiro","GRUPO MEXICO SERVICIOS DE INGENIERI","MEXICO COMPAÑIA CONSTRUCTORA"]},{"c":"GRUPO MOTA","n":"GRUPO MOTA","id":"50955770","g":"Guillermo Laserna","jv":"María José Castro","ca":"David Abarca","rs":["CONSORCIO LAMAT TRAMO 1","MOTA-ENGIL MEXICO","MOTA-ENGIL O&M MEXICO SAPI DE CV"]},{"c":"GRUPO VINTE","n":"GRUPO VINTE","id":"51155656","g":"Nancy Acosta","jv":"Angeles Salazar","ca":"David Abarca","rs":["CASAS JAVER DE MEXICO SA DE CV","CASAS JAVER DE QUERETARO SA DE CV","CASAS JAVER, S.A. DE C.V.","DEREX DESARROLLO RESIDENCIAL","EDIFICACIONES E INGENIERIAS DEL CENTRO SA de CV","FIDEICOMISO CIB/3698","INMUEBLES PARA TI S.A. DE C.V.","PROMOTORA DE VIVIENDAS INTEGRALES SA de CV","SERVICIOS CORPORATIVOS JAVER SAB DE","URBA E INFRA DEL  CENTRO SA DE CV","URBANIZACIONES INMOBILIARIAS DEL CENTRO SA DE CV"]},{"c":"H y A","n":"H y A","id":"50000923","g":"Nancy Acosta","jv":"Angeles Salazar","ca":"David Abarca","rs":["CONSTRUCTORA RAMHER DE MEXICO SA DE CV","CONSTRUCTORA RAMHER, SA DE CV","DESARROLLADORA EXE","EXE CONSTRUCTORA S. A. DE C. V.","H Y A DE MEXICO DE BC SA DE CV","INMOBILIARIA DEL VALLE DE MEXICALI SA DE CV"]},{"c":"HKD MEXICO","n":"HKD MEXICO S DE RL DE CV","id":"50800053","g":"Guillermo Laserna","jv":"María José Castro","ca":"David Abarca","rs":["CHINA COMMUNICATIONS CONSTRUCTION COMPANY MEXICO","K & B CONSTRUCTORA"]},{"c":"ICA","n":"ICA","id":"50000307","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":["CASAFLEX S.A. PI DE C.V","COMPAÑÍA HIDROELECTRICA LA YESCA, S.A. DE C.V.","CONSTRUCCIONES Y TRITURACIONES","CONSTRUCTORA DE INFRAESTRUCTURA DE AGUA DE QUERÉTARO S.A. DE","CONSTRUCTORA EL CAJON","CONSTRUCTORA PUENTE MANANTIAL","DESARROLLADORA DE INFRAESTRUCTURA PUERTO ESCONDIDO","HOLDING PREFABRICADOS","ICA CONSTRUCTORA","ICA CONSTRUCTORA DE INFRAESTRUCTURA SA DE CV","ICA EDIFICIO SATELITE","INGENIEROS CIVILES ASOCIADOS, S.A D","INGENIEROS CIVILES ASOCIADOS,S.A. DE C.V"]},{"c":"ICA FLUOR","n":"ICA FLUOR","id":"50964921","g":"Guillermo Laserna","jv":"María José Castro","ca":"David Abarca","rs":["ICA FLUOR DANIEL","ICA FLUOR OPERACIONES Y MANTENIMIEN"]},{"c":"IDINSA","n":"IMPULSORA DE DESARROLLO INTEGRAL","id":"50003917","g":"Guillermo Laserna","jv":"Gerardo Castellanos","ca":"David Abarca","rs":["IMPULSORA DE DESARROLLO INTEGRAL"]},{"c":"IRKON","n":"IRKON HOLDINGS","id":"50748039","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["IRKON HOLDINGS"]},{"c":"KIMEX","n":"KIMEX INGENIERIA Y CONSTRUCCION","id":"51053480","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":["KIMEX INGENIERIA Y CONSTRUCCION"]},{"c":"LA PENINSULAR","n":"LA PENINSULAR","id":"50159449","g":"Nancy Acosta","jv":"Armando Albarrán","ca":"David Abarca","rs":["CONSTRUCTORA Y OPERADORA RENO SA DE","CONSTRUCTORES DEL ZAPOTILLO","LA PENINSULAR COMPAÑIA CONSTRUCTORA"]},{"c":"LITERNUM EDIFICACIONES","n":"LITERNUM EDIFICACIONES","id":"51097120","g":"Legal","jv":"Legal","ca":"","rs":[]},{"c":"MAYAN","n":"MAYAN","id":"50000371","g":"Nancy Acosta","jv":"Armando Albarrán","ca":"David Abarca","rs":["CONSTRUCCIONES HOTELERAS S.A. DE C.V.","CONSTRUCTORA INMOBILIARIA  TURISTICA SA DE CV","CONSTRUCTORA Y DESARROLLADORA DE INMUEBLES SA DE CV","EDIFICADORA DE INMUEBLES TURISTICOS SA DE CV","OPERADORA TURÍSTICA HOTELERA SA DE CV"]},{"c":"MIGDAL","n":"MIGDAL","id":"50000935","g":"Nancy Acosta","jv":"Angeles Salazar","ca":"David Abarca","rs":["CORPORACION MIGDAL","INMOBILIARIA KANAI UNO SA DE CV","PROMOBUILDING, S.A. DE C.V.","PROMOINFRA SA DE CV","PROMOKSA","PROMOKSA CUATRO S.A DE C.V","PROMOKSA DOS SA DE CV","PROMOKSA TRES SA DE CV","PROMOKSA UNO SA DE CV","PROMOURBANIA S.A DE C.V"]},{"c":"MIRA","n":"MIRA","id":"50139871","g":"Nancy Acosta","jv":"Angeles Salazar","ca":"David Abarca","rs":["BANCO VE POR MAS, FIDEICOMISO 979","CIB/2872","FIDEICOMISO DE ADMINISTRACION CIB/3170","FIM-TIERRA UNO S de RL de CV","FRBC ARRENDADORA CANCUN","FRBC ARRENDADORA MONTERREY,","FRBC DESARROLLOS INMOBILIARIOS S de RL de CV","FRBC-PC AR S DE RL DE CV","FRBC-TIERRA CUATRO S DE RL DE CV","FRBC-TIERRA DOS S DE RL DE CV"]},{"c":"NORMANDIA","n":"NORMANDIA","id":"51156949","g":"Guillermo Laserna","jv":"Gerardo Castellanos","ca":"David Abarca","rs":["NORMANDIA INVEST"]},{"c":"OMEGA","n":"OMEGA","id":"50955552","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["CAMELLIA CONSTRUCCIONES S.A. DE C.V.","INMOBILIARIA A P G S.A. DE C.V.","OMEGA CONSTRUCCIONES INDUSTRIALES"]},{"c":"PRODEMEX","n":"PRODEMEX","id":"50000881","g":"Nancy Acosta","jv":"Armando Albarrán","ca":"David Abarca","rs":["CONSTRUCTORA VIALIDAD LAS TORRES SA DE CV","DESARROLLADORA PENITENCIARIA.","DESARROLLO DE TERRACERIAS SA de CV","ENERGIAS PRODISA SAPI DE CV","GRUPO HERMANOS VAZQUEZ S.A. DE C.V.","INFRAVIAL SA DE CV","MOPRO, S.A. DE C.V.","PRODEMEX CONSTRUCCIONES SA DE CV","PROMOTORA Y DESARROLLADORA MEXICANA","PROMOTORA Y DESARROLLADORA MEXICANA SA DE CV","PROVIAL APP SA DE CV","TERRACERIAS, CIMENTACIONES Y TUNELES"]},{"c":"PROFESIONALES EN MUNICIPALES Y ESTA","n":"PROFESIONALES EN MUNICIPALES Y ESTA","id":"51153049","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":[]},{"c":"PROMOTORA DE ESPECTACULOS DEPORTIVO OAXACA","n":"PROMOTORA DE ESPECTACULOS DEPORTIVO OAXACA","id":"51128306","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["PROMOTORA DE ESPECTACULOS DEPORTIVOS DE OAXACA"]},{"c":"PULSO INMOBILIARIO","n":"PULSO INMOBILIARIO","id":"51155695","g":"Nancy Acosta","jv":"Angeles Salazar","ca":"David Abarca","rs":["ALDEANIZUC","AMPER ADMINISTRACION","BANCA MIFEL FIDEICOMISO NUMERO 1412","BANCA MIFEL FIDEICOMISO NUMERO 1505","BANCA MIFEL S.A. FIDEICOMISO 2553/2017","BANCA MIFEL S.A. FIDEICOMISO 3163/2019","BANCO MONEX FIDEICOMISO F/3193","BANCO VE POR MAS, FIDEICOMISO 1490","BANCO VE POR MAS, S.A. FIDEICOMISO 321","BANCO VE POR MAS, SA FIDEICOMISO 12","BANCO VE POR MAS, SA FIDEICOMISO 72","CASAS FUTURISTICAS, SA DE CV","CIBANCO FIDEICOMISO CIB/548","DE CANCUN PARA EL MUNDO","DEEXBOJ S.A. DE C.V.","FIDEICOMISO 6169/2022 GFM","K3 DESARROLLADORA S.DE R.L . DE C.V","MARISOL MORALES","PULSO METEPEC S A P I DE CV.","PULSO PERIFERICO SUR S.A. P. I. DE","Puerto Morelos Developers SA de CV","VICKY SHREM ACHAR"]},{"c":"PYCE","n":"PROYECTOS Y CONSTRUCCIONES PYCE","id":"51095139","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["PROYECTOS Y CONSTRUCCIONES PYCE"]},{"c":"RECSA","n":"RECSA","id":"50006815","g":"Guillermo Laserna","jv":"Gerardo Castellanos","ca":"David Abarca","rs":["REGIOMONTANA DE CONSTRUCCION Y SERVICIOS"]},{"c":"RENTA DE MAQUINARIA Y EQUIPOS PARA RUCCION VALSEQUILLO","n":"RENTA DE MAQUINARIA Y EQUIPOS PARA RUCCION VALSEQUILLO","id":"51055918","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":[]},{"c":"RUBA","n":"RUBA","id":"50000199","g":"Nancy Acosta","jv":"Armando Albarrán","ca":"David Abarca","rs":["DGA DESARROLLOS, SA DE CV","FIDEICOMISO F/10689","FIDEICOMISO F/9804","GRUPO LOGISTICO Y SOLUCIONES INTEGRAL DEL NORTE SA DE CV","INMOBILIARIA RUBA SA DE CV","INTRAURBANA DE OCCIDENTE","INTRAURBANA SUR SA DE CV","RUBA DESARROLLOS SA DE CV","RUBA RESIDENCIAL SA DE CV","RUBA SERVICIOS S.A. DE C.V."]},{"c":"SADASI","n":"SADASI","id":"50000353","g":"Nancy Acosta","jv":"Angeles Salazar","ca":"David Abarca","rs":["ALTTA HOMES CENTRO SUR, S. DE RL","PREMEZCLADOS Y MATERIALES PARA LA CONSTRUCCION SADASI","PROMOTORA SADASI, S.A. DE C.V."]},{"c":"SEDENA","n":"SDN MANTO Y REHAB UHN GUAYMAS","id":"50149753","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["AEROPUERTO INTERNACIONAL FELIPE ANGELES","BANCO NACIONAL DEL EJERCITO FUERZA AEREA Y ARMADA","FIDEICOMISO DE ADMINISTRACION Y PAG SEDENA 80778","INSTITUTO DE SEGURIDAD SOCIAL PARA LAS FUERZAS ARMADAS MEXIC","SECRETARIA DE LA DEFENSA NACIONAL"]},{"c":"SEMAR","n":"SEMAR","id":"50086525","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["SECRETARIA DE MARINA"]},{"c":"TECHINT","n":"TECHINT","id":"50000331","g":"Guillermo Laserna","jv":"Gerardo Castellanos","ca":"David Abarca","rs":["CONSTRUCTORA MEXICANA ELECTROMECANICA Y DE INSTRUMENTACIÓN SA DE CV","SIDERNET MEXICANA SA DE CV","TECHGEN SA DE CV","TECHINT,S.A. DE C.V.","TUBOS DE ACERO DE MEXICO SA"]},{"c":"TERNIUM","n":"TERNIUM","id":"50736461","g":"Guillermo Laserna","jv":"Gerardo Castellanos","ca":"David Abarca","rs":["CONSORCIO MINERO BENITO JUAREZ PEÑA COLORADA","SERVICIOS INTEGRALES NOVA DE MONTERREY","TERNIUM MEXICO, S.A. DE C.V."]},{"c":"TICONSA","n":"TICONSA INFRAESTRUCTURA","id":"51087413","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["TICONSA INFRAESTRUCTURA"]},{"c":"URALES","n":"URALES","id":"51159497","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":["CONSTRUCCIONES URALES","CONSTRUCTORA TALLERES Y COCHERAS"]},{"c":"VARILLAS Y CONCRETOS","n":"VARILLAS Y CONCRETOS","id":"50684898","g":"Legal","jv":"Legal","ca":"","rs":[]},{"c":"VESTAS WTG MEXICO SA DE CV","n":"VESTAS WTG MEXICO SA DE CV","id":"50710134","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["VESTAS WTG MEXICO"]},{"c":"VIRGO","n":"VIRGO","id":"50105281","g":"Guillermo Laserna","jv":"Gerardo Castellanos","ca":"David Abarca","rs":["PROYECTOS Y CONSTRUCCIONES VIRGO"]},{"c":"VISE","n":"VISE","id":"50505549","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":["CONSTRUCTOR DE AUTOPISTAS DEL BAJIO"]},{"c":"WALMART","n":"WALMART","id":"50107330","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["NUEVA WAL MART DE MEXICO S DE R"]}]</script>
+<script id="catalogo-clientes" type="application/json">[{"c":"CARVID","n":"CARVID","id":"50005992","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["NEGOCIACION INDUSTRIAL CARVID SA DE CV"]},{"c":"WALMART","n":"WALMART","id":"50107330","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["NUEVA WAL MART DE MEXICO S DE R"]},{"c":"CJD","n":"CJD","id":"50746684","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["CONSULTORIA JURIDICA Y DESARROLLO INMOBILIARIO SA DE CV"]},{"c":"SEMAR","n":"SEMAR","id":"50086525","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["SECRETARIA DE MARINA"]},{"c":"SDN MANTO Y REHAB UHN GUAYMAS","n":"SDN MANTO Y REHAB UHN GUAYMAS","id":"50149753","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["AEROPUERTO INTERNACIONAL FELIPE ANGELES","BANCO NACIONAL DEL EJERCITO FUERZA AEREA Y ARMADA","FIDEICOMISO DE ADMINISTRACION Y PAG SEDENA 80778","INSTITUTO DE SEGURIDAD SOCIAL PARA LAS FUERZAS ARMADAS MEXIC","SECRETARIA DE LA DEFENSA NACIONAL"]},{"c":"VESTAS WTG MEXICO SA DE CV","n":"VESTAS WTG MEXICO SA DE CV","id":"50710134","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["VESTAS WTG MEXICO"]},{"c":"ECO - TRANSFORMA","n":"ECO - TRANSFORMA","id":"50965757","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["ECO - TRANSFORMA"]},{"c":"GENI CONSTRUCCION Y DISEÑO","n":"GENI CONSTRUCCION Y DISEÑO","id":"51054376","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["GENI CONSTRUCCION Y DISEÑO"]},{"c":"RENTA DE MAQUINARIA Y EQUIPOS PARA RUCCION VALSEQUILLO","n":"RENTA DE MAQUINARIA Y EQUIPOS PARA RUCCION VALSEQUILLO","id":"51055918","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["RENTA DE MAQUINARIA Y EQUIPOS PARA RUCCION VALSEQUILLO"]},{"c":"AEROPUERTO DE TIJUANA","n":"AEROPUERTO DE TIJUANA","id":"51063105","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["AEROPUERTO DE TIJUANA"]},{"c":"TICONSA INFRAESTRUCTURA","n":"TICONSA INFRAESTRUCTURA","id":"51087413","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["TICONSA INFRAESTRUCTURA"]},{"c":"GAFSACOM","n":"GAFSACOM","id":"51136376","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["GAFSACOM"]},{"c":"CAROLINA MORALES MARTINEZ","n":"CAROLINA MORALES MARTINEZ","id":"51138874","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["CAROLINA MORALES MARTINEZ"]},{"c":"PROFESIONALES EN MUNICIPALES Y ESTA","n":"PROFESIONALES EN MUNICIPALES Y ESTA","id":"51153049","g":"Alejandro Jiménez","jv":"Uriel Cruz","ca":"David Abarca","rs":["PROFESIONALES EN MUNICIPALES Y ESTA"]},{"c":"OMEGA","n":"OMEGA","id":"50955552","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["CAMELLIA CONSTRUCCIONES S.A. DE C.V.","INMOBILIARIA A P G S.A. DE C.V.","OMEGA CONSTRUCCIONES INDUSTRIALES"]},{"c":"ESMA INSTALACIONES","n":"ESMA INSTALACIONES","id":"51028839","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["ESMA INSTALACIONES","GREMIAL CONSTRUCCIONES","HUELLAS DE CRECIMIENTO LAND"]},{"c":"PROYECTOS Y CONSTRUCCIONES PYCE","n":"PROYECTOS Y CONSTRUCCIONES PYCE","id":"51095139","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["PROYECTOS Y CONSTRUCCIONES PYCE"]},{"c":"PROMOTORA DE ESPECTACULOS DEPORTIVO OAXACA","n":"PROMOTORA DE ESPECTACULOS DEPORTIVO OAXACA","id":"51128306","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["PROMOTORA DE ESPECTACULOS DEPORTIVOS DE OAXACA"]},{"c":"CONSORCIO ARISTOS","n":"CONSORCIO ARISTOS","id":"51140712","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["ALFA PROVEEDORES Y CONTRATISTAS","INGENIERIA DISEÑO Y CONSTRUCCION DE PUENTES Y ESTRUCTURAS","PRESFORZA"]},{"c":"CONSTRUCTORA Y EDIFICADORA GIA A S. C.V.","n":"CONSTRUCTORA Y EDIFICADORA GIA A S. C.V.","id":"50674541","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["CONSTRUCTORA Y EDIFICADORA GIA+A","INGENIERIA ARQUITECTURA SERVICIOS ADMINISTRATIVOS"]},{"c":"GRUPO INDI","n":"GRUPO INDI","id":"50000969","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["CARGO CONNECTING","CONSTRUCCIONES LERMA","GAMI INGENIERIA E INSTALACIONES","INDUSTRIA DE INGENIERIA","KODIAK ARANZIA","TELECOMUNICACIONES Y CONSTRUCCIONES IP SA DE CV"]},{"c":"ELECNOR","n":"ELECNOR","id":"50174017","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["ELECNOR MEXICO","ELECNOR, S.A."]},{"c":"GRUPO MEXICO","n":"GRUPO MEXICO","id":"50980989","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["Eólica El Retiro","GRUPO MEXICO SERVICIOS DE INGENIERI","MEXICO COMPAÑIA CONSTRUCTORA"]},{"c":"GLOBAL ENERGY SERVICES MEXICO, SA D","n":"GLOBAL ENERGY SERVICES MEXICO, SA D","id":"51014236","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["GES RENEWABLE ENERGY LATAM","GLOBAL ENERGY SERVICES MEXICO"]},{"c":"IRKON HOLDINGS","n":"IRKON HOLDINGS","id":"50748039","g":"Erick Gonzalez","jv":"Ana Fragoso","ca":"David Abarca","rs":["IRKON HOLDINGS"]},{"c":"MAYAN","n":"MAYAN","id":"50000371","g":"Nancy Acosta","jv":"Valeria Garcia","ca":"David Abarca","rs":["CONSTRUCCIONES HOTELERAS S.A. DE C.V.","CONSTRUCTORA INMOBILIARIA  TURISTICA SA DE CV","CONSTRUCTORA Y DESARROLLADORA DE INMUEBLES SA DE CV","EDIFICADORA DE INMUEBLES TURISTICOS SA DE CV","OPERADORA TURÍSTICA HOTELERA SA DE CV"]},{"c":"ICA","n":"ICA","id":"50000307","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":["CASAFLEX S.A. PI DE C.V","COMPAÑÍA HIDROELECTRICA LA YESCA, S.A. DE C.V.","CONSTRUCCIONES Y TRITURACIONES","CONSTRUCTORA DE INFRAESTRUCTURA DE AGUA DE QUERÉTARO S.A. DE","CONSTRUCTORA EL CAJON","CONSTRUCTORA PUENTE MANANTIAL","DESARROLLADORA DE INFRAESTRUCTURA PUERTO ESCONDIDO","HOLDING PREFABRICADOS","ICA CONSTRUCTORA","ICA CONSTRUCTORA DE INFRAESTRUCTURA SA DE CV","ICA EDIFICIO SATELITE","INGENIEROS CIVILES ASOCIADOS, S.A D","INGENIEROS CIVILES ASOCIADOS,S.A. DE C.V"]},{"c":"GRUPO CARSO","n":"GRUPO CARSO","id":"50001094","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":["CARSO INFRAESTRUCTURA Y CONSTRUCCION SA DE CV","CONSTRUCCIONES URVITEC","FCC CONSTRUCCION","FUNDACION CARLOS SLIM AC","FUNDACION INBURSA","OPERADORA CICSA"]},{"c":"FCC CONSTRUCCIÓN","n":"FCC CONSTRUCCIÓN","id":"50988343","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":[]},{"c":"VISE","n":"VISE","id":"50505549","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":["CONSTRUCTOR DE AUTOPISTAS DEL BAJIO","VISE"]},{"c":"CALZADA CONSTRUCCIONES","n":"CALZADA CONSTRUCCIONES","id":"50508556","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":["CALZADA CONSTRUCCIONES","CONSORCIO LIBRAMIENTO ORIENTE SLP","CONSTRUCCION Y SERVICIOS CARRETEROS CAMPECHE-MERIDA","CONSTRUCCIONES Y DRAGADOS DEL SURESTE","CONSTRUCCIONES Y VIAS MANTE TULA","GRUPO CONSTRUCTOR HYCLAM","HYCSA EDIFICACIONES Y PROYECTOS","HYCSARUBAU INFRAESTRUCTURAS"]},{"c":"URALES","n":"URALES","id":"50683766","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":[]},{"c":"CIMENTACIONES MEXICANAS, S.A. DE C.","n":"CIMENTACIONES MEXICANAS, S.A. DE C.","id":"50715356","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":["CIMENTACIONES MEXICANAS","MEJORAMIENTO DE SUELOS MENARD"]},{"c":"FREYSSINET","n":"FREYSSINET","id":"50765266","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":["FREYSSINET DE MEXICO","GEOQUEST MEXICO"]},{"c":"KIMEX INGENIERIA Y CONSTRUCCION","n":"KIMEX INGENIERIA Y CONSTRUCCION","id":"51053480","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":["KIMEX INGENIERIA Y CONSTRUCCION"]},{"c":"ALDESA","n":"ALDESA","id":"50080006","g":"Erick Gonzalez","jv":"Valeria Garcia","ca":"David Abarca","rs":[]},{"c":"VIRGO","n":"VIRGO","id":"50105281","g":"Guillermo Laserna","jv":"María José Castro","ca":"David Abarca","rs":["PROYECTOS Y CONSTRUCCIONES VIRGO"]},{"c":"TERNIUM","n":"TERNIUM","id":"50736461","g":"Guillermo Laserna","jv":"María José Castro","ca":"David Abarca","rs":["CONSORCIO MINERO BENITO JUAREZ PEÑA COLORADA","SERVICIOS INTEGRALES NOVA DE MONTERREY","TERNIUM MEXICO, S.A. DE C.V."]},{"c":"TECHINT","n":"TECHINT","id":"50000331","g":"Guillermo Laserna","jv":"María José Castro","ca":"David Abarca","rs":["CONSTRUCTORA MEXICANA ELECTROMECANICA Y DE INSTRUMENTACIÓN SA DE CV","SIDERNET MEXICANA SA DE CV","TECHGEN SA DE CV","TECHINT,S.A. DE C.V.","TUBOS DE ACERO DE MEXICO SA"]},{"c":"IMPULSORA DE DESARROLLO INTEGRAL","n":"IMPULSORA DE DESARROLLO INTEGRAL","id":"50003917","g":"Guillermo Laserna","jv":"María José Castro","ca":"David Abarca","rs":["IMPULSORA DE DESARROLLO INTEGRAL"]},{"c":"RECSA","n":"RECSA","id":"50006815","g":"Guillermo Laserna","jv":"María José Castro","ca":"David Abarca","rs":["REGIOMONTANA DE CONSTRUCCION Y SERVICIOS"]},{"c":"COSUIS CONSTRUCTORA Y SUPERVISORA","n":"COSUIS CONSTRUCTORA Y SUPERVISORA","id":"50393577","g":"Guillermo Laserna","jv":"María José Castro","ca":"David Abarca","rs":["COSUIS CONSTRUCTORA Y SUPERVISORA"]},{"c":"NORMANDIA INVEST","n":"NORMANDIA INVEST","id":"51156949","g":"Guillermo Laserna","jv":"María José Castro","ca":"David Abarca","rs":["NORMANDIA INVEST"]},{"c":"HKD MEXICO S DE RL DE CV","n":"HKD MEXICO S DE RL DE CV","id":"50800053","g":"Guillermo Laserna","jv":"María José Castro","ca":"David Abarca","rs":["CHINA COMMUNICATIONS CONSTRUCTION COMPANY MEXICO","K & B CONSTRUCTORA"]},{"c":"GRUPO MOTA","n":"GRUPO MOTA","id":"50955770","g":"Guillermo Laserna","jv":"María José Castro","ca":"David Abarca","rs":["CONSORCIO LAMAT TRAMO 1","MOTA-ENGIL MEXICO","MOTA-ENGIL O&M MEXICO SAPI DE CV"]},{"c":"ICA FLUOR","n":"ICA FLUOR","id":"50964921","g":"Guillermo Laserna","jv":"María José Castro","ca":"David Abarca","rs":["ICA FLUOR DANIEL","ICA FLUOR OPERACIONES Y MANTENIMIEN"]},{"c":"PRODEMEX","n":"PRODEMEX","id":"50000881","g":"Nancy Acosta","jv":"Armando Albarrán","ca":"David Abarca","rs":["CONSTRUCTORA VIALIDAD LAS TORRES SA DE CV","DESARROLLADORA PENITENCIARIA.","DESARROLLO DE TERRACERIAS SA de CV","ENERGIAS PRODISA SAPI DE CV","GRUPO HERMANOS VAZQUEZ S.A. DE C.V.","INFRAVIAL SA DE CV","MOPRO, S.A. DE C.V.","PRODEMEX CONSTRUCCIONES SA DE CV","PROMOTORA Y DESARROLLADORA MEXICANA","PROMOTORA Y DESARROLLADORA MEXICANA SA DE CV","PROVIAL APP SA DE CV","TERRACERIAS, CIMENTACIONES Y TUNELES"]},{"c":"SADASI","n":"SADASI","id":"50000353","g":"Nancy Acosta","jv":"Angeles Salazar","ca":"David Abarca","rs":["ALTTA HOMES CENTRO SUR, S. DE RL","PREMEZCLADOS Y MATERIALES PARA LA CONSTRUCCION SADASI","PROMOTORA SADASI, S.A. DE C.V."]},{"c":"H y A","n":"H y A","id":"50000923","g":"Nancy Acosta","jv":"Angeles Salazar","ca":"David Abarca","rs":["CONSTRUCTORA RAMHER DE MEXICO SA DE CV","CONSTRUCTORA RAMHER, SA DE CV","DESARROLLADORA EXE","EXE CONSTRUCTORA S. A. DE C. V.","H Y A DE MEXICO DE BC SA DE CV","INMOBILIARIA DEL VALLE DE MEXICALI SA DE CV"]},{"c":"MIGDAL","n":"MIGDAL","id":"50000935","g":"Nancy Acosta","jv":"Angeles Salazar","ca":"David Abarca","rs":["CORPORACION MIGDAL","INMOBILIARIA KANAI UNO SA DE CV","PROMOBUILDING, S.A. DE C.V.","PROMOINFRA SA DE CV","PROMOKSA","PROMOKSA CUATRO S.A DE C.V","PROMOKSA DOS SA DE CV","PROMOKSA TRES SA DE CV","PROMOKSA UNO SA DE CV","PROMOURBANIA S.A DE C.V"]},{"c":"GRUPO VINTE","n":"GRUPO VINTE","id":"51155656","g":"Nancy Acosta","jv":"Angeles Salazar","ca":"David Abarca","rs":["CASAS JAVER DE MEXICO SA DE CV","CASAS JAVER DE QUERETARO SA DE CV","CASAS JAVER, S.A. DE C.V.","DEREX DESARROLLO RESIDENCIAL","EDIFICACIONES E INGENIERIAS DEL CENTRO SA de CV","FIDEICOMISO CIB/3698","INMUEBLES PARA TI S.A. DE C.V.","PROMOTORA DE VIVIENDAS INTEGRALES SA de CV","SERVICIOS CORPORATIVOS JAVER SAB DE","URBA E INFRA DEL  CENTRO SA DE CV","URBANIZACIONES INMOBILIARIAS DEL CENTRO SA DE CV"]},{"c":"PULSO INMOBILIARIO","n":"PULSO INMOBILIARIO","id":"51155695","g":"Nancy Acosta","jv":"Angeles Salazar","ca":"David Abarca","rs":["ALDEANIZUC","AMPER ADMINISTRACION","BANCA MIFEL FIDEICOMISO NUMERO 1412","BANCA MIFEL FIDEICOMISO NUMERO 1505","BANCA MIFEL S.A. FIDEICOMISO 2553/2017","BANCA MIFEL S.A. FIDEICOMISO 3163/2019","BANCO MONEX FIDEICOMISO F/3193","BANCO VE POR MAS, FIDEICOMISO 1490","BANCO VE POR MAS, S.A. FIDEICOMISO 321","BANCO VE POR MAS, SA FIDEICOMISO 12","BANCO VE POR MAS, SA FIDEICOMISO 72","CASAS FUTURISTICAS, SA DE CV","CIBANCO FIDEICOMISO CIB/548","DE CANCUN PARA EL MUNDO","DEEXBOJ S.A. DE C.V.","FIDEICOMISO 6169/2022 GFM","K3 DESARROLLADORA S.DE R.L . DE C.V","MARISOL MORALES","PULSO METEPEC S A P I DE CV.","PULSO PERIFERICO SUR S.A. P. I. DE","Puerto Morelos Developers SA de CV","VICKY SHREM ACHAR"]},{"c":"ARA","n":"ARA","id":"50000309","g":"Nancy Acosta","jv":"Angeles Salazar","ca":"David Abarca","rs":["CONSORCIO ARA SAB DE CV","CONSORCIO DE INGENIERIA INTEGRAL SA DE CV","CONSTRUCTORA Y URBANIZADORA ARA SA DE CV","INMOBILIARIA EL GLOBO, SA DE CV","PROYECTOS URBANOS ECOLOGICOS"]},{"c":"COCONAL","n":"COCONAL","id":"50005268","g":"Nancy Acosta","jv":"Armando Albarrán","ca":"David Abarca","rs":["COCONAL"]},{"c":"LA PENINSULAR","n":"LA PENINSULAR","id":"50159449","g":"Nancy Acosta","jv":"Armando Albarrán","ca":"David Abarca","rs":["CONSTRUCTORA Y OPERADORA RENO SA DE","CONSTRUCTORES DEL ZAPOTILLO","LA PENINSULAR COMPAÑIA CONSTRUCTORA"]},{"c":"RUBA","n":"RUBA","id":"50000199","g":"Nancy Acosta","jv":"Armando Albarrán","ca":"David Abarca","rs":["DGA DESARROLLOS, SA DE CV","FIDEICOMISO F/10689","FIDEICOMISO F/9804","GRUPO LOGISTICO Y SOLUCIONES INTEGRAL DEL NORTE SA DE CV","INMOBILIARIA RUBA SA DE CV","INTRAURBANA DE OCCIDENTE","INTRAURBANA SUR SA DE CV","RUBA DESARROLLOS SA DE CV","RUBA RESIDENCIAL SA DE CV","RUBA SERVICIOS S.A. DE C.V."]},{"c":"CROCSA","n":"CROCSA","id":"50014745","g":"Nancy Acosta","jv":"Armando Albarrán","ca":"David Abarca","rs":["CROCSA CORPORATIVO SA DE C V"]},{"c":"ABITAT","n":"ABITAT","id":"50768998","g":"Nancy Acosta","jv":"Armando Albarrán","ca":"David Abarca","rs":["ARQUITECTURA HABITACIONAL E INDUSTRIAL SA DE CV"]},{"c":"COPACHISA","n":"COPACHISA","id":"50972048","g":"Nancy Acosta","jv":"Armando Albarrán","ca":"David Abarca","rs":["CIVIL GPA,S.A.P.I. DE C.V.","COPACHISA VIVIENDA","COPACHISA, S.A. DE C.V.","DEMEK","GPAG2M CIVIL SAPI DE CV"]},{"c":"GFA DESARROLLADORES","n":"GFA DESARROLLADORES","id":"51145018","g":"Nancy Acosta","jv":"Armando Albarrán","ca":"David Abarca","rs":["BALTA PADS","GFM DESARROLLADORES"]}]</script>
 <script id="seed-data" type="application/json">{"projects":[],"catalogs":{"estatus":["01 - Proyecto","02 - Licitación","03 - Negociación","04 - Contratado","05 - Ejecución","06 - Terminado","07 - Perdido","08 - Inactivo"],"estados":{"Aguascalientes":"Norte - Bajío","Baja California":"Pacífico","Baja California Sur":"Pacífico","Campeche":"Centro - Sureste","Chiapas":"Centro - Sureste","Chihuahua":"Norte - Bajío","Ciudad de Mexico":"Centro - Sureste","Coahuila":"Norte - Bajío","Colima":"Pacífico","Durango":"Norte - Bajío","Estado de Mexico":"Centro - Sureste","Guanajuato":"Norte - Bajío","Guerrero":"Centro - Sureste","Hidalgo":"Pacífico","Internacional":"Internacional","Jalisco":"Pacífico","Michoacan":"Pacífico","Morelos":"Centro - Sureste","Nayarit":"Pacífico","Nuevo Leon":"Norte - Bajío","Oaxaca":"Centro - Sureste","Puebla":"Centro - Sureste","Queretaro":"Norte - Bajío","Quintana Roo":"Centro - Sureste","San Luis Potosi":"Norte - Bajío","Sinaloa":"Pacífico","Sonora":"Pacífico","Tabasco":"Centro - Sureste","Tamaulipas":"Norte - Bajío","Tlaxcala":"Centro - Sureste","Veracruz":"Centro - Sureste","Yucatán":"Centro - Sureste","Zacatecas":"Norte - Bajío"},"tipos":{"Carreteras":"Carreteras y Vialidades","Viaductos":"Carreteras y Vialidades","Pasos a Desnivel":"Carreteras y Vialidades","Puentes":"Carreteras y Vialidades","Túneles":"Carreteras y Vialidades","BRT":"Carreteras y Vialidades","Urbanización":"Carreteras y Vialidades","Plataformas":"Aeropuertos y Puertos","Pistas y rodajes":"Aeropuertos y Puertos","Terminales y servicios":"Aeropuertos y Puertos","Puertos Marinos":"Aeropuertos y Puertos","Puertos Secos":"Aeropuertos y Puertos","Ferrocarriles":"Trenes","Estaciones":"Trenes","Metro":"Trenes","Presas":"Hidráulica","Acueductos":"Hidráulica","Tratamiento de Agua":"Hidráulica","Distritos de riego":"Hidráulica","Refinerías":"Energía","Gas natural":"Energía","Sustentables":"Energía","Subestaciones eléctricas":"Energía","Centros de ciclo combinado":"Energía","Minas":"Energía","Educación":"Edificación Pública","Salud":"Edificación Pública","Oficinas":"Edificación Pública","Deportivos":"Edificación Pública","Seguridad":"Edificación Pública","Edificio de Usos mixtos":"Edificación Pública","Otros":"Otros"},"regiones":["Pacífico","Norte - Bajío","Centro - Sureste","Internacional"],"subsegmentos":["Carreteras y Vialidades","Aeropuertos y Puertos","Trenes","Hidráulica","Energía","Edificación Pública","Otros"],"responsables":["LCDC","DDLG","APC","JDDO","FRB","JMSS","YATG","MLR","ESRA","SAAH","JMLG","HARH","MFRC","MJSA"],"clasificacion":{"Infraestructura":{"Carreteras y Vialidades":["Carreteras","Viaductos","Pasos a Desnivel","Puentes","Túneles","BRT","Urbanización"],"Aeropuertos y Puertos":["Plataformas","Pistas y rodajes","Terminales y servicios","Puertos Marinos","Puertos Secos"],"Trenes":["Ferrocarriles","Estaciones","Metro"],"Hidráulica":["Presas","Acueductos","Tratamiento de Agua","Distritos de riego"],"Energía":["Refinerías","Gas natural","Sustentables","Subestaciones eléctricas","Centros de ciclo combinado","Minas"]},"Edificación":{"Pública":["Educación","Salud","Oficinas","Deportivos","Seguridad","Edificio de usos mixtos"],"Privada":["Educación","Salud","Oficinas","Deportivos","Hotel","Centros comerciales","Edificios de usos mixtos"]},"Industrial":{"Edificación":["Servicios","Logística","Manufactura"],"Urbanización":["Pavimentos","Muros","Obras de servicio"]},"Vivienda":{"Edificación":["Vivienda en serie","Edificios de departamentos","Vivienda Particular","Vivienda de Bienestar"],"Urbanización":["Pavimentos","Muros","Obras de servicio"]}}},"fichas":[],"_metadata":null}</script>
 <script id="map-paths" type="application/json">{"Baja California":{"name":"Baja California","displayName":"Baja California","path":"M 94 178 L 94 181 L 90 178 L 93 173 L 94 167 L 95 172 L 94 178 Z M 3 136 L 0 129 L 0 126 L 4 130 L 3 136 Z M 124 185 L 126 182 L 125 185 L 124 185 Z  M 119 10 L 115 11 L 112 17 L 114 23 L 114 32 L 117 37 L 118 42 L 115 47 L 114 52 L 113 61 L 114 65 L 117 70 L 117 78 L 117 82 L 118 90 L 116 99 L 119 108 L 122 111 L 123 116 L 129 118 L 133 124 L 141 132 L 145 138 L 147 146 L 147 152 L 150 150 L 152 156 L 155 155 L 156 159 L 159 168 L 162 170 L 166 171 L 165 177 L 168 181 L 167 184 L 168 189 L 146 187 L 128 185 L 127 180 L 129 177 L 127 175 L 130 168 L 127 160 L 123 159 L 118 148 L 115 147 L 114 141 L 111 140 L 104 129 L 98 127 L 95 122 L 91 118 L 84 112 L 84 107 L 81 104 L 82 99 L 81 89 L 76 83 L 77 74 L 76 70 L 73 68 L 71 64 L 69 64 L 70 57 L 70 54 L 65 44 L 61 40 L 62 36 L 60 32 L 62 33 L 64 28 L 60 25 L 58 22 L 56 12 L 54 10 L 52 3 L 52 0 L 123 2 L 120 6 L 119 10 Z M 153 142 L 146 132 L 147 127 L 153 134 L 153 137 L 158 138 L 160 150 L 153 142 Z","cx":99.5,"cy":94.6},"Baja California Sur":{"name":"Baja California Sur","displayName":"Baja California Sur","path":"M 253 342 L 251 342 L 250 340 L 249 333 L 253 342 Z M 185 324 L 188 324 L 194 330 L 193 333 L 185 324 Z M 236 326 L 238 329 L 237 331 L 234 325 L 236 326 Z M 229 307 L 231 313 L 227 310 L 225 307 L 229 307 Z M 180 306 L 178 313 L 175 313 L 179 304 L 181 295 L 179 303 L 180 306 Z M 216 266 L 211 275 L 211 271 L 213 267 L 216 266 Z M 124 185 L 126 188 L 127 185 L 146 187 L 168 189 L 167 194 L 172 202 L 179 206 L 181 214 L 184 219 L 187 223 L 191 225 L 188 229 L 193 236 L 191 239 L 195 246 L 198 245 L 194 240 L 193 234 L 202 241 L 202 246 L 205 248 L 205 253 L 207 256 L 206 259 L 208 266 L 207 270 L 208 277 L 211 280 L 214 287 L 217 288 L 216 290 L 220 302 L 224 307 L 227 315 L 225 320 L 224 325 L 225 332 L 229 338 L 235 342 L 237 338 L 236 335 L 240 334 L 241 337 L 246 341 L 247 345 L 252 345 L 252 351 L 256 355 L 256 361 L 262 365 L 264 369 L 264 375 L 260 382 L 254 385 L 248 390 L 242 385 L 240 373 L 236 364 L 228 359 L 214 342 L 201 332 L 196 326 L 194 322 L 190 323 L 189 319 L 186 314 L 182 314 L 180 310 L 181 299 L 183 295 L 184 288 L 183 277 L 181 267 L 178 264 L 177 259 L 174 256 L 165 251 L 155 242 L 153 234 L 154 227 L 149 235 L 146 233 L 142 233 L 141 236 L 138 235 L 135 232 L 133 226 L 128 224 L 124 219 L 120 217 L 113 213 L 113 207 L 110 204 L 106 202 L 103 195 L 97 192 L 97 188 L 111 192 L 114 193 L 120 189 L 120 195 L 124 198 L 126 200 L 128 198 L 130 199 L 132 196 L 128 195 L 126 196 L 124 192 L 125 187 L 121 189 L 124 185 Z","cx":199.9,"cy":287.7},"Sonora":{"name":"Sonora","displayName":"Sonora","path":"M 184 162 L 175 155 L 179 152 L 178 148 L 181 143 L 185 143 L 185 146 L 188 151 L 184 162 Z M 121 40 L 117 38 L 121 40 Z M 297 242 L 276 259 L 273 258 L 273 253 L 265 243 L 265 245 L 261 245 L 258 244 L 255 240 L 252 230 L 242 226 L 239 222 L 235 220 L 238 220 L 233 214 L 233 208 L 234 206 L 233 200 L 236 199 L 228 195 L 226 193 L 225 199 L 222 194 L 214 190 L 208 177 L 201 173 L 200 168 L 194 161 L 192 157 L 189 152 L 189 147 L 187 144 L 187 139 L 184 140 L 182 136 L 183 133 L 175 115 L 174 105 L 171 101 L 171 95 L 167 91 L 165 85 L 164 80 L 167 66 L 162 63 L 153 60 L 151 57 L 150 52 L 147 49 L 142 47 L 139 51 L 135 50 L 126 42 L 124 39 L 121 38 L 114 32 L 114 23 L 112 17 L 115 11 L 119 10 L 214 58 L 226 64 L 288 68 L 286 87 L 293 95 L 296 96 L 299 100 L 300 118 L 296 142 L 294 142 L 295 166 L 294 173 L 297 184 L 294 187 L 287 184 L 281 185 L 279 188 L 282 199 L 286 202 L 287 205 L 290 208 L 293 215 L 293 222 L 292 227 L 295 233 L 298 235 L 297 242 Z M 272 263 L 273 260 L 272 262 L 272 263 Z M 274 262 L 274 259 L 276 260 L 274 262 Z","cx":239.8,"cy":134.8},"Colima":{"name":"Colima","displayName":"Colima","path":"M 209 548 L 205 546 L 207 543 L 210 547 L 209 548 Z M 445 554 L 437 547 L 425 541 L 426 539 L 417 536 L 419 533 L 429 530 L 432 524 L 434 523 L 441 527 L 448 524 L 449 527 L 452 530 L 452 539 L 453 543 L 449 546 L 448 550 L 445 554 Z","cx":436.1,"cy":537.5},"Nayarit":{"name":"Nayarit","displayName":"Nayarit","path":"M 351 439 L 355 440 L 354 444 L 352 442 L 351 439 Z M 426 415 L 425 418 L 423 424 L 433 436 L 431 443 L 429 446 L 438 451 L 436 455 L 433 458 L 429 459 L 429 467 L 427 471 L 427 477 L 421 472 L 419 469 L 416 469 L 413 465 L 410 465 L 406 468 L 401 469 L 394 478 L 392 475 L 388 475 L 389 471 L 394 465 L 396 463 L 397 458 L 396 453 L 397 447 L 391 443 L 384 429 L 383 426 L 383 418 L 381 408 L 384 406 L 389 409 L 390 406 L 388 401 L 386 397 L 390 393 L 389 390 L 392 388 L 400 389 L 406 393 L 408 397 L 404 402 L 405 407 L 411 402 L 415 404 L 417 410 L 421 412 L 425 409 L 426 415 Z","cx":407.7,"cy":432.5},"Campeche":{"name":"Campeche","displayName":"Campeche","path":"M 846 534 L 842 537 L 837 538 L 845 533 L 846 534 Z M 928 559 L 928 564 L 868 570 L 866 564 L 862 564 L 855 561 L 847 560 L 845 566 L 837 567 L 834 565 L 827 559 L 826 547 L 819 548 L 817 547 L 815 541 L 829 538 L 832 538 L 836 541 L 831 541 L 838 545 L 845 547 L 848 544 L 853 541 L 855 535 L 850 531 L 849 529 L 858 523 L 865 517 L 871 508 L 871 496 L 872 492 L 878 486 L 877 480 L 877 467 L 876 462 L 876 454 L 878 450 L 879 461 L 884 462 L 887 465 L 890 465 L 892 463 L 894 469 L 897 470 L 899 475 L 906 479 L 909 484 L 912 488 L 914 493 L 916 495 L 924 502 L 929 509 L 929 516 L 927 519 L 927 530 L 931 549 L 928 556 L 928 559 Z","cx":898.6,"cy":512.4},"Quintana Roo":{"name":"Quintana Roo","displayName":"Quintana Roo","path":"M 1000 447 L 995 458 L 993 460 L 992 453 L 994 449 L 1000 447 Z M 970 413 L 980 414 L 982 413 L 983 409 L 979 410 L 983 407 L 988 409 L 991 413 L 994 413 L 995 422 L 998 423 L 996 429 L 995 436 L 989 446 L 984 452 L 978 465 L 978 477 L 973 486 L 970 486 L 970 489 L 973 490 L 973 493 L 976 490 L 981 490 L 981 492 L 974 498 L 973 503 L 977 500 L 980 499 L 977 512 L 976 522 L 974 525 L 973 536 L 972 539 L 972 545 L 971 540 L 968 536 L 963 534 L 965 526 L 963 519 L 960 524 L 956 535 L 949 536 L 945 546 L 943 549 L 942 554 L 938 561 L 932 557 L 928 559 L 928 556 L 931 549 L 927 530 L 927 519 L 929 516 L 929 509 L 924 502 L 916 495 L 914 493 L 915 486 L 921 485 L 925 481 L 930 480 L 936 474 L 945 469 L 947 464 L 950 462 L 953 457 L 958 457 L 962 455 L 969 448 L 972 435 L 970 429 L 971 421 L 970 413 Z","cx":948.8,"cy":482.9},"Estado de Mexico":{"name":"Estado de Mexico","displayName":"México","path":"M 611 538 L 609 540 L 605 540 L 605 537 L 600 536 L 599 526 L 595 517 L 591 526 L 588 530 L 590 534 L 588 538 L 589 542 L 584 547 L 583 552 L 581 552 L 578 549 L 574 555 L 572 553 L 565 555 L 562 560 L 558 564 L 555 561 L 556 558 L 553 554 L 552 547 L 546 546 L 557 531 L 556 528 L 561 524 L 559 519 L 562 504 L 567 495 L 568 492 L 571 490 L 577 497 L 580 495 L 582 499 L 581 503 L 584 505 L 586 511 L 592 502 L 598 499 L 601 503 L 600 508 L 604 505 L 608 506 L 611 510 L 610 516 L 611 521 L 610 524 L 611 532 L 611 538 Z","cx":572.8,"cy":527.2},"Morelos":{"name":"Morelos","displayName":"Morelos","path":"M 600 536 L 605 537 L 605 540 L 609 540 L 611 538 L 611 543 L 608 546 L 610 551 L 608 551 L 611 561 L 606 558 L 598 564 L 593 556 L 592 560 L 589 560 L 586 558 L 583 552 L 584 547 L 589 542 L 588 538 L 590 534 L 598 537 L 600 536 Z","cx":596.7,"cy":549.0},"Ciudad de Mexico":{"name":"Ciudad de Mexico","displayName":"Distrito Federal","path":"M 600 536 L 598 537 L 590 534 L 588 530 L 589 526 L 595 517 L 599 526 L 601 535 L 600 536 Z","cx":594.1,"cy":528.4},"Queretaro":{"name":"Queretaro","displayName":"Querétaro","path":"M 571 490 L 568 492 L 567 495 L 562 504 L 560 499 L 556 494 L 553 492 L 550 486 L 549 482 L 547 474 L 550 465 L 555 468 L 557 466 L 559 469 L 562 467 L 563 458 L 566 456 L 570 457 L 574 454 L 571 452 L 571 447 L 573 444 L 578 448 L 584 446 L 590 438 L 594 448 L 593 452 L 595 452 L 596 456 L 590 458 L 585 459 L 586 462 L 584 467 L 581 469 L 581 473 L 582 476 L 577 480 L 571 482 L 571 490 Z","cx":564.4,"cy":471.4},"Tabasco":{"name":"Tabasco","displayName":"Tabasco","path":"M 867 570 L 868 592 L 853 593 L 854 590 L 851 587 L 846 583 L 843 575 L 840 575 L 839 569 L 833 569 L 828 574 L 821 578 L 819 581 L 811 591 L 806 590 L 803 586 L 800 584 L 799 577 L 799 570 L 796 572 L 793 569 L 789 570 L 786 582 L 783 586 L 781 593 L 779 586 L 775 582 L 768 579 L 767 576 L 763 574 L 764 570 L 761 562 L 770 557 L 773 558 L 775 555 L 779 555 L 779 553 L 783 551 L 795 551 L 803 549 L 808 543 L 815 541 L 817 547 L 819 548 L 826 547 L 827 559 L 834 565 L 837 567 L 845 566 L 847 560 L 855 561 L 862 564 L 866 564 L 867 570 Z","cx":814.8,"cy":567.7},"Chiapas":{"name":"Chiapas","displayName":"Chiapas","path":"M 766 643 L 771 647 L 765 645 L 766 643 Z M 853 593 L 858 595 L 866 605 L 878 611 L 882 616 L 882 621 L 885 620 L 891 625 L 889 627 L 890 633 L 888 636 L 846 640 L 831 671 L 832 673 L 836 679 L 834 682 L 833 689 L 834 694 L 831 700 L 815 683 L 810 677 L 805 674 L 796 665 L 781 653 L 771 647 L 774 646 L 773 643 L 766 641 L 768 636 L 764 628 L 767 622 L 767 616 L 771 613 L 772 608 L 772 602 L 779 596 L 781 593 L 783 586 L 786 582 L 789 570 L 793 569 L 796 572 L 799 570 L 799 577 L 800 584 L 803 586 L 806 590 L 811 591 L 819 581 L 821 578 L 828 574 L 833 569 L 839 569 L 840 575 L 843 575 L 846 583 L 851 585 L 854 590 L 853 593 Z","cx":827.9,"cy":634.6},"Nuevo Leon":{"name":"Nuevo Leon","displayName":"Nuevo León","path":"M 564 204 L 566 206 L 561 212 L 561 215 L 565 215 L 568 229 L 567 234 L 568 238 L 572 240 L 570 246 L 572 246 L 577 248 L 578 250 L 577 254 L 578 258 L 582 260 L 585 261 L 587 269 L 590 268 L 594 272 L 597 268 L 604 271 L 605 290 L 609 292 L 596 306 L 591 305 L 586 310 L 587 318 L 583 316 L 577 320 L 575 324 L 572 324 L 570 327 L 571 330 L 574 329 L 575 335 L 574 343 L 575 346 L 579 350 L 575 357 L 567 359 L 564 367 L 566 373 L 561 371 L 559 374 L 561 375 L 561 378 L 552 378 L 552 380 L 549 379 L 548 372 L 548 368 L 547 362 L 547 356 L 544 352 L 543 349 L 542 339 L 535 328 L 537 321 L 536 315 L 538 313 L 535 310 L 536 306 L 540 303 L 544 302 L 549 304 L 552 303 L 554 300 L 551 298 L 546 298 L 542 295 L 539 291 L 542 292 L 540 288 L 538 288 L 534 281 L 533 275 L 531 273 L 531 270 L 527 267 L 525 263 L 522 259 L 536 245 L 537 250 L 541 244 L 541 234 L 538 231 L 536 234 L 534 233 L 534 227 L 539 222 L 545 220 L 546 211 L 548 208 L 552 204 L 559 210 L 564 204 Z","cx":574.8,"cy":291.6},"Sinaloa":{"name":"Sinaloa","displayName":"Sinaloa","path":"M 272 262 L 272 266 L 274 262 L 276 260 L 277 264 L 276 259 L 297 242 L 298 235 L 301 231 L 305 233 L 306 236 L 312 238 L 312 242 L 317 250 L 318 264 L 330 269 L 332 270 L 334 279 L 338 282 L 344 288 L 340 293 L 339 296 L 338 305 L 341 315 L 344 320 L 346 320 L 349 324 L 353 332 L 354 337 L 357 339 L 360 340 L 364 336 L 367 336 L 371 340 L 374 348 L 377 349 L 375 353 L 376 362 L 378 367 L 381 371 L 382 378 L 387 383 L 392 384 L 392 388 L 389 390 L 390 393 L 386 397 L 388 401 L 390 406 L 389 409 L 384 406 L 381 408 L 379 403 L 374 397 L 371 396 L 365 387 L 359 380 L 356 373 L 353 371 L 347 362 L 344 356 L 340 351 L 329 342 L 317 331 L 324 336 L 326 335 L 325 330 L 322 332 L 312 325 L 315 329 L 310 325 L 309 319 L 311 320 L 309 311 L 309 318 L 306 316 L 302 307 L 306 312 L 306 309 L 310 311 L 307 307 L 304 304 L 300 305 L 299 301 L 299 305 L 297 301 L 289 295 L 286 296 L 276 290 L 281 288 L 283 284 L 276 288 L 275 285 L 271 285 L 271 282 L 266 279 L 267 271 L 272 263 L 272 262 Z","cx":327.1,"cy":320.1},"Chihuahua":{"name":"Chihuahua","displayName":"Chihuahua","path":"M 298 235 L 295 233 L 292 227 L 293 222 L 293 215 L 289 210 L 287 205 L 286 202 L 282 199 L 279 188 L 281 185 L 287 184 L 294 187 L 297 184 L 294 173 L 295 166 L 294 142 L 296 142 L 299 120 L 299 100 L 296 96 L 293 95 L 286 87 L 288 68 L 311 69 L 311 52 L 361 53 L 366 56 L 368 61 L 371 66 L 376 68 L 383 77 L 388 81 L 389 84 L 395 89 L 399 91 L 405 96 L 409 101 L 410 106 L 415 115 L 415 124 L 418 130 L 419 135 L 425 140 L 427 140 L 434 147 L 441 150 L 445 154 L 449 154 L 454 159 L 436 201 L 447 250 L 437 246 L 432 245 L 428 247 L 419 261 L 417 261 L 410 256 L 405 256 L 401 254 L 394 257 L 387 253 L 384 248 L 380 248 L 373 242 L 371 246 L 369 246 L 369 251 L 367 258 L 360 260 L 362 268 L 361 272 L 357 275 L 356 283 L 351 288 L 344 288 L 338 282 L 334 279 L 332 270 L 330 269 L 319 266 L 317 250 L 312 242 L 312 238 L 306 236 L 305 233 L 301 231 L 298 235 L 298 235 Z","cx":373.1,"cy":169.5},"Veracruz":{"name":"Veracruz","displayName":"Veracruz","path":"M 761 562 L 764 570 L 763 574 L 767 576 L 768 579 L 775 582 L 779 586 L 779 591 L 779 596 L 772 602 L 736 602 L 734 596 L 731 595 L 725 588 L 726 582 L 713 591 L 707 591 L 703 582 L 707 573 L 705 568 L 701 567 L 696 568 L 692 566 L 691 563 L 686 558 L 685 553 L 679 551 L 676 549 L 678 554 L 675 559 L 672 553 L 662 556 L 661 550 L 655 549 L 654 544 L 658 540 L 656 531 L 661 530 L 665 525 L 657 524 L 651 520 L 654 519 L 651 515 L 653 510 L 653 503 L 658 495 L 658 493 L 650 489 L 648 490 L 646 494 L 641 492 L 638 489 L 638 483 L 640 481 L 645 480 L 643 477 L 640 476 L 638 469 L 634 468 L 632 472 L 632 478 L 630 481 L 629 474 L 626 473 L 619 483 L 616 486 L 614 486 L 612 482 L 614 476 L 616 474 L 617 467 L 622 468 L 622 464 L 625 459 L 622 456 L 620 456 L 620 453 L 618 456 L 613 452 L 615 448 L 612 447 L 612 442 L 608 439 L 608 436 L 613 432 L 610 427 L 614 424 L 616 418 L 616 413 L 608 408 L 613 407 L 618 408 L 618 405 L 621 405 L 625 409 L 631 411 L 632 414 L 635 412 L 636 419 L 641 429 L 644 433 L 651 439 L 650 444 L 648 450 L 646 444 L 648 442 L 649 439 L 645 436 L 640 430 L 637 424 L 640 436 L 642 441 L 645 442 L 645 445 L 651 458 L 656 467 L 658 474 L 661 478 L 674 492 L 681 502 L 685 515 L 688 523 L 692 527 L 695 531 L 698 533 L 700 537 L 703 541 L 699 540 L 705 544 L 713 546 L 707 544 L 715 545 L 724 545 L 731 550 L 738 551 L 746 564 L 750 565 L 761 562 Z","cx":668.0,"cy":506.6},"Zacatecas":{"name":"Zacatecas","displayName":"Zacatecas","path":"M 425 418 L 426 415 L 429 403 L 430 385 L 432 382 L 432 373 L 438 368 L 438 365 L 441 365 L 442 363 L 440 360 L 440 357 L 439 354 L 441 353 L 441 349 L 446 345 L 451 338 L 454 338 L 455 335 L 459 332 L 473 335 L 483 333 L 483 319 L 477 310 L 480 308 L 493 306 L 502 309 L 506 315 L 511 317 L 510 321 L 515 322 L 519 318 L 524 320 L 527 325 L 535 328 L 534 332 L 530 336 L 523 350 L 510 362 L 508 365 L 504 366 L 501 371 L 497 375 L 493 373 L 491 379 L 492 385 L 491 390 L 496 398 L 501 402 L 505 408 L 507 410 L 511 408 L 513 404 L 520 404 L 522 408 L 519 413 L 521 423 L 515 433 L 512 429 L 507 428 L 505 426 L 500 422 L 500 416 L 497 416 L 494 413 L 490 409 L 489 412 L 483 416 L 480 416 L 479 419 L 473 430 L 473 433 L 476 437 L 475 442 L 480 444 L 478 450 L 474 454 L 467 455 L 466 464 L 461 463 L 452 458 L 449 458 L 448 456 L 444 457 L 445 451 L 444 446 L 447 447 L 451 443 L 451 434 L 455 430 L 459 428 L 463 428 L 465 425 L 464 422 L 466 418 L 466 416 L 462 415 L 462 413 L 456 408 L 454 412 L 456 414 L 453 418 L 452 422 L 446 422 L 446 415 L 448 408 L 447 405 L 443 406 L 441 421 L 439 414 L 441 406 L 442 404 L 443 400 L 436 398 L 436 406 L 438 409 L 437 414 L 432 414 L 425 418 Z","cx":460.7,"cy":387.3},"Aguascalientes":{"name":"Aguascalientes","displayName":"Aguascalientes","path":"M 505 426 L 503 429 L 498 432 L 497 436 L 493 439 L 484 438 L 480 436 L 476 437 L 473 433 L 473 430 L 479 419 L 480 416 L 483 416 L 489 412 L 490 409 L 493 414 L 497 416 L 500 416 L 500 422 L 505 426 Z","cx":489.4,"cy":424.3},"Jalisco":{"name":"Jalisco","displayName":"Jalisco","path":"M 476 437 L 480 436 L 484 438 L 493 439 L 497 436 L 498 432 L 503 429 L 505 426 L 507 428 L 512 429 L 515 433 L 513 435 L 515 441 L 512 445 L 514 452 L 510 456 L 508 456 L 505 459 L 499 470 L 498 476 L 501 479 L 501 482 L 497 489 L 493 491 L 485 492 L 479 495 L 466 500 L 466 504 L 476 505 L 478 509 L 475 511 L 475 516 L 477 520 L 477 524 L 481 523 L 483 527 L 480 533 L 478 532 L 472 534 L 469 540 L 463 543 L 459 540 L 457 543 L 453 543 L 452 539 L 452 530 L 449 527 L 448 524 L 441 527 L 434 523 L 432 524 L 429 530 L 421 533 L 417 536 L 412 533 L 410 533 L 403 528 L 401 521 L 395 517 L 387 503 L 386 496 L 381 488 L 385 485 L 393 484 L 396 482 L 394 478 L 401 469 L 406 468 L 410 465 L 413 465 L 416 469 L 419 469 L 421 472 L 427 477 L 427 471 L 429 467 L 429 459 L 433 458 L 436 455 L 438 451 L 429 446 L 431 443 L 433 436 L 423 424 L 425 418 L 432 414 L 437 414 L 438 409 L 436 406 L 436 398 L 443 400 L 442 404 L 441 406 L 439 414 L 441 421 L 443 406 L 447 405 L 448 408 L 446 415 L 446 422 L 452 422 L 453 418 L 456 414 L 454 412 L 456 408 L 462 413 L 462 415 L 466 416 L 466 418 L 464 422 L 465 425 L 463 428 L 459 428 L 455 430 L 451 434 L 451 443 L 447 447 L 444 446 L 445 451 L 444 457 L 448 456 L 449 458 L 452 458 L 461 463 L 466 464 L 467 455 L 474 454 L 478 450 L 480 444 L 475 442 L 476 437 Z","cx":463.1,"cy":470.6},"Michoacan":{"name":"Michoacan","displayName":"Michoacán","path":"M 556 494 L 560 499 L 560 503 L 559 519 L 561 524 L 556 528 L 557 531 L 546 546 L 544 549 L 543 546 L 541 549 L 543 560 L 547 563 L 545 567 L 544 563 L 540 560 L 535 560 L 533 559 L 526 559 L 518 561 L 513 557 L 507 558 L 505 562 L 506 568 L 504 572 L 496 574 L 496 583 L 482 578 L 477 578 L 468 573 L 465 573 L 457 570 L 453 568 L 450 561 L 446 557 L 445 554 L 448 550 L 449 546 L 453 543 L 457 543 L 459 540 L 463 543 L 469 540 L 472 534 L 478 532 L 480 533 L 483 527 L 481 523 L 477 524 L 477 520 L 475 516 L 475 511 L 478 509 L 476 505 L 466 504 L 466 500 L 479 495 L 485 492 L 491 490 L 497 489 L 502 489 L 504 496 L 511 496 L 513 491 L 518 490 L 521 493 L 520 501 L 527 502 L 528 499 L 533 499 L 533 505 L 536 506 L 539 504 L 541 506 L 548 504 L 553 504 L 553 499 L 556 494 Z","cx":511.5,"cy":537.0},"Oaxaca":{"name":"Oaxaca","displayName":"Oaxaca","path":"M 766 641 L 764 639 L 762 640 L 755 636 L 754 639 L 761 641 L 766 643 L 754 641 L 746 641 L 749 637 L 747 634 L 743 637 L 740 632 L 733 639 L 742 639 L 728 643 L 724 646 L 721 650 L 704 657 L 695 663 L 688 663 L 684 664 L 680 663 L 674 662 L 668 659 L 664 656 L 660 655 L 643 654 L 630 645 L 617 641 L 622 639 L 624 637 L 624 632 L 627 631 L 627 626 L 629 626 L 632 623 L 634 614 L 629 607 L 627 606 L 623 602 L 623 597 L 621 591 L 623 582 L 625 580 L 628 576 L 636 575 L 637 579 L 640 579 L 642 576 L 639 571 L 642 564 L 646 562 L 645 568 L 648 572 L 650 576 L 652 576 L 656 570 L 660 568 L 665 570 L 670 565 L 673 564 L 675 559 L 678 554 L 676 549 L 679 551 L 685 553 L 686 558 L 691 563 L 692 566 L 696 568 L 701 567 L 705 568 L 707 573 L 703 582 L 707 591 L 713 591 L 726 582 L 725 588 L 731 595 L 734 596 L 736 602 L 772 602 L 772 608 L 771 613 L 767 616 L 767 622 L 764 628 L 768 636 L 766 641 Z","cx":700.0,"cy":606.5},"Puebla":{"name":"Puebla","displayName":"Puebla","path":"M 611 538 L 611 532 L 610 524 L 611 521 L 616 522 L 620 529 L 626 534 L 630 530 L 634 532 L 637 530 L 637 526 L 643 527 L 644 524 L 639 520 L 637 521 L 637 517 L 630 514 L 630 512 L 627 512 L 623 505 L 627 496 L 626 492 L 623 492 L 623 488 L 625 487 L 630 481 L 632 478 L 632 472 L 634 468 L 638 469 L 640 476 L 643 477 L 645 480 L 642 483 L 638 483 L 638 489 L 641 492 L 646 494 L 648 490 L 650 489 L 658 493 L 658 495 L 653 503 L 653 510 L 651 515 L 654 519 L 651 520 L 657 524 L 665 525 L 661 530 L 656 531 L 658 540 L 654 544 L 655 549 L 661 550 L 662 556 L 672 553 L 675 559 L 673 564 L 670 565 L 665 570 L 660 568 L 656 570 L 652 576 L 650 576 L 648 572 L 645 568 L 646 562 L 642 564 L 639 571 L 642 576 L 640 579 L 637 579 L 636 575 L 628 576 L 625 580 L 622 581 L 620 578 L 615 579 L 607 576 L 606 573 L 603 572 L 599 568 L 598 564 L 606 558 L 611 561 L 608 551 L 610 551 L 608 546 L 611 543 L 611 538 Z","cx":652.3,"cy":524.7},"Guerrero":{"name":"Guerrero","displayName":"Guerrero","path":"M 598 564 L 599 568 L 603 572 L 606 573 L 607 576 L 615 579 L 620 578 L 622 581 L 621 591 L 623 597 L 623 602 L 627 606 L 629 607 L 634 614 L 632 623 L 629 626 L 627 626 L 627 631 L 624 632 L 624 637 L 622 639 L 617 641 L 609 633 L 607 634 L 589 629 L 582 628 L 577 627 L 569 620 L 533 607 L 529 602 L 520 598 L 519 594 L 514 592 L 513 590 L 508 584 L 501 580 L 496 583 L 496 574 L 504 572 L 506 568 L 505 562 L 507 558 L 513 557 L 518 561 L 526 559 L 533 559 L 535 560 L 540 560 L 544 563 L 545 567 L 547 563 L 543 560 L 541 549 L 543 546 L 544 549 L 546 546 L 552 547 L 553 554 L 556 558 L 555 561 L 558 564 L 562 560 L 565 555 L 572 553 L 574 555 L 578 549 L 581 552 L 583 552 L 586 558 L 589 560 L 592 560 L 593 556 L 598 564 Z","cx":569.0,"cy":593.3},"Tlaxcala":{"name":"Tlaxcala","displayName":"Tlaxcala","path":"M 611 521 L 608 517 L 613 514 L 620 516 L 622 511 L 627 512 L 630 512 L 630 514 L 637 517 L 637 521 L 639 520 L 644 524 L 643 527 L 637 526 L 637 530 L 634 532 L 630 530 L 626 534 L 620 529 L 616 522 L 611 521 Z","cx":629.8,"cy":522.7},"Tamaulipas":{"name":"Tamaulipas","displayName":"Tamaulipas","path":"M 561 378 L 561 375 L 559 374 L 561 371 L 566 373 L 564 367 L 567 359 L 575 357 L 579 350 L 575 346 L 574 343 L 575 335 L 574 329 L 571 330 L 570 327 L 572 324 L 575 324 L 577 320 L 583 316 L 587 318 L 586 310 L 591 305 L 596 306 L 609 292 L 605 290 L 605 272 L 597 268 L 594 272 L 590 268 L 587 269 L 585 261 L 582 260 L 580 256 L 577 254 L 578 250 L 577 248 L 572 246 L 570 246 L 572 240 L 568 238 L 567 234 L 568 229 L 565 215 L 561 215 L 561 212 L 567 208 L 570 209 L 573 212 L 574 217 L 573 222 L 576 225 L 575 232 L 577 233 L 579 239 L 582 240 L 582 249 L 586 251 L 588 256 L 597 257 L 602 261 L 610 263 L 615 267 L 628 267 L 634 268 L 640 274 L 645 270 L 649 269 L 648 279 L 644 292 L 640 300 L 635 326 L 634 345 L 634 356 L 634 374 L 635 385 L 632 395 L 632 402 L 635 412 L 632 414 L 631 411 L 625 409 L 621 405 L 618 405 L 618 408 L 613 407 L 608 408 L 603 408 L 598 410 L 587 407 L 583 399 L 578 397 L 578 401 L 574 400 L 564 396 L 562 392 L 566 389 L 566 386 L 562 381 L 560 383 L 561 378 Z M 631 324 L 630 329 L 633 328 L 633 338 L 632 347 L 634 353 L 634 336 L 635 324 L 638 305 L 641 296 L 641 291 L 638 289 L 638 292 L 636 295 L 633 293 L 632 297 L 633 301 L 631 308 L 635 310 L 632 313 L 634 322 L 633 327 L 631 324 Z","cx":610.2,"cy":311.2},"Coahuila":{"name":"Coahuila","displayName":"Coahuila","path":"M 456 159 L 461 161 L 462 158 L 470 151 L 472 137 L 475 131 L 480 130 L 483 130 L 485 125 L 492 129 L 506 130 L 509 128 L 509 130 L 513 129 L 514 133 L 518 135 L 517 140 L 524 141 L 525 144 L 531 148 L 533 152 L 536 154 L 537 161 L 541 166 L 541 169 L 545 174 L 548 185 L 551 188 L 555 190 L 558 196 L 561 199 L 564 204 L 559 210 L 552 204 L 548 208 L 546 211 L 545 220 L 539 222 L 534 227 L 534 233 L 536 234 L 538 231 L 541 234 L 541 244 L 537 250 L 536 245 L 522 259 L 525 263 L 527 267 L 531 270 L 531 273 L 533 275 L 534 281 L 538 288 L 540 288 L 542 292 L 539 291 L 542 295 L 546 298 L 551 298 L 554 300 L 552 303 L 549 304 L 544 302 L 540 303 L 536 306 L 535 310 L 538 313 L 536 315 L 537 321 L 535 328 L 527 325 L 524 320 L 519 318 L 515 322 L 510 321 L 511 317 L 506 315 L 502 309 L 493 306 L 480 308 L 477 310 L 472 317 L 472 323 L 468 320 L 463 319 L 459 316 L 458 310 L 455 308 L 451 302 L 454 297 L 452 292 L 457 286 L 456 270 L 458 265 L 458 261 L 447 250 L 436 201 L 456 159 Z","cx":488.9,"cy":224.5},"Yucatán":{"name":"Yucatán","displayName":"Yucatán","path":"M 878 450 L 879 442 L 887 436 L 897 430 L 918 425 L 932 420 L 935 416 L 940 414 L 945 414 L 950 411 L 956 411 L 964 413 L 961 414 L 970 413 L 971 421 L 970 429 L 972 435 L 969 448 L 962 455 L 958 457 L 953 457 L 950 462 L 947 464 L 945 469 L 936 474 L 930 480 L 925 481 L 921 485 L 915 486 L 914 493 L 912 488 L 909 484 L 906 479 L 899 475 L 897 470 L 894 469 L 892 463 L 890 465 L 887 465 L 884 462 L 879 461 L 878 450 Z","cx":921.2,"cy":452.8},"Durango":{"name":"Durango","displayName":"Durango","path":"M 344 288 L 351 288 L 356 283 L 357 275 L 361 272 L 362 268 L 360 260 L 367 258 L 367 253 L 369 246 L 371 246 L 373 242 L 380 248 L 384 248 L 387 253 L 394 257 L 401 254 L 404 257 L 410 256 L 417 261 L 419 261 L 428 247 L 432 245 L 437 246 L 447 250 L 458 261 L 458 265 L 456 270 L 457 286 L 452 292 L 454 297 L 451 302 L 455 308 L 458 310 L 459 316 L 463 319 L 468 320 L 472 323 L 472 317 L 477 310 L 483 319 L 483 333 L 473 335 L 459 332 L 455 335 L 454 338 L 451 338 L 446 345 L 441 349 L 441 353 L 439 354 L 440 357 L 440 360 L 442 363 L 441 365 L 438 365 L 438 368 L 432 373 L 432 382 L 430 385 L 429 403 L 426 415 L 425 409 L 421 412 L 417 410 L 415 404 L 411 402 L 405 407 L 404 402 L 408 397 L 406 393 L 400 389 L 392 388 L 392 384 L 387 383 L 382 378 L 381 371 L 378 367 L 376 362 L 375 353 L 377 349 L 374 348 L 371 340 L 367 336 L 364 336 L 360 340 L 357 339 L 354 337 L 353 332 L 349 324 L 346 320 L 344 320 L 341 315 L 338 305 L 339 296 L 340 293 L 344 288 Z","cx":417.2,"cy":327.9},"Guanajuato":{"name":"Guanajuato","displayName":"Guanajuato","path":"M 571 447 L 571 452 L 574 454 L 570 457 L 566 456 L 563 458 L 562 467 L 559 469 L 557 466 L 555 468 L 550 465 L 547 474 L 549 482 L 550 486 L 553 492 L 556 494 L 553 499 L 553 504 L 548 506 L 541 506 L 539 504 L 536 506 L 533 505 L 533 499 L 528 499 L 527 502 L 520 501 L 521 493 L 518 490 L 513 491 L 511 496 L 504 496 L 502 489 L 497 489 L 501 482 L 501 479 L 498 476 L 499 470 L 505 459 L 508 456 L 510 456 L 514 452 L 512 445 L 515 441 L 513 435 L 515 433 L 518 433 L 522 431 L 524 435 L 533 436 L 544 445 L 548 445 L 550 439 L 562 443 L 566 446 L 571 447 Z","cx":524.0,"cy":469.3},"San Luis Potosi":{"name":"San Luis Potosi","displayName":"San Luis Potosí","path":"M 561 378 L 560 383 L 562 381 L 566 386 L 566 389 L 562 392 L 564 396 L 574 400 L 578 401 L 578 397 L 582 400 L 587 407 L 598 410 L 602 410 L 608 408 L 616 413 L 616 418 L 614 424 L 610 427 L 613 432 L 608 436 L 608 439 L 612 442 L 612 447 L 610 448 L 610 454 L 603 456 L 599 451 L 595 452 L 593 452 L 594 448 L 590 438 L 584 446 L 578 448 L 573 444 L 571 447 L 566 446 L 562 443 L 551 438 L 548 445 L 544 445 L 533 436 L 524 435 L 522 431 L 518 433 L 515 433 L 521 423 L 519 413 L 522 408 L 520 404 L 513 404 L 511 408 L 507 410 L 505 408 L 501 402 L 496 398 L 491 390 L 492 385 L 490 380 L 493 373 L 497 375 L 501 371 L 504 366 L 508 365 L 510 362 L 523 350 L 530 336 L 534 332 L 535 328 L 542 339 L 543 349 L 544 352 L 547 356 L 547 362 L 548 368 L 548 372 L 549 379 L 552 380 L 552 378 L 561 378 Z","cx":527.6,"cy":390.9},"Hidalgo":{"name":"Hidalgo","displayName":"Hidalgo","path":"M 612 447 L 615 448 L 613 452 L 618 456 L 620 453 L 620 456 L 622 456 L 625 459 L 622 464 L 622 468 L 617 467 L 616 474 L 614 476 L 612 482 L 614 486 L 616 486 L 618 482 L 626 473 L 629 474 L 630 481 L 625 487 L 623 488 L 623 492 L 626 492 L 627 496 L 623 505 L 627 512 L 622 511 L 620 516 L 613 514 L 610 516 L 611 510 L 608 506 L 604 505 L 601 508 L 601 503 L 598 499 L 592 502 L 586 511 L 584 505 L 581 503 L 582 499 L 580 495 L 577 497 L 571 490 L 571 482 L 577 480 L 582 476 L 581 473 L 581 469 L 584 467 L 586 462 L 585 459 L 590 458 L 596 456 L 595 452 L 599 451 L 603 456 L 610 454 L 610 448 L 612 447 Z","cx":592.3,"cy":481.6}}</script>
 
@@ -3536,6 +3702,17 @@ function migrarCampos(p) {
   }
   if (p.gerente_comercial === undefined) p.gerente_comercial = null;
   if (p.ppto_2027 === undefined) p.ppto_2027 = false;
+  // Fecha de registro: para lo que ya existía, la primera huella que haya
+  if (p.fecha_registro === undefined) {
+    const huellas = [
+      ...(Array.isArray(p.bitacora) ? p.bitacora.filter(e => e.tipo === 'alta').map(e => String(e.ts).slice(0, 10)) : []),
+      ...(Array.isArray(p.history) ? p.history.map(h => String(h.ts || '').slice(0, 10)) : [])
+    ].filter(f => /^\d{4}-\d{2}-\d{2}$/.test(f)).sort();
+    p.fecha_registro = huellas[0] || null;
+  }
+  if (p.ganador === undefined) p.ganador = null;
+  if (p.motivo_perdida === undefined) p.motivo_perdida = null;
+  if (p.motivo_detalle === undefined) p.motivo_detalle = null;
   if (!Array.isArray(p.equipos)) p.equipos = [];
   if (!Array.isArray(p.archivos)) p.archivos = [];
   if (p.ebit === undefined) p.ebit = null;
@@ -3572,7 +3749,7 @@ function anioFin(p) {
 // se deja del tipo que espera el tablero, sin perder la información.
 const CAMPOS_TEXTO = ['id', 'proyecto', 'cliente', 'estatus', 'segmento', 'subsegmento', 'tipo', 'region',
   'estado', 'direccion', 'modalidad', 'tipo_licitacion', 'responsable', 'asesor', 'gerente', 'jefatura',
-  'gerente_comercial', 'comentario', 'obra_madre'];
+  'gerente_comercial', 'comentario', 'obra_madre', 'ganador', 'motivo_perdida', 'motivo_detalle'];
 const CAMPOS_NUMERO = ['concreto_total', 'volumen_total', 'share_cemex', 'venta', 'ebitda', 'ebit',
   'longitud_km', 'duracion_meses', 'anio'];
 
@@ -3616,6 +3793,7 @@ function sanearTipos(p) {
   });
   ['fecha_arranque', 'fecha_termino'].forEach(k => { if (p[k] !== undefined && p[k] !== null) p[k] = aMes(p[k]); });
   if (p.fecha_update !== undefined && p.fecha_update !== null) p.fecha_update = aDia(p.fecha_update);
+  if (p.fecha_registro !== undefined && p.fecha_registro !== null) p.fecha_registro = aDia(p.fecha_registro);
   ['highlight', 'seguimiento', 'conversion_tecnica', 'detalle_bpr', 'proveedor_unico', 'ppto_2027'].forEach(k => {
     if (p[k] !== undefined && typeof p[k] !== 'boolean') p[k] = ['si', 'sí', 'true', '1', 'x'].includes(String(p[k]).trim().toLowerCase());
   });
@@ -3646,6 +3824,23 @@ function sanearTipos(p) {
   }
   if (p.archivos !== undefined && !Array.isArray(p.archivos)) p.archivos = [];
   return p;
+}
+
+function completarResponsablesCn() {
+  if (!state.catalogs) state.catalogs = {};
+  if (state.catalogs._cn_catalogo_v2) return 0;
+  let n = 0;
+  (state.projects || []).forEach(p => {
+    if (!esCN(p)) return;
+    const c = resolverCliente(p.cliente);
+    if (!c) return;
+    let tocada = false;
+    if (!p.gerente_comercial && c.g && c.g !== 'Legal') { p.gerente_comercial = nombrePersona(c.g); tocada = true; }
+    if (!p.responsable && c.jv && c.jv !== 'Legal') { p.responsable = nombrePersona(c.jv); tocada = true; }
+    if (tocada) n++;
+  });
+  state.catalogs._cn_catalogo_v2 = true;
+  return n;
 }
 
 function migrarTodo() {
@@ -3732,6 +3927,9 @@ const LIBRERIAS = {
   imagen: { global: 'html2canvas', nombre: 'imagen', urls: [
     'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js',
     'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js'] },
+  ocr: { global: 'Tesseract', nombre: 'lectura de escaneos (OCR)', urls: [
+    'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js',
+    'https://unpkg.com/tesseract.js@5.1.1/dist/tesseract.min.js'] },
   pdf: { global: 'pdfjsLib', nombre: 'PDF', urls: [
     'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
     'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js'] }
@@ -3794,9 +3992,11 @@ let versionVieja = false;
 let conteoRemoto = null;
 let fotoRemota = new Map();   // cómo estaba cada obra la última vez que se leyó de GitHub
 let fotoFichas = new Map();
+let fotoOps = new Map();
 function tomarFoto() {
   fotoRemota = new Map((state.projects || []).map(p => [p.id, JSON.stringify(p)]));
   fotoFichas = new Map((state.fichas || []).map(f => [f.id, JSON.stringify(f)]));
+  fotoOps = new Map((state.oportunidades || []).map(o => [o.id, JSON.stringify(o)]));
 }      // cuántas obras tiene la base publicada
 let bajaPermitida = false;    // un borrado hecho a propósito no dispara el candado
 
@@ -3852,6 +4052,8 @@ function paquete() {
     catalogs: state.catalogs,
     fichas: state.fichas || [],
     papelera: state.papelera || [],
+    oportunidades: state.oportunidades || [],
+    radarPrefs: state.radarPrefs || {},
     _metadata: state._metadata
   };
 }
@@ -3911,6 +4113,20 @@ function fusionarRemoto(remoto) {
   const idsF = new Set(fusF.map(x => x.id));
   camF.forEach((f, id) => { if (!idsF.has(id)) fusF.push(f); });
   state.fichas = fusF;
+
+  const remO = Array.isArray(remoto.oportunidades) ? remoto.oportunidades : [];
+  const locO = new Map((state.oportunidades || []).map(o => [o.id, o]));
+  const camO = new Map();
+  (state.oportunidades || []).forEach(o => { if (fotoOps.get(o.id) !== JSON.stringify(o)) camO.set(o.id, o); });
+  const borO = new Set([...fotoOps.keys()].filter(id => !locO.has(id)));
+  const fusO = remO.filter(r => !borO.has(r.id)).map(r => camO.has(r.id) ? camO.get(r.id) : r);
+  const idsO = new Set(fusO.map(x => x.id));
+  camO.forEach((o, id) => { if (!idsO.has(id)) fusO.push(o); });
+  state.oportunidades = fusO;
+  // Preferencias: las de los demás como están publicadas; las mías, como las tengo
+  const mias = userAuth && state.radarPrefs ? state.radarPrefs[userAuth.iniciales] : null;
+  state.radarPrefs = { ...(remoto.radarPrefs || {}) };
+  if (mias) state.radarPrefs[userAuth.iniciales] = mias;
 
   const papR = Array.isArray(remoto.papelera) ? remoto.papelera : [];
   const vistos = new Set(papR.map(x => x.id + '|' + x.eliminada));
@@ -4027,7 +4243,7 @@ function startPolling() {
 // Al sincronizar con lo que guardaron otros, se refresca la vista que se está viendo
 function refrescarTodo() {
   refrescarVistas();
-  if (document.getElementById('view-lic').classList.contains('active')) renderLicitaciones();
+  if (document.getElementById('view-lic').classList.contains('active')) renderLicTab();
 }
 
 function updateUserBadge() {
@@ -4092,6 +4308,8 @@ function aplicarDatos(data) {
   state.projects = data.projects;
   state.catalogs = data.catalogs || SEED.catalogs;
   state.fichas = Array.isArray(data.fichas) ? data.fichas : (state.fichas || []);
+  state.oportunidades = Array.isArray(data.oportunidades) ? data.oportunidades : (state.oportunidades || []);
+  state.radarPrefs = data.radarPrefs && typeof data.radarPrefs === 'object' ? data.radarPrefs : (state.radarPrefs || {});
   state.papelera = Array.isArray(data.papelera) ? data.papelera : (state.papelera || []);
   state._metadata = data._metadata || null;
   const vRemota = data._metadata && data._metadata.app_version;
@@ -4139,6 +4357,8 @@ function saveLocalData(note) {
     projects: state.projects,
     catalogs: state.catalogs,
     fichas: state.fichas || [],
+    oportunidades: state.oportunidades || [],
+    radarPrefs: state.radarPrefs || {},
     _metadata: state._metadata
   }));
   lastSyncTime = Date.now();
@@ -4208,6 +4428,11 @@ function cambiosRelevantes(a, p) {
   if ((a.estatus || '') !== (p.estatus || '')) {
     ev.push({ tipo: 'estatus', de: a.estatus || null, a: p.estatus || null,
       texto: a.estatus ? `Pasó de ${statusShortName(a.estatus)} a ${statusShortName(p.estatus)}` : `Quedó en ${statusShortName(p.estatus)}` });
+  }
+  if ((a.ganador || '') !== (p.ganador || '') && p.ganador) {
+    ev.push({ tipo: 'perdida', texto: `Lo ganó ${p.ganador}${p.motivo_perdida ? ' · ' + p.motivo_perdida : ''}` });
+  } else if ((a.motivo_perdida || '') !== (p.motivo_perdida || '') && p.motivo_perdida) {
+    ev.push({ tipo: 'perdida', texto: `Motivo de pérdida: ${p.motivo_perdida}` });
   }
   if (a.proyecto && p.proyecto && a.proyecto !== p.proyecto) {
     ev.push({ tipo: 'nombre', texto: `Se renombró: antes "${a.proyecto}"` });
@@ -4339,6 +4564,7 @@ function toast(msg, type='success') {
 // ==========================================================================
 function refrescarVistas() {
   renderTable();
+  if (typeof actualizarCampana === 'function') actualizarCampana();
   if (document.getElementById('view-cap').classList.contains('active')) renderCapturaTab();
   if (document.getElementById('view-eq').classList.contains('active')) renderEquiposTab();
   if (document.getElementById('view-vp').classList.contains('active')) renderVP();
@@ -4433,6 +4659,14 @@ const COLS_PIPELINE = [
     td: p => `<span class="cell-mini">${escapeHtml(p.estado || '—')}</span>` },
   { k: 'concreto_total', t: 'Vol. CEMEX', sub: 'K m³', sort: 'concreto_total', def: true, num: true,
     td: p => fmtNum(volCemex(p)) },
+  { k: 'fecha_registro', t: 'Registro', sort: 'fecha_registro', def: true,
+    td: p => p.fecha_registro ? `<span class="cell-mini">${escapeHtml(new Date(p.fecha_registro + 'T12:00:00').toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: '2-digit' }))}</span>` : '<span class="cell-tbc">—</span>' },
+  { k: 'fecha_arranque', t: 'Arranque', sort: 'fecha_arranque', def: true,
+    td: p => `<span class="cell-mini">${escapeHtml(p.fecha_arranque || 'TBD')}</span>` },
+  { k: 'ganador', t: 'Lo ganó', sort: 'ganador', def: false,
+    td: p => p.ganador ? `<span class="cell-mini">${escapeHtml(p.ganador)}</span>` : '<span class="cell-tbc">—</span>' },
+  { k: 'motivo_perdida', t: 'Motivo de pérdida', sort: 'motivo_perdida', def: false,
+    td: p => p.motivo_perdida ? `<span class="cell-mini" title="${escapeHtml(p.motivo_detalle || '')}">${escapeHtml(p.motivo_perdida)}</span>` : '<span class="cell-tbc">—</span>' },
   { k: 'volumen_total', t: 'Vol. obra', sub: 'K m³', sort: 'volumen_total', def: false, num: true,
     td: p => p.volumen_total ? fmtNum(p.volumen_total) : '<span class="cell-tbc">TBC</span>' },
   { k: 'share', t: '% CEMEX', sort: 'share_cemex', def: false, num: true,
@@ -4475,8 +4709,6 @@ const COLS_PIPELINE = [
     td: p => p.duracion_meses ? p.duracion_meses : '<span class="cell-tbc">TBC</span>' },
   { k: 'anio_fin', t: 'Hasta', sub: 'año', sort: null, def: false, num: true,
     td: p => anioFin(p) || '<span class="cell-tbc">TBC</span>' },
-  { k: 'fecha_arranque', t: 'Arranque', sort: 'fecha_arranque', def: false,
-    td: p => `<span class="cell-mini">${escapeHtml(p.fecha_arranque || 'TBD')}</span>` },
   { k: 'anio', t: 'Año', sort: 'anio', def: false, num: true, td: p => p.anio || '—' },
 
   { k: 'fecha_update', t: 'Actualizado', sort: 'fecha_update', def: true,
@@ -4492,7 +4724,14 @@ function colsVisibles() {
     let guardadas = null;
     try { guardadas = JSON.parse(lsGet(COLS_KEY) || 'null'); } catch (e) {}
     state.cols = Array.isArray(guardadas) && guardadas.length
-      ? guardadas.map(k => k === 'responsable' ? 'asesor_cargo' : k)
+      ? (() => {
+          const l = guardadas.map(k => k === 'responsable' ? 'asesor_cargo' : k);
+          if (!lsGet('pipeline_cols_registro_v1')) {
+            ['fecha_registro', 'fecha_arranque'].forEach(k => { if (!l.includes(k)) l.push(k); });
+            lsSet('pipeline_cols_registro_v1', '1');
+          }
+          return l;
+        })()
       : COLS_PIPELINE.filter(c => c.def).map(c => c.k);
   }
   return COLS_PIPELINE.filter(c => c.fijo || state.cols.includes(c.k));
@@ -4976,6 +5215,30 @@ function openModal(id = null) {
       <p class="fi-ayuda">Úsalo cuando la misma obra la cotizan varios clientes. La ligada no suma volumen, para no contar dos veces.</p>
     </div>
     <div class="field">
+      <label>Fecha de registro</label>
+      <input id="m-registro" type="date" value="${p.fecha_registro || (state.editingId ? '' : new Date().toISOString().slice(0, 10))}">
+    </div>
+    <div class="field" id="m-perdida-campos">
+      <div class="perdida-grid">
+        <div>
+          <label>¿Quién lo ganó?</label>
+          <input id="m-ganador" list="lista-ganadores" autocomplete="off" value="${escapeHtml(p.ganador || '')}" placeholder="Competidor o empresa que se quedó con la obra">
+          <datalist id="lista-ganadores">${competidoresConocidos().map(n => `<option value="${escapeHtml(n)}"></option>`).join('')}</datalist>
+        </div>
+        <div>
+          <label>¿Por qué se perdió?</label>
+          <select id="m-motivo">
+            <option value="">—</option>
+            ${MOTIVOS_PERDIDA.map(m => `<option ${p.motivo_perdida === m ? 'selected' : ''}>${escapeHtml(m)}</option>`).join('')}
+          </select>
+        </div>
+        <div class="perdida-det">
+          <label>Detalle</label>
+          <input id="m-motivo-det" value="${escapeHtml(p.motivo_detalle || '')}" placeholder="Ej. su precio quedó 8% abajo; pidieron concreto MR-48 que no ofrecimos">
+        </div>
+      </div>
+    </div>
+    <div class="field">
       <label>Fecha Update</label>
       <input id="m-fecha" type="date" value="${p.fecha_update||''}">
     </div>
@@ -5231,6 +5494,14 @@ function openModal(id = null) {
 
   reordenarFormulario();
 
+  const verPerdida = () => {
+    const caja = document.getElementById('m-perdida-campos');
+    if (caja) caja.style.display = String(document.getElementById('m-estatus').value || '').startsWith('07') ? '' : 'none';
+  };
+  document.getElementById('m-estatus').addEventListener('change', verPerdida);
+  verPerdida();
+  conectarClienteCatalogo();
+
   // ---- Estado inicial de los bloques que dependen de la competencia ----
   // Va aquí, y no arriba, porque necesitan la lista de competidores ya creada:
   // antes tronaba al editar obras con único proveedor o perdidas sin competidor.
@@ -5345,6 +5616,10 @@ function leerFormulario() {
     anio: getNum('m-anio'),
     duracion_meses: getNum('m-duracion'),
     equipos: leerEquiposForm(),
+    fecha_registro: get('m-registro') || null,
+    ganador: (get('m-ganador') || '').trim() || null,
+    motivo_perdida: get('m-motivo') || null,
+    motivo_detalle: (get('m-motivo-det') || '').trim() || null,
     detalle_bpr: document.getElementById('m-bpr').checked,
     proveedor_unico: document.getElementById('m-bpr').checked && document.getElementById('m-unico').checked,
     obra_madre: get('m-obra-madre') || null,
@@ -5370,6 +5645,47 @@ function normalizarUnico(o) {
   return o;
 }
 
+const MOTIVOS_PERDIDA = ['Precio', 'Especificación técnica', 'Capacidad o logística', 'Tiempo de entrega',
+  'Relación con el cliente', 'El cliente canceló o pospuso', 'El cliente usó planta propia', 'Otro'];
+
+// Nombres de competidores y ganadores ya capturados, para no escribirlos distinto cada vez
+function competidoresConocidos() {
+  const set = new Set();
+  (state.projects || []).forEach(p => {
+    competidores(p).forEach(c => c.nombre && set.add(String(c.nombre).trim()));
+    if (p.ganador) set.add(String(p.ganador).trim());
+  });
+  return [...set].filter(Boolean).sort((a, b) => a.localeCompare(b, 'es'));
+}
+
+function conectarClienteCatalogo() {
+  const inp = document.getElementById('m-cliente');
+  if (!inp || inp.dataset.combo) return;
+  inp.dataset.combo = '1';
+  inp.removeAttribute('list');
+  const envoltura = document.createElement('div');
+  envoltura.className = 'eq-combo';
+  inp.parentElement.insertBefore(envoltura, inp);
+  envoltura.appendChild(inp);
+  const cuentas = CATALOGO_CLIENTES.map(c => ({ v: c.c, grupo: 'Cuentas Nacionales',
+    sub: [nombreCorto(c.g), nombreCorto(c.jv)].filter(x => x && x !== 'Legal').join(' · ') }));
+  const nombresCn = new Set(cuentas.map(c => normCuenta(c.v)));
+  comboLista(inp, () => [
+    ...cuentas,
+    ...[...new Set((state.projects || []).map(p => p.cliente).filter(Boolean))]
+      .filter(n => !nombresCn.has(normCuenta(n)))
+      .sort((a, b) => String(a).localeCompare(String(b), 'es'))
+      .map(n => ({ v: n, grupo: 'Otros clientes del pipeline' }))
+  ], () => {
+    const c = resolverCliente(inp.value);
+    if (!c) return;
+    const gc = document.getElementById('m-gerente-com'), ac = document.getElementById('m-resp');
+    if (gc && !gc.value && c.g && c.g !== 'Legal') gc.value = nombrePersona(c.g);
+    if (ac && !ac.value && c.jv && c.jv !== 'Legal') ac.value = nombrePersona(c.jv);
+    inp.dispatchEvent(new Event('input'));
+  }, 'cliente nuevo');
+}
+
 // Primero lo general (qué obra es, en qué va, de quién es) y conforme se baja,
 // lo de detalle: responsables, datos de PDM, equipos y comentarios
 function reordenarFormulario() {
@@ -5381,16 +5697,19 @@ function reordenarFormulario() {
     return el;
   };
   const seps = [...body.querySelectorAll(':scope > .resp-sep')];
+  // La duración aplica a todas las obras: sale del bloque de PDM
+  const fDur = document.getElementById('m-duracion') && document.getElementById('m-duracion').closest('.field');
+  if (fDur && fDur.parentElement !== body) body.appendChild(fDur);
   const orden = [
     'm-proyecto',
-    'm-estatus', 'm-direccion',
+    'm-estatus', 'm-direccion', 'm-perdida-campos',
     'm-segmento', 'm-subseg', 'm-tipo', 'm-cliente', 'm-region', 'm-estado',
     'm-modalidad', 'm-licitacion',
-    'm-concreto', 'm-arranque', 'm-anio', 'm-fecha',
+    'm-concreto', 'm-arranque', 'm-duracion', 'm-registro', 'm-anio', 'm-fecha',
     'm-conv',
     seps[0], 'm-gerente', 'm-jefatura', 'm-asesor',
     seps[1], 'm-gerente-com', 'm-resp',
-    'm-bpr', 'm-bpr-campos', 'm-comps-field', 'm-longitud-field', 'm-duracion',
+    'm-bpr', 'm-bpr-campos', 'm-comps-field', 'm-longitud-field',
     'm-obra-madre',
     'm-equipos',
     'm-comentario'
@@ -5468,6 +5787,10 @@ function saveModal() {
     anio: getNum('m-anio'),
     duracion_meses: getNum('m-duracion'),
     equipos: leerEquiposForm(),
+    fecha_registro: get('m-registro') || null,
+    ganador: (get('m-ganador') || '').trim() || null,
+    motivo_perdida: get('m-motivo') || null,
+    motivo_detalle: (get('m-motivo-det') || '').trim() || null,
     detalle_bpr: document.getElementById('m-bpr').checked,
     proveedor_unico: document.getElementById('m-bpr').checked && document.getElementById('m-unico').checked,
     obra_madre: get('m-obra-madre') || null,
@@ -5820,7 +6143,7 @@ function renderLicitaciones() {
       const obra = f.proyecto_id ? state.projects.find(p => p.id === f.proyecto_id) : null;
       return `
       <div class="lic-item ${f.id === licSel ? 'activo' : ''}" data-id="${f.id}">
-        <span class="lic-tipo ${f.tipo}">${f.tipo === 'apertura' ? 'Apertura' : 'Convocatoria'}</span>
+        <span class="lic-tipo ${f.tipo}">${f.tipo === 'ganador' ? 'Ganador' : f.tipo === 'apertura' ? 'Licitantes' : 'Proyecto'}</span>
         <div class="lic-item-tit">${escapeHtml(f.titulo || 'Sin título')}</div>
         <div class="lic-item-sub">${escapeHtml(f.dependencia || f.cliente || '—')}${f.ubicacion ? ' · ' + escapeHtml(f.ubicacion) : ''}</div>
         ${obra ? `<div class="lic-item-obra">Ligada a: ${escapeHtml(obra.proyecto.slice(0, 40))}</div>` : ''}
@@ -5873,11 +6196,19 @@ function renderFicha() {
       <button class="btn btn-ghost btn-sm btn-peligro" data-fa="del">Eliminar</button>
     </div>`;
 
-  cont.innerHTML = acciones + (f.tipo === 'apertura' ? fichaApertura(f) : fichaProyecto(f));
+  cont.innerHTML = acciones + (f.tipo === 'ganador' ? fichaGanador(f) : f.tipo === 'apertura' ? fichaApertura(f) : fichaProyecto(f));
+  // Las fichas de una misma licitación se ligan entre sí
+  const hermanas = f.grupo ? fichas().filter(x => x.grupo === f.grupo && x.id !== f.id) : [];
+  if (hermanas.length) {
+    const nom = { proyecto: 'Proyecto', apertura: 'Licitantes', ganador: 'Ganador' };
+    cont.querySelector('.ficha-acciones').insertAdjacentHTML('afterbegin',
+      `<span class="ficha-hermanas">${hermanas.map(h => `<button type="button" data-hermana="${h.id}">${nom[h.tipo] || 'Ficha'}</button>`).join('')}</span>`);
+    cont.querySelectorAll('[data-hermana]').forEach(b => b.addEventListener('click', () => { licSel = b.dataset.hermana; renderLicitaciones(); }));
+  }
 
   cont.querySelectorAll('[data-fa]').forEach(b => b.addEventListener('click', () => {
     const a = b.dataset.fa;
-    if (a === 'edit') abrirFicha(f.id);
+    if (a === 'edit') { if (f.tipo === 'ganador') editarGanador(f); else abrirFicha(f.id); }
     if (a === 'dup') {
       const copia = JSON.parse(JSON.stringify(f));
       copia.id = uid();
@@ -5893,11 +6224,12 @@ function renderFicha() {
       saveState('Eliminó una ficha de licitación');
       renderLicitaciones();
     }
-    if (a === 'pptx') exportFichaPptx(f);
+    if (a === 'pptx') { if (f.tipo === 'ganador') exportFichaImagenPptx(f); else exportFichaPptx(f); }
     if (a === 'png') exportFichaPng(f);
   }));
 
-  if (f.tipo === 'apertura') dibujarPropuestas(f); else dibujarResistencias(f);
+  if (f.tipo === 'ganador') dibujarGanador(f);
+  else if (f.tipo === 'apertura') dibujarPropuestas(f); else dibujarResistencias(f);
 }
 
 // Formato en blanco: misma estructura de la ficha real, con los campos vacíos
@@ -6145,7 +6477,7 @@ function aMdp(v) {
 
 function fichaApertura(f) {
   const a = analisisPropuestas(f);
-  const mdp = v => '$' + Number(v).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp';
+  const mdp = v => '$' + fmtMdpLic(v) + ' mdp';
   const total = totalResistencias(f);
   const datos = [
     ['Dependencia', f.dependencia], ['Cliente', f.cliente],
@@ -6276,12 +6608,13 @@ function dibujarPropuestas(f) {
         legend: { display: false },
         tooltip: { callbacks: { label: c => {
           const p = a.props[c.dataIndex];
-          return `$${fmtNum(p.importe)} mdp · ${p.vs >= 0 ? '+' : ''}${p.vs.toFixed(1)}% vs promedio`;
+          return `$${fmtMdpLic(p.importe)} mdp · ${p.vs >= 0 ? '+' : ''}${p.vs.toFixed(1)}% vs promedio`;
         } } }
       },
       scales: {
         y: { grid: { display: false }, ticks: { color: '#14173d', font: { size: 10 }, autoSkip: false } },
-        x: { grid: { color: '#edeef8' }, ticks: { color: '#565b85', font: { size: 9.5 }, callback: v => fmtNum(v) },
+        // Sin arrancar en cero: con diferencias de 2% las barras se verían iguales
+        x: { min: Math.max(0, Math.floor(a.min.importe * 0.97 * 100) / 100), grid: { color: '#edeef8' }, ticks: { color: '#565b85', font: { size: 9.5 }, callback: v => fmtMdpLic(v) },
              title: { display: true, text: 'mdp sin IVA · azul debajo del promedio, rojo arriba', color: '#8a8fb0', font: { size: 9.5 } } }
       }
     }
@@ -6431,7 +6764,7 @@ async function procesarArchivosFicha(files) {
   let hallazgos = {};
   for (const file of files) {
     try {
-      const texto = await textoDeArchivo(file);
+      const texto = (await textoLicitacion(file)).texto;
       nuevos.push({ nombre: file.name, tamano: file.size, caracteres: texto.length });
       hallazgos = Object.assign(extraerDatosFicha(texto), hallazgos);
     } catch (e) {
@@ -6553,7 +6886,7 @@ async function exportFichaPptx(f) {
   const pres = crearPresentacion(f.titulo || 'Ficha de licitación');
   const sl = pres.addSlide({ masterName: MASTER });
   const T = { face: PPT.fuente, chico: 9, normal: 10 };
-  const mdp = v => '$' + Number(v).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mdp';
+  const mdp = v => '$' + fmtMdpLic(v) + ' mdp';
 
   sl.addText(f.titulo || 'Sin título', {
     x: 0.45, y: 0.26, w: 12.4, h: 0.5, isTextBox: true,
@@ -7036,7 +7369,9 @@ const CAMPOS_PERFIL = [
   { et: 'Venta', grupo: 'bpr', ok: p => (num0(p.venta) || 0) > 0 },
   { et: 'EBITDA', grupo: 'bpr', ok: p => (num0(p.ebitda) || 0) > 0 },
   { et: 'Competencia', grupo: 'bpr', ok: p => competidores(p).length > 0 || p.proveedor_unico },
-  { et: 'Duración', grupo: 'bpr', ok: p => (num0(p.duracion_meses) || 0) > 0 },
+  { et: 'Duración', grupo: 'base', ok: p => (num0(p.duracion_meses) || 0) > 0, aplica: p => /^0[1-5]/.test(p.estatus || '') },
+  { et: 'Quién lo ganó', grupo: 'base', ok: p => !!p.ganador, aplica: p => /^07/.test(p.estatus || '') },
+  { et: 'Motivo de pérdida', grupo: 'base', ok: p => !!p.motivo_perdida, aplica: p => /^07/.test(p.estatus || '') },
   { et: 'Longitud', grupo: 'bpr', ok: p => (num0(p.longitud_km) || 0) > 0, aplica: aplicaLongitud }
 ];
 
@@ -8191,6 +8526,8 @@ function pintarFichaObra(p) {
       <section class="fo-col">
         <h4>Datos generales</h4>
         ${dato('Cliente', p.cliente)}${dato('Estado', p.estado)}${dato('Región', p.region)}
+        ${dato('Fecha de registro', p.fecha_registro ? new Date(p.fecha_registro + 'T12:00:00').toLocaleDateString('es-MX') : null)}
+        ${/^07/.test(p.estatus || '') ? dato('Lo ganó', p.ganador) + dato('Motivo de pérdida', [p.motivo_perdida, p.motivo_detalle].filter(Boolean).join(' · ')) : ''}
         ${dato('Modalidad', p.modalidad)}${dato('Tipo de licitación', p.tipo_licitacion)}
         ${aplicaLongitud(p) ? dato('Longitud', p.longitud_km ? p.longitud_km + ' km' : null) : ''}
         <h4 style="margin-top:12px">Responsables</h4>
@@ -8818,6 +9155,1429 @@ function desgloseEnGrafica(chart, resolver) {
 }
 
 // ==========================================================================
+// RADAR DE LICITACIONES
+// Las oportunidades que el área sigue: se agregan pegando el resumen de la
+// convocatoria, subiendo el PDF o capturándolas; cada quien tiene sus palabras
+// clave, sus favoritas y una bandeja con lo que le envían. Las fechas de las
+// favoritas avisan antes de que se pasen.
+// ==========================================================================
+const FUENTES_RADAR = [
+  { k: 'ComprasMX', url: 'https://comprasmx.buengobierno.gob.mx/sitiopublico/#/' },
+  { k: 'Proyectos México', url: 'https://www.proyectosmexico.gob.mx/proyectos/#profile' },
+  { k: 'Proyectos Estratégicos', url: 'https://proyectosestrategicosmx.hacienda.gob.mx/sitiopublico/#/' },
+  { k: 'DOF · convocatorias', url: 'https://www.dof.gob.mx/' }
+];
+const PALABRAS_SUGERIDAS = ['concreto', 'pavimento', 'carretera', 'autopista', 'libramiento', 'puente', 'viaducto',
+  'tren', 'ferroviario', 'presa', 'acueducto', 'hidráulica', 'aeropuerto', 'puerto', 'muelle', 'hospital', 'planta'];
+const ETAPAS_RADAR = [
+  { k: 'publicacion', et: 'Publicación' },
+  { k: 'visita', et: 'Visita al sitio' },
+  { k: 'junta', et: 'Junta de aclaraciones' },
+  { k: 'apertura', et: 'Apertura de propuestas' },
+  { k: 'fallo', et: 'Fallo' }
+];
+const MESES_ES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+let radarFiltro = 'todas', radarBuscar = '', radarTipo = '', radarResaltar = null, radarEnvio = null, radarOrigen = '';
+let radarVisitaSesion = null;   // lo que era "nuevo" al abrir esta sesión
+
+function oportunidades() {
+  if (!Array.isArray(state.oportunidades)) state.oportunidades = [];
+  return state.oportunidades;
+}
+
+// Lo que deja el proceso automático de GitHub (radar_feed.json en el repositorio de datos)
+let radarAuto = null, radarAutoCargado = 0;
+async function cargarRadarAuto(forzar) {
+  if (!userAuth) return;
+  if (!forzar && Date.now() - radarAutoCargado < 15 * 60 * 1000) return;
+  radarAutoCargado = Date.now();
+  try {
+    const r = await fetch(`https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/radar_feed.json?ref=${GH.branch}`, {
+      headers: { Authorization: `Bearer ${userAuth.token}`, Accept: 'application/vnd.github.raw' }, cache: 'no-store' });
+    if (r.status === 404) radarAuto = { sinConfigurar: true, oportunidades: [] };
+    else if (r.ok) radarAuto = await r.json();
+  } catch (e) { /* sin red: se queda lo que había */ }
+  actualizarCampana();
+  if (document.getElementById('view-lic').classList.contains('active') && state.licVista !== 'fichas') renderRadar();
+}
+
+// Las del equipo más las automáticas que nadie ha tocado todavía
+function oportunidadesTodas() {
+  const propias = oportunidades();
+  const ids = new Set(propias.map(o => o.id));
+  const nums = new Set(propias.map(o => o.numero).filter(Boolean));
+  const auto = ((radarAuto && radarAuto.oportunidades) || [])
+    .filter(o => !ids.has(o.id) && !(o.numero && nums.has(o.numero)))
+    .map(o => ({ ...o, _auto: true, alta: o.detectada, alta_por: 'radar', favoritos: [], enviados: [] }));
+  return [...propias, ...auto];
+}
+
+// Al marcarla, enviarla o editarla, una automática pasa a ser del equipo
+function materializarOportunidad(op) {
+  if (!op || !op._auto) return op;
+  const c = JSON.parse(JSON.stringify(op));
+  delete c._auto;
+  c.favoritos = []; c.enviados = [];
+  oportunidades().push(c);
+  return c;
+}
+function yo() { return (userAuth && userAuth.iniciales) || 'local'; }
+function prefsRadar(ini) {
+  if (!state.radarPrefs || typeof state.radarPrefs !== 'object') state.radarPrefs = {};
+  const k = ini || yo();
+  if (!state.radarPrefs[k]) state.radarPrefs[k] = { palabras: [] };
+  return state.radarPrefs[k];
+}
+function visitaRadar() {
+  if (radarVisitaSesion === null) radarVisitaSesion = lsGet('radar_visita_' + yo()) || '1970-01-01';
+  return radarVisitaSesion;
+}
+
+// ---------- fechas en español ----------
+function fechaMxAIso(v) {
+  if (!v) return null;
+  const t = String(v).toLowerCase().replace(/\s+/g, ' ').trim();
+  let m;
+  if ((m = t.match(/^(\d{4})-(\d{2})-(\d{2})/))) return `${m[1]}-${m[2]}-${m[3]}`;
+  if ((m = t.match(/(\d{1,2})\s*(?:de\s*)?([a-záéíóú]+)\s*(?:del?\s*|\/\s*)?(\d{4})/))) {
+    const mes = MESES_ES.findIndex(x => normEq(x) === normEq(m[2]).slice(0, x.length) || normEq(m[2]).startsWith(normEq(x).slice(0, 3)));
+    if (mes >= 0) return `${m[3]}-${String(mes + 1).padStart(2, '0')}-${String(m[1]).padStart(2, '0')}`;
+  }
+  if ((m = t.match(/(\d{1,2})\s*\/\s*([a-záéíóú]+)\s*\/\s*(\d{4})/))) {
+    const mes = MESES_ES.findIndex(x => normEq(m[2]).startsWith(normEq(x).slice(0, 3)));
+    if (mes >= 0) return `${m[3]}-${String(mes + 1).padStart(2, '0')}-${String(m[1]).padStart(2, '0')}`;
+  }
+  if ((m = t.match(/(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})/))) return `${m[3]}-${String(m[2]).padStart(2, '0')}-${String(m[1]).padStart(2, '0')}`;
+  return null;
+}
+function diasHasta(iso) {
+  if (!iso) return null;
+  const hoy = new Date(); hoy.setHours(12, 0, 0, 0);
+  return Math.round((new Date(iso + 'T12:00:00') - hoy) / 86400000);
+}
+function fechaCorta(iso) {
+  return iso ? new Date(iso + 'T12:00:00').toLocaleDateString('es-MX', { day: 'numeric', month: 'short' }) : '';
+}
+
+// ---------- clasificación ----------
+function tipoProcedimiento(numero) {
+  const n = String(numero || '').toUpperCase();
+  if (/^[LIA]O-/.test(n)) return 'obra';
+  if (/^[LIA][AS]-/.test(n)) return 'adquisicion';
+  return 'otro';
+}
+const ETQ_TIPO = { obra: 'Obra pública', adquisicion: 'Adquisición o servicio', otro: 'Proyecto' };
+function fuenteDeLiga(url) {
+  const u = String(url || '').toLowerCase();
+  if (u.includes('comprasmx') || u.includes('compranet')) return 'ComprasMX';
+  if (u.includes('proyectosmexico')) return 'Proyectos México';
+  if (u.includes('proyectosestrategicos') || u.includes('hacienda.gob')) return 'Proyectos Estratégicos';
+  if (u.includes('dof.gob') || u.includes('sidof')) return 'DOF';
+  return u ? 'Otra' : '';
+}
+function palabrasDe(op, palabras) {
+  const texto = normEq([op.titulo, op.dependencia, op.estado, op.notas, op.numero].join(' '));
+  return (palabras || []).filter(p => p && texto.includes(normEq(p)));
+}
+function proximaFecha(op) {
+  const fut = ETAPAS_RADAR.map(e => ({ ...e, f: (op.fechas || {})[e.k] }))
+    .filter(e => e.f && diasHasta(e.f) >= 0).sort((a, b) => a.f.localeCompare(b.f));
+  return fut[0] || null;
+}
+
+// ---------- lectura del resumen de la convocatoria (DOF, ComprasMX o PDF) ----------
+function leerConvocatoria(texto) {
+  const t = String(texto || '').replace(/\r/g, '');
+  const plano = t.replace(/\s+/g, ' ');
+  const r = { fechas: {} };
+  const num = plano.match(/\b([LIA][AOS]-\d{2}-[A-Z0-9]{3}-[A-Z0-9]{6,}-[A-Z]-\d+-\d{4})\b/i)
+    || plano.match(/\b([A-Z]{2}-[A-Z0-9]{6,}-[A-Z]-\d+-\d{4})\b/);
+  if (num) r.numero = num[1].toUpperCase();
+  const etiquetas = 'Volumen a adquirir|Fecha de publicaci[oó]n|Visita a (?:las instalaciones|l sitio)|Junta de aclaraciones|Presentaci[oó]n y apertura|Fallo|Los detalles|N[uú]mero de';
+  const obj = plano.match(new RegExp('(?:Descripci[oó]n de la licitaci[oó]n|Objeto de la licitaci[oó]n|Descripci[oó]n del objeto|Objeto)\\s*[:|]?\\s*[“"]?(.{8,260}?)[”"]?\\s*(?:\\||' + etiquetas + ')', 'i'));
+  if (obj) r.titulo = obj[1].replace(/^[|\s:]+|[|\s]+$/g, '').trim();
+  const fecha = '(\\d{1,2}\\s*(?:de\\s*)?[a-záéíóú]+\\s*(?:de\\s*|\\/\\s*)?\\d{4}|\\d{1,2}\\s*\\/\\s*[a-záéíóú]+\\s*\\/\\s*\\d{4}|\\d{1,2}[\\/.-]\\d{1,2}[\\/.-]\\d{4})';
+  const busca = (labels) => {
+    for (const l of labels) {
+      const m = plano.match(new RegExp(l + '[^\\d]{0,60}?' + fecha, 'i'));
+      if (m) { const iso = fechaMxAIso(m[1]); if (iso) return iso; }
+    }
+    return null;
+  };
+  r.fechas.publicacion = busca(['Fecha de publicaci[oó]n en Compras ?MX', 'Fecha de publicaci[oó]n', 'publicaci[oó]n de la convocatoria']);
+  r.fechas.visita = busca(['Visita a las instalaciones', 'Visita al sitio', 'Visita al lugar']);
+  r.fechas.junta = busca(['Junta de aclaraciones']);
+  r.fechas.apertura = busca(['Presentaci[oó]n y apertura de proposiciones', 'apertura de proposiciones', 'Acto de apertura']);
+  r.fechas.fallo = busca(['Fallo', 'Emisi[oó]n del fallo']);
+  // La convocante suele ir en la primera línea en mayúsculas
+  const primera = t.split('\n').map(x => x.trim()).find(x => x.length > 6 && x === x.toUpperCase() && /[A-ZÁÉÍÓÚÑ]{4}/.test(x));
+  try {
+    const h = typeof extraerDatosFicha === 'function' ? extraerDatosFicha(t) : {};
+    r.dependencia = h.dependencia || primera || '';
+    if (h.ubicacion) r.estado = (typeof estadoDelMapa === 'function' && estadoDelMapa(h.ubicacion)) || h.ubicacion;
+    if (!r.numero && h.licitacion) r.numero = h.licitacion;
+    if (!r.fechas.junta && h.junta) r.fechas.junta = fechaMxAIso(h.junta);
+    if (!r.fechas.apertura && h.fecha_apertura) r.fechas.apertura = fechaMxAIso(h.fecha_apertura);
+    if (!r.fechas.fallo && h.fallo) r.fechas.fallo = fechaMxAIso(h.fallo);
+  } catch (e) { r.dependencia = r.dependencia || primera || ''; }
+  if (!r.estado) {
+    const est = Object.keys(MAP_PATHS).find(k => new RegExp('\\b' + k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'i').test(plano));
+    if (est) r.estado = est;
+  }
+  return r;
+}
+
+// ---------- pestaña de Licitaciones: Radar y Fichas ----------
+function renderLicTab() {
+  const vista = state.licVista === 'fichas' ? 'fichas' : 'radar';
+  document.getElementById('licv-radar').hidden = vista !== 'radar';
+  document.getElementById('licv-fichas').hidden = vista !== 'fichas';
+  document.querySelectorAll('[data-licv]').forEach(b => b.classList.toggle('on', b.dataset.licv === vista));
+  if (vista === 'radar') { renderRadar(); cargarRadarAuto(); lsSet('radar_visita_' + yo(), new Date().toISOString()); }
+  else renderLicitaciones();
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest && e.target.closest('[data-licv]');
+  if (!b) return;
+  state.licVista = b.dataset.licv;
+  renderLicTab();
+});
+
+function renderRadar() {
+  const cont = document.getElementById('licv-radar');
+  if (!cont) return;
+  const esc = escapeHtml;
+  const misPalabras = prefsRadar().palabras || [];
+  const visita = visitaRadar();
+  const todas = oportunidadesTodas().filter(op => !radarOrigen || (radarOrigen === 'auto') === !!op._auto);
+  const esFav = op => (op.favoritos || []).includes(yo());
+  const meEnviaron = op => (op.enviados || []).some(x => x.para === yo());
+  const conteo = {
+    todas: todas.length,
+    palabras: todas.filter(op => palabrasDe(op, misPalabras).length).length,
+    favoritas: todas.filter(esFav).length,
+    enviadas: todas.filter(meEnviaron).length
+  };
+  const q = normEq(radarBuscar);
+  let lista = todas.filter(op => {
+    if (radarFiltro === 'palabras' && !palabrasDe(op, misPalabras).length) return false;
+    if (radarFiltro === 'favoritas' && !esFav(op)) return false;
+    if (radarFiltro === 'enviadas' && !meEnviaron(op)) return false;
+    if (radarTipo && tipoProcedimiento(op.numero) !== radarTipo) return false;
+    if (q && !normEq([op.titulo, op.dependencia, op.numero, op.estado, op.notas].join(' ')).includes(q)) return false;
+    return true;
+  });
+  // Primero lo que tiene la fecha más cercana; luego lo más reciente
+  lista = lista.sort((a, b) => {
+    const fa = proximaFecha(a), fb = proximaFecha(b);
+    if (fa && fb) return fa.f.localeCompare(fb.f);
+    if (fa) return -1; if (fb) return 1;
+    return String(b.alta || '').localeCompare(String(a.alta || ''));
+  });
+
+  const resalta = (texto, pal) => {
+    let h = esc(texto || '');
+    pal.forEach(p => {
+      const re = new RegExp('(' + p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+      h = h.replace(re, '<mark>$1</mark>');
+    });
+    return h;
+  };
+  const chipFecha = (op, e) => {
+    const f = (op.fechas || {})[e.k];
+    if (!f) return '';
+    const d = diasHasta(f);
+    const clase = d < 0 ? 'pasada' : d <= 3 ? 'urgente' : d <= 7 ? 'pronto' : '';
+    const cuando = d < 0 ? '' : d === 0 ? ' · hoy' : d === 1 ? ' · mañana' : ` · en ${d} días`;
+    return `<span class="rad-f ${clase}"><b>${e.et}</b> ${fechaCorta(f)}${cuando}</span>`;
+  };
+  const personas = RESPONSABLES.filter(i => i !== yo()).sort((a, b) => nombrePersona(a).localeCompare(nombrePersona(b), 'es'));
+
+  const tarjeta = op => {
+    const pal = palabrasDe(op, misPalabras);
+    const tipo = tipoProcedimiento(op.numero);
+    const nueva = op.alta && op.alta > visita && op.alta_por !== yo();
+    const envios = (op.enviados || []).filter(x => x.para === yo());
+    const obra = op.proyecto_id ? state.projects.find(p => p.id === op.proyecto_id) : null;
+    const ficha = op.ficha_id ? fichas().find(f => f.id === op.ficha_id) : null;
+    return `
+    <article class="rad-card ${esFav(op) ? 'fav' : ''} ${radarResaltar === op.id ? 'resaltada' : ''}" data-op="${esc(op.id)}">
+      <div class="rad-card-top">
+        <span class="rad-tipo ${tipo}">${ETQ_TIPO[tipo]}</span>
+        ${op.fuente ? `<span class="rad-fuente">${esc(op.fuente)}</span>` : ''}
+        ${nueva ? '<span class="rad-nueva">Nueva</span>' : ''}
+        ${op._auto ? '<span class="rad-auto" title="La encontró el radar automático; al marcarla o enviarla queda para el equipo">Encontrada sola</span>' : ''}
+        ${op.numero ? `<span class="rad-num">${esc(op.numero)}</span>` : ''}
+        <button type="button" class="rad-estrella ${esFav(op) ? 'on' : ''}" data-rad="fav" title="${esFav(op) ? 'Quitar de favoritas' : 'Marcar como favorita'}">★</button>
+      </div>
+      <h4>${resalta(op.titulo || 'Sin título', pal)}</h4>
+      <p class="rad-meta">${[op.dependencia, op.estado, op.monto ? '$' + fmtNum(op.monto) + ' M' : ''].filter(Boolean).map(x => resalta(x, pal)).join(' · ')}</p>
+      <div class="rad-fechas">${ETAPAS_RADAR.map(e => chipFecha(op, e)).join('')}</div>
+      ${op.notas ? `<p class="rad-notas">${resalta(op.notas, pal)}</p>` : ''}
+      ${envios.length ? envios.map(x => `<p class="rad-envio"><b>${esc(nombreCorto(x.de))}</b> te la envió${x.nota ? `: “${esc(x.nota)}”` : ''}</p>`).join('') : ''}
+      <div class="rad-acc">
+        ${op.link ? `<a href="${esc(op.link)}" target="_blank" rel="noopener">Abrir convocatoria ↗</a>` : ''}
+        <button type="button" data-rad="enviar">Enviar a…</button>
+        ${ficha ? `<button type="button" data-rad="verficha">Ver ficha</button>` : `<button type="button" data-rad="ficha">Crear ficha</button>`}
+        ${obra ? `<button type="button" data-rad="verobra">Ver en el pipeline</button>` : `<button type="button" data-rad="pipeline">Agregar al pipeline</button>`}
+        <button type="button" data-rad="editar">Editar</button>
+      </div>
+      ${radarEnvio === op.id ? `
+        <div class="rad-enviar">
+          <select data-rad-para><option value="">¿A quién?</option>${personas.map(i => `<option value="${i}">${esc(nombrePersona(i))}</option>`).join('')}</select>
+          <input data-rad-nota placeholder="Nota (opcional)">
+          <button type="button" class="btn btn-primary btn-sm" data-rad="mandar">Enviar</button>
+        </div>` : ''}
+    </article>`;
+  };
+
+  const proximas = todas.filter(esFav).flatMap(op => ETAPAS_RADAR
+    .map(e => ({ op, e, f: (op.fechas || {})[e.k] }))
+    .filter(x => x.f && diasHasta(x.f) >= 0 && diasHasta(x.f) <= 30))
+    .sort((a, b) => a.f.localeCompare(b.f));
+
+  cont.innerHTML = `
+  <div class="rad">
+    <div class="rad-top">
+      <input type="search" class="rad-buscar" placeholder="Buscar por obra, dependencia, número o estado…" value="${esc(radarBuscar)}">
+      <div class="rad-chips">
+        ${[['todas', 'Todas'], ['palabras', 'Mis palabras clave'], ['favoritas', 'Favoritas'], ['enviadas', 'Enviadas a mí']]
+          .map(([k, et]) => `<button type="button" class="rad-chip ${radarFiltro === k ? 'on' : ''}" data-radf="${k}">${et}<span>${conteo[k]}</span></button>`).join('')}
+        <select class="rad-origen-sel">
+          <option value="">Todo origen</option>
+          <option value="equipo" ${radarOrigen === 'equipo' ? 'selected' : ''}>Capturadas por el equipo</option>
+          <option value="auto" ${radarOrigen === 'auto' ? 'selected' : ''}>Encontradas solas</option>
+        </select>
+        <select class="rad-tipo-sel">
+          <option value="">Todo tipo</option>
+          <option value="obra" ${radarTipo === 'obra' ? 'selected' : ''}>Obra pública</option>
+          <option value="adquisicion" ${radarTipo === 'adquisicion' ? 'selected' : ''}>Adquisición o servicio</option>
+        </select>
+      </div>
+      <div class="rad-botones">
+        <button type="button" class="btn btn-ghost btn-sm" data-rad-top="resumen">Resumen de favoritas</button>
+        <button type="button" class="btn btn-primary btn-sm" data-rad-top="nueva">+ Agregar oportunidad</button>
+      </div>
+    </div>
+    <div class="rad-g">
+      <div class="rad-feed">
+        ${lista.length ? lista.map(tarjeta).join('') : `<div class="rad-vacio">${todas.length
+          ? 'Nada coincide con el filtro.'
+          : 'Todavía no hay oportunidades. Agrega la primera con <b>+ Agregar oportunidad</b>: pega el resumen de la convocatoria del DOF o de ComprasMX, o sube el PDF, y se llenan solas las fechas.'}</div>`}
+      </div>
+      <aside class="rad-lado">
+        <section>
+          <h4>Próximas fechas de tus favoritas</h4>
+          ${proximas.length ? proximas.slice(0, 12).map(x => {
+            const d = diasHasta(x.f);
+            return `<div class="rad-prox ${d <= 3 ? 'urgente' : d <= 7 ? 'pronto' : ''}" data-ir="${esc(x.op.id)}">
+              <span class="rad-prox-dia"><b>${new Date(x.f + 'T12:00:00').getDate()}</b>${MESES_ES[new Date(x.f + 'T12:00:00').getMonth()].slice(0, 3)}</span>
+              <span><b>${esc(x.e.et)}</b>${esc((x.op.titulo || '').slice(0, 70))}</span>
+              <em>${d === 0 ? 'hoy' : d === 1 ? 'mañana' : d + ' días'}</em></div>`;
+          }).join('') : '<p class="rad-nada">Marca oportunidades con ★ y aquí verás sus fechas de los próximos 30 días.</p>'}
+        </section>
+        <section>
+          <div class="rad-sec-head"><h4>Mis palabras clave</h4><button type="button" data-rad-top="palabras">Editar</button></div>
+          ${misPalabras.length ? `<div class="rad-pals">${misPalabras.map(p => `<span>${esc(p)}</span>`).join('')}</div>`
+            : '<p class="rad-nada">Configura las palabras que te interesan y te avisamos cuando entre una oportunidad que las mencione.</p>'}
+        </section>
+        <section>
+          <h4>Búsqueda automática</h4>
+          ${!radarAuto ? '<p class="rad-nada">Consultando…</p>'
+            : radarAuto.sinConfigurar ? '<p class="rad-nada">Todavía no está instalado el proceso diario en GitHub. Con él, aquí aparecen solas las licitaciones de obra pública de ComprasMX y el DOF.</p>'
+            : `<p class="rad-nada">Última revisión: ${radarAuto.generado ? new Date(radarAuto.generado).toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—'}</p>
+               ${Object.entries(radarAuto.fuentes || {}).map(([k, v]) => `<div class="rad-fuente-est ${v.ok ? 'ok' : ''}" title="${esc(v.detalle || '')}"><i></i><span>${esc(k)}</span><b>${v.ok ? v.registros : '—'}</b></div>`).join('')}`}
+        </section>
+        <section>
+          <h4>Buscar en las plataformas</h4>
+          ${FUENTES_RADAR.map(f => `<a class="rad-fuente-link" href="${f.url}" target="_blank" rel="noopener">${esc(f.k)} ↗</a>`).join('')}
+        </section>
+      </aside>
+    </div>
+  </div>`;
+
+  cont.querySelector('.rad-buscar').addEventListener('input', e => {
+    radarBuscar = e.target.value;
+    const pos = e.target.selectionStart;
+    renderRadar();
+    const nuevo = cont.querySelector('.rad-buscar'); nuevo.focus(); try { nuevo.setSelectionRange(pos, pos); } catch (x) {}
+  });
+  cont.querySelectorAll('[data-radf]').forEach(b => b.addEventListener('click', () => { radarFiltro = b.dataset.radf; renderRadar(); }));
+  cont.querySelector('.rad-tipo-sel').addEventListener('change', e => { radarTipo = e.target.value; renderRadar(); });
+  cont.querySelector('.rad-origen-sel').addEventListener('change', e => { radarOrigen = e.target.value; renderRadar(); });
+  cont.querySelectorAll('[data-rad-top]').forEach(b => b.addEventListener('click', () => {
+    const a = b.dataset.radTop;
+    if (a === 'nueva') abrirOportunidad(null);
+    if (a === 'palabras') editarPalabras();
+    if (a === 'resumen') resumenFavoritas();
+  }));
+  cont.querySelectorAll('[data-ir]').forEach(el => el.addEventListener('click', () => irAOportunidad(el.dataset.ir)));
+  cont.querySelectorAll('.rad-card').forEach(card => {
+    const op = todas.find(o => o.id === card.dataset.op);
+    card.querySelectorAll('[data-rad]').forEach(b => b.addEventListener('click', () => accionRadar(op, b.dataset.rad, card)));
+  });
+  if (radarResaltar) {
+    const c = cont.querySelector(`.rad-card[data-op="${CSS.escape ? CSS.escape(radarResaltar) : radarResaltar}"]`);
+    if (c && c.scrollIntoView) c.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => { radarResaltar = null; }, 2500);
+  }
+}
+
+function accionRadar(op, accion, card) {
+  if (!op) return;
+  if (accion !== 'enviar') op = materializarOportunidad(op);
+  const t = (op.titulo || '').slice(0, 50);
+  if (accion === 'fav') {
+    const f = new Set(op.favoritos || []);
+    f.has(yo()) ? f.delete(yo()) : f.add(yo());
+    op.favoritos = [...f];
+    saveState(`${f.has(yo()) ? 'Marcó' : 'Quitó'} como favorita "${t}"`);
+    renderRadar(); actualizarCampana();
+  }
+  if (accion === 'enviar') { radarEnvio = radarEnvio === op.id ? null : op.id; renderRadar(); }
+  if (accion === 'mandar') {
+    const para = card.querySelector('[data-rad-para]').value;
+    if (!para) { toast('Elige a quién enviársela', 'warn'); return; }
+    op.enviados = [...(op.enviados || []), { de: yo(), para, nota: card.querySelector('[data-rad-nota]').value.trim(), ts: new Date().toISOString() }];
+    radarEnvio = null;
+    saveState(`Le envió "${t}" a ${nombreCorto(para)}`);
+    toast(`Enviada a ${nombreCorto(para)}: le aparece en sus notificaciones`);
+    renderRadar();
+  }
+  if (accion === 'editar') abrirOportunidad(op.id);
+  if (accion === 'verobra') abrirFichaObra(op.proyecto_id);
+  if (accion === 'verficha') { state.licVista = 'fichas'; licSel = op.ficha_id; renderLicTab(); }
+  if (accion === 'ficha') {
+    const f = fichaNueva('proyecto');
+    f.titulo = op.titulo || ''; f.dependencia = op.dependencia || ''; f.cliente = op.dependencia || '';
+    f.ubicacion = op.estado || ''; f.licitacion = op.numero || '';
+    f.fecha_apertura = op.fechas && op.fechas.apertura ? fechaCorta(op.fechas.apertura) : '';
+    f.fallo = op.fechas && op.fechas.fallo ? fechaCorta(op.fechas.fallo) : '';
+    f.hitos = f.hitos.map(h => {
+      if (/publicaci/i.test(h.etiqueta) && op.fechas && op.fechas.publicacion) return { ...h, valor: fechaCorta(op.fechas.publicacion) };
+      if (/junta/i.test(h.etiqueta) && op.fechas && op.fechas.junta) return { ...h, valor: fechaCorta(op.fechas.junta) };
+      return h;
+    });
+    if (op.link) f.observaciones = [`Convocatoria: ${op.link}`];
+    f.autor = yo();
+    fichas().push(f);
+    op.ficha_id = f.id;
+    saveState(`Creó la ficha de "${t}" desde el radar`);
+    state.licVista = 'fichas'; licSel = f.id; renderLicTab();
+    toast('Ficha creada con los datos de la convocatoria: complétala con Editar');
+  }
+  if (accion === 'pipeline') {
+    const hoy = new Date().toISOString().slice(0, 10);
+    const p = {
+      id: uid(), proyecto: op.titulo || 'Oportunidad del radar', cliente: op.dependencia || '', estado: op.estado || '',
+      estatus: '02 - Licitación', direccion: 'Construcción',
+      tipo_licitacion: tipoProcedimiento(op.numero) === 'obra' ? 'Licitación de obra' : '',
+      comentario: [op.numero, op.link].filter(Boolean).join(' · '),
+      fecha_update: hoy, fecha_registro: hoy,
+      history: [{ ts: hoy, text: `Alta desde el radar de licitaciones${op.numero ? ' · ' + op.numero : ''}`, author: yo() }]
+    };
+    sanearTipos(p); migrarEstatus(p); migrarClasificacion(p); migrarCompetidores(p); migrarCampos(p);
+    state.projects.push(p);
+    op.proyecto_id = p.id;
+    saveState(`Agregó "${t}" al pipeline desde el radar`);
+    refrescarVistas(); renderRadar();
+    openModal(p.id);
+    toast('Agregada en Licitación: completa segmento, volumen y responsables');
+  }
+}
+
+function irAOportunidad(id) {
+  radarResaltar = id;
+  state.licVista = 'radar';
+  if (!document.getElementById('view-lic').classList.contains('active')) switchView('lic');
+  else renderLicTab();
+}
+
+// ---------- alta y edición ----------
+function abrirOportunidad(id) {
+  const orig = id ? oportunidades().find(o => o.id === id) : null;
+  const op = orig ? JSON.parse(JSON.stringify(orig)) : { fechas: {} };
+  const esc = escapeHtml;
+  let ov = document.getElementById('rad-overlay');
+  if (!ov) {
+    ov = document.createElement('div');
+    ov.id = 'rad-overlay'; ov.className = 'modal-overlay';
+    document.body.appendChild(ov);
+    ov.addEventListener('click', e => { if (e.target === ov) ov.classList.remove('active'); });
+  }
+  ov.innerHTML = `
+    <div class="modal rad-modal">
+      <div class="modal-header"><h2>${orig ? 'Editar oportunidad' : 'Agregar oportunidad'}</h2><button class="modal-close" data-x>×</button></div>
+      <div class="modal-body rad-form">
+        ${orig ? '' : `
+        <div class="field full rad-pegar">
+          <label>Pega el resumen de la convocatoria o sube el PDF</label>
+          <textarea id="ro-texto" rows="4" placeholder="Copia el resumen del DOF o la ficha de ComprasMX: número, descripción, junta de aclaraciones, apertura, fallo…"></textarea>
+          <div class="rad-pegar-acc">
+            <button type="button" class="btn btn-ghost btn-sm" id="ro-leer">Leer texto</button>
+            <label class="btn btn-ghost btn-sm rad-archivo">Subir convocatoria<input type="file" id="ro-archivo" accept=".pdf,.txt,.xlsx,.xls,.csv" hidden></label>
+            <span id="ro-estado"></span>
+          </div>
+        </div>`}
+        <div class="field full"><label>Obra u objeto de la licitación</label><input id="ro-titulo" value="${esc(op.titulo || '')}" placeholder="Ej. Construcción del puente vehicular…"></div>
+        <div class="field"><label>Dependencia o convocante</label><input id="ro-dep" value="${esc(op.dependencia || '')}" placeholder="Ej. SICT, CONAGUA, ASIPONA…"></div>
+        <div class="field"><label>Número de procedimiento</label><input id="ro-num" value="${esc(op.numero || '')}" placeholder="LO-09-JZL-009JZL002-N-25-2026"></div>
+        <div class="field"><label>Estado</label><select id="ro-estado-sel"><option value="">—</option>${Object.keys(MAP_PATHS).sort().map(k => `<option ${op.estado === k ? 'selected' : ''}>${esc(k)}</option>`).join('')}</select></div>
+        <div class="field"><label>Monto estimado (M MXN)</label><input id="ro-monto" type="number" step="0.1" value="${op.monto || ''}"></div>
+        <div class="field full"><label>Liga a la convocatoria</label><input id="ro-link" value="${esc(op.link || '')}" placeholder="https://comprasmx.buengobierno.gob.mx/…"></div>
+        ${ETAPAS_RADAR.map(e => `<div class="field"><label>${e.et}</label><input type="date" id="ro-f-${e.k}" value="${(op.fechas || {})[e.k] || ''}"></div>`).join('')}
+        <div class="field full"><label>Requisitos y notas</label><textarea id="ro-notas" rows="3" placeholder="Lo que hay que preparar: tipo de concreto, volumen, garantías, experiencia que piden, visita obligatoria…">${esc(op.notas || '')}</textarea></div>
+      </div>
+      <div class="modal-footer">
+        ${orig ? '<button type="button" class="btn btn-ghost" data-borrar style="margin-right:auto;color:var(--accent)">Eliminar</button>' : ''}
+        <button type="button" class="btn btn-ghost" data-x>Cancelar</button>
+        <button type="button" class="btn btn-primary" data-guardar>Guardar</button>
+      </div>
+    </div>`;
+  const $ = id2 => document.getElementById(id2);
+  const rellenar = r => {
+    const set = (id2, v) => { if (v && !$(id2).value) $(id2).value = v; };
+    set('ro-titulo', r.titulo); set('ro-dep', r.dependencia); set('ro-num', r.numero);
+    if (r.estado && !$('ro-estado-sel').value) $('ro-estado-sel').value = r.estado;
+    ETAPAS_RADAR.forEach(e => set('ro-f-' + e.k, r.fechas[e.k]));
+    const n = ['titulo', 'dependencia', 'numero', 'estado'].filter(k => r[k]).length + ETAPAS_RADAR.filter(e => r.fechas[e.k]).length;
+    $('ro-estado').textContent = n ? `Se llenaron ${n} datos: revísalos antes de guardar.` : 'No encontré datos reconocibles; captúralos a mano.';
+  };
+  ov.querySelectorAll('[data-x]').forEach(b => b.addEventListener('click', () => ov.classList.remove('active')));
+  if (!orig) {
+    $('ro-leer').addEventListener('click', () => rellenar(leerConvocatoria($('ro-texto').value)));
+    $('ro-archivo').addEventListener('change', async e => {
+      const f = e.target.files[0]; if (!f) return;
+      $('ro-estado').textContent = 'Leyendo el archivo…';
+      try { rellenar(leerConvocatoria((await textoLicitacion(f, m => { $('ro-estado').textContent = m; })).texto)); }
+      catch (err) { $('ro-estado').textContent = 'No pude leer el archivo: ' + err.message; }
+    });
+  }
+  const borrar = ov.querySelector('[data-borrar]');
+  if (borrar) borrar.addEventListener('click', () => {
+    if (!confirm('¿Quitar esta oportunidad del radar?')) return;
+    state.oportunidades = oportunidades().filter(o => o.id !== orig.id);
+    saveState(`Quitó del radar "${(orig.titulo || '').slice(0, 50)}"`);
+    ov.classList.remove('active'); renderRadar(); actualizarCampana();
+  });
+  ov.querySelector('[data-guardar]').addEventListener('click', () => {
+    const titulo = $('ro-titulo').value.trim();
+    if (!titulo) { toast('Ponle nombre a la oportunidad', 'error'); return; }
+    const numero = $('ro-num').value.trim().toUpperCase();
+    const dup = numero && oportunidades().find(o => o.numero === numero && (!orig || o.id !== orig.id));
+    if (dup) { toast('Esa licitación ya está en el radar', 'warn'); ov.classList.remove('active'); irAOportunidad(dup.id); return; }
+    const link = $('ro-link').value.trim();
+    const datos = {
+      titulo, numero, link, dependencia: $('ro-dep').value.trim(), estado: $('ro-estado-sel').value,
+      monto: Number($('ro-monto').value) || null, notas: $('ro-notas').value.trim(),
+      fuente: fuenteDeLiga(link) || (op.fuente || ''),
+      fechas: Object.fromEntries(ETAPAS_RADAR.map(e => [e.k, $('ro-f-' + e.k).value || null]))
+    };
+    if (orig) Object.assign(orig, datos);
+    else oportunidades().push({ id: uid(), ...datos, alta: new Date().toISOString(), alta_por: yo(), favoritos: [yo()], enviados: [] });
+    saveState(`${orig ? 'Editó' : 'Agregó al radar'} "${titulo.slice(0, 50)}"`);
+    ov.classList.remove('active');
+    renderRadar(); actualizarCampana();
+    if (!orig) toast('Agregada y marcada como tu favorita');
+  });
+  ov.classList.add('active');
+}
+
+function editarPalabras() {
+  const pr = prefsRadar();
+  const actual = (pr.palabras || []).join(', ');
+  let ov = document.getElementById('rad-pal-overlay');
+  if (!ov) {
+    ov = document.createElement('div'); ov.id = 'rad-pal-overlay'; ov.className = 'modal-overlay';
+    document.body.appendChild(ov);
+    ov.addEventListener('click', e => { if (e.target === ov) ov.classList.remove('active'); });
+  }
+  ov.innerHTML = `
+    <div class="modal" style="max-width:620px">
+      <div class="modal-header"><h2>Mis palabras clave</h2><button class="modal-close" data-x>×</button></div>
+      <div class="modal-body" style="display:block">
+        <label class="rad-lbl">Sepáralas con coma</label>
+        <textarea id="rp-texto" rows="3" style="width:100%">${escapeHtml(actual)}</textarea>
+        <div class="rad-lbl" style="margin-top:10px">Sugerencias</div>
+        <div class="rad-pals sug">${PALABRAS_SUGERIDAS.map(p => `<button type="button" data-sug="${escapeHtml(p)}">${escapeHtml(p)}</button>`).join('')}</div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-ghost" data-x>Cancelar</button><button class="btn btn-primary" data-ok>Guardar</button></div>
+    </div>`;
+  const ta = ov.querySelector('#rp-texto');
+  ov.querySelectorAll('[data-sug]').forEach(b => b.addEventListener('click', () => {
+    const l = ta.value.split(',').map(x => x.trim()).filter(Boolean);
+    if (!l.some(x => normEq(x) === normEq(b.dataset.sug))) l.push(b.dataset.sug);
+    ta.value = l.join(', ');
+  }));
+  ov.querySelectorAll('[data-x]').forEach(b => b.addEventListener('click', () => ov.classList.remove('active')));
+  ov.querySelector('[data-ok]').addEventListener('click', () => {
+    pr.palabras = [...new Set(ta.value.split(',').map(x => x.trim()).filter(Boolean))];
+    saveState('Actualizó sus palabras clave del radar');
+    ov.classList.remove('active'); renderRadar(); actualizarCampana();
+  });
+  ov.classList.add('active');
+}
+
+// ---------- resumen de favoritas: fechas y requisitos ----------
+function resumenFavoritas() {
+  const favs = oportunidades().filter(o => (o.favoritos || []).includes(yo()))
+    .sort((a, b) => ((proximaFecha(a) || {}).f || '9').localeCompare((proximaFecha(b) || {}).f || '9'));
+  const esc = escapeHtml;
+  let ov = document.getElementById('rad-res-overlay');
+  if (!ov) {
+    ov = document.createElement('div'); ov.id = 'rad-res-overlay'; ov.className = 'modal-overlay';
+    document.body.appendChild(ov);
+    ov.addEventListener('click', e => { if (e.target === ov) ov.classList.remove('active'); });
+  }
+  const celda = (op, k) => {
+    const f = (op.fechas || {})[k]; if (!f) return '<td class="gris">—</td>';
+    const d = diasHasta(f);
+    return `<td class="${d < 0 ? 'gris' : d <= 7 ? 'rojo' : ''}">${fechaCorta(f)}${d >= 0 ? `<small>${d === 0 ? 'hoy' : d + ' d'}</small>` : ''}</td>`;
+  };
+  ov.innerHTML = `
+    <div class="modal rad-res" style="max-width:1180px">
+      <div class="modal-header"><h2>Resumen de mis favoritas</h2><button class="modal-close" data-x>×</button></div>
+      <div class="modal-body" style="display:block" id="rad-res-cuerpo">
+        <p class="rad-res-sub">${esc(nombrePersona(yo()))} · ${new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' })} · ${favs.length} oportunidades</p>
+        ${favs.length ? `<table class="rad-res-tabla">
+          <thead><tr><th>Oportunidad</th>${ETAPAS_RADAR.map(e => `<th>${e.et}</th>`).join('')}<th>Requisitos y notas</th></tr></thead>
+          <tbody>${favs.map(op => {
+            const ficha = op.ficha_id ? fichas().find(f => f.id === op.ficha_id) : null;
+            const vol = ficha ? totalResistencias(ficha) : 0;
+            const extra = [vol ? `Volumen de la ficha: ${fmtNum(vol)} m³` : '', ficha && ficha.plazo ? `Plazo: ${ficha.plazo}` : ''].filter(Boolean).join(' · ');
+            return `<tr><td><b>${esc(op.titulo)}</b><small>${esc([op.dependencia, op.estado, op.numero].filter(Boolean).join(' · '))}</small></td>
+              ${ETAPAS_RADAR.map(e => celda(op, e.k)).join('')}
+              <td class="req">${esc(op.notas || '')}${extra ? `<small>${esc(extra)}</small>` : ''}</td></tr>`;
+          }).join('')}</tbody></table>` : '<p class="rad-nada">Aún no tienes favoritas.</p>'}
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-x>Cerrar</button>
+        <button class="btn btn-ghost" data-xlsx>Excel</button>
+        <button class="btn btn-primary" data-png>Descargar PNG</button>
+      </div>
+    </div>`;
+  ov.querySelectorAll('[data-x]').forEach(b => b.addEventListener('click', () => ov.classList.remove('active')));
+  ov.querySelector('[data-png]').addEventListener('click', async () => {
+    if (!await asegurarLibreria('imagen')) return;
+    const c = await html2canvas(document.getElementById('rad-res-cuerpo'), { scale: 2, backgroundColor: '#ffffff', logging: false });
+    c.toBlob(b => download(b, `Resumen_favoritas_${new Date().toISOString().slice(0, 10)}.png`), 'image/png');
+  });
+  ov.querySelector('[data-xlsx]').addEventListener('click', async () => {
+    if (!await asegurarLibreria('xlsx')) return;
+    const filas = favs.map(op => ({
+      'Oportunidad': op.titulo, 'Dependencia': op.dependencia || '', 'Estado': op.estado || '', 'Número': op.numero || '',
+      ...Object.fromEntries(ETAPAS_RADAR.map(e => [e.et, (op.fechas || {})[e.k] || ''])),
+      'Requisitos y notas': op.notas || '', 'Liga': op.link || ''
+    }));
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(filas.length ? filas : [{ 'Oportunidad': '' }]), 'Favoritas');
+    XLSX.writeFile(wb, `Resumen_favoritas_${new Date().toISOString().slice(0, 10)}.xlsx`);
+  });
+  ov.classList.add('active');
+}
+
+// ---------- centro de notificaciones ----------
+function notificaciones() {
+  if (!userAuth) return [];
+  const pals = prefsRadar().palabras || [];
+  const visita = visitaRadar();
+  const leidos = new Set(JSON.parse(lsGet('radar_leidos_' + yo()) || '[]'));
+  const out = [];
+  oportunidadesTodas().forEach(op => {
+    (op.enviados || []).filter(x => x.para === yo()).forEach(x => {
+      const k = op.id + '|' + x.ts;
+      if (!leidos.has(k)) out.push({ k, op, tipo: 'enviada', ts: x.ts, texto: `${nombreCorto(x.de)} te envió “${op.titulo}”${x.nota ? ': ' + x.nota : ''}` });
+    });
+    const pal = palabrasDe(op, pals);
+    if (pal.length && op.alta > visita && op.alta_por !== yo()) {
+      const k = op.id + '|nueva';
+      if (!leidos.has(k)) out.push({ k, op, tipo: 'nueva', ts: op.alta, texto: `Nueva oportunidad con “${pal.join('”, “')}”: ${op.titulo}` });
+    }
+    if ((op.favoritos || []).includes(yo())) {
+      ETAPAS_RADAR.forEach(e => {
+        const f = (op.fechas || {})[e.k]; const d = diasHasta(f);
+        if (f && d >= 0 && d <= 7) {
+          const k = op.id + '|' + e.k + '|' + f;
+          if (!leidos.has(k)) out.push({ k, op, tipo: 'fecha', ts: f, texto: `${e.et} ${d === 0 ? 'hoy' : d === 1 ? 'mañana' : 'en ' + d + ' días'}: ${op.titulo}` });
+        }
+      });
+    }
+  });
+  // Primero las fechas, de la más cercana a la más lejana; luego lo más reciente
+  return out.sort((a, b) => (a.tipo === 'fecha' ? 0 : 1) - (b.tipo === 'fecha' ? 0 : 1) ||
+    (a.tipo === 'fecha' ? String(a.ts).localeCompare(String(b.ts)) : String(b.ts).localeCompare(String(a.ts))));
+}
+
+function actualizarCampana() {
+  const b = document.getElementById('btn-notif');
+  if (!b) return;
+  const n = notificaciones().length;
+  const badge = b.querySelector('.notif-n');
+  badge.textContent = n > 99 ? '99+' : n;
+  badge.style.display = n ? '' : 'none';
+}
+
+function abrirNotificaciones() {
+  let panel = document.getElementById('notif-panel');
+  if (panel) { panel.remove(); return; }
+  const lista = notificaciones();
+  const btn = document.getElementById('btn-notif');
+  cargarRadarAuto();
+  const r = btn.getBoundingClientRect();
+  panel = document.createElement('div');
+  panel.id = 'notif-panel';
+  panel.style.top = (r.bottom + 6) + 'px';
+  panel.style.right = (window.innerWidth - r.right) + 'px';
+  const ico = { enviada: '✉', nueva: '◆', fecha: '⏱' };
+  panel.innerHTML = `
+    <div class="notif-head"><b>Notificaciones</b>${lista.length ? '<button type="button" data-todo>Marcar todo como leído</button>' : ''}</div>
+    ${lista.length ? lista.map(x => `<div class="notif-item ${x.tipo}" data-k="${escapeHtml(x.k)}" data-op="${escapeHtml(x.op.id)}"><i>${ico[x.tipo]}</i><span>${escapeHtml(x.texto)}</span></div>`).join('')
+      : '<p class="notif-vacio">Estás al día. Aquí aparecen las oportunidades que coinciden con tus palabras clave, las que te envían y las fechas próximas de tus favoritas.</p>'}
+    <div class="notif-pie"><button type="button" data-radar>Abrir el radar de licitaciones</button></div>`;
+  document.body.appendChild(panel);
+  const marcar = ks => {
+    const l = new Set(JSON.parse(lsGet('radar_leidos_' + yo()) || '[]'));
+    ks.forEach(k => l.add(k));
+    lsSet('radar_leidos_' + yo(), JSON.stringify([...l].slice(-500)));
+    actualizarCampana();
+  };
+  panel.querySelectorAll('.notif-item').forEach(it => it.addEventListener('click', () => {
+    marcar([it.dataset.k]); panel.remove(); irAOportunidad(it.dataset.op);
+  }));
+  const todo = panel.querySelector('[data-todo]');
+  if (todo) todo.addEventListener('click', () => { marcar(lista.map(x => x.k)); panel.remove(); });
+  panel.querySelector('[data-radar]').addEventListener('click', () => { panel.remove(); state.licVista = 'radar'; switchView('lic'); });
+  setTimeout(() => document.addEventListener('click', function cerrar(e) {
+    if (!panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)) { panel.remove(); document.removeEventListener('click', cerrar); }
+  }), 0);
+}
+
+// ==========================================================================
+// FICHAS AUTOMÁTICAS DE LICITACIÓN
+// Se suben los documentos de una licitación (convocatoria o invitación, bases,
+// anexos, junta de aclaraciones, acta de apertura, fallo) y salen tres fichas:
+// la del proyecto, la de licitantes y la del ganador. Los escaneos se leen con
+// OCR en el navegador. Lo que se encuentra se muestra antes de crear nada.
+// ==========================================================================
+const TIPOS_DOC_LIC = {
+  invitacion: 'Invitación o convocatoria', bases: 'Bases de licitación', junta: 'Junta de aclaraciones',
+  anexo_tecnico: 'Anexos técnicos', anexo_economico: 'Anexos económicos', catalogo: 'Catálogo de conceptos',
+  apertura: 'Acta de apertura', fallo: 'Acta de fallo', contrato: 'Modelo de contrato', otro: 'Otro documento'
+};
+
+// ---------- utilidades de texto ----------
+const sinAcentos = v => String(v || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+const MAYUS = v => sinAcentos(v).toUpperCase();
+const limpiaEsp = v => String(v || '').replace(/\s+/g, ' ').trim();
+
+function montoDe(str) {
+  // "$1,269,721.96", "$1.269.721,96", "1,269,721,96" (el OCR confunde punto y coma), "$1’232,650.73"
+  const s = String(str || '').replace(/[^\d.,]/g, '').replace(/[.,]+$/, '');
+  if (!s) return null;
+  const m = s.match(/[.,](\d{2})$/);
+  let entero = (m ? s.slice(0, -3) : s).replace(/[.,]/g, '');
+  let dec = m ? m[1] : '';
+  // "1,269,72196": el OCR se comió el punto; el último grupo trae 3 cifras + 2 de centavos
+  if (!m && /[.,]\d{5}$/.test(s)) { dec = entero.slice(-2); entero = entero.slice(0, -2); }
+  const n = Number(entero + (dec ? '.' + dec : ''));
+  return isFinite(n) && n > 0 ? n : null;
+}
+
+// Fechas como vienen en las actas: "19 de Julio del 2023", "10/07/2023"
+function fechaLic(v) {
+  const t = sinAcentos(String(v || '')).toLowerCase();
+  const m = t.match(/(\d{1,2})\s*(?:de\s+)?([a-z]{3,})\s*(?:del?\s+|\/\s*|,\s*|\s+)?(?:ano\s+)?(\d{4})/);
+  if (m) {
+    const mes = MESES_ES.findIndex(x => m[2].startsWith(sinAcentos(x).slice(0, 3)));
+    if (mes >= 0) return `${m[3]}-${String(mes + 1).padStart(2, '0')}-${String(m[1]).padStart(2, '0')}`;
+  }
+  const n = t.match(/(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})/);
+  if (n) return `${n[3]}-${String(n[2]).padStart(2, '0')}-${String(n[1]).padStart(2, '0')}`;
+  return null;
+}
+const FECHA_RE = '(\\d{1,2}\\s*(?:de\\s+)?[A-Za-zÁÉÍÓÚáéíóú]{3,}\\s*(?:del?\\s+|\\/\\s*|,\\s*|\\s+)?(?:a[nñ]o\\s+)?\\d{4}|\\d{1,2}[\\/.-]\\d{1,2}[\\/.-]\\d{4})';
+function fechaTras(texto, etiquetas, alcance) {
+  for (const et of etiquetas) {
+    const m = texto.match(new RegExp(et + '[^\\d]{0,' + (alcance || 70) + '}?' + FECHA_RE, 'i'));
+    if (m) { const f = fechaLic(m[1]); if (f) return f; }
+  }
+  return null;
+}
+function fechaLarga(iso) {
+  if (!iso) return '';
+  return new Date(iso + 'T12:00:00').toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+// Número de procedimiento, tolerante a lo que confunde el OCR (IO→10, O→0)
+function numerosLicitacion(texto) {
+  const re = /\b([LIA1l|][AOS0Q])\s*[-–—]\s*(\d{2})\s*[-–—]\s*([A-Z0-9]{3})\s*[-–—]\s*([A-Z0-9]{6,})\s*[-–—]\s*([A-Z])\s*[-–—]\s*(\d{1,4})\s*[-–—]\s*(\d{4})\b/g;
+  const out = [];
+  let m;
+  while ((m = re.exec(texto))) {
+    const pre = m[1].toUpperCase().replace(/^[1L|]/, c => c === 'L' ? 'L' : 'I').replace(/[0Q]$/, 'O');
+    out.push(`${pre}-${m[2]}-${m[3].toUpperCase()}-${m[4].toUpperCase()}-${m[5].toUpperCase()}-${m[6]}-${m[7]}`);
+  }
+  return out;
+}
+
+function clasificarDocLic(nombre, texto) {
+  const n = MAYUS(nombre), t = MAYUS(texto), ini = t.slice(0, 1500);
+  // Primero el nombre del archivo, luego cómo empieza el documento
+  if (/FALLO/.test(n)) return 'fallo';
+  if (/BASES|CONVOCATORIA/.test(n)) return 'bases';
+  if (/ACTA DE FALLO|NOMBRE DEL PARTICIPANTE GANADOR/.test(ini) || (/SE LE ADJUDICA EL CONTRATO/.test(t) && /\bACTA\b/.test(ini))) return 'fallo';
+  if (/APERTURA/.test(n) || (/APERTURA DE (PROPUESTAS|PROPOSICIONES)/.test(ini) && /ACTA/.test(ini))) return 'apertura';
+  if (/JUNTA|ACLARACION/.test(n) || (/JUNTA DE ACLARACIONES/.test(ini.slice(0, 500)) && /ACTA/.test(ini.slice(0, 500)))) return 'junta';
+  if (/CATALOGO/.test(n) || (/CATALOGO DE CONCEPTOS/.test(ini) && (t.match(/\bM3\b/g) || []).length > 3)) return 'catalogo';
+  if (/ANEXOS?[ _-]*TEC/.test(n) || /ANEXOS TECNICOS/.test(ini.slice(0, 300))) return 'anexo_tecnico';
+  if (/ANEXOS?[ _-]*ECO/.test(n) || /ANEXOS ECONOMICOS/.test(ini.slice(0, 300))) return 'anexo_economico';
+  if (/CONTRATO/.test(n) || /MODELO DE CONTRATO|CONTRATO DE OBRA PUBLICA A PRECIOS UNITARIOS/.test(ini)) return 'contrato';
+  if (/BASES|CONVOCATORIA/.test(n) || /CONVOCATORIA A LA LICITACION/.test(ini)) return 'bases';
+  if (/INVITA/.test(n) || /LE INVITA A PRESENTAR|INVITA A PRESENTAR PROPUESTAS/.test(t)) return 'invitacion';
+  return 'otro';
+}
+
+// Coincidencia de nombres de empresas aunque el OCR los ensucie
+function tokensNombre(v) {
+  return MAYUS(v).replace(/[^A-Z0-9 ]/g, ' ').split(/\s+/)
+    .filter(x => x.length > 2 && !['DEL', 'LOS', 'LAS', 'SAB', 'S', 'A', 'CV', 'C', 'DE', 'ING', 'ARQ'].includes(x));
+}
+function parecido(a, b) {
+  const A = new Set(tokensNombre(a)), B = new Set(tokensNombre(b));
+  if (!A.size || !B.size) return 0;
+  let c = 0; A.forEach(x => { if (B.has(x)) c++; });
+  return c / Math.min(A.size, B.size);
+}
+function nombreLimpio(v) {
+  return limpiaEsp(String(v || '').replace(/[|_*“”"]/g, ' ').replace(/\bS\.?\s*A\.?\s*DE\s*C\.?\s*V\.?/i, 'S.A. DE C.V.')
+    .replace(/^\W+|\W+$/g, '').replace(/^(\d+\.?-?\s*)/, ''));
+}
+
+// Señales de que el concreto va a ser especializado
+const ALERTAS_CONCRETO = [
+  { re: /\bM\.?\s?R\.?\s*-?\s*\d{2}\b|MODULO DE RUPTURA/, et: 'Concreto por módulo de ruptura (MR): típico de pavimento hidráulico' },
+  { re: /PAVIMENTO DE CONCRETO|CONCRETO HIDRAULICO/, et: 'Pavimento de concreto hidráulico' },
+  { re: /F.?\s?C\s*=?\s*(3[5-9]\d|[4-9]\d\d)\s*KG/, et: 'Alta resistencia (f\'c de 350 kg/cm² o más)' },
+  { re: /AUTOCOMPACTABLE|AUTOCONSOLIDABLE/, et: 'Concreto autocompactable' },
+  { re: /FIBRA/, et: 'Concreto con fibras' },
+  { re: /PERMEABLE|ECOCRETO/, et: 'Concreto permeable' },
+  { re: /COMPACTADO CON RODILLO|\bCCR\b/, et: 'Concreto compactado con rodillo (CCR)' },
+  { re: /CONCRETO MASIVO|COLADO MASIVO|CALOR DE HIDRATACION/, et: 'Concreto masivo: control de temperatura' },
+  { re: /LANZADO|SHOTCRETE/, et: 'Concreto lanzado' },
+  { re: /RESISTENCIA RAPIDA|FRAGUADO RAPIDO|RESISTENCIA TEMPRANA|\bRR\b/, et: 'Resistencia rápida o temprana' },
+  { re: /BAJO AGUA|SULFATO|AMBIENTE MARINO|AGRESIV/, et: 'Exposición agresiva (agua, sulfatos o ambiente marino)' },
+  { re: /BOMBEABLE|CONCRETO BOMBEADO/, et: 'Concreto bombeable' }
+];
+
+// ---------- lectura de toda la licitación ----------
+function leerLicitacion(docs) {
+  const todo = docs.map(d => d.texto).join('\n\n');
+  const T = MAYUS(todo);
+  const porTipo = k => docs.filter(d => d.tipo === k);
+  const txt = k => porTipo(k).map(d => d.texto).join('\n');
+  const avisos = [];
+
+  // Número de procedimiento: el que más se repite; los documentos con otro se señalan
+  const conteo = {};
+  docs.forEach(d => { d.numeros = [...new Set(numerosLicitacion(d.texto))]; d.numeros.forEach(n => { conteo[n] = (conteo[n] || 0) + 1; }); });
+  const numero = Object.entries(conteo).sort((a, b) => b[1] - a[1])[0];
+  const lic = numero ? numero[0] : '';
+  docs.forEach(d => {
+    if (lic && d.numeros.length && !d.numeros.includes(lic)) {
+      const obj = (d.texto.match(/(?:los trabajos|relativa a|referente a la obra)\s*[:"“]*\s*([A-ZÁÉÍÓÚÑ][^"”\n]{10,90})/i) || [])[1];
+      avisos.push(`"${d.nombre}" trae el número ${d.numeros[0]}${obj ? ` y la obra "${limpiaEsp(obj)}"` : ''}: parece de otra licitación. No se usó para las fichas.`);
+      d.ajena = true;
+    }
+  });
+  const usar = docs.filter(d => !d.ajena);
+  const txtU = k => usar.filter(d => d.tipo === k).map(d => d.texto).join('\n');
+  const todoU = usar.map(d => d.texto).join('\n\n');
+  const plano = limpiaEsp(todoU);
+
+  // Objeto de la obra
+  let objeto = '';
+  const cands = [
+    plano.match(/OBJETO\s*:\s*(.{20,400}?)(?:\s+En cumplimiento|\s+PARTICIPACI)/i),
+    plano.match(/Descripci[oó]n de los trabajos\s*:\s*(.{20,400}?)\s+Origen de los recursos/i),
+    plano.match(/relativa a\s*:\s*[“"]?(.{20,400}?)[”"]\s*\.?\s*A\.?-/i),
+    plano.match(/(?:referente a la obra|consistir[aá] en)\s*:?\s*[“"]?(.{20,400}?)[”",]/i)
+  ].filter(Boolean);
+  if (cands.length) objeto = limpiaEsp(cands[0][1]).replace(/[”"]+$/, '');
+  const titulo = objeto ? limpiaEsp(objeto.split(/,\s*INCLUYE|\s+INCLUYE/i)[0]) : '';
+
+  // Convocante y ubicación
+  let convocante = '';
+  const gm = T.match(/GOBIERNO (MUNICIPAL|DEL ESTADO) DE ([A-Z ]{3,40}?)\s*(?:\n|DIRECCION|OBRAS|SECRETARIA)/);
+  if (gm) convocante = `Gobierno ${gm[1] === 'MUNICIPAL' ? 'Municipal' : 'del Estado'} de ${limpiaEsp(gm[2]).toLowerCase().replace(/\b\w/g, c => c.toUpperCase())}`;
+  if (/DIRECCION DE OBRAS PUBLICAS/.test(T)) convocante = (convocante ? convocante + ' · ' : '') + 'Dirección de Obras Públicas';
+  if (!convocante) {
+    const dep = (typeof DEPENDENCIAS_CONOCIDAS !== 'undefined' ? DEPENDENCIAS_CONOCIDAS : []).find(x => new RegExp('\\b' + x + '\\b').test(T));
+    if (dep) convocante = dep;
+  }
+  let ubicacion = '';
+  const estados = typeof MAP_PATHS !== 'undefined' ? Object.keys(MAP_PATHS) : [];
+  const um = plano.match(/(?:ciudad de|En)\s+([A-ZÁÉÍÓÚ][a-záéíóúñ]+(?:\s[A-ZÁÉÍÓÚ][a-záéíóúñ]+)?),\s*([A-ZÁÉÍÓÚ][a-záéíóúñ]+(?:\s[A-ZÁÉÍÓÚ][a-záéíóúñ]+)?)/);
+  if (um && estados.some(e => sinAcentos(e).toLowerCase() === sinAcentos(um[2]).toLowerCase())) ubicacion = `${um[1]}, ${um[2]}`;
+  const estado = ubicacion ? estados.find(e => sinAcentos(e).toLowerCase() === sinAcentos(ubicacion.split(',')[1]).trim().toLowerCase()) : '';
+
+  // Procedimiento, recursos y condiciones
+  const procedimiento = /INVITACION A CUANDO MENOS TRES PERSONAS?/.test(T) ? 'Invitación a cuando menos tres personas'
+    : /LICITACION PUBLICA INTERNACIONAL/.test(T) ? 'Licitación pública internacional'
+    : /LICITACION PUBLICA/.test(T) ? 'Licitación pública nacional' : '';
+  const recursos = limpiaEsp(((plano.match(/provienen de\s*:\s*([A-ZÁÉÍÓÚÑ0-9 ,]{6,80}?)(?:\s+Fechas|\.|\s+\d\.)/i) || plano.match(/ORIGEN DE LOS FONDOS\.?\s*.{0,120}?(FORTALECIMIENTO[A-ZÁÉÍÓÚ ]+?\s*RAMO\s*\d+|RAMO\s*\d+[A-Z ]*|RECURSOS? (?:FEDERALES|ESTATALES|PROPIOS)[A-Z ]*)/i) || [])[1] || ''));
+  const anticipo = (plano.match(/anticipo (?:del?|por el)\s*(\d{1,2})\s*%/i) || plano.match(/(\d{1,2})\s*%\s*\([^)]*\)\s*al monto total/i) || [])[1];
+  const contNac = (plano.match(/(\d{1,2})%\s*\([^)]*\)\s*de\s*contenido nacional/i) || plano.match(/porcentaje del\s*(\d{1,2})%/i) || [])[1];
+  const subcontratar = /NO PODRA SUBCONTRATAR/.test(T) ? 'No se permite subcontratar' : '';
+  const criterio = /PUNTOS O PORCENTAJES/.test(T) ? 'Evaluación por puntos y porcentajes'
+    : /BINARI/.test(T) ? 'Evaluación binaria (precio más bajo solvente)' : '';
+  const rangoSolvencia = /PRESUPUESTO BASE Y EL 20% INFERIOR/.test(T.replace(/\s+/g, ' ')) ? 'Solventes solo las propuestas entre el presupuesto base y 20% por debajo' : '';
+  const contrato = /PRECIOS UNITARIOS Y TIEMPO DETERMINADO/.test(T.replace(/\s+/g, ' ')) ? 'Obra pública a precios unitarios y tiempo determinado' : '';
+
+  // Fechas del procedimiento
+  const fechas = {
+    publicacion: fechaTras(plano, ['Fecha de Publicaci[oó]n en Compra ?Net', 'Fecha de publicaci[oó]n']),
+    aceptacion: fechaTras(plano, ['acepta participar']),
+    bases: fechaTras(plano, ['adquisici[oó]n de bases']),
+    visita: fechaTras(plano, ['Visita al (?:lugar|sitio) de los trabajos', 'Visita al (?:lugar|sitio)']),
+    junta: fechaTras(plano, ['Junta de aclaraciones\\s*:?', 'primera junta de aclaraciones se celebrar[aá] el d[ií]a']),
+    apertura: fechaTras(plano, ['Presentaci[oó]n y apertura de proposiciones(?: T[eé]cnicas)?', 'apertura de propuestas econ[oó]micas, celebrado el d[ií]a']),
+    fallo: fechaTras(plano, ['\\bFallo\\b(?!\\s+de esta)', 'conocer el fallo'], 40),
+    inicio: fechaTras(plano, ['inicio (?:de la obra )?ser[aá] el d[ií]a', 'iniciar trabajos el d[ií]a', 'Estimada de inicio y t[eé]rmino de los trabajos\\s*:\\s*del']),
+    termino: fechaTras(plano, ['terminaci[oó]n ser[aá] el\\s*d[ií]a', 'concluyendo el d[ií]a', 'Estimada de inicio y t[eé]rmino de los trabajos\\s*:\\s*del[^a]+al'], 60)
+  };
+  const plazo = (plano.match(/plazo de (?:la )?ejecuci[oó]n de (?:los trabajos|la obra)\s*(?:ser[aá] de)?\s*(\d{1,4})\s*\(?/i) || [])[1];
+  const plazoObjeto = (plano.match(/para ejecutarse en\s*(\d{1,4})\s*d[ií]as/i) || [])[1];
+  if (plazo && plazoObjeto && plazo !== plazoObjeto) avisos.push(`Las bases dicen ${plazoObjeto} días naturales en el objeto y ${plazo} días en el plazo de ejecución: conviene aclararlo en la junta.`);
+
+  // Requisitos de la propuesta (anexos técnicos y económicos)
+  const requisitos = [];
+  ['anexo_tecnico', 'anexo_economico'].forEach(k => {
+    const t = limpiaEsp(txtU(k));
+    const re = /\b(A[TE])\s?(\d{1,2})\s+([A-ZÁÉÍÓÚÑ ,;()/“”".-]{15,160}?)(?=[,;.]|\s+(?:A[TE])\s?\d)/g;
+    let m;
+    while ((m = re.exec(t))) requisitos.push({ codigo: m[1] + ' ' + m[2], texto: limpiaEsp(m[3]).toLowerCase().replace(/^./, c => c.toUpperCase()) });
+  });
+  const reqClave = [];
+  if (/CAPITAL CONTABLE/.test(T)) {
+    const anios = [...new Set((plano.match(/EJERCICIOS FISCALES\s*(\d{4})\s*y\s*(\d{4})/i) || []).slice(1))];
+    reqClave.push(`Acreditar capital contable${anios.length ? ' con declaraciones ' + anios.join(' y ') : ''}`);
+  }
+  if (/EXPERIENCIA/.test(T)) reqClave.push('Experiencia comprobable en obras de características similares');
+  if (/RELACION DE MAQUINARIA Y EQUIPO/.test(T)) reqClave.push('Relación de maquinaria y equipo propio o arrendado con carta de disponibilidad');
+  if (/OPINION (?:FAVORABLE|DE CUMPLIMIENTO)/.test(T)) reqClave.push('Opiniones de cumplimiento del SAT (32-D) y de seguridad social');
+
+  // Concreto: tipos pedidos y señales de concreto especializado
+  const tipos = new Map();
+  const reC = /CONCRETO[^\n]{0,40}?(?:F\s*[´'’`]?\s*C|MR)\s*=?\s*(\d{2,3})\s*(KG\s*\/\s*C?M\s*2|KG\s*\/\s*CM²)/gi;
+  let mc;
+  while ((mc = reC.exec(todoU))) {
+    const fc = Number(mc[1]);
+    const premez = /PREMEZCLADO/i.test(mc[0]);
+    if (!tipos.has(fc)) tipos.set(fc, { fc, premezclado: premez, unidadDudosa: /KG\s*\/\s*M\s*2/i.test(mc[2]) });
+  }
+  [...tipos.values()].filter(x => x.unidadDudosa).forEach(x => avisos.push(`El concreto f'c ${x.fc} aparece en "kg/m2" en las bases: casi seguro es kg/cm², pero vale la pena confirmarlo.`));
+  const alertas = ALERTAS_CONCRETO.filter(a => a.re.test(T)).map(a => a.et);
+  const materiales = [];
+  const lista = plano.match(/PRIORIDAD 1\s*(.{20,600}?)(?:\s+Este programa|\s+Asimismo|\s+PRIORIDAD 2)/i);
+  if (lista) lista[1].split(/\s\d{1,2}\.\s/).map(x => limpiaEsp(x).replace(/^\d{1,2}\.\s*/, ''))
+    .filter(x => x.length > 3 && x.length < 70 && !/\sDE$/.test(x)).forEach(x => materiales.push(x));
+
+  // Junta de aclaraciones
+  const tJunta = MAYUS(txtU('junta'));
+  let junta = '';
+  if (tJunta) {
+    if (/NO SE RECIBIERON SOLICITUDES DE ACLARACION/.test(tJunta.replace(/\s+/g, ' '))) junta = 'No hubo preguntas de los licitantes.';
+    else {
+      const preg = (tJunta.match(/PREGUNTA\s*(?:N[O°º.]*)?\s*\d+/g) || []).length;
+      junta = preg ? `Se respondieron ${preg} preguntas de los licitantes.` : 'Se celebró la junta de aclaraciones.';
+      if (/SE MODIFICA|MODIFICACION/.test(tJunta)) junta += ' Hubo modificaciones a la convocatoria.';
+    }
+  } else if (docs.some(d => d.tipo === 'junta' && d.ajena)) junta = 'El acta de junta que se subió es de otra licitación.';
+
+  // Licitantes: los invitados, la lista del acta y los montos
+  const invitados = [];
+  const reInv = /\n\s*((?:C\.\s*)?[A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑ0-9 .,&]{8,90}?)\s*\n\s*Presente/g;
+  let mi;
+  const tInv = txtU('invitacion') + '\n' + txtU('bases');
+  while ((mi = reInv.exec(tInv))) invitados.push(nombreLimpio(mi[1]));
+  const canonicos = [...new Set(invitados)];
+  const lineas = t => t.split('\n').map(x => x.trim()).filter(Boolean);
+  const propuestas = [];
+  const lAp = lineas(txtU('apertura'));
+  lAp.forEach((l, i) => {
+    const m = l.match(/^(.*?)\$\s*([\d.,’'”\s]{5,})$/) || l.match(/^(.*?)\$\s*([\d.,’'”]{5,})/);
+    if (!m) return;
+    const monto = montoDe(m[2]);
+    if (!monto || monto < 1000) return;
+    let nombre = nombreLimpio(m[1]);
+    if (tokensNombre(nombre).length < 2 && i > 0) nombre = nombreLimpio(lAp[i - 1] + ' ' + nombre);
+    const canon = canonicos.map(c => ({ c, s: parecido(c, nombre) })).sort((a, b) => b.s - a.s)[0];
+    if (canon && canon.s >= 0.5) nombre = canon.c;
+    nombre = nombre.replace(/S\.A\. DE C\.V$/, 'S.A. DE C.V.');
+    if (!propuestas.some(p => Math.abs(p.monto - monto) < 1)) propuestas.push({ licitante: nombre, monto });
+  });
+
+  // Fallo: presupuesto base, puntos, ganador y motivos de desechamiento
+  const tFallo = txtU('fallo');
+  const pFallo = limpiaEsp(tFallo);
+  let presupuestoBase = null;
+  const pb = pFallo.match(/PRESUPUESTO BASE[\s\S]{0,160}?\$\s*([\d.,’'”\s]{5,})/i);
+  if (pb) presupuestoBase = montoDe(pb[1]);
+  // Si el presupuesto base sale muy por arriba de todas las propuestas, el OCR perdió el punto decimal
+  const maxProp = Math.max(0, ...propuestas.map(q => q.monto));
+  if (presupuestoBase && maxProp && presupuestoBase / maxProp > 20) presupuestoBase = Math.round(presupuestoBase) / 100;
+  const evaluacion = [];
+  lineas(tFallo).forEach((l, i, arr) => {
+    const m = l.match(/\$\s*([\d.,’'”]{5,})\s+(\d{1,3}[.,]\d{2})\s+(\d{1,3}[.,]\d{2})\s+(\d{1,3}[.,]\d{2})/);
+    if (!m) return;
+    const monto = montoDe(m[1]);
+    const prop = propuestas.find(p => Math.abs(p.monto - monto) < 1);
+    let nombre = prop ? prop.licitante : nombreLimpio((arr[i - 1] || '') + ' ' + l.split('$')[0]);
+    evaluacion.push({ licitante: nombre, monto, tecnicos: Number(m[2].replace(',', '.')), economicos: Number(m[3].replace(',', '.')), total: Number(m[4].replace(',', '.')) });
+  });
+  propuestas.forEach(p => { if (!evaluacion.some(e => Math.abs(e.monto - p.monto) < 1)) evaluacion.push({ licitante: p.licitante, monto: p.monto }); });
+  let ganador = null;
+  const gMonto = (pFallo.match(/monto total de\s*\$\s*([\d.,’'”\s]{5,}?)\s*\(/i) || [])[1];
+  const gNombre = (pFallo.match(/presentada por el licitante\s+([A-ZÁÉÍÓÚÑ][A-ZÁÉÍÓÚÑ .]{5,90}?)[.,]{1,3}\s+y en consecuencia/i) || [])[1];
+  if (gMonto || gNombre) {
+    const m = montoDe(gMonto);
+    const e = evaluacion.find(x => m && Math.abs(x.monto - m) < 1) || evaluacion.find(x => gNombre && parecido(x.licitante, gNombre) >= 0.5);
+    ganador = { licitante: e ? e.licitante : nombreLimpio(gNombre), monto: m || (e && e.monto) || null };
+  }
+  // Motivos: cada bloque "OBTUVO xx PUNTOS ... Se desecha la propuesta por ..."
+  const reMot = /OBTUVO\s*(\d{1,3}[.,]\d{2})\s*PUNTOS[\s\S]{0,700}?Se desecha la propuesta por\s*([^.]{10,220})/gi;
+  let mm;
+  while ((mm = reMot.exec(tFallo))) {
+    const tot = Number(mm[1].replace(',', '.'));
+    const e = evaluacion.find(x => x.total === tot);
+    // Se limpia lo que mete el OCR (barras, comillas, corchetes)
+    if (e) e.motivo = limpiaEsp(mm[2].replace(/[|"“”\[\]{}_]/g, ' ')).replace(/^no\s/i, 'No ').replace(/\s+de conformidad.*$/i, '');
+  }
+  evaluacion.forEach(e => { e.resultado = ganador && Math.abs((ganador.monto || -1) - e.monto) < 1 ? 'Ganador' : e.motivo ? 'Desechada' : 'No ganó'; });
+  evaluacion.sort((a, b) => (b.total || 0) - (a.total || 0) || a.monto - b.monto);
+  const fechaFallo = fechaTras(pFallo, ['ACTA DE FALLO\\s*[A-Za-zÁÉÍÓÚáéíóú ,]*?;?\\s*a', 'siendo las \\d{1,2}:\\d{2} horas,? del d[ií]a']);
+  const inicioFallo = fechaTras(pFallo, ['iniciar trabajos el d[ií]a']);
+  const terminoFallo = fechaTras(pFallo, ['concluyendo el d[ií]a']);
+  const duracionFallo = (pFallo.match(/duraci[oó]n de\s*(\d{1,4})\s*\(/i) || [])[1];
+  const firma = fechaTras(pFallo, ['FIRMAR EL CONTRATO[\\s\\S]{0,700}?horas,? del d[ií]a'], 60);
+  const garantias = /QUINCE D[IÍ]AS NATURALES/i.test(pFallo) ? 'Garantías de cumplimiento y anticipo dentro de los 15 días naturales siguientes al fallo' : '';
+
+  return {
+    licitacion: lic, objeto, titulo, convocante, ubicacion, estado, procedimiento, recursos, contrato,
+    anticipo: anticipo ? anticipo + '%' : '', contenidoNacional: contNac ? contNac + '%' : '', subcontratar, criterio, rangoSolvencia,
+    fechas, plazo: plazo ? `${plazo} días naturales` : '', requisitos, reqClave, tipos: [...tipos.values()].sort((a, b) => a.fc - b.fc),
+    alertas, materiales, junta, propuestas, presupuestoBase, evaluacion, ganador,
+    fallo: { fecha: fechaFallo, inicio: inicioFallo || fechas.inicio, termino: terminoFallo || fechas.termino,
+             duracion: duracionFallo ? `${duracionFallo} días naturales` : '', firma, garantias },
+    avisos, documentos: docs.map(d => ({ nombre: d.nombre, tipo: d.tipo, ocr: !!d.ocr, numero: d.numeros[0] || '', ajena: !!d.ajena }))
+  };
+}
+
+// ---------- de lo leído a las tres fichas ----------
+const fechaCortaLic = iso => iso ? new Date(iso + 'T12:00:00').toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+function fichasDesdeLicitacion(x) {
+  const base = {
+    licitacion: x.licitacion, dependencia: x.convocante, cliente: x.convocante, ubicacion: x.ubicacion,
+    titulo: x.titulo || x.objeto || 'Licitación', autor: (userAuth && userAuth.iniciales) || ''
+  };
+  const out = [];
+  // 1. Proyecto
+  const hitos = [
+    ['Publicación de la convocatoria', x.fechas.publicacion], ['Límite para aceptar participar', x.fechas.aceptacion],
+    ['Visita al sitio', x.fechas.visita], ['Junta de aclaraciones', x.fechas.junta],
+    ['Presentación y apertura de propuestas', x.fechas.apertura], ['Fallo', x.fechas.fallo],
+    ['Inicio y término de los trabajos', x.fechas.inicio ? `${fechaCortaLic(x.fechas.inicio)}${x.fechas.termino ? ' al ' + fechaCortaLic(x.fechas.termino) : ''}` : '']
+  ].filter(h => h[1]).map(([etiqueta, valor]) => ({ etiqueta, valor: /^\d{4}-/.test(valor) ? fechaCortaLic(valor) : valor }));
+  const p = Object.assign(fichaNueva('proyecto'), base, {
+    subtitulo: [x.procedimiento, x.licitacion].filter(Boolean).join(' · '),
+    bajada: x.objeto,
+    alcance: x.objeto,
+    contrato: x.contrato,
+    fecha_inicio: fechaCortaLic(x.fechas.inicio),
+    plazo: x.plazo,
+    inversion_cliente: x.presupuestoBase ? `$${fmtMdpLic(x.presupuestoBase / 1e6)} mdp (presupuesto base)` : '',
+    resistencias: x.tipos.length ? x.tipos.map(t => ({ fc: t.fc, volumen: null })) : [{ fc: 150, volumen: null }],
+    elementos: x.materiales.slice(0, 8),
+    retos: [...x.alertas, ...x.avisos].slice(0, 8),
+    aspectos: [
+      x.anticipo && `Anticipo del ${x.anticipo}`, x.contenidoNacional && `Contenido nacional mínimo del ${x.contenidoNacional}`,
+      x.subcontratar, x.criterio, x.rangoSolvencia, ...x.reqClave
+    ].filter(Boolean).slice(0, 8),
+    observaciones: [
+      x.recursos && `Origen de los recursos: ${x.recursos}`,
+      x.junta && `Junta de aclaraciones: ${x.junta}`,
+      x.requisitos.length && `La propuesta pide ${x.requisitos.length} documentos (${x.requisitos.filter(r => r.codigo.startsWith('AT')).length} técnicos y ${x.requisitos.filter(r => r.codigo.startsWith('AE')).length} económicos).`
+    ].filter(Boolean),
+    hitos,
+    fecha_apertura: fechaCortaLic(x.fechas.apertura), fallo: fechaCortaLic(x.fechas.fallo),
+    tipo_proyecto: /PAVIMENT/i.test(x.objeto) ? 'Pavimentación' : /PUENTE/i.test(x.objeto) ? 'Puente' : /PRESA/i.test(x.objeto) ? 'Presa' : ''
+  });
+  out.push(p);
+  // 2. Licitantes
+  if (x.propuestas.length) {
+    const a = Object.assign(fichaNueva('apertura'), base, {
+      subtitulo: 'Apertura de proposiciones' + (x.licitacion ? ' · ' + x.licitacion : ''),
+      contrato: x.contrato,
+      fecha_apertura: fechaCortaLic(x.fechas.apertura), fallo: fechaCortaLic(x.fechas.fallo),
+      fecha_inicio: fechaCortaLic(x.fechas.inicio), plazo: x.plazo,
+      propuestas: x.propuestas.map(q => ({ licitante: q.licitante, importe: Math.round(q.monto / 1e6 * 1e4) / 1e4 })),
+      relevantes: x.presupuestoBase ? [`Presupuesto base de la convocante: $${fmtMdpLic(x.presupuestoBase / 1e6)} mdp. ` +
+        `${x.propuestas.every(q => q.monto <= x.presupuestoBase) ? 'Todas las propuestas quedaron por debajo.' : 'Hubo propuestas por arriba.'}`] : []
+    });
+    a.tipo = 'apertura';
+    out.push(a);
+  }
+  // 3. Ganador
+  if (x.ganador || x.evaluacion.some(e => e.total)) {
+    const g = Object.assign(fichaNueva('ganador'), base, {
+      subtitulo: 'Fallo' + (x.licitacion ? ' · ' + x.licitacion : ''),
+      bajada: x.objeto,
+      presupuesto_base: x.presupuestoBase,
+      ganador: x.ganador,
+      evaluacion: x.evaluacion,
+      fecha_fallo: x.fallo.fecha, inicio: x.fallo.inicio, termino: x.fallo.termino,
+      duracion: x.fallo.duracion || x.plazo, firma: x.fallo.firma, garantias: x.fallo.garantias
+    });
+    g.tipo = 'ganador';
+    out.push(g);
+  }
+  const grupo = uid();
+  out.forEach(f => { f.grupo = grupo; });
+  return out;
+}
+function fmtMdpLic(v) {
+  const n = Number(v) || 0;
+  return n.toLocaleString('es-MX', { minimumFractionDigits: n < 10 ? 2 : 1, maximumFractionDigits: n < 10 ? 2 : 1 });
+}
+
+// ---------- OCR en el navegador para los escaneos ----------
+let ocrTrabajador = null;
+async function lectorOcr(aviso) {
+  if (ocrTrabajador) return ocrTrabajador;
+  if (!await asegurarLibreria('ocr')) throw new Error('No cargó el lector de escaneos');
+  const rutas = ['https://cdn.jsdelivr.net/npm/@tesseract.js-data/spa/4.0.0_best_int', 'https://tessdata.projectnaptha.com/4.0.0'];
+  for (const langPath of rutas) {
+    try {
+      aviso && aviso('Preparando el lector de escaneos (solo la primera vez tarda)…');
+      ocrTrabajador = await Tesseract.createWorker('spa', 1, {
+        langPath,
+        workerPath: 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/worker.min.js',
+        corePath: 'https://cdn.jsdelivr.net/npm/tesseract.js-core@5.1.1'
+      });
+      return ocrTrabajador;
+    } catch (e) { ocrTrabajador = null; }
+  }
+  throw new Error('No se pudo descargar el diccionario de español para leer escaneos');
+}
+
+// Lee un PDF: el texto que trae y, en las páginas escaneadas, OCR
+async function textoLicitacion(file, aviso) {
+  const nombre = (file.name || '').toLowerCase();
+  if (!nombre.endsWith('.pdf')) return { texto: await textoDeArchivo(file), ocr: false };
+  if (!await asegurarLibreria('pdf')) throw new Error('La librería de PDF no cargó');
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  const doc = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
+  const paginas = Math.min(doc.numPages, 60);
+  const textos = [], escaneadas = [];
+  for (let i = 1; i <= paginas; i++) {
+    const pg = await doc.getPage(i);
+    const c = await pg.getTextContent();
+    // Se respetan los renglones: varios datos dependen de leer línea por línea
+    let t = '', y = null;
+    c.items.forEach(it => { const yy = Math.round(it.transform[5]); if (y !== null && Math.abs(yy - y) > 3) t += '\n'; t += it.str + ' '; y = yy; });
+    textos[i] = t;
+    if (t.replace(/\s/g, '').length < 40) escaneadas.push(i);
+  }
+  if (escaneadas.length) {
+    const w = await lectorOcr(aviso);
+    for (const [k, i] of escaneadas.entries()) {
+      aviso && aviso(`Leyendo escaneo · página ${k + 1} de ${escaneadas.length}`);
+      const pg = await doc.getPage(i);
+      const vp = pg.getViewport({ scale: 2 });
+      const cv = document.createElement('canvas');
+      cv.width = vp.width; cv.height = vp.height;
+      await pg.render({ canvasContext: cv.getContext('2d'), viewport: vp }).promise;
+      const r = await w.recognize(cv);
+      textos[i] = r.data.text;
+    }
+  }
+  return { texto: textos.filter(Boolean).join('\n\n'), ocr: escaneadas.length > 0 };
+}
+
+// ---------- ventana: subir archivos y crear las fichas ----------
+function abrirGeneradorFichas() {
+  let ov = document.getElementById('gen-overlay');
+  if (!ov) {
+    ov = document.createElement('div'); ov.id = 'gen-overlay'; ov.className = 'modal-overlay';
+    document.body.appendChild(ov);
+    ov.addEventListener('click', e => { if (e.target === ov) ov.classList.remove('active'); });
+  }
+  ov.innerHTML = `
+    <div class="modal gen-modal">
+      <div class="modal-header"><h2>Generar fichas desde los archivos de la licitación</h2><button class="modal-close" data-x>×</button></div>
+      <div class="modal-body gen-body">
+        <label class="gen-drop" id="gen-drop">
+          <input type="file" id="gen-files" multiple accept=".pdf,.xlsx,.xls,.csv,.txt" hidden>
+          <b>Suelta aquí todos los archivos de una licitación</b>
+          <span>Convocatoria o invitación, bases, anexos técnicos y económicos, catálogo de conceptos, junta de aclaraciones, acta de apertura y fallo. Los escaneos se leen solos.</span>
+        </label>
+        <div id="gen-lista"></div>
+        <div id="gen-resultado"></div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-ghost" data-x>Cerrar</button><button class="btn btn-primary" id="gen-crear" disabled>Crear fichas</button></div>
+    </div>`;
+  ov.querySelectorAll('[data-x]').forEach(b => b.addEventListener('click', () => ov.classList.remove('active')));
+  const drop = ov.querySelector('#gen-drop');
+  const procesar = files => procesarGenerador([...files]);
+  ov.querySelector('#gen-files').addEventListener('change', e => procesar(e.target.files));
+  ['dragover', 'dragenter'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('sobre'); }));
+  ['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('sobre'); }));
+  drop.addEventListener('drop', e => procesar(e.dataTransfer.files));
+  ov.classList.add('active');
+}
+
+async function procesarGenerador(files) {
+  const lista = document.getElementById('gen-lista');
+  const res = document.getElementById('gen-resultado');
+  res.innerHTML = '';
+  lista.innerHTML = files.map((f, i) => `<div class="gen-doc" id="gen-doc-${i}"><b>${escapeHtml(f.name)}</b><span>En espera…</span></div>`).join('');
+  const docs = [];
+  for (const [i, f] of files.entries()) {
+    const el = document.getElementById('gen-doc-' + i).querySelector('span');
+    try {
+      el.textContent = 'Leyendo…';
+      const r = await textoLicitacion(f, m => { el.textContent = m; });
+      const tipo = clasificarDocLic(f.name, r.texto);
+      docs.push({ nombre: f.name, texto: r.texto, ocr: r.ocr, tipo });
+      el.textContent = `${TIPOS_DOC_LIC[tipo]}${r.ocr ? ' · escaneo leído con OCR' : ''}`;
+    } catch (e) {
+      el.textContent = 'No se pudo leer: ' + e.message;
+      el.classList.add('error');
+    }
+  }
+  if (!docs.length) return;
+  const x = leerLicitacion(docs);
+  window._ultimaLicitacion = { docs, x };   // para revisar a detalle si algo sale raro
+  docs.forEach((d, i) => { if (d.ajena) { const el = document.getElementById('gen-doc-' + files.findIndex(f => f.name === d.nombre)); if (el) el.classList.add('ajena'); } });
+  const fichasNuevas = fichasDesdeLicitacion(x);
+  const etiqueta = { proyecto: 'Ficha de proyecto', apertura: 'Ficha de licitantes', ganador: 'Ficha de ganador' };
+  const obras = state.projects.slice().sort((a, b) => String(a.proyecto).localeCompare(String(b.proyecto), 'es'));
+  const sugerida = obras.find(o => x.licitacion && String(o.comentario || '').includes(x.licitacion)) ||
+    obras.map(o => ({ o, s: parecido(o.proyecto, x.titulo) })).sort((a, b) => b.s - a.s).filter(z => z.s >= 0.6).map(z => z.o)[0];
+  const fila = (k, v) => v ? `<div><span>${k}</span><b>${escapeHtml(String(v))}</b></div>` : '';
+  res.innerHTML = `
+    <div class="gen-res">
+      <h4>${escapeHtml(x.titulo || 'Licitación')}</h4>
+      <p class="gen-sub">${escapeHtml([x.procedimiento, x.licitacion, x.convocante, x.ubicacion].filter(Boolean).join(' · '))}</p>
+      ${x.avisos.length ? `<div class="gen-avisos">${x.avisos.map(a => `<p>⚠ ${escapeHtml(a)}</p>`).join('')}</div>` : ''}
+      <div class="gen-datos">
+        ${fila('Apertura', fechaLarga(x.fechas.apertura))}${fila('Fallo', fechaLarga(x.fechas.fallo))}
+        ${fila('Junta de aclaraciones', fechaLarga(x.fechas.junta))}${fila('Plazo', x.plazo)}
+        ${fila('Presupuesto base', x.presupuestoBase ? '$' + x.presupuestoBase.toLocaleString('es-MX', { minimumFractionDigits: 2 }) : '')}
+        ${fila('Ganador', x.ganador ? `${x.ganador.licitante}${x.ganador.monto ? ' · $' + x.ganador.monto.toLocaleString('es-MX', { minimumFractionDigits: 2 }) : ''}` : '')}
+        ${fila('Licitantes', x.propuestas.length ? String(x.propuestas.length) : '')}
+        ${fila('Concreto', x.tipos.map(t => `f'c ${t.fc}${t.premezclado ? ' premezclado' : ''}`).join(', '))}
+        ${fila('Concreto especializado', x.alertas.join(' · ') || 'Sin señales')}
+      </div>
+      <div class="gen-fichas">
+        ${fichasNuevas.map((f, i) => `<label><input type="checkbox" data-gf="${i}" checked> ${etiqueta[f.tipo]}</label>`).join('')}
+      </div>
+      <label class="gen-obra">Ligar a la obra del pipeline
+        <select id="gen-obra"><option value="">— Ninguna —</option>${obras.map(o => `<option value="${escapeHtml(o.id)}" ${sugerida && sugerida.id === o.id ? 'selected' : ''}>${escapeHtml(o.proyecto)}</option>`).join('')}</select>
+      </label>
+    </div>`;
+  const btn = document.getElementById('gen-crear');
+  btn.disabled = false;
+  btn.onclick = () => {
+    const elegidas = [...document.querySelectorAll('[data-gf]:checked')].map(c => fichasNuevas[Number(c.dataset.gf)]);
+    if (!elegidas.length) { toast('Elige al menos una ficha', 'warn'); return; }
+    const obra = document.getElementById('gen-obra').value || null;
+    elegidas.forEach(f => { f.proyecto_id = obra; fichas().push(f); });
+    saveState(`Generó ${elegidas.length} ficha(s) de "${(x.titulo || '').slice(0, 50)}" desde archivos`);
+    document.getElementById('gen-overlay').classList.remove('active');
+    state.licVista = 'fichas'; licSel = elegidas[0].id; renderLicTab();
+    toast(`${elegidas.length} ficha(s) creadas`);
+  };
+}
+
+// ---------- la ficha del ganador ----------
+function fichaGanador(f) {
+  const esc = escapeHtml;
+  const ev = (f.evaluacion || []).filter(e => e.licitante);
+  const g = f.ganador || {};
+  const pb = Number(f.presupuesto_base) || null;
+  const mdp = v => '$' + fmtMdpLic(v / 1e6) + ' mdp';
+  // Las diferencias chicas se leen mejor en pesos
+  const dinero = v => Math.abs(v) < 1e6 ? '$' + Math.round(v).toLocaleString('es-MX') : mdp(v);
+  const sinPunto = v => String(v || '').replace(/\.+$/, '');
+  const vsPb = v => pb ? ((v - pb) / pb * 100) : null;
+  const orden = ev.slice().sort((a, b) => a.monto - b.monto);
+  const segundo = ev.filter(e => e.resultado !== 'Ganador').sort((a, b) => (b.total || 0) - (a.total || 0))[0];
+  const tiras = [
+    { et: 'Monto adjudicado', v: g.monto ? mdp(g.monto) : '' },
+    { et: 'Contra presupuesto base', v: g.monto && pb ? `${vsPb(g.monto).toFixed(1)}%` : '' },
+    { et: 'Licitantes', v: ev.length ? String(ev.length) : '' },
+    { et: 'Inicio · término', v: f.inicio ? `${fechaCortaLic(f.inicio)}${f.termino ? ' – ' + fechaCortaLic(f.termino) : ''}` : '' },
+    { et: 'Duración', v: f.duracion }
+  ].filter(t => t.v);
+  const datos = [
+    ['Dependencia', f.dependencia], ['Ubicación', f.ubicacion], ['Licitación', f.licitacion],
+    ['Fecha del fallo', fechaLarga(f.fecha_fallo)], ['Firma del contrato', fechaLarga(f.firma)],
+    ['Presupuesto base', pb ? mdp(pb) : ''], ['Garantías', f.garantias]
+  ].filter(d => d[1]);
+  const relevantes = [];
+  if (g.licitante && g.monto) relevantes.push(`Ganó ${sinPunto(g.licitante)} con ${mdp(g.monto)}${pb ? `, ${Math.abs(vsPb(g.monto)).toFixed(1)}% ${vsPb(g.monto) < 0 ? 'debajo' : 'arriba'} del presupuesto base` : ''}.`);
+  const evG = ev.find(e => e.resultado === 'Ganador');
+  if (evG && segundo && evG.total && segundo.total) relevantes.push(`Ganó por ${(evG.total - segundo.total).toFixed(0)} punto(s): ${evG.total} contra ${segundo.total} de ${sinPunto(segundo.licitante)}.`);
+  if (orden.length > 1) relevantes.push(`La propuesta más baja fue ${orden[0].resultado === 'Ganador' ? 'la ganadora' : 'de ' + orden[0].licitante}; entre la más baja y la más alta hubo ${dinero(orden[orden.length - 1].monto - orden[0].monto)}.`);
+  const desechadas = ev.filter(e => e.resultado === 'Desechada');
+  if (desechadas.length) relevantes.push(`${desechadas.length} propuesta(s) desechada(s): ${desechadas[0].motivo || 'ver detalle'}.`);
+  return `
+  <article class="ficha">
+    <header class="ficha-head">
+      <div class="ficha-head-texto">
+        <div class="ficha-marca">CEMEX</div>
+        <h2>${esc(f.titulo || 'Sin título')}</h2>
+        <h3>${esc(f.subtitulo || 'Fallo')}</h3>
+        ${f.bajada ? `<p>${esc(f.bajada)}</p>` : ''}
+      </div>
+      <div class="ficha-foto sin-foto ficha-ganador-sello"><span>Ganador</span><b>${esc(g.licitante || '—')}</b></div>
+    </header>
+    ${tiras.length ? `<div class="ficha-tiras">${tiras.map(t => `<div class="ficha-tira"><span>${esc(t.et)}</span><b>${esc(t.v)}</b></div>`).join('')}</div>` : ''}
+    <div class="ficha-cuerpo ficha-cuerpo-ap">
+      <section class="ficha-col">
+        <div class="ficha-bloque-tit azul">Datos clave del fallo</div>
+        <div class="ficha-datos">${datos.map(([k, v]) => `<div><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join('')}</div>
+      </section>
+      <section class="ficha-col">
+        <div class="ficha-bloque-tit azul">Puntos obtenidos</div>
+        <div class="ficha-barras"><canvas id="chart-ganador"></canvas></div>
+      </section>
+      <section class="ficha-col ficha-col-ancha">
+        <div class="ficha-bloque-tit azul">Evaluación de las propuestas</div>
+        <table class="ficha-tabla">
+          <thead><tr><th>Licitante</th><th class="num">Importe sin IVA</th><th class="num">vs presupuesto</th><th class="num">Técnicos</th><th class="num">Económicos</th><th class="num">Total</th><th>Resultado</th></tr></thead>
+          <tbody>${ev.map(e => `
+            <tr class="${e.resultado === 'Ganador' ? 'ficha-ganadora' : ''}">
+              <td>${esc(e.licitante)}${e.motivo ? `<small class="ficha-motivo">${esc(e.motivo)}</small>` : ''}</td>
+              <td class="num">${mdp(e.monto)}</td>
+              <td class="num ${vsPb(e.monto) < 0 ? 'neg' : 'pos'}">${pb ? (vsPb(e.monto) >= 0 ? '+' : '') + vsPb(e.monto).toFixed(1) + '%' : '—'}</td>
+              <td class="num">${e.tecnicos ?? '—'}</td><td class="num">${e.economicos ?? '—'}</td><td class="num"><b>${e.total ?? '—'}</b></td>
+              <td><span class="ficha-res ${String(e.resultado || '').toLowerCase().replace(/\s/g, '')}">${esc(e.resultado || '')}</span></td>
+            </tr>`).join('')}</tbody>
+        </table>
+      </section>
+    </div>
+    <div class="ficha-pie">
+      ${bloqueLista('Lo más relevante', relevantes)}
+    </div>
+  </article>`;
+}
+
+function dibujarGanador(f) {
+  const el = document.getElementById('chart-ganador');
+  if (!el || typeof Chart === 'undefined') return;
+  if (charts.ganador) charts.ganador.destroy();
+  const ev = (f.evaluacion || []).filter(e => e.total);
+  if (!ev.length) { el.parentElement.innerHTML = '<p class="ficha-sin">El fallo no trae puntos por licitante.</p>'; return; }
+  el.parentElement.style.height = Math.max(170, ev.length * 34 + 50) + 'px';
+  const corto = s => s.length > 28 ? s.slice(0, 26) + '…' : s;
+  charts.ganador = new Chart(el, {
+    type: 'bar',
+    data: {
+      labels: ev.map(e => corto(e.licitante)),
+      datasets: [
+        { label: 'Técnicos', data: ev.map(e => e.tecnicos || 0), backgroundColor: ev.map(e => e.resultado === 'Ganador' ? '#0003aa' : '#9da0e4'), stack: 's', borderRadius: 3 },
+        { label: 'Económicos', data: ev.map(e => e.economicos || 0), backgroundColor: ev.map(e => e.resultado === 'Ganador' ? '#f22230' : '#f7a1a8'), stack: 's', borderRadius: 3 }
+      ]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } },
+        tooltip: { callbacks: { footer: items => `Total: ${ev[items[0].dataIndex].total} puntos` } } },
+      scales: {
+        x: { stacked: true, max: 100, grid: { color: '#edeef8' }, ticks: { font: { size: 9.5 } } },
+        y: { stacked: true, grid: { display: false }, ticks: { color: '#14173d', font: { size: 10 }, autoSkip: false } }
+      }
+    }
+  });
+}
+
+// Edición sencilla de la ficha del ganador
+function editarGanador(f) {
+  let ov = document.getElementById('ganador-overlay');
+  if (!ov) {
+    ov = document.createElement('div'); ov.id = 'ganador-overlay'; ov.className = 'modal-overlay';
+    document.body.appendChild(ov);
+  }
+  const esc = escapeHtml;
+  const ev = (f.evaluacion || []).slice();
+  ov.innerHTML = `
+    <div class="modal" style="max-width:980px">
+      <div class="modal-header"><h2>Editar ficha del ganador</h2><button class="modal-close" data-x>×</button></div>
+      <div class="modal-body">
+        <div class="field full"><label>Título</label><input id="eg-titulo" value="${esc(f.titulo || '')}"></div>
+        <div class="field"><label>Dependencia</label><input id="eg-dep" value="${esc(f.dependencia || '')}"></div>
+        <div class="field"><label>Ubicación</label><input id="eg-ubi" value="${esc(f.ubicacion || '')}"></div>
+        <div class="field"><label>Licitación</label><input id="eg-lic" value="${esc(f.licitacion || '')}"></div>
+        <div class="field"><label>Presupuesto base (pesos)</label><input id="eg-pb" type="number" step="0.01" value="${f.presupuesto_base || ''}"></div>
+        <div class="field"><label>Fecha del fallo</label><input id="eg-ff" type="date" value="${f.fecha_fallo || ''}"></div>
+        <div class="field"><label>Duración</label><input id="eg-dur" value="${esc(f.duracion || '')}"></div>
+        <div class="field"><label>Inicio</label><input id="eg-ini" type="date" value="${f.inicio || ''}"></div>
+        <div class="field"><label>Término</label><input id="eg-ter" type="date" value="${f.termino || ''}"></div>
+        <div class="field full">
+          <label>Propuestas · marca la ganadora</label>
+          <table class="eg-tabla"><thead><tr><th></th><th>Licitante</th><th>Importe (pesos)</th><th>Técnicos</th><th>Económicos</th><th>Motivo si se desechó</th></tr></thead>
+          <tbody>${[...ev, {}].map((e, i) => `<tr>
+            <td><input type="radio" name="eg-gan" value="${i}" ${e.resultado === 'Ganador' ? 'checked' : ''}></td>
+            <td><input data-c="licitante" value="${esc(e.licitante || '')}"></td>
+            <td><input data-c="monto" type="number" step="0.01" value="${e.monto || ''}"></td>
+            <td><input data-c="tecnicos" type="number" step="0.01" value="${e.tecnicos ?? ''}"></td>
+            <td><input data-c="economicos" type="number" step="0.01" value="${e.economicos ?? ''}"></td>
+            <td><input data-c="motivo" value="${esc(e.motivo || '')}"></td></tr>`).join('')}</tbody></table>
+        </div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-ghost" data-x>Cancelar</button><button class="btn btn-primary" data-ok>Guardar</button></div>
+    </div>`;
+  ov.querySelectorAll('[data-x]').forEach(b => b.addEventListener('click', () => ov.classList.remove('active')));
+  ov.querySelector('[data-ok]').addEventListener('click', () => {
+    const v = id => document.getElementById(id).value.trim();
+    const gan = (ov.querySelector('[name="eg-gan"]:checked') || {}).value;
+    const filas = [...ov.querySelectorAll('.eg-tabla tbody tr')].map((tr, i) => {
+      const o = {}; tr.querySelectorAll('[data-c]').forEach(inp => { o[inp.dataset.c] = inp.value.trim(); });
+      ['monto', 'tecnicos', 'economicos'].forEach(k => { o[k] = o[k] === '' ? null : Number(o[k]); });
+      if (o.tecnicos != null || o.economicos != null) o.total = Math.round(((o.tecnicos || 0) + (o.economicos || 0)) * 100) / 100;
+      o.resultado = String(i) === gan ? 'Ganador' : o.motivo ? 'Desechada' : 'No ganó';
+      return o;
+    }).filter(o => o.licitante && o.monto);
+    Object.assign(f, { titulo: v('eg-titulo'), dependencia: v('eg-dep'), ubicacion: v('eg-ubi'), licitacion: v('eg-lic'),
+      presupuesto_base: Number(v('eg-pb')) || null, fecha_fallo: v('eg-ff') || null, duracion: v('eg-dur'),
+      inicio: v('eg-ini') || null, termino: v('eg-ter') || null, evaluacion: filas });
+    const gg = filas.find(o => o.resultado === 'Ganador');
+    f.ganador = gg ? { licitante: gg.licitante, monto: gg.monto } : null;
+    saveState(`Editó la ficha del ganador de "${(f.titulo || '').slice(0, 50)}"`);
+    ov.classList.remove('active'); renderLicitaciones();
+  });
+  ov.classList.add('active');
+}
+
+async function exportFichaImagenPptx(f) {
+  const nodo = document.querySelector('#lic-detalle .ficha');
+  if (!nodo) return;
+  if (!await asegurarLibreria('imagen') || !await asegurarLibreria('pptx')) return;
+  toast('Preparando la lámina…', 'warn');
+  const lienzo = await html2canvas(nodo, { scale: 2, backgroundColor: '#ffffff', logging: false, windowWidth: Math.max(nodo.scrollWidth, 1280) });
+  const pres = crearPresentacion(f.titulo || 'Ficha de licitación');
+  const sl = pres.addSlide({ masterName: MASTER });
+  const r = lienzo.width / lienzo.height;
+  let w = 12.6, h = w / r; if (h > 6.9) { h = 6.9; w = h * r; }
+  sl.addImage({ data: lienzo.toDataURL('image/png'), x: (13.333 - w) / 2, y: 0.3, w, h });
+  await pres.writeFile({ fileName: `Ficha_${nombreArchivoFicha(f)}.pptx` });
+  toast('Lámina descargada');
+}
+
+// ==========================================================================
 // PDM · PARTICIPACIÓN DE MERCADO
 // Lee del pipeline: volumen total de cada obra, lo que trae CEMEX y lo que
 // traen los competidores. El "mercado mapeado" son las obras que ya tienen
@@ -9069,13 +10829,34 @@ function renderChartShare(data) {
 // El BPR y el PDM solo trabajan con las obras marcadas para información completa
 function datosBPR() { return datosUnicos(getFiltered()).filter(p => p.detalle_bpr); }
 
+function renderPerdidas() {
+  const perdidas = datosUnicos(getFiltered()).filter(p => /^07/.test(p.estatus || ''));
+  const tabla = (id, clave, titulo) => {
+    const g = {};
+    perdidas.forEach(p => {
+      const k = clave(p) || 'Sin capturar';
+      if (!g[k]) g[k] = { obras: [], vol: 0 };
+      g[k].obras.push(p); g[k].vol += volCemex(p) || 0;
+    });
+    const filas = Object.entries(g).sort((a, b) => b[1].vol - a[1].vol || b[1].obras.length - a[1].obras.length);
+    const el = document.getElementById(id);
+    if (!perdidas.length) { el.innerHTML = '<tr><td class="pdm-sin">No hay obras perdidas con los filtros actuales.</td></tr>'; return; }
+    el.innerHTML = `<thead><tr><th>${titulo}</th><th class="num">Obras</th><th class="num">K m³</th></tr></thead><tbody>` +
+      filas.map(([k, v]) => `<tr data-k="${escapeHtml(k)}" class="${k === 'Sin capturar' ? 'sin-dato' : ''}"><td>${escapeHtml(k)}</td><td class="num">${v.obras.length}</td><td class="num">${fmtNum(Math.round(v.vol * 10) / 10)}</td></tr>`).join('') + '</tbody>';
+    el.querySelectorAll('tbody tr').forEach(tr => tr.addEventListener('dblclick', () =>
+      abrirDesglose(`${titulo} · ${tr.dataset.k}`, g[tr.dataset.k].obras)));
+  };
+  tabla('perd-ganadores', p => p.ganador, 'Lo ganó');
+  tabla('perd-motivos', p => p.motivo_perdida, 'Motivo');
+}
+
 // Pestaña PDM: dos vistas, las fichas por subsegmento (con el mapa) y la competencia
 function renderPdmTab() {
   const vista = state.pdmVista === 'comp' ? 'comp' : 'fichas';
   document.getElementById('pdmv-fichas').hidden = vista !== 'fichas';
   document.getElementById('pdmv-comp').hidden = vista !== 'comp';
   document.querySelectorAll('[data-pdmv]').forEach(b => b.classList.toggle('on', b.dataset.pdmv === vista));
-  if (vista === 'comp') renderPDM(); else renderBPR();
+  if (vista === 'comp') { renderPDM(); renderPerdidas(); } else renderBPR();
 }
 document.addEventListener('click', e => {
   const b = e.target.closest && e.target.closest('[data-pdmv]');
@@ -10133,7 +11914,7 @@ function switchView(name) {
   if (name === 'map') renderMap();
   if (name === 'cap') renderCapturaTab();
   if (name === 'eq') renderEquiposTab();
-  if (name === 'lic') renderLicitaciones();
+  if (name === 'lic') renderLicTab();
 }
 
 // ==========================================================================
@@ -10880,6 +12661,11 @@ async function exportXlsx() {
     { h: 'Arranque', w: 12, get: p => p.fecha_arranque },
     { h: 'Prioridad', w: 9, get: p => p.prioridad, fmt: '0' },
     { h: 'Equipos', w: 40, get: p => resumenEquipos(p), align: 'left' },
+    { h: 'Fecha de registro', w: 14, get: p => p.fecha_registro || '' },
+    { h: 'Duración (meses)', w: 12, get: p => p.duracion_meses || '' },
+    { h: 'Lo ganó', w: 24, get: p => p.ganador || '' },
+    { h: 'Motivo de pérdida', w: 22, get: p => p.motivo_perdida || '' },
+    { h: 'Detalle de pérdida', w: 34, get: p => p.motivo_detalle || '', align: 'left' },
     { h: 'Gerente', w: 20, get: p => nombrePersona(p.gerente) },
     { h: 'Jefatura', w: 20, get: p => nombrePersona(p.jefatura) },
     { h: 'Asesor', w: 20, get: p => nombrePersona(p.asesor) },
@@ -11139,6 +12925,8 @@ function construirHtmlActualizado() {
     projects: state.projects,
     catalogs: state.catalogs,
     fichas: state.fichas || [],
+    oportunidades: state.oportunidades || [],
+    radarPrefs: state.radarPrefs || {},
     _metadata: state._metadata || null
   }).replace(/<\//g, '<\\/');   // evita que un comentario cierre la etiqueta de datos
 
@@ -11345,6 +13133,10 @@ const ALIAS_EXCEL = {
   conversion_tecnica: ['conv tecnica', 'conversion tecnica'],
   detalle_bpr: ['pdm', 'bpr', 'proyecto estrategico', 'informacion completa'],
   ppto_2027: ['ppto 2027', 'presupuesto 2027', 'ppto'],
+  fecha_registro: ['fecha de registro', 'registro', 'fecha registro', 'fecha de alta'],
+  ganador: ['lo gano', 'ganador', 'quien lo gano', 'ganado por'],
+  motivo_perdida: ['motivo de perdida', 'por que se perdio', 'motivo perdida'],
+  motivo_detalle: ['detalle de perdida'],
   proveedor_unico: ['proveedor unico']
 };
 const INDICE_ALIAS = Object.fromEntries(
@@ -11818,6 +13610,7 @@ function wire() {
     e.currentTarget.classList.toggle('active', state.filters.seguimiento);
     refrescarVistas();
   });
+  document.getElementById('btn-notif').addEventListener('click', e => { e.stopPropagation(); abrirNotificaciones(); });
   document.getElementById('chip-ppto').addEventListener('click', e => {
     state.filters.ppto = !state.filters.ppto;
     e.currentTarget.classList.toggle('active', state.filters.ppto);
@@ -11906,6 +13699,7 @@ function wire() {
   document.getElementById('btn-save-file').addEventListener('click', guardarArchivo);
   document.getElementById('btn-merge').addEventListener('click', abrirMerge);
   document.getElementById('lic-nueva').addEventListener('click', () => abrirFicha(null));
+  document.getElementById('lic-generar').addEventListener('click', abrirGeneradorFichas);
   document.getElementById('vp-pptx').addEventListener('click', () => {
     // El BPR exporta lo filtrado: aquí se acota a lo marcado para el VP
     const guardado = state.filters.highlight;
@@ -11961,6 +13755,12 @@ function arrancarConDatos() {
   state.projects.forEach(p => { if (!p.history) p.history = []; });
   const sinClasificar = migrarTodo();
   tomarFoto();
+  setTimeout(() => { if (typeof actualizarCampana === 'function') actualizarCampana(); if (typeof cargarRadarAuto === 'function') cargarRadarAuto(true); }, 0);
+  // Una sola vez para todo el equipo: responsables de Cuentas Nacionales desde el catálogo
+  const llenadasCn = completarResponsablesCn();
+  if (llenadasCn && userAuth) {
+    setTimeout(() => saveState(`Completó gerente y asesor comercial de ${llenadasCn} obras de Cuentas Nacionales con el catálogo`), 0);
+  }
   updateUserBadge();
   populateFilters();
   refrescarTodo();
