@@ -724,6 +724,46 @@ body {
   font-size: 9px; font-weight: 700; vertical-align: middle;
 }
 .chip-toggle.chip-ppto.active { background: #e8f6ee; border-color: #b7e2c8; color: #15803d; }
+.chip-toggle.chip-cargar { font-family: inherit; border-style: dashed; }
+.chip-toggle.chip-cargar:hover { border-color: #15803d; color: #15803d; }
+.cell-ppto27 { color: #15803d; font-weight: 600; }
+.ppto27-info { grid-column: 1 / -1; margin-top: 6px; font-size: 11.5px; color: #15803d; background: #e8f6ee; border: 1px solid #b7e2c8; border-radius: 7px; padding: 6px 10px; }
+.ppto27-info span { color: var(--text-3); }
+.ppto-modal { max-width: 1080px; }
+.ppto-body { display: block !important; }
+.ppto-estado { margin-top: 10px; font-size: 12px; color: var(--accent-4); }
+.ppto-estado.error { color: #c0121d; }
+.ppto-resumen { display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); gap: 8px; }
+.ppto-resumen div { background: #f7f8fc; border: 1px solid var(--border); border-radius: 9px; padding: 8px 11px; }
+.ppto-resumen span { display: block; font-size: 10px; letter-spacing: .05em; text-transform: uppercase; color: var(--text-3); font-weight: 600; }
+.ppto-resumen b { font-size: 17px; color: var(--accent-4); }
+.ppto-fuente { margin: 8px 0 4px; font-size: 11px; color: var(--text-3); line-height: 1.5; }
+.ppto-aviso { margin: 6px 0; padding: 6px 10px; border-radius: 6px; background: #fff4e6; border: 1px solid #f5cf9a; color: #8a4b07; font-size: 11.5px; }
+.ppto-filtros { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0; }
+.ppto-chip { display: inline-block; font-size: 10.5px; font-weight: 600; padding: 3px 9px; border-radius: 12px; background: #f3f4fb; color: var(--text-2); white-space: nowrap; }
+.ppto-chip.ok { background: #e8f6ee; color: #15803d; }
+.ppto-chip.warn { background: #fff4e6; color: #8a4b07; }
+.ppto-chip.no { background: #fde8ea; color: #c0121d; }
+.ppto-chip.nueva { background: #eef0ff; color: var(--accent-4); }
+.ppto-tabla-wrap { max-height: 46vh; overflow: auto; border: 1px solid var(--border); border-radius: 9px; }
+.ppto-tabla { width: 100%; border-collapse: collapse; font-size: 12px; }
+.ppto-tabla th { position: sticky; top: 0; background: var(--accent-4); color: #fff; text-align: left; font-size: 10px; letter-spacing: .05em; text-transform: uppercase; padding: 7px 8px; z-index: 1; }
+.ppto-tabla th.num, .ppto-tabla td.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.ppto-tabla td { padding: 6px 8px; border-bottom: 1px solid #edeef8; vertical-align: top; }
+.ppto-tabla td small { display: block; font-size: 10.5px; color: var(--text-3); margin-top: 2px; }
+.ppto-tabla td small.ppto-nota { color: #8a4b07; }
+.ppto-tabla select { width: 100%; max-width: 380px; font-family: inherit; font-size: 11.5px; padding: 4px 6px; border: 1px solid var(--border-2); border-radius: 6px; }
+.ppto-tabla select.ppto-estatus { margin-top: 4px; max-width: 220px; }
+.ppto-tabla tr.ppto-no td:first-child { border-left: 3px solid #f5a3aa; }
+.ppto-tabla tr.ppto-warn td:first-child { border-left: 3px solid #f5cf9a; }
+.ppto-tabla tr.ppto-ok td:first-child { border-left: 3px solid #b7e2c8; }
+.ppto-sin { margin-top: 10px; padding: 8px 11px; border: 1px solid var(--border); border-radius: 9px; background: #fafbff; }
+.ppto-sin h4 { margin: 0 0 6px; font-size: 12px; }
+.ppto-sin p { margin: 0; display: flex; flex-wrap: wrap; gap: 5px; }
+.ppto-sin span { font-size: 11px; padding: 3px 9px; border-radius: 12px; background: #fff; border: 1px solid var(--border-2); }
+.ppto-sin em { color: var(--text-3); font-style: normal; }
+.ppto-opc { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 10px; font-size: 12px; color: var(--text-2); }
+.ppto-opc input { accent-color: #15803d; }
 .modal-toggle.toggle-ppto { background: #e8f6ee; border-color: #b7e2c8; color: #15803d; }
 #aviso-version {
   position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 1000;
@@ -807,10 +847,39 @@ body {
 .rad-botones { display: flex; gap: 6px; margin-left: auto; }
 .rad-g { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 10px; align-items: start; }
 .rad-feed { display: flex; flex-direction: column; gap: 8px; }
-.rad-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 11px 14px; transition: box-shadow .2s, border-color .2s; }
+.rad-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 11px 14px; transition: box-shadow .2s, border-color .2s;
+  display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 11px; }
+.rad-card.cerrada { opacity: .62; }
+.rad-av { width: 36px; height: 36px; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .02em; }
+.rad-cuerpo { min-width: 0; }
+.rad-quien { font-size: 12px; color: var(--text-2); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 62%; }
+.rad-quien b { color: var(--text); font-weight: 600; }
+.rad-cuando { font-size: 11px; color: var(--text-3); white-space: nowrap; }
+.rad-etqs { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin: 0 0 7px; }
+.rad-cierra { font-size: 9.5px; font-weight: 700; padding: 2px 7px; border-radius: 4px; background: #fff4e6; color: #8a4b07; }
+.rad-cierra.urgente { background: #fde8ea; color: #c0121d; }
+.rad-cerrada-et { font-size: 9.5px; font-weight: 700; padding: 2px 7px; border-radius: 4px; background: #f3f4fb; color: var(--text-3); }
+.rad-pal-et { font-size: 10px; padding: 2px 7px; border-radius: 4px; background: #fff2b3; color: #6b5300; }
+.rad-sep { display: flex; align-items: center; gap: 10px; margin: 6px 2px 0; font-size: 10.5px; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--text-3); }
+.rad-sep::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.rad-feed-head { display: flex; gap: 10px; align-items: center; font-size: 12px; color: var(--text-2); padding: 0 2px; }
+.rad-feed-head b { color: var(--accent-4); font-size: 14px; }
+.rad-mas { font-family: inherit; font-size: 12px; padding: 9px; border-radius: 9px; border: 1px dashed var(--border-2); background: #fff;
+  color: var(--accent-4); cursor: pointer; font-weight: 600; }
+.rad-mas:hover { background: #eef0ff; }
+.rad-atrib { margin: 2px 2px 0; font-size: 10.5px; color: var(--text-3); line-height: 1.5; }
+.rad-estado-sel, .rad-orden-sel { font-family: inherit; font-size: 11.5px; padding: 5px 8px; border: 1px solid var(--border-2); border-radius: 8px; background: #fff; max-width: 170px; }
+.rad-cerradas { display: inline-flex; gap: 5px; align-items: center; font-size: 11.5px; color: var(--text-2); cursor: pointer; }
+.rad-cerradas input { accent-color: var(--accent-4); }
+.rad-fuente-est.falla i { background: #c0121d; }
+.rad-fuente-det { margin: -1px 0 5px 17px; font-size: 10.5px; color: #8a4b07; line-height: 1.4; }
+.rad-aviso { margin: 4px 0 6px; padding: 6px 8px; border-radius: 6px; background: #fff4e6; border: 1px solid #f5cf9a; color: #8a4b07; font-size: 11px; line-height: 1.45; }
+.rad-registro { font-size: 11px; margin-top: 4px; }
 .rad-card.fav { border-left: 4px solid #f5b400; }
 .rad-card.resaltada { border-color: var(--accent-4); box-shadow: 0 0 0 3px #d9dcf7; }
-.rad-card-top { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.rad-card-top { display: flex; gap: 8px; align-items: baseline; }
 .rad-tipo { font-size: 9.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; background: #f3f4fb; color: var(--text-2); }
 .rad-tipo.obra { background: #eef0ff; color: var(--accent-4); }
 .rad-fuente { font-size: 10.5px; color: var(--text-3); }
@@ -818,7 +887,7 @@ body {
 .rad-num { font-size: 10.5px; color: var(--text-3); font-variant-numeric: tabular-nums; }
 .rad-estrella { margin-left: auto; border: none; background: none; font-size: 18px; line-height: 1; color: #d6d8e8; cursor: pointer; padding: 0 2px; }
 .rad-estrella.on { color: #f5b400; }
-.rad-card h4 { margin: 6px 0 2px; font-size: 13.5px; font-weight: 600; line-height: 1.35; color: var(--text); }
+.rad-card h4 { margin: 3px 0 6px; font-size: 14px; font-weight: 600; line-height: 1.38; color: var(--text); }
 .rad-card mark { background: #fff2b3; color: inherit; padding: 0 1px; border-radius: 2px; }
 .rad-meta { margin: 0 0 6px; font-size: 11.5px; color: var(--text-2); }
 .rad-fechas { display: flex; flex-wrap: wrap; gap: 5px; }
@@ -2833,6 +2902,10 @@ tr.row-highlighted {
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
           Ppto. 2027
         </div>
+        <button type="button" class="chip-toggle chip-cargar" id="btn-ppto27" title="Sube el Excel del presupuesto 2027 y concilia Venta 27 y EBITDA 27 contra el pipeline">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+          Presupuesto 27
+        </button>
         <div class="chip-toggle chip-highlight" id="chip-highlight">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l2.6 6.6L21 9.3l-4.8 4.3 1.4 6.4L12 16.8 6.4 20l1.4-6.4L3 9.3l6.4-.7z"/></svg>
           Presentación VP
@@ -3751,7 +3824,7 @@ const CAMPOS_TEXTO = ['id', 'proyecto', 'cliente', 'estatus', 'segmento', 'subse
   'estado', 'direccion', 'modalidad', 'tipo_licitacion', 'responsable', 'asesor', 'gerente', 'jefatura',
   'gerente_comercial', 'comentario', 'obra_madre', 'ganador', 'motivo_perdida', 'motivo_detalle'];
 const CAMPOS_NUMERO = ['concreto_total', 'volumen_total', 'share_cemex', 'venta', 'ebitda', 'ebit',
-  'longitud_km', 'duracion_meses', 'anio'];
+  'longitud_km', 'duracion_meses', 'anio', 'venta_27', 'ebitda_27', 'vol_27'];
 
 function fechaDeExcel(v) {
   if (v && typeof v.getTime === 'function') return isNaN(v.getTime()) ? null : v;
@@ -3987,7 +4060,7 @@ let shaRemoto = null;     // sha del data.json que tenemos cargado
 let commitRemoto = null;  // último commit visto, para detectar cambios de otros
 let pollTimer = null;
 let guardando = false;
-const APP_VERSION = '2026-10-09';
+const APP_VERSION = '2026-10-28';
 let versionVieja = false;
 let conteoRemoto = null;
 let fotoRemota = new Map();   // cómo estaba cada obra la última vez que se leyó de GitHub
@@ -3997,7 +4070,9 @@ function tomarFoto() {
   fotoRemota = new Map((state.projects || []).map(p => [p.id, JSON.stringify(p)]));
   fotoFichas = new Map((state.fichas || []).map(f => [f.id, JSON.stringify(f)]));
   fotoOps = new Map((state.oportunidades || []).map(o => [o.id, JSON.stringify(o)]));
-}      // cuántas obras tiene la base publicada
+  fotoPpto = JSON.stringify(state.presupuestos || {});
+}
+let fotoPpto = '{}';      // cuántas obras tiene la base publicada
 let bajaPermitida = false;    // un borrado hecho a propósito no dispara el candado
 
 function cargarAcceso() {
@@ -4054,6 +4129,7 @@ function paquete() {
     papelera: state.papelera || [],
     oportunidades: state.oportunidades || [],
     radarPrefs: state.radarPrefs || {},
+    presupuestos: state.presupuestos || {},
     _metadata: state._metadata
   };
 }
@@ -4127,6 +4203,9 @@ function fusionarRemoto(remoto) {
   const mias = userAuth && state.radarPrefs ? state.radarPrefs[userAuth.iniciales] : null;
   state.radarPrefs = { ...(remoto.radarPrefs || {}) };
   if (mias) state.radarPrefs[userAuth.iniciales] = mias;
+
+  // Presupuestos: si esta persona no los cambió, se queda lo publicado
+  if (JSON.stringify(state.presupuestos || {}) === fotoPpto) state.presupuestos = remoto.presupuestos || {};
 
   const papR = Array.isArray(remoto.papelera) ? remoto.papelera : [];
   const vistos = new Set(papR.map(x => x.id + '|' + x.eliminada));
@@ -4310,6 +4389,7 @@ function aplicarDatos(data) {
   state.fichas = Array.isArray(data.fichas) ? data.fichas : (state.fichas || []);
   state.oportunidades = Array.isArray(data.oportunidades) ? data.oportunidades : (state.oportunidades || []);
   state.radarPrefs = data.radarPrefs && typeof data.radarPrefs === 'object' ? data.radarPrefs : (state.radarPrefs || {});
+  state.presupuestos = data.presupuestos && typeof data.presupuestos === 'object' ? data.presupuestos : (state.presupuestos || {});
   state.papelera = Array.isArray(data.papelera) ? data.papelera : (state.papelera || []);
   state._metadata = data._metadata || null;
   const vRemota = data._metadata && data._metadata.app_version;
@@ -4359,6 +4439,7 @@ function saveLocalData(note) {
     fichas: state.fichas || [],
     oportunidades: state.oportunidades || [],
     radarPrefs: state.radarPrefs || {},
+    presupuestos: state.presupuestos || {},
     _metadata: state._metadata
   }));
   lastSyncTime = Date.now();
@@ -4675,6 +4756,11 @@ const COLS_PIPELINE = [
     td: p => competidores(p).length ? `<div class="cell-cliente" title="${escapeHtml(textoCompetencia(p))}">${escapeHtml(textoCompetencia(p))}</div>` : '<span class="cell-tbc">—</span>' },
   { k: 'venta', t: 'Venta', sub: 'M MXN', sort: 'venta', def: false, num: true,
     td: p => p.venta ? fmtNum(p.venta) : '<span class="cell-tbc">TBC</span>' },
+  { k: 'venta27', t: 'Venta 27', sub: 'M MXN · Ppto.', sort: 'venta_27', def: false, num: true,
+    td: p => p.venta_27 !== undefined && p.venta_27 !== null
+      ? `<span class="cell-ppto27" title="Presupuesto 2027${p.ppto27 && p.ppto27.lineas ? ': ' + escapeHtml(p.ppto27.lineas.join(' + ')) : ''}">${fmtNum(p.venta_27)}</span>` : '<span class="cell-tbc">—</span>' },
+  { k: 'ebitda27', t: 'EBITDA 27', sub: 'M MXN · Ppto.', sort: 'ebitda_27', def: false, num: true,
+    td: p => p.ebitda_27 !== undefined && p.ebitda_27 !== null ? `<span class="cell-ppto27">${fmtNum(p.ebitda_27)}</span>` : '<span class="cell-tbc">—</span>' },
   { k: 'longitud_km', t: 'Longitud', sub: 'km', sort: 'longitud_km', def: false, num: true,
     td: p => !aplicaLongitud(p) ? '<span class="cell-tbc">n/a</span>' : (p.longitud_km ? fmtNum(p.longitud_km) : '<span class="cell-tbc">TBC</span>') },
   { k: 'asesor_cargo', t: 'Asesor', sort: null, def: true,
@@ -4783,8 +4869,11 @@ function renderTable() {
     return acc;
   }, { count: 0, concreto: 0, imp: 0 });
 
+  const v27 = data.reduce((a, p) => a + (Number(p.venta_27) || 0), 0), e27 = data.reduce((a, p) => a + (Number(p.ebitda_27) || 0), 0);
+  const extra27 = (state.filters.ppto || data.some(p => p.venta_27)) && (v27 || e27)
+    ? ` · Ppto. 27: <strong>$${fmtNum(v27)}</strong> M venta · <strong>$${fmtNum(e27)}</strong> M EBITDA` : '';
   document.getElementById('filter-summary').innerHTML =
-    `<strong>${sum.count}</strong> proyecto${sum.count===1?'':'s'} · <strong>${fmtNum(sum.concreto)}</strong> K m³ de concreto · <strong>${sum.imp}</strong> para presentación VP <span style="color:var(--text-soft);margin-left:8px">· doble clic para ver la ficha</span>`;
+    `<strong>${sum.count}</strong> proyecto${sum.count===1?'':'s'} · <strong>${fmtNum(sum.concreto)}</strong> K m³ de concreto · <strong>${sum.imp}</strong> para presentación VP ${extra27} <span style="color:var(--text-soft);margin-left:8px">· doble clic para ver la ficha</span>`;
 
   const cols = colsVisibles();
   document.getElementById('pipeline-head').innerHTML = `
@@ -5025,6 +5114,7 @@ function openModal(id = null) {
           <span>Ppto. 2027</span>
         </label>
       </div>
+      ${p.venta_27 !== undefined && p.venta_27 !== null ? `<div class="ppto27-info">Presupuesto 2027: venta <b>$${fmtNum(p.venta_27)} M</b> · EBITDA <b>$${fmtNum(p.ebitda_27)} M</b>${p.vol_27 ? ` · <b>${fmtNum(p.vol_27)}</b> K m³` : ''}${p.ppto27 && p.ppto27.lineas ? ` <span>· ${escapeHtml(p.ppto27.lineas.join(' + '))}</span>` : ''}. La venta total de la obra no se toca.</div>` : ''}
     </div>
     <div class="field full resp-sep"><span>Responsables · Dirección de Construcción</span></div>
     <div class="field">
@@ -9163,10 +9253,22 @@ function desgloseEnGrafica(chart, resolver) {
 // ==========================================================================
 const FUENTES_RADAR = [
   { k: 'ComprasMX', url: 'https://comprasmx.buengobierno.gob.mx/sitiopublico/#/' },
-  { k: 'Proyectos México', url: 'https://www.proyectosmexico.gob.mx/proyectos/#profile' },
   { k: 'Proyectos Estratégicos', url: 'https://proyectosestrategicosmx.hacienda.gob.mx/sitiopublico/#/' },
-  { k: 'DOF · convocatorias', url: 'https://www.dof.gob.mx/' }
+  { k: 'Postor Abierto · vigentes', url: 'https://postor.com.mx/licitaciones/vigentes' },
+  { k: 'Proyectos México', url: 'https://www.proyectosmexico.gob.mx/proyectos/#profile' },
+  { k: 'DOF · convocatorias', url: 'https://dof.gob.mx/' }
 ];
+// Orden y color de cada fuente del feed
+const FUENTES_FEED = {
+  'ComprasMX': { c: '#0003aa', ini: 'CM' },
+  'Proyectos Estratégicos': { c: '#7c3aed', ini: 'PE' },
+  'Portal estatal': { c: '#0f766e', ini: 'ES' },
+  'CFE': { c: '#15803d', ini: 'CFE' },
+  'DOF': { c: '#8a4b07', ini: 'DOF' },
+  'Equipo': { c: '#f22230', ini: '' }
+};
+const RADAR_WORKFLOW = 'radar-licitaciones.yml';
+const RADAR_VERSION_ESPERADA = 2;
 const PALABRAS_SUGERIDAS = ['concreto', 'pavimento', 'carretera', 'autopista', 'libramiento', 'puente', 'viaducto',
   'tren', 'ferroviario', 'presa', 'acueducto', 'hidráulica', 'aeropuerto', 'puerto', 'muelle', 'hospital', 'planta'];
 const ETAPAS_RADAR = [
@@ -9179,6 +9281,7 @@ const ETAPAS_RADAR = [
 const MESES_ES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
 
 let radarFiltro = 'todas', radarBuscar = '', radarTipo = '', radarResaltar = null, radarEnvio = null, radarOrigen = '';
+let radarOrden = 'recientes', radarEstado = '', radarCerradas = false, radarMostrar = 40;
 let radarVisitaSesion = null;   // lo que era "nuevo" al abrir esta sesión
 
 function oportunidades() {
@@ -9268,6 +9371,36 @@ function tipoProcedimiento(numero) {
   return 'otro';
 }
 const ETQ_TIPO = { obra: 'Obra pública', adquisicion: 'Adquisición o servicio', otro: 'Proyecto' };
+// El número manda; si no hay número (portales estatales, CFE), lo que dijo el radar
+function tipoOp(op) {
+  const t = tipoProcedimiento(op && op.numero);
+  return t !== 'otro' ? t : ((op && op.tipo) || 'otro');
+}
+function fuenteOp(op) { return op._auto || op.alta_por === 'radar' ? (op.fuente || 'ComprasMX') : 'Equipo'; }
+// Fecha con la que se acomoda en el feed: publicación, si no cuándo se detectó o se capturó
+function fechaFeed(op) {
+  const pub = (op.fechas || {}).publicacion;
+  const alta = String(op.alta || op.detectada || '').slice(0, 10);
+  return pub || alta || '';
+}
+// Abierta: alguna fecha del procedimiento sigue por venir (o no trae fechas)
+function sigueAbierta(op) {
+  const fs = Object.values(op.fechas || {}).filter(Boolean);
+  if (!fs.length) return true;
+  const ap = (op.fechas || {}).apertura;
+  if (ap) return diasHasta(ap) >= 0;
+  return fs.some(f => diasHasta(f) >= 0);
+}
+function haceCuanto(iso) {
+  if (!iso) return '';
+  const d = -diasHasta(String(iso).slice(0, 10));
+  if (d <= 0) return 'hoy';
+  if (d === 1) return 'ayer';
+  if (d < 7) return `hace ${d} días`;
+  if (d < 14) return 'hace una semana';
+  if (d < 60) return `hace ${Math.floor(d / 7)} semanas`;
+  return fechaCorta(String(iso).slice(0, 10));
+}
 function fuenteDeLiga(url) {
   const u = String(url || '').toLowerCase();
   if (u.includes('comprasmx') || u.includes('compranet')) return 'ComprasMX';
@@ -9350,7 +9483,9 @@ function renderRadar() {
   const esc = escapeHtml;
   const misPalabras = prefsRadar().palabras || [];
   const visita = visitaRadar();
-  const todas = oportunidadesTodas().filter(op => !radarOrigen || (radarOrigen === 'auto') === !!op._auto);
+  const universo = oportunidadesTodas();
+  const todas = universo.filter(op => (!radarOrigen || fuenteOp(op) === radarOrigen) && (radarCerradas || sigueAbierta(op)
+    || (op.favoritos || []).length || (op.enviados || []).length));
   const esFav = op => (op.favoritos || []).includes(yo());
   const meEnviaron = op => (op.enviados || []).some(x => x.para === yo());
   const conteo = {
@@ -9364,17 +9499,23 @@ function renderRadar() {
     if (radarFiltro === 'palabras' && !palabrasDe(op, misPalabras).length) return false;
     if (radarFiltro === 'favoritas' && !esFav(op)) return false;
     if (radarFiltro === 'enviadas' && !meEnviaron(op)) return false;
-    if (radarTipo && tipoProcedimiento(op.numero) !== radarTipo) return false;
+    if (radarTipo && tipoOp(op) !== radarTipo) return false;
+    if (radarEstado && normEq(op.estado || '') !== normEq(radarEstado)) return false;
     if (q && !normEq([op.titulo, op.dependencia, op.numero, op.estado, op.notas].join(' ')).includes(q)) return false;
     return true;
   });
-  // Primero lo que tiene la fecha más cercana; luego lo más reciente
+  // Feed: lo más reciente arriba; o, si se pide, lo que cierra primero
   lista = lista.sort((a, b) => {
-    const fa = proximaFecha(a), fb = proximaFecha(b);
-    if (fa && fb) return fa.f.localeCompare(fb.f);
-    if (fa) return -1; if (fb) return 1;
-    return String(b.alta || '').localeCompare(String(a.alta || ''));
+    if (radarOrden === 'cierre') {
+      const fa = proximaFecha(a), fb = proximaFecha(b);
+      if (fa && fb) return fa.f.localeCompare(fb.f);
+      if (fa) return -1; if (fb) return 1;
+    }
+    return fechaFeed(b).localeCompare(fechaFeed(a)) || String(b.alta || '').localeCompare(String(a.alta || ''));
   });
+  const nuevasVisita = lista.filter(op => op.alta && op.alta > visita && op.alta_por !== yo()).length;
+  const estadosLista = [...new Set(universo.map(op => op.estado).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'es'));
+  const origenes = Object.keys(FUENTES_FEED).filter(k => universo.some(op => fuenteOp(op) === k));
 
   const resalta = (texto, pal) => {
     let h = esc(texto || '');
@@ -9396,42 +9537,89 @@ function renderRadar() {
 
   const tarjeta = op => {
     const pal = palabrasDe(op, misPalabras);
-    const tipo = tipoProcedimiento(op.numero);
+    const tipo = tipoOp(op);
     const nueva = op.alta && op.alta > visita && op.alta_por !== yo();
     const envios = (op.enviados || []).filter(x => x.para === yo());
     const obra = op.proyecto_id ? state.projects.find(p => p.id === op.proyecto_id) : null;
     const ficha = op.ficha_id ? fichas().find(f => f.id === op.ficha_id) : null;
+    const fuente = fuenteOp(op);
+    const ff = FUENTES_FEED[fuente] || FUENTES_FEED.ComprasMX;
+    const ini = fuente === 'Equipo' ? nombreCorto(op.alta_por || '').split(' ').map(x => x[0]).join('').slice(0, 2).toUpperCase() || 'EQ' : ff.ini;
+    const prox = proximaFecha(op);
+    const dProx = prox ? diasHasta(prox.f) : null;
+    const cuando = haceCuanto(fechaFeed(op));
+    const abierta = sigueAbierta(op);
+    const deQuien = fuente === 'Equipo' ? `Capturada por ${esc(nombreCorto(op.alta_por || '') || 'el equipo')}` : esc(fuente);
     return `
-    <article class="rad-card ${esFav(op) ? 'fav' : ''} ${radarResaltar === op.id ? 'resaltada' : ''}" data-op="${esc(op.id)}">
-      <div class="rad-card-top">
-        <span class="rad-tipo ${tipo}">${ETQ_TIPO[tipo]}</span>
-        ${op.fuente ? `<span class="rad-fuente">${esc(op.fuente)}</span>` : ''}
-        ${nueva ? '<span class="rad-nueva">Nueva</span>' : ''}
-        ${op._auto ? '<span class="rad-auto" title="La encontró el radar automático; al marcarla o enviarla queda para el equipo">Encontrada sola</span>' : ''}
-        ${op.numero ? `<span class="rad-num">${esc(op.numero)}</span>` : ''}
-        <button type="button" class="rad-estrella ${esFav(op) ? 'on' : ''}" data-rad="fav" title="${esFav(op) ? 'Quitar de favoritas' : 'Marcar como favorita'}">★</button>
+    <article class="rad-card ${esFav(op) ? 'fav' : ''} ${radarResaltar === op.id ? 'resaltada' : ''} ${abierta ? '' : 'cerrada'}" data-op="${esc(op.id)}">
+      <div class="rad-av" style="--c:${ff.c}" title="${esc(fuente)}">${esc(ini)}</div>
+      <div class="rad-cuerpo">
+        <div class="rad-card-top">
+          <span class="rad-quien"><b>${resalta(op.dependencia || 'Convocante sin nombre', pal)}</b>${op.estado ? ` · ${resalta(op.estado, pal)}` : ''}</span>
+          <span class="rad-cuando">${deQuien}${cuando ? ' · ' + cuando : ''}</span>
+          <button type="button" class="rad-estrella ${esFav(op) ? 'on' : ''}" data-rad="fav" title="${esFav(op) ? 'Quitar de favoritas' : 'Marcar como favorita'}">★</button>
+        </div>
+        <h4>${resalta(op.titulo || 'Sin título', pal)}</h4>
+        <div class="rad-etqs">
+          <span class="rad-tipo ${tipo}">${ETQ_TIPO[tipo]}</span>
+          ${nueva ? '<span class="rad-nueva">Nueva</span>' : ''}
+          ${!abierta ? '<span class="rad-cerrada-et">Cerrada</span>' : prox && dProx <= 7 ? `<span class="rad-cierra ${dProx <= 3 ? 'urgente' : ''}">${esc(prox.et)} ${dProx === 0 ? 'hoy' : dProx === 1 ? 'mañana' : 'en ' + dProx + ' días'}</span>` : ''}
+          ${op.procedimiento ? `<span class="rad-num">${esc(op.procedimiento)}</span>` : ''}
+          ${op.numero ? `<span class="rad-num">${esc(op.numero)}</span>` : ''}
+          ${op.monto ? `<span class="rad-num">$${fmtNum(op.monto)} M</span>` : ''}
+          ${pal.length ? `<span class="rad-pal-et">${pal.map(esc).join(' · ')}</span>` : ''}
+        </div>
+        <div class="rad-fechas">${ETAPAS_RADAR.map(e => chipFecha(op, e)).join('')}</div>
+        ${op.notas ? `<p class="rad-notas">${resalta(op.notas, pal)}</p>` : ''}
+        ${envios.length ? envios.map(x => `<p class="rad-envio"><b>${esc(nombreCorto(x.de))}</b> te la envió${x.nota ? `: “${esc(x.nota)}”` : ''}</p>`).join('') : ''}
+        <div class="rad-acc">
+          ${op.link ? `<a href="${esc(op.link)}" target="_blank" rel="noopener">${/postor\.com\.mx/.test(op.link) ? 'Ver ficha' : 'Abrir convocatoria'} ↗</a>` : ''}
+          ${op.link_oficial ? `<a href="${esc(op.link_oficial)}" target="_blank" rel="noopener">Expediente oficial ↗</a>` : ''}
+          <button type="button" data-rad="enviar">Enviar a…</button>
+          ${ficha ? `<button type="button" data-rad="verficha">Ver ficha</button>` : `<button type="button" data-rad="ficha">Crear ficha</button>`}
+          ${obra ? `<button type="button" data-rad="verobra">Ver en el pipeline</button>` : `<button type="button" data-rad="pipeline">Agregar al pipeline</button>`}
+          <button type="button" data-rad="editar">Editar</button>
+        </div>
+        ${radarEnvio === op.id ? `
+          <div class="rad-enviar">
+            <select data-rad-para><option value="">¿A quién?</option>${personas.map(i => `<option value="${i}">${esc(nombrePersona(i))}</option>`).join('')}</select>
+            <input data-rad-nota placeholder="Nota (opcional)">
+            <button type="button" class="btn btn-primary btn-sm" data-rad="mandar">Enviar</button>
+          </div>` : ''}
       </div>
-      <h4>${resalta(op.titulo || 'Sin título', pal)}</h4>
-      <p class="rad-meta">${[op.dependencia, op.estado, op.monto ? '$' + fmtNum(op.monto) + ' M' : ''].filter(Boolean).map(x => resalta(x, pal)).join(' · ')}</p>
-      <div class="rad-fechas">${ETAPAS_RADAR.map(e => chipFecha(op, e)).join('')}</div>
-      ${op.notas ? `<p class="rad-notas">${resalta(op.notas, pal)}</p>` : ''}
-      ${envios.length ? envios.map(x => `<p class="rad-envio"><b>${esc(nombreCorto(x.de))}</b> te la envió${x.nota ? `: “${esc(x.nota)}”` : ''}</p>`).join('') : ''}
-      <div class="rad-acc">
-        ${op.link ? `<a href="${esc(op.link)}" target="_blank" rel="noopener">Abrir convocatoria ↗</a>` : ''}
-        <button type="button" data-rad="enviar">Enviar a…</button>
-        ${ficha ? `<button type="button" data-rad="verficha">Ver ficha</button>` : `<button type="button" data-rad="ficha">Crear ficha</button>`}
-        ${obra ? `<button type="button" data-rad="verobra">Ver en el pipeline</button>` : `<button type="button" data-rad="pipeline">Agregar al pipeline</button>`}
-        <button type="button" data-rad="editar">Editar</button>
-      </div>
-      ${radarEnvio === op.id ? `
-        <div class="rad-enviar">
-          <select data-rad-para><option value="">¿A quién?</option>${personas.map(i => `<option value="${i}">${esc(nombrePersona(i))}</option>`).join('')}</select>
-          <input data-rad-nota placeholder="Nota (opcional)">
-          <button type="button" class="btn btn-primary btn-sm" data-rad="mandar">Enviar</button>
-        </div>` : ''}
     </article>`;
   };
 
+  // Separadores del feed: hoy, ayer, esta semana, antes
+  const grupoDe = op => {
+    const d = -diasHasta(fechaFeed(op) || '1970-01-01');
+    return d <= 0 ? 'Hoy' : d === 1 ? 'Ayer' : d < 7 ? 'Esta semana' : d < 31 ? 'Este mes' : 'Antes';
+  };
+  const visibles = lista.slice(0, radarMostrar);
+  let grupoAnt = null;
+  const feedHtml = visibles.map(op => {
+    let h = '';
+    if (radarOrden === 'recientes') {
+      const g = grupoDe(op);
+      if (g !== grupoAnt) { h += `<div class="rad-sep"><span>${g}</span></div>`; grupoAnt = g; }
+    }
+    return h + tarjeta(op);
+  }).join('');
+
+  // Estado de la búsqueda automática
+  const estadoAuto = () => {
+    if (!radarAuto) return '<p class="rad-nada">Consultando…</p>';
+    if (radarAuto.sinConfigurar) return '<p class="rad-nada">Todavía no está instalado el proceso diario en GitHub.</p>';
+    const viejo = (radarAuto.version || 1) < RADAR_VERSION_ESPERADA;
+    const fuentes = Object.entries(radarAuto.fuentes || {});
+    return `
+      <p class="rad-nada">Última revisión: <b>${radarAuto.generado ? new Date(radarAuto.generado).toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—'}</b></p>
+      ${viejo ? '<p class="rad-aviso">Está instalada la versión anterior del proceso. Reemplaza <b>radar/radar.py</b> en GitHub por la versión nueva.</p>' : ''}
+      ${fuentes.map(([k, v]) => `
+        <div class="rad-fuente-est ${v.ok ? 'ok' : 'falla'}"><i></i><span>${esc(k)}</span><b>${v.ok ? v.registros : '—'}</b></div>
+        ${!v.ok && v.detalle ? `<p class="rad-fuente-det">${esc(v.detalle)}</p>` : ''}`).join('')}`;
+  };
+  const urlActions = `https://github.com/${GH.owner}/${GH.repo}/actions/workflows/${RADAR_WORKFLOW}`;
   const proximas = todas.filter(esFav).flatMap(op => ETAPAS_RADAR
     .map(e => ({ op, e, f: (op.fechas || {})[e.k] }))
     .filter(x => x.f && diasHasta(x.f) >= 0 && diasHasta(x.f) <= 30))
@@ -9444,16 +9632,24 @@ function renderRadar() {
       <div class="rad-chips">
         ${[['todas', 'Todas'], ['palabras', 'Mis palabras clave'], ['favoritas', 'Favoritas'], ['enviadas', 'Enviadas a mí']]
           .map(([k, et]) => `<button type="button" class="rad-chip ${radarFiltro === k ? 'on' : ''}" data-radf="${k}">${et}<span>${conteo[k]}</span></button>`).join('')}
-        <select class="rad-origen-sel">
-          <option value="">Todo origen</option>
-          <option value="equipo" ${radarOrigen === 'equipo' ? 'selected' : ''}>Capturadas por el equipo</option>
-          <option value="auto" ${radarOrigen === 'auto' ? 'selected' : ''}>Encontradas solas</option>
+        <select class="rad-origen-sel" title="Fuente">
+          <option value="">Todas las fuentes</option>
+          ${origenes.map(k => `<option value="${esc(k)}" ${radarOrigen === k ? 'selected' : ''}>${k === 'Equipo' ? 'Capturadas por el equipo' : esc(k)}</option>`).join('')}
+        </select>
+        <select class="rad-estado-sel" title="Estado">
+          <option value="">Todo el país</option>
+          ${estadosLista.map(e => `<option value="${esc(e)}" ${radarEstado === e ? 'selected' : ''}>${esc(e)}</option>`).join('')}
         </select>
         <select class="rad-tipo-sel">
           <option value="">Todo tipo</option>
           <option value="obra" ${radarTipo === 'obra' ? 'selected' : ''}>Obra pública</option>
           <option value="adquisicion" ${radarTipo === 'adquisicion' ? 'selected' : ''}>Adquisición o servicio</option>
         </select>
+        <select class="rad-orden-sel" title="Orden">
+          <option value="recientes" ${radarOrden === 'recientes' ? 'selected' : ''}>Más recientes</option>
+          <option value="cierre" ${radarOrden === 'cierre' ? 'selected' : ''}>Próxima fecha</option>
+        </select>
+        <label class="rad-cerradas"><input type="checkbox" ${radarCerradas ? 'checked' : ''}> Incluir cerradas</label>
       </div>
       <div class="rad-botones">
         <button type="button" class="btn btn-ghost btn-sm" data-rad-top="resumen">Resumen de favoritas</button>
@@ -9462,9 +9658,17 @@ function renderRadar() {
     </div>
     <div class="rad-g">
       <div class="rad-feed">
-        ${lista.length ? lista.map(tarjeta).join('') : `<div class="rad-vacio">${todas.length
+        <div class="rad-feed-head">
+          <b>${lista.length.toLocaleString('es-MX')}</b> ${lista.length === 1 ? 'oportunidad' : 'oportunidades'}${radarCerradas ? '' : ' abiertas'}
+          ${nuevasVisita ? `<span class="rad-nueva">${nuevasVisita} nuevas desde tu última visita</span>` : ''}
+        </div>
+        ${lista.length ? feedHtml : `<div class="rad-vacio">${universo.length
           ? 'Nada coincide con el filtro.'
-          : 'Todavía no hay oportunidades. Agrega la primera con <b>+ Agregar oportunidad</b>: pega el resumen de la convocatoria del DOF o de ComprasMX, o sube el PDF, y se llenan solas las fechas.'}</div>`}
+          : radarAuto && !radarAuto.sinConfigurar
+            ? 'La búsqueda automática no trajo oportunidades en su última corrida. Revisa al costado qué respondió cada fuente; mientras, puedes agregar una con <b>+ Agregar oportunidad</b>.'
+            : 'Todavía no hay oportunidades. Agrega la primera con <b>+ Agregar oportunidad</b>: pega el resumen de la convocatoria del DOF o de ComprasMX, o sube el PDF, y se llenan solas las fechas.'}</div>`}
+        ${lista.length > radarMostrar ? `<button type="button" class="rad-mas" data-rad-mas>Ver ${Math.min(40, lista.length - radarMostrar)} más · quedan ${lista.length - radarMostrar}</button>` : ''}
+        ${radarAuto && radarAuto.atribucion ? `<p class="rad-atrib">Fuentes: ${esc(radarAuto.atribucion)}. Confirma fechas y requisitos en el expediente oficial.</p>` : ''}
       </div>
       <aside class="rad-lado">
         <section>
@@ -9483,11 +9687,9 @@ function renderRadar() {
             : '<p class="rad-nada">Configura las palabras que te interesan y te avisamos cuando entre una oportunidad que las mencione.</p>'}
         </section>
         <section>
-          <h4>Búsqueda automática</h4>
-          ${!radarAuto ? '<p class="rad-nada">Consultando…</p>'
-            : radarAuto.sinConfigurar ? '<p class="rad-nada">Todavía no está instalado el proceso diario en GitHub. Con él, aquí aparecen solas las licitaciones de obra pública de ComprasMX y el DOF.</p>'
-            : `<p class="rad-nada">Última revisión: ${radarAuto.generado ? new Date(radarAuto.generado).toLocaleString('es-MX', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '—'}</p>
-               ${Object.entries(radarAuto.fuentes || {}).map(([k, v]) => `<div class="rad-fuente-est ${v.ok ? 'ok' : ''}" title="${esc(v.detalle || '')}"><i></i><span>${esc(k)}</span><b>${v.ok ? v.registros : '—'}</b></div>`).join('')}`}
+          <div class="rad-sec-head"><h4>Búsqueda automática</h4><button type="button" data-rad-top="correr" title="Corre el proceso en GitHub; tarda unos minutos">Buscar ahora</button></div>
+          ${estadoAuto()}
+          <a class="rad-fuente-link rad-registro" href="${urlActions}" target="_blank" rel="noopener">Ver registro en GitHub ↗</a>
         </section>
         <section>
           <h4>Buscar en las plataformas</h4>
@@ -9505,12 +9707,18 @@ function renderRadar() {
   });
   cont.querySelectorAll('[data-radf]').forEach(b => b.addEventListener('click', () => { radarFiltro = b.dataset.radf; renderRadar(); }));
   cont.querySelector('.rad-tipo-sel').addEventListener('change', e => { radarTipo = e.target.value; renderRadar(); });
-  cont.querySelector('.rad-origen-sel').addEventListener('change', e => { radarOrigen = e.target.value; renderRadar(); });
+  cont.querySelector('.rad-origen-sel').addEventListener('change', e => { radarOrigen = e.target.value; radarMostrar = 40; renderRadar(); });
+  cont.querySelector('.rad-estado-sel').addEventListener('change', e => { radarEstado = e.target.value; radarMostrar = 40; renderRadar(); });
+  cont.querySelector('.rad-orden-sel').addEventListener('change', e => { radarOrden = e.target.value; renderRadar(); });
+  cont.querySelector('.rad-cerradas input').addEventListener('change', e => { radarCerradas = e.target.checked; radarMostrar = 40; renderRadar(); });
+  const mas = cont.querySelector('[data-rad-mas]');
+  if (mas) mas.addEventListener('click', () => { radarMostrar += 40; renderRadar(); });
   cont.querySelectorAll('[data-rad-top]').forEach(b => b.addEventListener('click', () => {
     const a = b.dataset.radTop;
     if (a === 'nueva') abrirOportunidad(null);
     if (a === 'palabras') editarPalabras();
     if (a === 'resumen') resumenFavoritas();
+    if (a === 'correr') correrRadarAhora(b);
   }));
   cont.querySelectorAll('[data-ir]').forEach(el => el.addEventListener('click', () => irAOportunidad(el.dataset.ir)));
   cont.querySelectorAll('.rad-card').forEach(card => {
@@ -9570,9 +9778,9 @@ function accionRadar(op, accion, card) {
   if (accion === 'pipeline') {
     const hoy = new Date().toISOString().slice(0, 10);
     const p = {
-      id: uid(), proyecto: op.titulo || 'Oportunidad del radar', cliente: op.dependencia || '', estado: op.estado || '',
+      id: uid(), proyecto: op.titulo || 'Oportunidad del radar', cliente: op.dependencia || '', estado: estadoDelMapa(op.estado) || op.estado || '',
       estatus: '02 - Licitación', direccion: 'Construcción',
-      tipo_licitacion: tipoProcedimiento(op.numero) === 'obra' ? 'Licitación de obra' : '',
+      tipo_licitacion: tipoOp(op) === 'obra' ? 'Licitación de obra' : '',
       comentario: [op.numero, op.link].filter(Boolean).join(' · '),
       fecha_update: hoy, fecha_registro: hoy,
       history: [{ ts: hoy, text: `Alta desde el radar de licitaciones${op.numero ? ' · ' + op.numero : ''}`, author: yo() }]
@@ -9587,8 +9795,31 @@ function accionRadar(op, accion, card) {
   }
 }
 
+async function correrRadarAhora(btn) {
+  if (!userAuth) return;
+  btn.disabled = true; btn.textContent = 'Lanzando…';
+  try {
+    const r = await fetch(`https://api.github.com/repos/${GH.owner}/${GH.repo}/actions/workflows/${RADAR_WORKFLOW}/dispatches`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${userAuth.token}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ref: GH.branch, inputs: { dias: '7' } })
+    });
+    if (r.status === 204) {
+      toast('Búsqueda lanzada en GitHub: en 3 a 6 minutos se actualiza el radar solo');
+      [4, 7, 10].forEach(m => setTimeout(() => cargarRadarAuto(true), m * 60 * 1000));
+    } else if (r.status === 403 || r.status === 404) {
+      toast('El token del equipo no tiene permiso para correr el proceso. Córrelo desde GitHub: Actions → Radar de licitaciones → Run workflow', 'warn');
+      window.open(`https://github.com/${GH.owner}/${GH.repo}/actions/workflows/${RADAR_WORKFLOW}`, '_blank', 'noopener');
+    } else toast('GitHub no aceptó la orden (' + r.status + ')', 'warn');
+  } catch (e) { toast('Sin conexión con GitHub', 'warn'); }
+  btn.disabled = false; btn.textContent = 'Buscar ahora';
+}
+
 function irAOportunidad(id) {
   radarResaltar = id;
+  radarMostrar = Math.max(radarMostrar, 2000);
+  const op = oportunidadesTodas().find(o => o.id === id);
+  if (op && !sigueAbierta(op)) radarCerradas = true;
   state.licVista = 'radar';
   if (!document.getElementById('view-lic').classList.contains('active')) switchView('lic');
   else renderLicTab();
@@ -9790,7 +10021,9 @@ function notificaciones() {
       if (!leidos.has(k)) out.push({ k, op, tipo: 'enviada', ts: x.ts, texto: `${nombreCorto(x.de)} te envió “${op.titulo}”${x.nota ? ': ' + x.nota : ''}` });
     });
     const pal = palabrasDe(op, pals);
-    if (pal.length && op.alta > visita && op.alta_por !== yo()) {
+    // De lo automático solo avisa lo reciente y lo que sigue abierto
+    const reciente = !op._auto || (diasHasta(fechaFeed(op)) >= -7 && sigueAbierta(op));
+    if (pal.length && reciente && op.alta > visita && op.alta_por !== yo()) {
       const k = op.id + '|nueva';
       if (!leidos.has(k)) out.push({ k, op, tipo: 'nueva', ts: op.alta, texto: `Nueva oportunidad con “${pal.join('”, “')}”: ${op.titulo}` });
     }
@@ -10575,6 +10808,473 @@ async function exportFichaImagenPptx(f) {
   sl.addImage({ data: lienzo.toDataURL('image/png'), x: (13.333 - w) / 2, y: 0.3, w, h });
   await pres.writeFile({ fileName: `Ficha_${nombreArchivoFicha(f)}.pptx` });
   toast('Lámina descargada');
+}
+
+// ==========================================================================
+// PRESUPUESTO 2027 · Venta 27 y EBITDA 27 por obra
+// El Excel de Planeación ("2027 EBITDA Consolidado Construcción") trae solo
+// el año 2027. El pipeline guarda el total de cada obra, así que lo del
+// presupuesto vive en campos propios (venta_27, ebitda_27, vol_27 y la
+// mensualización) y no pisa la venta total. Se carga subiendo el Excel; la
+// conciliación contra el pipeline se revisa antes de guardar.
+// ==========================================================================
+const PPTO_ANIO = '2027';
+const MESES_CORTOS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+const ESTATUS_ALTA_PPTO = ['01 - Proyecto', '02 - Licitación', '03 - Negociación', '04 - Contratado', '05 - Ejecución'];
+// Equivalencias que ya se revisaron a mano: nombre en el presupuesto → cómo se llama en el pipeline
+const PISTAS_PPTO = [
+  { ppto: /(mex|mx).{0,6}(qro|qrt).{0,30}148|esma/, obra: /cpo\.?\s*b\b|cuerpo b|palmillas/, nota: '' },
+  { ppto: /laterales.{0,20}tepotz|tepotz.{0,30}laterales/, obra: /tepotz.{0,25}jorobas/, nota: '' },
+  { ppto: /periferico oriente|puentes periferico/, obra: /alameda oriente|periferico oriente/, nota: 'Su cifra coincide con el LUCA de Puentes Alameda Oriente' },
+  { ppto: /distribuidor vial.{0,15}(gdl|guadalajara)|(gdl|guadalajara).{0,25}distribuidor|distribuidor.{0,20}\bt2\b/, obra: /(gdl|guadalajara).{0,30}distribuidor|distribuidor vial.{0,20}(gdl|guadalajara)/, nota: 'Por confirmar con Hugo y Fer' },
+  { ppto: /estaciones seguras/, obra: /estaciones seguras/, nota: 'Por confirmar con Hugo y Fer' }
+];
+// Renglones del Excel que no son obra: se suman aparte
+const RE_NO_OBRA = /^(total|subtotal|gran total)\b|\bopex\b|taller central|gastos? (de )?(operacion|central|administr)|corporativo|overhead|indirectos?\b|^ebitda\b/;
+
+function presupuesto() {
+  if (!state.presupuestos || typeof state.presupuestos !== 'object') state.presupuestos = {};
+  return state.presupuestos[PPTO_ANIO] || null;
+}
+
+// ---------- lectura del Excel ----------
+function leerPresupuestoExcel(wb, nombreArchivo) {
+  const nombres = wb.SheetNames.slice().sort((a, b) => (normEq(b) === 'consolidado') - (normEq(a) === 'consolidado'));
+  for (const nombreHoja of nombres) {
+    const filas = filasAbsolutas(wb.Sheets[nombreHoja]);
+    const r = leerHojaPresupuesto(filas);
+    if (r) return { ...r, hoja: nombreHoja, archivo: nombreArchivo };
+  }
+  throw new Error('No encontré la tabla del presupuesto: busco un renglón de encabezados con Status, el proyecto y los meses, y la columna de concepto (ING, EBITDA, VOL).');
+}
+
+function mesDeEncabezado(v) {
+  if (v instanceof Date) return v.getMonth();
+  if (typeof v === 'number' && v > 40000 && v < 60000) return new Date(Math.round((v - 25569) * 864e5)).getUTCMonth();
+  const t = normEq(v).replace(/[^a-z]/g, ' ').trim();
+  if (!t) return -1;
+  const p = t.split(/\s+/)[0];
+  const i = MESES_CORTOS.findIndex(m => p === m || p.startsWith(m) || (m === 'sep' && p === 'set'));
+  return p.length >= 3 && p.length <= 10 ? i : -1;
+}
+
+function leerHojaPresupuesto(filas) {
+  const CONCEPTOS = { ing: 'venta', ingreso: 'venta', ingresos: 'venta', venta: 'venta', ventas: 'venta',
+    ebitda: 'ebitda', ocf: 'ebitda', vol: 'volumen', volumen: 'volumen' };
+  const concepto = v => CONCEPTOS[normEq(v).replace(/[^a-z]/g, '')] || null;
+  // Encabezado: el renglón con más meses reconocidos (y de preferencia "Status")
+  let iEnc = -1, mejor = 0;
+  filas.slice(0, 40).forEach((r, i) => {
+    if (!r) return;
+    const meses = r.filter(v => mesDeEncabezado(v) >= 0).length;
+    const st = r.some(v => /^(status|estatus)$/.test(normEq(v))) ? 3 : 0;
+    if (meses >= 6 && meses + st > mejor) { mejor = meses + st; iEnc = i; }
+  });
+  if (iEnc < 0) return null;
+  const enc = filas[iEnc];
+  const colMes = Array(12).fill(-1);
+  enc.forEach((v, c) => { const m = mesDeEncabezado(v); if (m >= 0 && colMes[m] < 0) colMes[m] = c; });
+  if (colMes.filter(c => c >= 0).length < 6) return null;
+  const primeraMes = Math.min(...colMes.filter(c => c >= 0));
+  const colAcum = enc.findIndex((v, c) => c > primeraMes && /^(acum|acumulado|total|anual|fy|ano)/.test(normEq(v)));
+  // Concepto: la columna antes de los meses donde más aparecen ING / EBITDA / VOL
+  let colConc = -1, maxC = 0;
+  for (let c = 0; c < primeraMes; c++) {
+    const n = filas.slice(iEnc + 1).filter(r => r && concepto(r[c])).length;
+    if (n > maxC) { maxC = n; colConc = c; }
+  }
+  if (colConc < 0 || maxC < 2) return null;
+  const buscaCol = (re, defecto) => {
+    const c = enc.findIndex((v, i) => i < primeraMes && i !== colConc && re.test(normEq(v)));
+    return c >= 0 ? c : defecto;
+  };
+  // Proyecto: por encabezado; si no, la columna de texto más variada antes del concepto
+  let colProy = buscaCol(/proyecto|obra|nombre|descripcion/, -1);
+  if (colProy < 0) {
+    let maxU = 0;
+    for (let c = 0; c < colConc; c++) {
+      const u = new Set(filas.slice(iEnc + 1).map(r => r && typeof r[c] === 'string' ? r[c].trim() : '').filter(Boolean)).size;
+      if (u > maxU) { maxU = u; colProy = c; }
+    }
+  }
+  if (colProy < 0) return null;
+  const colSeg = buscaCol(/^seg/, -1), colStatus = buscaCol(/^(status|estatus)$/, -1);
+
+  const valor = v => (typeof v === 'number' && isFinite(v)) ? v : (v !== null && v !== '' && isFinite(Number(String(v).replace(/[$,\s]/g, ''))) ? Number(String(v).replace(/[$,\s]/g, '')) : 0);
+  const porNombre = new Map();
+  let ultimoNombre = '';
+  filas.slice(iEnc + 1).forEach(r => {
+    if (!r) return;
+    const k = concepto(r[colConc]);
+    let nombre = r[colProy] === null || r[colProy] === undefined ? '' : String(r[colProy]).trim();
+    if (!nombre && k) nombre = ultimoNombre;   // celdas combinadas: el nombre va solo en el primer renglón
+    if (!k || !nombre) { if (nombre) ultimoNombre = nombre; return; }
+    ultimoNombre = nombre;
+    if (!porNombre.has(nombre)) porNombre.set(nombre, {
+      nombre, segmento: colSeg >= 0 ? (r[colSeg] || '') : '', status: colStatus >= 0 ? (r[colStatus] || '') : '',
+      venta: 0, ebitda: 0, volumen: 0, meses: { venta: Array(12).fill(0), ebitda: Array(12).fill(0), volumen: Array(12).fill(0) }
+    });
+    const o = porNombre.get(nombre);
+    const meses = colMes.map(c => c >= 0 ? valor(r[c]) : 0);
+    const suma = meses.reduce((a, b) => a + b, 0);
+    const acum = colAcum >= 0 ? valor(r[colAcum]) : 0;
+    meses.forEach((v, i) => { o.meses[k][i] += v; });
+    o[k] += acum || suma;
+    if (acum && Math.abs(acum - suma) > Math.max(1, Math.abs(acum) * 0.01)) o.descuadre = true;
+  });
+  if (!porNombre.size) return null;
+
+  // Unidades: el archivo de Planeación viene en miles de pesos; si viene en pesos se nota en el tamaño
+  const todas = [...porNombre.values()];
+  const ventaMiles = todas.reduce((a, o) => a + (RE_NO_OBRA.test(normEq(o.nombre)) ? 0 : o.venta), 0);
+  const divisor = ventaMiles > 5e7 ? 1e6 : 1e3;   // > 50 mil millones "en miles" no es creíble: vienen pesos
+  const unidades = divisor === 1e6 ? 'pesos' : 'miles de pesos';
+  todas.forEach(o => {
+    ['venta', 'ebitda'].forEach(k => { o[k] = o[k] / divisor; o.meses[k] = o.meses[k].map(v => v / divisor); });
+    o.volumen = o.volumen / 1e3; o.meses.volumen = o.meses.volumen.map(v => v / 1e3);   // m³ → K m³
+    o.es_obra = !RE_NO_OBRA.test(normEq(o.nombre));
+  });
+  const obras = todas.filter(o => o.es_obra && (o.venta || o.ebitda || o.volumen));
+  const otros = todas.filter(o => !o.es_obra);
+  const sum = (arr, k) => arr.reduce((a, o) => a + (o[k] || 0), 0);
+  // Los renglones de total no se suman con lo demás
+  const sinTotales = otros.filter(o => !/^(total|subtotal|gran total)\b/.test(normEq(o.nombre)));
+  return {
+    unidades, filas: obras, otros: otros.map(o => ({ nombre: o.nombre, venta: o.venta, ebitda: o.ebitda })),
+    totales: {
+      venta: sum(obras, 'venta'), ebitda_proyectos: sum(obras, 'ebitda'), volumen: sum(obras, 'volumen'),
+      ebitda_total: sum(obras, 'ebitda') + sum(sinTotales, 'ebitda')
+    },
+    descuadres: obras.filter(o => o.descuadre).map(o => o.nombre)
+  };
+}
+
+// ---------- conciliación contra el pipeline ----------
+const VACIAS_PPTO = new Set(['de', 'del', 'la', 'las', 'los', 'el', 'y', 'en', 'a', 'al', 'para', 'por', 'con', 'obra', 'proyecto',
+  'etapa', 'fase', 'construccion', 'sa', 'cv', 'km', 'tramo', 'the']);
+function tokensObra(v) {
+  return normEq(v).replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(t => t.length > 1 && !VACIAS_PPTO.has(t));
+}
+function parecidoObra(a, b) {
+  const A = new Set(tokensObra(a)), B = new Set(tokensObra(b));
+  if (!A.size || !B.size) return 0;
+  let c = 0; A.forEach(t => { if (B.has(t)) c++; });
+  return c / Math.min(A.size, B.size) * (c >= 2 || Math.min(A.size, B.size) === 1 ? 1 : 0.6);
+}
+function sugerirObra(fila, alias) {
+  const obras = state.projects;
+  const k = normEq(fila.nombre);
+  if (alias && alias[k]) {
+    const o = obras.find(p => p.id === alias[k]);
+    if (o) return { id: o.id, tipo: 'confirmada', nota: '' };
+  }
+  const pista = PISTAS_PPTO.find(x => x.ppto.test(k));
+  if (pista) {
+    const cand = obras.filter(p => pista.obra.test(normEq(p.proyecto)));
+    const elegido = cand.filter(p => !esCotizacionAlterna(p)).sort((a, b) => (b.ppto_2027 === true) - (a.ppto_2027 === true))[0] || cand[0];
+    if (elegido) return { id: elegido.id, tipo: pista.nota ? 'confirmar' : 'sugerida', nota: pista.nota };
+  }
+  const exacta = obras.find(p => normEq(p.proyecto) === k);
+  if (exacta) return { id: exacta.id, tipo: 'sugerida', nota: '' };
+  const ranking = obras.map(p => ({ p, s: parecidoObra(fila.nombre, p.proyecto) })).filter(x => x.s >= 0.6)
+    .sort((a, b) => b.s - a.s || (b.p.ppto_2027 === true) - (a.p.ppto_2027 === true) || esCotizacionAlterna(a.p) - esCotizacionAlterna(b.p));
+  if (ranking.length && (ranking.length === 1 || ranking[0].s > ranking[1].s || ranking[0].p.ppto_2027)) {
+    return { id: ranking[0].p.id, tipo: ranking[0].s >= 0.99 ? 'sugerida' : 'confirmar', nota: ranking[0].s >= 0.99 ? '' : 'Nombre parecido: confírmalo' };
+  }
+  return { id: '', tipo: 'sin', nota: '' };
+}
+
+// ---------- ventana ----------
+let pptoBorrador = null;   // lo leído del Excel, antes de guardar
+
+function abrirPresupuesto() {
+  let ov = document.getElementById('ppto-overlay');
+  if (!ov) {
+    ov = document.createElement('div'); ov.id = 'ppto-overlay'; ov.className = 'modal-overlay';
+    document.body.appendChild(ov);
+    ov.addEventListener('click', e => { if (e.target === ov) ov.classList.remove('active'); });
+  }
+  const guardado = presupuesto();
+  pptoBorrador = guardado ? JSON.parse(JSON.stringify(guardado)) : null;
+  if (pptoBorrador) pptoBorrador.filas.forEach(f => { f._sel = f.obra_id || ''; f._sug = f.obra_id ? { tipo: 'confirmada', nota: '' } : sugerirObra(f, guardado.alias); if (!f.obra_id && f._sug.id) f._sel = f._sug.id; });
+  pintarPresupuesto();
+  ov.classList.add('active');
+}
+
+function pintarPresupuesto() {
+  const ov = document.getElementById('ppto-overlay');
+  const esc = escapeHtml;
+  const b = pptoBorrador;
+  const obras = state.projects.slice().sort((x, y) => String(x.proyecto).localeCompare(String(y.proyecto), 'es'));
+  const m = v => v === null || v === undefined || !isFinite(v) ? '—' : Number(v).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const etq = { confirmada: ['Ligada', 'ok'], sugerida: ['Empata', 'ok'], confirmar: ['Por confirmar', 'warn'], sin: ['Sin obra', 'no'], nueva: ['Alta nueva', 'nueva'] };
+  let cuerpo = '';
+  if (!b) {
+    cuerpo = `
+      <label class="gen-drop" id="ppto-drop">
+        <input type="file" id="ppto-file" accept=".xlsx,.xlsm,.xls" hidden>
+        <b>Sube el Excel del presupuesto ${PPTO_ANIO}</b>
+        <span>El consolidado de Planeación ("2027 EBITDA Consolidado Construcción"): un renglón por proyecto y concepto (ING, EBITDA, VOL), con los meses y el acumulado. Solo se leen las cifras ${PPTO_ANIO}; la venta total de cada obra no se toca.</span>
+      </label>
+      <div id="ppto-estado" class="ppto-estado"></div>`;
+  } else {
+    const ligadas = new Set(b.filas.map(f => f._sel).filter(x => x && x !== '__nueva'));
+    const marcadasSin = state.projects.filter(p => p.ppto_2027 === true && !ligadas.has(p.id));
+    const n = k => b.filas.filter(f => estadoFila(f) === k).length;
+    cuerpo = `
+      <div class="ppto-resumen">
+        <div><span>Venta ${PPTO_ANIO}</span><b>$${m(b.totales.venta)} M</b></div>
+        <div><span>EBITDA de proyectos</span><b>$${m(b.totales.ebitda_proyectos)} M</b></div>
+        ${Math.abs((b.totales.ebitda_total || 0) - (b.totales.ebitda_proyectos || 0)) > 0.05 ? `<div><span>EBITDA tras OPEX y Taller</span><b>$${m(b.totales.ebitda_total)} M</b></div>` : ''}
+        <div><span>Proyectos en el presupuesto</span><b>${b.filas.length}</b></div>
+        <div><span>Ligados al pipeline</span><b>${ligadas.size}</b></div>
+      </div>
+      <p class="ppto-fuente">${esc(b.archivo || '')}${b.hoja ? ' · hoja ' + esc(b.hoja) : ''} · cifras en M MXN (el archivo viene en ${esc(b.unidades || 'miles de pesos')}) · volumen en K m³${b.cargado ? ` · cargado el ${new Date(b.cargado).toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' })}${b.por ? ' por ' + esc(nombreCorto(b.por)) : ''}` : ''}</p>
+      ${(b.descuadres || []).length ? `<p class="ppto-aviso">En ${b.descuadres.length} proyecto(s) el acumulado no cuadra con la suma de los meses; se usó el acumulado: ${b.descuadres.map(esc).join(', ')}.</p>` : ''}
+      <div class="ppto-filtros">
+        <span class="ppto-chip ok">Empatan ${n('sugerida') + n('confirmada')}</span>
+        <span class="ppto-chip warn">Por confirmar ${n('confirmar')}</span>
+        <span class="ppto-chip no">Sin obra en el pipeline ${n('sin')}</span>
+        ${n('nueva') ? `<span class="ppto-chip nueva">Altas nuevas ${n('nueva')}</span>` : ''}
+        <span class="ppto-chip">Marcadas Ppto. 27 sin cifra ${marcadasSin.length}</span>
+      </div>
+      <div class="ppto-tabla-wrap">
+      <table class="ppto-tabla">
+        <thead><tr><th>En el presupuesto</th><th class="num">Venta 27</th><th class="num">EBITDA 27</th><th class="num">Vol. 27</th><th>Obra en el pipeline</th><th></th></tr></thead>
+        <tbody>${b.filas.map((f, i) => {
+          const est = estadoFila(f);
+          const o = f._sel && f._sel !== '__nueva' ? state.projects.find(p => p.id === f._sel) : null;
+          const total = o && Number(o.venta) ? Number(o.venta) : null;
+          const avisoVenta = o && total && f.venta && Math.abs(total - f.venta) / f.venta < 0.01
+            ? 'La venta total capturada es igual a la de 2027: revisa si es el total del contrato' : '';
+          return `<tr class="ppto-${etq[est][1]}">
+            <td><b>${esc(f.nombre)}</b>${f.segmento || f.status ? `<small>${esc([f.status, f.segmento].filter(Boolean).join(' · '))}</small>` : ''}</td>
+            <td class="num">${m(f.venta)}</td><td class="num">${m(f.ebitda)}</td><td class="num">${f.volumen ? m(f.volumen) : '—'}</td>
+            <td>
+              <select data-pf="${i}">
+                <option value="">— Sin ligar —</option>
+                <option value="__nueva" ${f._sel === '__nueva' ? 'selected' : ''}>+ Dar de alta como obra nueva</option>
+                ${obras.map(p => `<option value="${esc(p.id)}" ${f._sel === p.id ? 'selected' : ''}>${esc(p.proyecto)}${esCotizacionAlterna(p) ? ' (cotización alterna)' : ''}</option>`).join('')}
+              </select>
+              ${f._sel === '__nueva' ? `<select data-pe="${i}" class="ppto-estatus"><option value="">Estatus de la obra nueva…</option>${ESTATUS_ALTA_PPTO.map(s => `<option ${f._estatus === s ? 'selected' : ''}>${esc(s)}</option>`).join('')}</select>` : ''}
+              ${o ? `<small>Venta total en el pipeline: ${total ? '$' + m(total) + ' M' : 'sin capturar'}${o.ppto_2027 ? ' · ya marcada Ppto. 27' : ''}</small>` : ''}
+              ${(f._sug && f._sug.nota && f._sel === f._sug.id) || avisoVenta ? `<small class="ppto-nota">${esc([f._sug && f._sel === f._sug.id ? f._sug.nota : '', avisoVenta].filter(Boolean).join(' · '))}</small>` : ''}
+            </td>
+            <td><span class="ppto-chip ${etq[est][1]}">${etq[est][0]}</span></td>
+          </tr>`;
+        }).join('')}</tbody>
+      </table>
+      </div>
+      ${marcadasSin.length ? `
+        <div class="ppto-sin">
+          <h4>Marcadas Ppto. 2027 en el pipeline, sin cifra en el presupuesto (${marcadasSin.length})</h4>
+          <p>${marcadasSin.map(p => `<span>${esc(p.proyecto)}${esCotizacionAlterna(p) ? ' <em>cotización alterna</em>' : ''}</span>`).join('')}</p>
+        </div>` : ''}
+      ${(b.otros || []).length ? `<p class="ppto-fuente">Renglones que no son obra y no se ligan: ${b.otros.map(o => `${esc(o.nombre)}${o.ebitda ? ' (EBITDA ' + m(o.ebitda) + ')' : ''}`).join(' · ')}</p>` : ''}
+      <div class="ppto-opc">
+        <label><input type="checkbox" id="ppto-marcar" ${b._marcar !== false ? 'checked' : ''}> Marcar como Ppto. 2027 las obras ligadas</label>
+        <label><input type="checkbox" id="ppto-quitar" ${b._quitar ? 'checked' : ''}> Quitar la marca a las ${marcadasSin.length} que no tienen cifra</label>
+      </div>`;
+  }
+  ov.innerHTML = `
+    <div class="modal ppto-modal">
+      <div class="modal-header"><h2>Presupuesto ${PPTO_ANIO} · Venta 27 y EBITDA 27</h2><button class="modal-close" data-x>×</button></div>
+      <div class="modal-body ppto-body">${cuerpo}</div>
+      <div class="modal-footer">
+        ${b ? `<button class="btn btn-ghost" data-ppto="otro">Subir otro Excel</button>
+               <button class="btn btn-ghost" data-ppto="excel">Descargar conciliación</button>` : ''}
+        <span style="flex:1"></span>
+        <button class="btn btn-ghost" data-x>Cerrar</button>
+        ${b ? '<button class="btn btn-primary" data-ppto="guardar">Guardar en el pipeline</button>' : ''}
+      </div>
+    </div>`;
+  ov.querySelectorAll('[data-x]').forEach(x => x.addEventListener('click', () => ov.classList.remove('active')));
+  const file = ov.querySelector('#ppto-file');
+  if (file) {
+    const drop = ov.querySelector('#ppto-drop');
+    file.addEventListener('change', e => e.target.files[0] && cargarExcelPresupuesto(e.target.files[0]));
+    ['dragover', 'dragenter'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('sobre'); }));
+    ['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('sobre'); }));
+    drop.addEventListener('drop', e => e.dataTransfer.files[0] && cargarExcelPresupuesto(e.dataTransfer.files[0]));
+  }
+  ov.querySelectorAll('[data-pf]').forEach(sel => sel.addEventListener('change', () => {
+    const f = b.filas[Number(sel.dataset.pf)];
+    f._sel = sel.value;
+    guardarOpciones(); pintarPresupuesto();
+  }));
+  ov.querySelectorAll('[data-pe]').forEach(sel => sel.addEventListener('change', () => { b.filas[Number(sel.dataset.pe)]._estatus = sel.value; }));
+  const accion = ov.querySelectorAll('[data-ppto]');
+  accion.forEach(btn => btn.addEventListener('click', () => {
+    const a = btn.dataset.ppto;
+    if (a === 'otro') { pptoBorrador = null; pintarPresupuesto(); }
+    if (a === 'excel') { guardarOpciones(); exportarConciliacionPpto(); }
+    if (a === 'guardar') { guardarOpciones(); guardarPresupuesto(); }
+  }));
+  function guardarOpciones() {
+    if (!b) return;
+    const mk = ov.querySelector('#ppto-marcar'), qt = ov.querySelector('#ppto-quitar');
+    if (mk) b._marcar = mk.checked;
+    if (qt) b._quitar = qt.checked;
+  }
+}
+
+function estadoFila(f) {
+  if (f._sel === '__nueva') return 'nueva';
+  if (!f._sel) return 'sin';
+  if (f._sug && f._sug.id === f._sel) return f._sug.tipo === 'sin' ? 'confirmada' : f._sug.tipo;
+  return 'confirmada';   // la eligió la persona
+}
+
+async function cargarExcelPresupuesto(file) {
+  const est = document.getElementById('ppto-estado');
+  if (est) est.textContent = 'Leyendo el Excel…';
+  try {
+    if (!await asegurarLibreria('xlsx')) throw new Error('No cargó la librería para leer Excel');
+    const wb = XLSX.read(await file.arrayBuffer(), { type: 'array', cellDates: true });
+    const r = leerPresupuestoExcel(wb, file.name);
+    const previo = presupuesto();
+    const alias = (previo && previo.alias) || {};
+    r.filas.forEach(f => {
+      f._sug = sugerirObra(f, alias);
+      f._sel = f._sug.id || '';
+    });
+    pptoBorrador = { ...r, alias, _marcar: true, _quitar: false };
+    pintarPresupuesto();
+  } catch (e) {
+    if (est) { est.textContent = 'No se pudo leer: ' + e.message; est.classList.add('error'); }
+  }
+}
+
+function guardarPresupuesto() {
+  const b = pptoBorrador;
+  if (!b) return;
+  const faltaEstatus = b.filas.filter(f => f._sel === '__nueva' && !f._estatus);
+  if (faltaEstatus.length) { toast(`Elige el estatus de la obra nueva: ${faltaEstatus[0].nombre}`, 'warn'); return; }
+  const hoy = new Date().toISOString().slice(0, 10);
+  const alias = { ...(b.alias || {}) };
+  // 1. Altas nuevas
+  b.filas.filter(f => f._sel === '__nueva').forEach(f => {
+    const p = {
+      id: uid(), proyecto: f.nombre, estatus: f._estatus, direccion: 'Construcción',
+      fecha_update: hoy, fecha_registro: hoy, ppto_2027: true,
+      history: [{ ts: hoy, text: `Alta desde el presupuesto ${PPTO_ANIO}`, author: yo() }]
+    };
+    sanearTipos(p); migrarEstatus(p); migrarClasificacion(p); migrarCompetidores(p); migrarCampos(p);
+    state.projects.push(p);
+    f._sel = p.id;
+  });
+  // 2. Se limpian las cifras anteriores y se ponen las nuevas (varias líneas del presupuesto pueden ir a una obra)
+  const porObra = new Map();
+  b.filas.forEach(f => {
+    if (!f._sel) return;
+    alias[normEq(f.nombre)] = f._sel;
+    if (!porObra.has(f._sel)) porObra.set(f._sel, []);
+    porObra.get(f._sel).push(f);
+  });
+  b.filas.forEach(f => { if (!f._sel) delete alias[normEq(f.nombre)]; });
+  let cambios = 0;
+  state.projects.forEach(p => {
+    const lineas = porObra.get(p.id);
+    const antes = JSON.stringify([p.venta_27, p.ebitda_27, p.vol_27, p.ppto_2027]);
+    if (lineas) {
+      const s = k => Math.round(lineas.reduce((a, f) => a + (f[k] || 0), 0) * 1000) / 1000;
+      const mes = k => Array.from({ length: 12 }, (_, i) => Math.round(lineas.reduce((a, f) => a + ((f.meses || {})[k] || [])[i] || 0, 0) * 1000) / 1000);
+      p.venta_27 = s('venta'); p.ebitda_27 = s('ebitda'); p.vol_27 = s('volumen') || null;
+      p.ppto27 = { anio: PPTO_ANIO, lineas: lineas.map(f => f.nombre), archivo: b.archivo || '', cargado: hoy,
+        meses: { venta: mes('venta'), ebitda: mes('ebitda'), volumen: mes('volumen') } };
+      if (b._marcar !== false) p.ppto_2027 = true;
+    } else if (p.venta_27 !== undefined || p.ebitda_27 !== undefined || p.ppto27) {
+      delete p.venta_27; delete p.ebitda_27; delete p.vol_27; delete p.ppto27;
+      if (b._quitar && p.ppto_2027) p.ppto_2027 = false;
+    } else if (b._quitar && p.ppto_2027) p.ppto_2027 = false;
+    if (JSON.stringify([p.venta_27, p.ebitda_27, p.vol_27, p.ppto_2027]) !== antes) {
+      p.fecha_update = hoy; cambios++;
+    }
+  });
+  // 3. Lo leído queda guardado para la conciliación y la próxima carga
+  if (!state.presupuestos || typeof state.presupuestos !== 'object') state.presupuestos = {};
+  state.presupuestos[PPTO_ANIO] = {
+    archivo: b.archivo, hoja: b.hoja, unidades: b.unidades, cargado: new Date().toISOString(),
+    por: yo(), totales: b.totales, otros: b.otros || [], descuadres: b.descuadres || [], alias,
+    filas: b.filas.map(f => ({ nombre: f.nombre, segmento: f.segmento || '', status: f.status || '', venta: f.venta, ebitda: f.ebitda,
+      volumen: f.volumen, meses: f.meses, obra_id: f._sel || null }))
+  };
+  // Columnas: Venta, Venta 27 y EBITDA 27 a la vista la primera vez
+  colsVisibles();
+  if (!lsGet('pipeline_cols_ppto27_v1')) {
+    ['venta', 'venta27', 'ebitda27'].forEach(k => { if (!state.cols.includes(k)) state.cols.push(k); });
+    lsSet(COLS_KEY, JSON.stringify(state.cols)); lsSet('pipeline_cols_ppto27_v1', '1');
+  }
+  const ligadas = porObra.size;
+  saveState(`Cargó el presupuesto ${PPTO_ANIO}: ${ligadas} obras con Venta 27 y EBITDA 27`);
+  document.getElementById('ppto-overlay').classList.remove('active');
+  populateFilters(); refrescarVistas();
+  toast(`Presupuesto ${PPTO_ANIO} guardado: ${ligadas} obras con cifra · ${cambios} actualizadas`);
+}
+
+// Conciliación para JM, en Excel
+async function exportarConciliacionPpto() {
+  const b = pptoBorrador;
+  if (!b || !await asegurarLibreria('excel')) return;
+  const AZUL = 'FF0003AA', TINTA = 'FF14173D', LINEA = 'FFE2E4F2';
+  const wb = new ExcelJS.Workbook();
+  wb.creator = 'CEMEX · Concretos y Construcción';
+  const ws = wb.addWorksheet('Conciliación', { views: [{ state: 'frozen', ySplit: 4 }] });
+  ws.columns = [{ width: 44 }, { width: 14 }, { width: 14 }, { width: 12 }, { width: 46 }, { width: 16 }, { width: 14 }, { width: 40 }];
+  ws.mergeCells('A1:H1');
+  ws.getCell('A1').value = `Presupuesto ${PPTO_ANIO} contra pipeline`;
+  ws.getCell('A1').font = { name: 'Outfit', size: 16, bold: true, color: { argb: AZUL } };
+  ws.mergeCells('A2:H2');
+  ws.getCell('A2').value = `${b.archivo || ''} · M MXN · volumen en K m³ · ${new Date().toLocaleDateString('es-MX')}`;
+  ws.getCell('A2').font = { name: 'Calibri', size: 10, color: { argb: 'FF565B85' } };
+  const enc = ['En el presupuesto', 'Venta 27', 'EBITDA 27', 'Vol. 27', 'Obra en el pipeline', 'Resultado', 'Venta total obra', 'Nota'];
+  const h = ws.getRow(4);
+  enc.forEach((t, i) => { const c = h.getCell(i + 1); c.value = t; c.font = { name: 'Calibri', bold: true, color: { argb: 'FFFFFFFF' } };
+    c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: AZUL } }; c.alignment = { vertical: 'middle', horizontal: i && i < 4 || i === 6 ? 'right' : 'left' }; });
+  const res = { confirmada: 'Ligada', sugerida: 'Empata', confirmar: 'Por confirmar', sin: 'Sin obra en el pipeline', nueva: 'Alta nueva' };
+  let r = 5;
+  b.filas.forEach(f => {
+    const o = f._sel && f._sel !== '__nueva' ? state.projects.find(p => p.id === f._sel) : null;
+    const fila = ws.getRow(r++);
+    [f.nombre, f.venta, f.ebitda, f.volumen || null, o ? o.proyecto : (f._sel === '__nueva' ? '(se da de alta)' : ''), res[estadoFila(f)],
+     o ? (Number(o.venta) || null) : null, f._sug && f._sug.id === f._sel ? f._sug.nota : ''].forEach((v, i) => {
+      const c = fila.getCell(i + 1); c.value = v === undefined ? null : v;
+      c.font = { name: 'Calibri', size: 10, color: { argb: TINTA } };
+      if ([1, 2, 3, 6].includes(i)) c.numFmt = '#,##0.0';
+      c.border = { bottom: { style: 'thin', color: { argb: LINEA } } };
+    });
+  });
+  const tot = ws.getRow(r++);
+  tot.getCell(1).value = 'Total proyectos';
+  [[2, 'venta'], [3, 'ebitda'], [4, 'volumen']].forEach(([c, k]) => { tot.getCell(c).value = b.filas.reduce((a, f) => a + (f[k] || 0), 0); tot.getCell(c).numFmt = '#,##0.0'; });
+  tot.eachCell(c => { c.font = { name: 'Calibri', bold: true, color: { argb: AZUL } }; });
+  const ligadas = new Set(b.filas.map(f => f._sel).filter(Boolean));
+  const sin = state.projects.filter(p => p.ppto_2027 === true && !ligadas.has(p.id));
+  if (sin.length) {
+    r++;
+    ws.getCell(`A${r++}`).value = 'Marcadas Ppto. 2027 en el pipeline sin cifra en el presupuesto';
+    ws.getCell(`A${r - 1}`).font = { name: 'Outfit', bold: true, color: { argb: AZUL } };
+    sin.forEach(p => { ws.getCell(`A${r}`).value = p.proyecto; ws.getCell(`E${r}`).value = esCotizacionAlterna(p) ? 'Cotización alterna' : ''; r++; });
+  }
+  // Mensualización
+  const wm = wb.addWorksheet('Mensual');
+  wm.columns = [{ width: 44 }, { width: 10 }, ...MESES_CORTOS.map(() => ({ width: 10 })), { width: 12 }];
+  const hm = wm.getRow(1);
+  ['Proyecto', 'Concepto', ...MESES_CORTOS.map(x => x[0].toUpperCase() + x.slice(1)), 'Total'].forEach((t, i) => {
+    const c = hm.getCell(i + 1); c.value = t; c.font = { bold: true, color: { argb: 'FFFFFFFF' } }; c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: AZUL } };
+  });
+  let rm = 2;
+  b.filas.forEach(f => [['venta', 'Venta'], ['ebitda', 'EBITDA'], ['volumen', 'Vol. K m³']].forEach(([k, et]) => {
+    const vals = (f.meses || {})[k] || [];
+    if (!vals.some(Boolean)) return;
+    const row = wm.getRow(rm++);
+    row.getCell(1).value = f.nombre; row.getCell(2).value = et;
+    vals.forEach((v, i) => { row.getCell(3 + i).value = v; row.getCell(3 + i).numFmt = '#,##0.0'; });
+    row.getCell(15).value = vals.reduce((a, x) => a + x, 0); row.getCell(15).numFmt = '#,##0.0';
+  }));
+  const buf = await wb.xlsx.writeBuffer();
+  download(new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), `Conciliacion_Ppto${PPTO_ANIO}_${new Date().toISOString().slice(0, 10)}.xlsx`);
+  toast('Conciliación descargada');
 }
 
 // ==========================================================================
@@ -12648,6 +13348,8 @@ async function exportXlsx() {
     { h: 'Región', w: 17, get: p => p.region },
     { h: 'Estado', w: 16, get: p => p.estado },
     { h: 'Venta\n(M MXN)', w: 13, get: p => p.venta, fmt: '#,##0', total: 'venta' },
+    { h: 'Venta 2027\nPpto. (M MXN)', w: 14, get: p => p.venta_27 ?? null, fmt: '#,##0.0', total: 'venta_27' },
+    { h: 'EBITDA 2027\nPpto. (M MXN)', w: 14, get: p => p.ebitda_27 ?? null, fmt: '#,##0.0', total: 'ebitda_27' },
     { h: 'Longitud\n(km)', w: 11, get: p => aplicaLongitud(p) ? p.longitud_km : null, fmt: '#,##0.0' },
     { h: 'Vol. total obra\n(K m³)', w: 14, get: p => p.volumen_total, fmt: '#,##0', total: 'volumen_total' },
     { h: 'Vol. CEMEX\n(K m³)', w: 13, get: p => volCemex(p), fmt: '#,##0', totalFn: sumaVolCxWb },
@@ -12927,6 +13629,7 @@ function construirHtmlActualizado() {
     fichas: state.fichas || [],
     oportunidades: state.oportunidades || [],
     radarPrefs: state.radarPrefs || {},
+    presupuestos: state.presupuestos || {},
     _metadata: state._metadata || null
   }).replace(/<\//g, '<\\/');   // evita que un comentario cierre la etiqueta de datos
 
@@ -13617,6 +14320,7 @@ function wire() {
     refrescarVistas();
   });
 
+  document.getElementById('btn-ppto27').addEventListener('click', abrirPresupuesto);
   document.getElementById('chip-highlight').addEventListener('click', e => {
     state.filters.highlight = !state.filters.highlight;
     e.currentTarget.classList.toggle('active', state.filters.highlight);
