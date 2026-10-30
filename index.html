@@ -724,6 +724,102 @@ body {
   font-size: 9px; font-weight: 700; vertical-align: middle;
 }
 .chip-toggle.chip-ppto.active { background: #e8f6ee; border-color: #b7e2c8; color: #15803d; }
+.men { display: flex; flex-direction: column; gap: 10px; }
+.men-barra { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; }
+.men-seg { display: inline-flex; background: #f3f4fb; border-radius: 8px; padding: 2px; }
+.men-seg button { font-family: inherit; font-size: 12px; border: none; background: none; padding: 5px 11px; border-radius: 6px; color: var(--text-2); cursor: pointer; }
+.men-seg button.on { background: #fff; color: var(--accent-4); font-weight: 600; box-shadow: 0 1px 3px rgba(20,23,61,.12); }
+.men-sel { font-family: inherit; font-size: 12px; padding: 5px 8px; border: 1px solid var(--border-2); border-radius: 8px; background: #fff; }
+.men-esc { display: inline-flex; gap: 6px; align-items: center; font-size: 12px; color: var(--text-3); }
+.men-aviso { background: #eef0ff; border: 1px solid #d9dcf7; border-radius: 9px; padding: 7px 12px; font-size: 12px; color: var(--accent-4); }
+.men-aviso button { border: none; background: none; color: var(--accent-4); font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer; text-decoration: underline; margin-left: 8px; }
+.men-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.men-kpi { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 10px 13px; cursor: pointer; transition: border-color .15s; }
+.men-kpi.on { border-color: var(--accent-4); box-shadow: 0 0 0 3px #eef0ff; }
+.men-kpi span { display: block; font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--text-3); font-weight: 600; }
+.men-kpi span small { text-transform: none; letter-spacing: 0; font-weight: 400; }
+.men-kpi b { display: block; font-size: 21px; color: var(--accent-4); margin: 2px 0; font-variant-numeric: tabular-nums; }
+.men-kpi p { margin: 0; font-size: 11px; color: var(--text-2); }
+.men-kpi em { display: inline-block; margin-top: 4px; font-style: normal; font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 10px; }
+.men-kpi em.sube { background: #e8f6ee; color: #15803d; }
+.men-kpi em.baja { background: #fde8ea; color: #c0121d; }
+.men-graf { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; height: 185px; }
+.men-ayuda { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; font-size: 11px; color: var(--text-3); padding: 0 2px; }
+.men-ayuda span { display: inline-flex; gap: 5px; align-items: center; }
+.men-ayuda i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; border: 1px solid var(--border-2); }
+.men-ayuda i.f-captura { background: #e8f6ee; border-color: #b7e2c8; }
+.men-ayuda i.f-ppto { background: #eef0ff; border-color: #d9dcf7; }
+.men-ayuda i.f-reparto { background: #fff; }
+.men-ayuda i.f-escenario { background: #fff2b3; border-color: #f0d36a; }
+.men-ayuda b { font-weight: 500; color: var(--accent-4); }
+.men-sinfecha { font-family: inherit; font-size: 11px; border: 1px solid #f5cf9a; background: #fff4e6; color: #8a4b07; border-radius: 10px; padding: 2px 9px; cursor: pointer; }
+.men-cap { margin-left: auto; }
+.men-tabla-wrap { background: #fff; border: 1px solid var(--border); border-radius: 10px; overflow: auto; max-height: 56vh; }
+.men-tabla { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 12px; }
+.men-tabla th { position: sticky; top: 0; z-index: 2; background: var(--accent-4); color: #fff; font-size: 10.5px; font-weight: 600; letter-spacing: .03em; text-transform: uppercase; padding: 8px 9px; white-space: nowrap; text-align: left; }
+.men-tabla th.num { text-align: right; }
+.men-tabla th.hoy { background: #2a2ec4; }
+.men-tabla th.pasado { background: #4a4e9e; }
+.men-tabla th small { text-transform: none; font-weight: 400; opacity: .75; margin-left: 4px; }
+.men-tabla th button { font-family: inherit; font-size: 10px; border: 1px solid rgba(255,255,255,.4); background: none; color: #fff; border-radius: 10px; padding: 1px 8px; margin-left: 8px; cursor: pointer; text-transform: none; }
+.men-tabla td { padding: 6px 9px; border-bottom: 1px solid #edeef8; white-space: nowrap; }
+.men-tabla td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.men-tabla .men-nom { position: sticky; left: 0; z-index: 1; background: #fff; min-width: 300px; max-width: 360px; white-space: normal; }
+.men-tabla th.men-nom { z-index: 3; background: var(--accent-4); }
+.men-tabla .men-tot { font-weight: 700; background: #fafbff; }
+.men-cli { cursor: pointer; }
+.men-cli td { background: #fafbff; font-weight: 600; }
+.men-cli:hover td { background: #f1f2fc; }
+.men-cli .men-nom { background: #fafbff; }
+.men-cli:hover .men-nom { background: #f1f2fc; }
+.men-caret { display: inline-block; width: 14px; color: var(--accent-4); }
+.men-cli small, .men-obra small { display: block; font-size: 10.5px; color: var(--text-3); font-weight: 400; margin-left: 14px; }
+.men-cli small { display: inline; margin-left: 8px; }
+.men-dots { margin-left: 6px; }
+.men-dots i, .men-nom > i, .men-sep-et i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 3px; vertical-align: middle; }
+.men-obra .men-nom { padding-left: 24px; position: sticky; }
+.men-pnom { cursor: default; }
+.men-obra small b { color: #8a4b07; font-weight: 600; }
+.men-reset { position: absolute; right: 6px; top: 6px; border: 1px solid var(--border-2); background: #fff; border-radius: 6px; font-size: 12px; cursor: pointer; color: var(--accent-4); padding: 0 6px; }
+.men-tabla td.f-captura { background: #f2fbf5; }
+.men-tabla td.f-ppto { background: #f6f7ff; }
+.men-tabla td.f-escenario { background: #fff7cc; font-weight: 600; }
+.men-tabla td.editable { cursor: text; }
+.men-tabla td.editable:hover { outline: 2px solid #c9ccf5; outline-offset: -2px; }
+.men-tabla td small { display: block; font-size: 9.5px; color: var(--text-3); font-weight: 400; }
+.men-tabla td input { width: 90px; font-family: inherit; font-size: 12px; text-align: right; padding: 3px 5px; border: 1.5px solid var(--accent-4); border-radius: 5px; }
+.men-mas { color: #c9ccf5; }
+.men-sep-et td { background: #f3f4fb; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text-2); position: sticky; left: 0; }
+.men-tabla tfoot td { position: sticky; bottom: 0; background: #f7f8fc; font-weight: 600; border-top: 1px solid var(--border); }
+.men-tabla tfoot .men-subt td { bottom: 33px; font-weight: 500; color: var(--text-2); }
+.men-tabla tfoot tr.men-subt:nth-last-child(3) td { bottom: 66px; }
+.men-tabla tfoot tr.men-subt:nth-last-child(4) td { bottom: 99px; }
+.men-tabla tfoot tr.men-subt:nth-last-child(5) td { bottom: 132px; }
+.men-tabla tfoot .men-total td { background: var(--accent-4); color: #fff; }
+.men-tabla tfoot .men-total .men-tot { background: #00027a; }
+.men-vacio { text-align: center; color: var(--text-3); padding: 26px !important; white-space: normal !important; }
+.men-modal { max-width: 1120px; }
+.men-body { display: block !important; }
+.men-intro { margin: 0 0 8px; font-size: 12px; color: var(--text-2); line-height: 1.55; }
+.men-pl-acc { display: flex; gap: 12px; align-items: center; margin-bottom: 8px; font-size: 12px; color: var(--text-3); }
+.men-pl-acc button { font-family: inherit; font-size: 12px; border: 1px solid var(--border-2); background: #fff; border-radius: 7px; padding: 4px 10px; cursor: pointer; color: var(--accent-4); }
+.men-pl-wrap { max-height: 54vh; overflow: auto; border: 1px solid var(--border); border-radius: 9px; }
+.men-pl { width: 100%; border-collapse: collapse; font-size: 12px; }
+.men-pl th { position: sticky; top: 0; background: var(--accent-4); color: #fff; font-size: 10px; letter-spacing: .04em; text-transform: uppercase; padding: 7px 8px; text-align: left; z-index: 1; }
+.men-pl th.num, .men-pl td.num { text-align: right; }
+.men-pl td { padding: 6px 8px; border-bottom: 1px solid #edeef8; vertical-align: top; }
+.men-pl td small { display: block; font-size: 10.5px; color: var(--text-3); }
+.men-pl tr.inc td { background: #fffbea; }
+.men-pl input[type=number], .men-pl input[type=month] { font-family: inherit; font-size: 12px; padding: 4px 6px; border: 1px solid var(--border-2); border-radius: 6px; width: 100%; max-width: 130px; }
+.men-pl input[type=number] { max-width: 92px; }
+.men-pl input.mov { border-color: #f0b429; background: #fff7cc; }
+.men-pl input[type=checkbox] { accent-color: var(--accent-4); width: 16px; height: 16px; }
+.men-menu { position: fixed; z-index: 260; width: 320px; background: #fff; border: 1px solid var(--border-2); border-radius: 10px; box-shadow: 0 12px 32px rgba(20,23,61,.18); padding: 6px; }
+.men-menu button, .men-menu label { display: block; width: 100%; text-align: left; border: none; background: none; padding: 9px 11px; border-radius: 7px; cursor: pointer; font-family: inherit; }
+.men-menu button:hover, .men-menu label:hover { background: #f3f4fb; }
+.men-menu b { display: block; font-size: 12.5px; color: var(--text); }
+.men-menu span { font-size: 11px; color: var(--text-3); line-height: 1.4; }
+@media (max-width: 1100px) { .men-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .chip-toggle.chip-cargar { font-family: inherit; border-style: dashed; }
 .chip-toggle.chip-cargar:hover { border-color: #15803d; color: #15803d; }
 .cell-ppto27 { color: #15803d; font-weight: 600; }
@@ -2797,6 +2893,10 @@ tr.row-highlighted {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg>
         Dashboard
       </button>
+      <button class="tab" data-view="men">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4M7 17v-3M12 17v-5M17 17v-2"/></svg>
+        Mensualizado
+      </button>
       <button class="tab" data-view="vp">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.6 6.6L21 9.3l-4.8 4.3 1.4 6.4L12 16.8 6.4 20l1.4-6.4L3 9.3l6.4-.7z"/></svg>
         Presentación VP
@@ -2929,6 +3029,10 @@ tr.row-highlighted {
   </section>
 
   <!-- ====== VIEW: DASHBOARD ====== -->
+  <section class="view" id="view-men">
+    <div id="men-cont"></div>
+  </section>
+
   <section class="view" id="view-dashboard">
     <div class="kpi-grid" id="kpi-grid"></div>
 
@@ -4060,7 +4164,7 @@ let shaRemoto = null;     // sha del data.json que tenemos cargado
 let commitRemoto = null;  // último commit visto, para detectar cambios de otros
 let pollTimer = null;
 let guardando = false;
-const APP_VERSION = '2026-10-28';
+const APP_VERSION = '2026-10-30';
 let versionVieja = false;
 let conteoRemoto = null;
 let fotoRemota = new Map();   // cómo estaba cada obra la última vez que se leyó de GitHub
@@ -4071,7 +4175,9 @@ function tomarFoto() {
   fotoFichas = new Map((state.fichas || []).map(f => [f.id, JSON.stringify(f)]));
   fotoOps = new Map((state.oportunidades || []).map(o => [o.id, JSON.stringify(o)]));
   fotoPpto = JSON.stringify(state.presupuestos || {});
+  fotoMen = JSON.stringify(state.mensualizado || {});
 }
+let fotoMen = '{}';
 let fotoPpto = '{}';      // cuántas obras tiene la base publicada
 let bajaPermitida = false;    // un borrado hecho a propósito no dispara el candado
 
@@ -4130,6 +4236,7 @@ function paquete() {
     oportunidades: state.oportunidades || [],
     radarPrefs: state.radarPrefs || {},
     presupuestos: state.presupuestos || {},
+    mensualizado: state.mensualizado || {},
     _metadata: state._metadata
   };
 }
@@ -4206,6 +4313,16 @@ function fusionarRemoto(remoto) {
 
   // Presupuestos: si esta persona no los cambió, se queda lo publicado
   if (JSON.stringify(state.presupuestos || {}) === fotoPpto) state.presupuestos = remoto.presupuestos || {};
+  // Mensualizado: los escenarios de los demás como están publicados; el mío, como lo tengo.
+  // La captura semanal: si esta persona no la cambió, la publicada.
+  {
+    const loc = state.mensualizado || {}, rem = JSON.parse(JSON.stringify(remoto.mensualizado || {}));
+    const antes = JSON.parse(fotoMen || '{}');
+    rem.escenarios = rem.escenarios || {};
+    if (userAuth && loc.escenarios && loc.escenarios[userAuth.iniciales]) rem.escenarios[userAuth.iniciales] = loc.escenarios[userAuth.iniciales];
+    if (JSON.stringify(loc.captura || {}) !== JSON.stringify(antes.captura || {})) { rem.captura = loc.captura; rem.captura_meta = loc.captura_meta; }
+    state.mensualizado = rem;
+  }
 
   const papR = Array.isArray(remoto.papelera) ? remoto.papelera : [];
   const vistos = new Set(papR.map(x => x.id + '|' + x.eliminada));
@@ -4390,6 +4507,7 @@ function aplicarDatos(data) {
   state.oportunidades = Array.isArray(data.oportunidades) ? data.oportunidades : (state.oportunidades || []);
   state.radarPrefs = data.radarPrefs && typeof data.radarPrefs === 'object' ? data.radarPrefs : (state.radarPrefs || {});
   state.presupuestos = data.presupuestos && typeof data.presupuestos === 'object' ? data.presupuestos : (state.presupuestos || {});
+  state.mensualizado = data.mensualizado && typeof data.mensualizado === 'object' ? data.mensualizado : (state.mensualizado || {});
   state.papelera = Array.isArray(data.papelera) ? data.papelera : (state.papelera || []);
   state._metadata = data._metadata || null;
   const vRemota = data._metadata && data._metadata.app_version;
@@ -4440,6 +4558,7 @@ function saveLocalData(note) {
     oportunidades: state.oportunidades || [],
     radarPrefs: state.radarPrefs || {},
     presupuestos: state.presupuestos || {},
+    mensualizado: state.mensualizado || {},
     _metadata: state._metadata
   }));
   lastSyncTime = Date.now();
@@ -4648,6 +4767,7 @@ function refrescarVistas() {
   if (typeof actualizarCampana === 'function') actualizarCampana();
   if (document.getElementById('view-cap').classList.contains('active')) renderCapturaTab();
   if (document.getElementById('view-eq').classList.contains('active')) renderEquiposTab();
+  if (document.getElementById('view-men') && document.getElementById('view-men').classList.contains('active')) renderMensualizado();
   if (document.getElementById('view-vp').classList.contains('active')) renderVP();
   if (document.getElementById('view-bpr').classList.contains('active')) renderPdmTab();
   if (document.getElementById('view-dashboard').classList.contains('active')) renderDashboard();
@@ -11278,6 +11398,629 @@ async function exportarConciliacionPpto() {
 }
 
 // ==========================================================================
+// MENSUALIZADO · volumen, ingreso y EBITDA por mes, por cliente y por proyecto
+// Lo asegurado (Ejecución y Contratado) sale de la captura semanal, del
+// presupuesto 2027 o, si no hay nada, del total de la obra repartido entre
+// sus meses. La prospección la arma cada quien: elige qué proyectos entran,
+// mueve arranque y duración, escribe el volumen de cada mes y ve al momento
+// cómo cambian el ingreso y el EBITDA contra la base.
+// ==========================================================================
+const MEN_ETAPAS = [
+  { k: 'sum', et: 'Suministrando', c: '#0003aa' },
+  { k: 'arr', et: 'Por arrancar', c: '#6b70e8' },
+  { k: 'pro', et: 'Prospección', c: '#f5a524' },
+  { k: 'ter', et: 'Terminadas', c: '#9aa0c4' }
+];
+const MEN_METRICAS = [
+  { k: 'vol', et: 'Volumen', u: 'm³' },
+  { k: 'ing', et: 'Ingreso', u: 'M MXN' },
+  { k: 'ebitda', et: 'EBITDA', u: 'M MXN' },
+  { k: 'margen', et: 'Margen', u: '% EBITDA' }
+];
+const MEN_HORIZONTES = [
+  { k: 'h6', et: 'Próximos 6 meses' },
+  { k: 'h12', et: 'Próximos 12 meses' },
+  { k: 'a2027', et: 'Año 2027' },
+  { k: 'hist', et: 'Últimos 6 y próximos 6' }
+];
+const MES_ABR = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+let menMetrica = 'vol', menHorizonte = 'h6', menVista = 'cliente', menVerDe = null, menAbiertos = new Set(), menPanel = null, menChart = null;
+let menGuardarTimer = null;
+
+function mensualizado() {
+  if (!state.mensualizado || typeof state.mensualizado !== 'object') state.mensualizado = {};
+  if (!state.mensualizado.escenarios) state.mensualizado.escenarios = {};
+  if (!state.mensualizado.captura) state.mensualizado.captura = {};
+  return state.mensualizado;
+}
+function escenarioDe(ini) {
+  const m = mensualizado();
+  if (!m.escenarios[ini]) m.escenarios[ini] = { incluidos: [], vol: {}, sup: {} };
+  const e = m.escenarios[ini];
+  e.incluidos = e.incluidos || []; e.vol = e.vol || {}; e.sup = e.sup || {};
+  return e;
+}
+const esMio = () => !menVerDe || menVerDe === yo();
+
+// ---------- meses ----------
+function mesSuma(ym, n) {
+  const [y, m] = ym.split('-').map(Number);
+  const d = new Date(y, m - 1 + n, 1);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+}
+function mesHoy() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`; }
+function mesesHorizonte() {
+  const h = mesHoy();
+  if (menHorizonte === 'h12') return Array.from({ length: 12 }, (_, i) => mesSuma(h, i));
+  if (menHorizonte === 'a2027') return Array.from({ length: 12 }, (_, i) => `2027-${String(i + 1).padStart(2, '0')}`);
+  if (menHorizonte === 'hist') return Array.from({ length: 12 }, (_, i) => mesSuma(h, i - 6));
+  return Array.from({ length: 6 }, (_, i) => mesSuma(h, i));
+}
+const etqMes = ym => `${MES_ABR[Number(ym.slice(5, 7)) - 1]} ${ym.slice(2, 4)}`;
+const mesValido = v => typeof v === 'string' && /^\d{4}-\d{2}$/.test(v);
+
+function etapaMen(p) {
+  if (esCotizacionAlterna(p)) return null;
+  const n = String(p.estatus || '').slice(0, 2);
+  return { '05': 'sum', '04': 'arr', '01': 'pro', '02': 'pro', '03': 'pro', '06': 'ter' }[n] || null;
+}
+
+// Supuestos de toda la cartera: ingreso por m³ y margen, para obras que no los traen
+let menSupuestosCache = null;
+function supuestosCartera() {
+  if (menSupuestosCache) return menSupuestosCache;
+  const med = arr => { const a = arr.filter(x => isFinite(x) && x > 0).sort((x, y) => x - y); return a.length ? a[Math.floor(a.length / 2)] : null; };
+  const precios = state.projects.map(p => { const v = volCemex(p), s = num0(p.venta); return v && s ? s / (v * 1000) : null; });
+  const margenes = state.projects.map(p => { const s = num0(p.venta), e = num0(p.ebitda); return s && e !== null ? e / s : null; });
+  menSupuestosCache = { precio: med(precios) || 0.003, margen: med(margenes) || 0.09 };
+  return menSupuestosCache;
+}
+
+// Base de una obra: mes → { vol (m³), ing, ebitda (M MXN), fuente }
+function baseObra(p, sup) {
+  sup = sup || {};
+  const volT = (volCemex(p) || 0) * 1000, ingT = num0(p.venta), ebT = num0(p.ebitda);
+  const cart = supuestosCartera();
+  const precioObra = volT && ingT ? ingT / volT : null;
+  const margenObra = ingT && ebT !== null ? ebT / ingT : null;
+  const precio = sup.precio !== undefined && sup.precio !== null && sup.precio !== '' ? Number(sup.precio) / 1e6 : (precioObra ?? cart.precio);
+  const margen = sup.margen !== undefined && sup.margen !== null && sup.margen !== '' ? Number(sup.margen) / 100 : (margenObra ?? cart.margen);
+  const avisos = [];
+  const arranque = mesValido(sup.arranque) ? sup.arranque : (mesValido(p.fecha_arranque) ? p.fecha_arranque : null);
+  let dur = num0(sup.duracion) || num0(p.duracion_meses);
+  if (!dur && mesValido(p.fecha_termino) && arranque) {
+    const [y1, m1] = arranque.split('-').map(Number), [y2, m2] = p.fecha_termino.split('-').map(Number);
+    dur = (y2 - y1) * 12 + (m2 - m1) + 1;
+  }
+  if (!arranque) avisos.push('sin fecha de arranque');
+  if (!dur || dur < 1) { if (arranque) avisos.push('sin duración: se supuso 12 meses'); dur = 12; }
+  dur = Math.round(dur);
+  const meses = {};
+  if (arranque) {
+    for (let i = 0; i < dur; i++) {
+      const ym = mesSuma(arranque, i);
+      const vol = volT / dur;
+      meses[ym] = { vol, ing: ingT !== null ? ingT / dur : vol * precio, ebitda: null, fuente: 'reparto' };
+      meses[ym].ebitda = ebT !== null && ingT !== null ? ebT / dur : meses[ym].ing * margen;
+    }
+  }
+  // Presupuesto 2027 mensualizado (si no se movió el arranque en el escenario)
+  if (p.ppto27 && p.ppto27.meses && !mesValido(sup.arranque)) {
+    const pm = p.ppto27.meses;
+    for (let i = 0; i < 12; i++) {
+      const ym = `${p.ppto27.anio || '2027'}-${String(i + 1).padStart(2, '0')}`;
+      const ing = (pm.venta || [])[i] || 0, eb = (pm.ebitda || [])[i] || 0, v = ((pm.volumen || [])[i] || 0) * 1000;
+      if (!ing && !eb && !v) { if (meses[ym] && (pm.venta || []).some(Boolean)) delete meses[ym]; continue; }
+      meses[ym] = { vol: v || (precio ? ing / precio : 0), ing, ebitda: eb, fuente: 'ppto' };
+    }
+  }
+  // Captura semanal: manda en el volumen; ingreso y EBITDA con los precios de la obra
+  const cap = mensualizado().captura[p.id] || {};
+  Object.entries(cap).forEach(([ym, v]) => {
+    if (!mesValido(ym) || v === null || v === undefined || v === '') return;
+    const vol = Number(v);
+    meses[ym] = { vol, ing: vol * precio, ebitda: vol * precio * margen, fuente: 'captura' };
+  });
+  return { meses, precio, margen, precioObra, margenObra, arranque, dur, avisos };
+}
+
+// Lo que se ve: base más los cambios del escenario
+function mesesObra(p, esc) {
+  const sup = (esc && esc.sup[p.id]) || {};
+  const b = baseObra(p, sup);
+  const ov = (esc && esc.vol[p.id]) || {};
+  const tocada = Object.keys(ov).length > 0 || ['precio', 'margen'].some(k => sup[k] !== undefined && sup[k] !== '' && sup[k] !== null);
+  const meses = {};
+  const todos = new Set([...Object.keys(b.meses), ...Object.keys(ov)]);
+  todos.forEach(ym => {
+    const base = b.meses[ym];
+    if (ov[ym] !== undefined && ov[ym] !== null && ov[ym] !== '') {
+      const vol = Number(ov[ym]);
+      meses[ym] = { vol, ing: vol * b.precio, ebitda: vol * b.precio * b.margen, fuente: 'escenario', base };
+    } else if (base && tocada && base.fuente !== 'captura') {
+      meses[ym] = { vol: base.vol, ing: base.vol * b.precio, ebitda: base.vol * b.precio * b.margen, fuente: base.fuente, base };
+    } else if (base) meses[ym] = { ...base, base };
+  });
+  return { ...b, meses, tocada };
+}
+
+function valorMet(c, k) {
+  if (!c) return 0;
+  if (k === 'margen') return c.ing ? c.ebitda / c.ing * 100 : null;
+  return c[k] || 0;
+}
+function fmtMet(v, k) {
+  if (v === null || v === undefined || !isFinite(v)) return '—';
+  if (k === 'vol') return Math.round(v).toLocaleString('es-MX');
+  if (k === 'margen') return v.toFixed(1) + '%';
+  return v.toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+}
+
+// ---------- cálculo de la vista ----------
+function calcularMensualizado() {
+  menSupuestosCache = null;
+  const meses = mesesHorizonte();
+  const verDe = menVerDe || yo();
+  const esc = escenarioDe(verDe);
+  const incluidos = new Set(esc.incluidos);
+  const obras = getFiltered().map(p => ({ p, etapa: etapaMen(p) })).filter(x => x.etapa && (x.etapa !== 'pro' || incluidos.has(x.p.id)));
+  const filas = obras.map(({ p, etapa }) => {
+    const m = mesesObra(p, esc);
+    const celdas = meses.map(ym => m.meses[ym] || null);
+    const suma = k => celdas.reduce((a, c) => a + (c ? c[k] || 0 : 0), 0);
+    // Base para comparar: la obra sin ningún cambio del escenario
+    const b0 = baseObra(p, {});
+    const baseSuma = k => meses.reduce((a, ym) => a + (b0.meses[ym] ? b0.meses[ym][k] || 0 : 0), 0);
+    return { p, etapa, m, celdas, tot: { vol: suma('vol'), ing: suma('ing'), ebitda: suma('ebitda') },
+      base: { vol: baseSuma('vol'), ing: baseSuma('ing'), ebitda: baseSuma('ebitda') } };
+  }).filter(f => f.etapa !== 'ter' || f.tot.vol || f.tot.ing);
+  const sumaMes = (lista, ym, k) => lista.reduce((a, f) => { const c = f.celdas[meses.indexOf(ym)]; return a + (c ? c[k] || 0 : 0); }, 0);
+  const porEtapa = {};
+  MEN_ETAPAS.forEach(e => {
+    const l = filas.filter(f => f.etapa === e.k);
+    porEtapa[e.k] = { filas: l, meses: meses.map(ym => ({ vol: sumaMes(l, ym, 'vol'), ing: sumaMes(l, ym, 'ing'), ebitda: sumaMes(l, ym, 'ebitda') })) };
+  });
+  const tot = k => filas.reduce((a, f) => a + f.tot[k], 0);
+  const totBase = k => filas.reduce((a, f) => a + f.base[k], 0);
+  const totEtapa = (ks, k) => filas.filter(f => ks.includes(f.etapa)).reduce((a, f) => a + f.tot[k], 0);
+  const sinFecha = getFiltered().filter(p => etapaMen(p) && etapaMen(p) !== 'ter' && (etapaMen(p) !== 'pro' || incluidos.has(p.id)) && !mesValido(p.fecha_arranque) && !mesValido(((esc.sup || {})[p.id] || {}).arranque));
+  const prospectos = getFiltered().filter(p => etapaMen(p) === 'pro');
+  return { meses, esc, verDe, filas, porEtapa, prospectos, sinFecha, incluidos,
+    tot: { vol: tot('vol'), ing: tot('ing'), ebitda: tot('ebitda') },
+    base: { vol: totBase('vol'), ing: totBase('ing'), ebitda: totBase('ebitda') },
+    aseg: { vol: totEtapa(['sum', 'arr', 'ter'], 'vol'), ing: totEtapa(['sum', 'arr', 'ter'], 'ing'), ebitda: totEtapa(['sum', 'arr', 'ter'], 'ebitda') },
+    pros: { vol: totEtapa(['pro'], 'vol'), ing: totEtapa(['pro'], 'ing'), ebitda: totEtapa(['pro'], 'ebitda') } };
+}
+
+// ---------- pestaña ----------
+function renderMensualizado() {
+  const cont = document.getElementById('men-cont');
+  if (!cont) return;
+  const esc = escapeHtml;
+  const R = calcularMensualizado();
+  const met = MEN_METRICAS.find(x => x.k === menMetrica);
+  const k = menMetrica;
+  const scrollPrevio = (cont.querySelector('.men-tabla-wrap') || {}).scrollTop || 0;
+  const scrollX = (cont.querySelector('.men-tabla-wrap') || {}).scrollLeft || 0;
+  const editable = esMio() && k === 'vol';
+  const personasConEsc = Object.keys(mensualizado().escenarios).filter(i => {
+    const e = mensualizado().escenarios[i]; return e && ((e.incluidos || []).length || Object.keys(e.vol || {}).length);
+  });
+  if (!personasConEsc.includes(yo())) personasConEsc.unshift(yo());
+
+  const delta = (a, b, kk) => {
+    const d = kk === 'margen' ? a - b : a - b;
+    if (!isFinite(d) || Math.abs(d) < (kk === 'vol' ? 0.5 : 0.05)) return '';
+    return `<em class="${d > 0 ? 'sube' : 'baja'}">${d > 0 ? '+' : ''}${fmtMet(d, kk)} por tus cambios</em>`;
+  };
+  const margenDe = o => o.ing ? o.ebitda / o.ing * 100 : null;
+  const tarjeta = (kk, et, u) => {
+    const v = kk === 'margen' ? margenDe(R.tot) : R.tot[kk];
+    const b = kk === 'margen' ? margenDe(R.base) : R.base[kk];
+    const a = kk === 'margen' ? margenDe(R.aseg) : R.aseg[kk];
+    const pr = kk === 'margen' ? margenDe(R.pros) : R.pros[kk];
+    return `<div class="men-kpi ${menMetrica === kk ? 'on' : ''}" data-men-met="${kk}">
+      <span>${et}${u ? ` <small>${u}</small>` : ''}</span><b>${kk === 'ing' || kk === 'ebitda' ? '$' : ''}${fmtMet(v, kk)}</b>
+      <p>Asegurado ${fmtMet(a, kk)} · Prospección ${fmtMet(pr, kk)}</p>${delta(v, b, kk)}</div>`;
+  };
+
+  // Celdas de un renglón de obra
+  const celdaObra = (f, i) => {
+    const c = f.celdas[i];
+    const ym = R.meses[i];
+    const v = valorMet(c, k);
+    const cambiada = c && c.fuente === 'escenario';
+    const bv = c && c.base ? valorMet(c.base, k) : (cambiada ? 0 : null);
+    const clase = [c ? 'f-' + c.fuente : 'vacia', editable ? 'editable' : '', cambiada ? 'cambiada' : ''].join(' ');
+    const m$ = v => '$' + (v || 0).toLocaleString('es-MX', { maximumFractionDigits: 1 }) + ' M';
+    const tip = c ? (cambiada
+      ? `Tu cambio: ${fmtMet(c.vol, 'vol')} m³ → ingreso ${m$(c.ing)}, EBITDA ${m$(c.ebitda)}` + (c.base ? `\nBase: ${fmtMet(c.base.vol, 'vol')} m³ → ingreso ${m$(c.base.ing)}, EBITDA ${m$(c.base.ebitda)}` : '\nBase: sin volumen ese mes')
+      : ({ captura: 'Captura semanal', ppto: 'Presupuesto 2027', reparto: 'Total de la obra repartido entre sus meses' }[c.fuente] || '') + ` · ${fmtMet(c.vol, 'vol')} m³ → ingreso ${m$(c.ing)}, EBITDA ${m$(c.ebitda)}`)
+      : (editable ? 'Escribe el volumen de este mes' : '');
+    return `<td class="num ${clase}" data-o="${esc(f.p.id)}" data-m="${ym}" title="${esc(tip)}">${c ? fmtMet(v, k) : (editable ? '<span class="men-mas">+</span>' : '')}${cambiada && bv !== null && Math.abs((v || 0) - (bv || 0)) > 0.0001 ? `<small>base ${fmtMet(bv, k)}</small>` : ''}</td>`;
+  };
+  const totFila = (o, kk) => kk === 'margen' ? (o.ing ? o.ebitda / o.ing * 100 : null) : o[kk];
+  const filaObra = f => `
+    <tr class="men-obra et-${f.etapa}" data-obra="${esc(f.p.id)}">
+      <td class="men-nom"><i style="background:${MEN_ETAPAS.find(e => e.k === f.etapa).c}"></i>
+        <span class="men-pnom" data-abrir="${esc(f.p.id)}" title="${esc(f.p.proyecto)}">${esc(f.p.proyecto)}</span>
+        <small>${esc(statusShortName(f.p.estatus))}${f.m.arranque ? ' · arranca ' + etqMes(f.m.arranque) : ''}${f.m.avisos.length ? ' · <b>' + esc(f.m.avisos.join(', ')) + '</b>' : ''}</small>
+        ${f.m.tocada && esMio() ? `<button type="button" class="men-reset" data-reset="${esc(f.p.id)}" title="Quitar tus cambios a esta obra">↺</button>` : ''}
+      </td>
+      ${R.meses.map((_, i) => celdaObra(f, i)).join('')}
+      <td class="num men-tot">${fmtMet(totFila(f.tot, k), k)}</td>
+    </tr>`;
+  const sumaFilas = (lista, i) => {
+    const o = lista.reduce((a, f) => { const c = f.celdas[i]; if (c) { a.vol += c.vol || 0; a.ing += c.ing || 0; a.ebitda += c.ebitda || 0; } return a; }, { vol: 0, ing: 0, ebitda: 0 });
+    return valorMet(o, k);
+  };
+  const totLista = lista => { const o = lista.reduce((a, f) => ({ vol: a.vol + f.tot.vol, ing: a.ing + f.tot.ing, ebitda: a.ebitda + f.tot.ebitda }), { vol: 0, ing: 0, ebitda: 0 }); return totFila(o, k); };
+
+  let cuerpo = '';
+  if (menVista === 'cliente') {
+    const grupos = new Map();
+    R.filas.forEach(f => {
+      const cli = (f.p.cliente || 'Sin cliente').trim();
+      if (!grupos.has(cli)) grupos.set(cli, []);
+      grupos.get(cli).push(f);
+    });
+    const orden = [...grupos.entries()].sort((a, b) => (b[1].reduce((s, f) => s + f.tot[k === 'margen' ? 'ing' : k], 0)) - (a[1].reduce((s, f) => s + f.tot[k === 'margen' ? 'ing' : k], 0)));
+    cuerpo = orden.map(([cli, l]) => {
+      const abierto = menAbiertos.has(cli);
+      const etapas = MEN_ETAPAS.filter(e => l.some(f => f.etapa === e.k)).map(e => `<i style="background:${e.c}" title="${e.et}"></i>`).join('');
+      return `<tr class="men-cli ${abierto ? 'abierto' : ''}" data-cli="${esc(cli)}">
+        <td class="men-nom"><span class="men-caret">${abierto ? '▾' : '▸'}</span><b>${esc(cli)}</b><span class="men-dots">${etapas}</span><small>${l.length} ${l.length === 1 ? 'obra' : 'obras'}</small></td>
+        ${R.meses.map((_, i) => `<td class="num">${fmtMet(sumaFilas(l, i), k)}</td>`).join('')}
+        <td class="num men-tot">${fmtMet(totLista(l), k)}</td></tr>` + (abierto ? l.sort((a, b) => MEN_ETAPAS.findIndex(e => e.k === a.etapa) - MEN_ETAPAS.findIndex(e => e.k === b.etapa)).map(filaObra).join('') : '');
+    }).join('');
+  } else {
+    cuerpo = MEN_ETAPAS.map(e => {
+      const l = R.porEtapa[e.k].filas.sort((a, b) => b.tot[k === 'margen' ? 'ing' : k] - a.tot[k === 'margen' ? 'ing' : k]);
+      if (!l.length) return '';
+      return `<tr class="men-sep-et"><td colspan="${R.meses.length + 2}"><i style="background:${e.c}"></i>${e.et} · ${l.length}</td></tr>` + l.map(filaObra).join('');
+    }).join('');
+  }
+  const pie = MEN_ETAPAS.filter(e => R.porEtapa[e.k].filas.length).map(e => `
+    <tr class="men-subt"><td class="men-nom"><i style="background:${e.c}"></i>${e.et}</td>
+      ${R.porEtapa[e.k].meses.map(o => `<td class="num">${fmtMet(valorMet(o, k), k)}</td>`).join('')}
+      <td class="num men-tot">${fmtMet(totLista(R.porEtapa[e.k].filas), k)}</td></tr>`).join('') + `
+    <tr class="men-total"><td class="men-nom">Total${R.pros.vol || R.pros.ing ? ' con prospección' : ''}</td>
+      ${R.meses.map((_, i) => `<td class="num">${fmtMet(sumaFilas(R.filas, i), k)}</td>`).join('')}
+      <td class="num men-tot">${fmtMet(totLista(R.filas), k)}</td></tr>`;
+
+  const nPros = R.prospectos.filter(p => R.incluidos.has(p.id)).length;
+  const verOtro = !esMio();
+  const capMeta = mensualizado().captura_meta;
+  cont.innerHTML = `
+  <div class="men">
+    <div class="men-barra">
+      <div class="men-seg">${MEN_METRICAS.map(m => `<button type="button" class="${menMetrica === m.k ? 'on' : ''}" data-men-met="${m.k}">${m.et}</button>`).join('')}</div>
+      <select class="men-sel" data-men="horizonte">${MEN_HORIZONTES.map(h => `<option value="${h.k}" ${menHorizonte === h.k ? 'selected' : ''}>${h.et}</option>`).join('')}</select>
+      <div class="men-seg">${[['cliente', 'Por cliente'], ['proyecto', 'Por proyecto']].map(([v, et]) => `<button type="button" class="${menVista === v ? 'on' : ''}" data-men-vista="${v}">${et}</button>`).join('')}</div>
+      <label class="men-esc">Escenario de
+        <select class="men-sel" data-men="verde">${personasConEsc.map(i => `<option value="${esc(i)}" ${R.verDe === i ? 'selected' : ''}>${i === yo() ? 'mí' : esc(nombreCorto(i))}</option>`).join('')}</select>
+      </label>
+      <span style="flex:1"></span>
+      <button type="button" class="btn btn-ghost btn-sm" data-men-acc="captura">Captura semanal</button>
+      <button type="button" class="btn btn-ghost btn-sm" data-men-acc="excel">Excel</button>
+      <button type="button" class="btn btn-primary btn-sm" data-men-acc="pros">Planear prospección · ${nPros}/${R.prospectos.length}</button>
+    </div>
+    ${verOtro ? `<div class="men-aviso">Estás viendo el escenario de <b>${esc(nombrePersona(R.verDe))}</b>, solo lectura. <button type="button" data-men-acc="mio">Volver al mío</button> <button type="button" data-men-acc="copiar">Copiarlo como mío</button></div>` : ''}
+    <div class="men-kpis">${MEN_METRICAS.map(m => tarjeta(m.k, m.et, m.k === 'margen' ? '' : m.u)).join('')}</div>
+    <div class="men-graf"><canvas id="men-canvas"></canvas></div>
+    <div class="men-ayuda">
+      <span><i class="f-captura"></i>Captura semanal</span><span><i class="f-ppto"></i>Presupuesto 2027</span><span><i class="f-reparto"></i>Total repartido entre los meses</span><span><i class="f-escenario"></i>Tu cambio</span>
+      ${editable ? '<b>Haz clic en un mes para escribir el volumen (m³); el ingreso y el EBITDA se recalculan con el precio por m³ y el margen de la obra.</b>' : k !== 'vol' && esMio() ? '<b>Para editar, cambia a Volumen.</b>' : ''}
+      ${R.sinFecha.length ? `<button type="button" data-men-acc="sinfecha" class="men-sinfecha">${R.sinFecha.length} sin fecha de arranque: no aparecen</button>` : ''}
+      ${capMeta ? `<span class="men-cap">Última captura: ${new Date(capMeta.fecha).toLocaleDateString('es-MX', { day: 'numeric', month: 'short' })} · ${esc(nombreCorto(capMeta.por || ''))}</span>` : ''}
+    </div>
+    <div class="men-tabla-wrap">
+      <table class="men-tabla">
+        <thead><tr><th class="men-nom">${menVista === 'cliente' ? 'Cliente · proyecto' : 'Proyecto'} <small>${met.u}</small>${menVista === 'cliente' ? ' <button type="button" data-men-acc="abrir">Abrir todos</button>' : ''}</th>
+          ${R.meses.map(ym => `<th class="num ${ym === mesHoy() ? 'hoy' : ym < mesHoy() ? 'pasado' : ''}">${etqMes(ym)}</th>`).join('')}<th class="num">Total</th></tr></thead>
+        <tbody>${cuerpo || `<tr><td colspan="${R.meses.length + 2}" class="men-vacio">No hay obras con volumen en estos meses con los filtros actuales.</td></tr>`}</tbody>
+        <tfoot>${pie}</tfoot>
+      </table>
+    </div>
+  </div>`;
+
+  const wrap = cont.querySelector('.men-tabla-wrap');
+  wrap.scrollTop = scrollPrevio; wrap.scrollLeft = scrollX;
+  cont.querySelectorAll('[data-men-met]').forEach(b => b.addEventListener('click', () => { menMetrica = b.dataset.menMet; renderMensualizado(); }));
+  cont.querySelectorAll('[data-men-vista]').forEach(b => b.addEventListener('click', () => { menVista = b.dataset.menVista; renderMensualizado(); }));
+  cont.querySelector('[data-men="horizonte"]').addEventListener('change', e => { menHorizonte = e.target.value; renderMensualizado(); });
+  cont.querySelector('[data-men="verde"]').addEventListener('change', e => { menVerDe = e.target.value === yo() ? null : e.target.value; renderMensualizado(); });
+  cont.querySelectorAll('.men-cli').forEach(tr => tr.addEventListener('click', () => {
+    const c = tr.dataset.cli; menAbiertos.has(c) ? menAbiertos.delete(c) : menAbiertos.add(c); renderMensualizado();
+  }));
+  cont.querySelectorAll('[data-abrir]').forEach(s => s.addEventListener('dblclick', () => openModal(s.dataset.abrir)));
+  cont.querySelectorAll('[data-reset]').forEach(b => b.addEventListener('click', e => {
+    e.stopPropagation();
+    const e2 = escenarioDe(yo()); delete e2.vol[b.dataset.reset]; delete e2.sup[b.dataset.reset];
+    guardarEscenario('Quitó sus cambios a una obra del mensualizado'); renderMensualizado();
+  }));
+  cont.querySelectorAll('[data-men-acc]').forEach(b => b.addEventListener('click', e => {
+    e.stopPropagation();
+    const a = b.dataset.menAcc;
+    if (a === 'pros') abrirPlaneador();
+    if (a === 'excel') exportarMensualizado();
+    if (a === 'captura') menuCaptura(b);
+    if (a === 'mio') { menVerDe = null; renderMensualizado(); }
+    if (a === 'copiar') {
+      const otro = JSON.parse(JSON.stringify(escenarioDe(menVerDe)));
+      mensualizado().escenarios[yo()] = otro; menVerDe = null;
+      guardarEscenario('Copió un escenario de mensualizado como suyo'); renderMensualizado(); toast('Copiado: ahora es tu escenario y lo puedes cambiar');
+    }
+    if (a === 'abrir') {
+      const clis = [...new Set(R.filas.map(f => (f.p.cliente || 'Sin cliente').trim()))];
+      if (menAbiertos.size >= clis.length) menAbiertos.clear(); else clis.forEach(c => menAbiertos.add(c));
+      renderMensualizado();
+    }
+    if (a === 'sinfecha') {
+      toast('Captura su fecha de arranque en la obra (o muévela en Planear prospección)', 'warn');
+      openModal(R.sinFecha[0].id);
+    }
+  }));
+  if (editable) cont.querySelectorAll('td.editable').forEach(td => td.addEventListener('click', () => editarCelda(td)));
+  pintarGraficaMen(R);
+}
+
+function editarCelda(td) {
+  if (td.querySelector('input')) return;
+  const id = td.dataset.o, ym = td.dataset.m;
+  const p = state.projects.find(x => x.id === id);
+  const esc = escenarioDe(yo());
+  const actual = (mesesObra(p, esc).meses[ym] || {}).vol;
+  td.innerHTML = `<input type="number" min="0" step="1" value="${actual !== undefined ? Math.round(actual) : ''}">`;
+  const inp = td.querySelector('input');
+  inp.focus(); inp.select();
+  let hecho = false;
+  const fin = guardar => {
+    if (hecho) return; hecho = true;
+    if (guardar) {
+      const v = inp.value.trim();
+      if (!esc.vol[id]) esc.vol[id] = {};
+      const base = (baseObra(p, esc.sup[id]).meses[ym] || {}).vol;
+      if (v === '' || (base !== undefined && Math.abs(Number(v) - base) < 0.5)) delete esc.vol[id][ym];
+      else esc.vol[id][ym] = Math.max(0, Number(v));
+      if (!Object.keys(esc.vol[id]).length) delete esc.vol[id];
+      guardarEscenario(`Ajustó el volumen de "${(p.proyecto || '').slice(0, 40)}" en ${etqMes(ym)}`);
+    }
+    renderMensualizado();
+  };
+  inp.addEventListener('keydown', e => {
+    if (e.key === 'Enter') fin(true);
+    if (e.key === 'Escape') fin(false);
+    if (e.key === 'Tab') { e.preventDefault(); fin(true);
+      const sig = document.querySelector(`td.editable[data-o="${CSS.escape(id)}"][data-m="${mesSuma(ym, e.shiftKey ? -1 : 1)}"]`);
+      if (sig) editarCelda(sig); }
+  });
+  inp.addEventListener('blur', () => fin(true));
+}
+
+function guardarEscenario(nota) {
+  escenarioDe(yo()).actualizado = new Date().toISOString();
+  clearTimeout(menGuardarTimer);
+  menGuardarTimer = setTimeout(() => saveState(nota), 2500);
+}
+
+function pintarGraficaMen(R) {
+  const cv = document.getElementById('men-canvas');
+  if (!cv || typeof Chart === 'undefined') return;
+  if (menChart) { menChart.destroy(); menChart = null; }
+  const k = menMetrica;
+  const labels = R.meses.map(etqMes);
+  const ds = k === 'margen'
+    ? [{ type: 'line', label: 'Margen EBITDA', data: R.meses.map((_, i) => { const o = R.filas.reduce((a, f) => { const c = f.celdas[i]; if (c) { a.ing += c.ing || 0; a.e += c.ebitda || 0; } return a; }, { ing: 0, e: 0 }); return o.ing ? o.e / o.ing * 100 : null; }),
+        borderColor: '#0003aa', backgroundColor: '#0003aa', tension: .3, pointRadius: 3 }]
+    : MEN_ETAPAS.filter(e => R.porEtapa[e.k].filas.length).map(e => ({ label: e.et, data: R.porEtapa[e.k].meses.map(o => o[k]), backgroundColor: e.c, borderRadius: 3, stack: 's' }));
+  menChart = new Chart(cv, {
+    type: k === 'margen' ? 'line' : 'bar',
+    data: { labels, datasets: ds },
+    options: { responsive: true, maintainAspectRatio: false, animation: false,
+      plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { family: 'Outfit', size: 11 } } },
+        tooltip: { callbacks: { label: c => `${c.dataset.label}: ${fmtMet(c.parsed.y, k)}` } } },
+      scales: { x: { stacked: true, grid: { display: false }, ticks: { font: { family: 'Outfit', size: 11 } } },
+        y: { stacked: k !== 'margen', ticks: { font: { family: 'Outfit', size: 10 }, callback: v => fmtMet(v, k) }, grid: { color: '#eef0f7' } } } }
+  });
+}
+
+// ---------- planeador de prospección ----------
+function abrirPlaneador() {
+  let ov = document.getElementById('men-overlay');
+  if (!ov) {
+    ov = document.createElement('div'); ov.id = 'men-overlay'; ov.className = 'modal-overlay';
+    document.body.appendChild(ov);
+    ov.addEventListener('click', e => { if (e.target === ov) { ov.classList.remove('active'); renderMensualizado(); } });
+  }
+  pintarPlaneador();
+  ov.classList.add('active');
+}
+
+function pintarPlaneador() {
+  const ov = document.getElementById('men-overlay');
+  const esc = escapeHtml;
+  const yoEsc = escenarioDe(yo());
+  const inc = new Set(yoEsc.incluidos);
+  const pros = getFiltered().filter(p => etapaMen(p) === 'pro')
+    .sort((a, b) => (inc.has(b.id) - inc.has(a.id)) || String(a.estatus).localeCompare(String(b.estatus)) || (volCemex(b) || 0) - (volCemex(a) || 0));
+  const cart = supuestosCartera();
+  const fila = p => {
+    const s = yoEsc.sup[p.id] || {};
+    const b = baseObra(p, s);
+    const m = mesesObra(p, yoEsc);
+    const tot = Object.values(m.meses).reduce((a, c) => ({ vol: a.vol + (c.vol || 0), ing: a.ing + (c.ing || 0), e: a.e + (c.ebitda || 0) }), { vol: 0, ing: 0, e: 0 });
+    return `<tr class="${inc.has(p.id) ? 'inc' : ''}" data-p="${esc(p.id)}">
+      <td><input type="checkbox" data-inc ${inc.has(p.id) ? 'checked' : ''}></td>
+      <td><b>${esc(p.proyecto)}</b><small>${esc(p.cliente || 'Sin cliente')} · ${esc(statusShortName(p.estatus))}</small></td>
+      <td class="num">${volCemex(p) ? Math.round(volCemex(p) * 1000).toLocaleString('es-MX') : '<span class="cell-tbc">—</span>'}</td>
+      <td><input type="month" data-sup="arranque" value="${esc(mesValido(s.arranque) ? s.arranque : (mesValido(p.fecha_arranque) ? p.fecha_arranque : ''))}" class="${mesValido(s.arranque) ? 'mov' : ''}"></td>
+      <td><input type="number" min="1" max="120" data-sup="duracion" value="${esc(s.duracion || p.duracion_meses || '')}" placeholder="12" class="${s.duracion ? 'mov' : ''}"></td>
+      <td><input type="number" min="0" step="50" data-sup="precio" value="${s.precio !== undefined && s.precio !== '' ? esc(s.precio) : ''}" placeholder="${Math.round((b.precioObra ?? cart.precio) * 1e6).toLocaleString('es-MX')}" class="${s.precio ? 'mov' : ''}"></td>
+      <td><input type="number" step="0.5" data-sup="margen" value="${s.margen !== undefined && s.margen !== '' ? esc(s.margen) : ''}" placeholder="${((b.margenObra ?? cart.margen) * 100).toFixed(1)}" class="${s.margen ? 'mov' : ''}"></td>
+      <td class="num">${Math.round(tot.vol).toLocaleString('es-MX')}<small>$${tot.ing.toLocaleString('es-MX', { maximumFractionDigits: 1 })} M · EBITDA $${tot.e.toLocaleString('es-MX', { maximumFractionDigits: 1 })} M</small></td>
+    </tr>`;
+  };
+  ov.innerHTML = `
+    <div class="modal men-modal">
+      <div class="modal-header"><h2>Planear prospección</h2><button class="modal-close" data-x>×</button></div>
+      <div class="modal-body men-body">
+        <p class="men-intro">Marca los proyectos en prospección que entran a tu escenario. Puedes mover su arranque y duración y cambiar el ingreso por m³ o el margen; si los dejas vacíos se usan los de la obra o, si no tiene, los de toda la cartera ($${Math.round(cart.precio * 1e6).toLocaleString('es-MX')} por m³ y ${(cart.margen * 100).toFixed(1)}% de margen). El volumen de cada mes se ajusta en la tabla, con clic en el mes. Se respetan los filtros de arriba.</p>
+        <div class="men-pl-acc"><button type="button" data-todos="1">Incluir todos</button><button type="button" data-todos="0">Quitar todos</button><span>${inc.size} de ${pros.length} incluidos</span></div>
+        <div class="men-pl-wrap">
+        <table class="men-pl">
+          <thead><tr><th></th><th>Proyecto</th><th class="num">Vol. CEMEX m³</th><th>Arranque</th><th>Meses</th><th>Ingreso por m³ $</th><th>Margen %</th><th class="num">En tu escenario</th></tr></thead>
+          <tbody>${pros.map(fila).join('') || '<tr><td colspan="8" class="men-vacio">No hay proyectos en prospección con estos filtros.</td></tr>'}</tbody>
+        </table>
+        </div>
+      </div>
+      <div class="modal-footer"><span style="flex:1"></span><button class="btn btn-primary" data-x>Ver en la tabla</button></div>
+    </div>`;
+  ov.querySelectorAll('[data-x]').forEach(x => x.addEventListener('click', () => { ov.classList.remove('active'); renderMensualizado(); }));
+  ov.querySelectorAll('[data-todos]').forEach(b => b.addEventListener('click', () => {
+    yoEsc.incluidos = b.dataset.todos === '1' ? [...new Set([...yoEsc.incluidos, ...pros.map(p => p.id)])] : yoEsc.incluidos.filter(id => !pros.some(p => p.id === id));
+    guardarEscenario('Cambió los proyectos de prospección de su escenario'); pintarPlaneador();
+  }));
+  ov.querySelectorAll('tr[data-p]').forEach(tr => {
+    const id = tr.dataset.p;
+    tr.querySelector('[data-inc]').addEventListener('change', e => {
+      const s = new Set(yoEsc.incluidos); e.target.checked ? s.add(id) : s.delete(id); yoEsc.incluidos = [...s];
+      guardarEscenario('Cambió los proyectos de prospección de su escenario'); pintarPlaneador();
+    });
+    tr.querySelectorAll('[data-sup]').forEach(inp => inp.addEventListener('change', () => {
+      const k = inp.dataset.sup, v = inp.value.trim();
+      const p = state.projects.find(x => x.id === id);
+      const s = yoEsc.sup[id] || {};
+      const original = k === 'arranque' ? p.fecha_arranque : k === 'duracion' ? p.duracion_meses : null;
+      if (v === '' || String(v) === String(original ?? '')) delete s[k]; else s[k] = k === 'arranque' ? v : Number(v);
+      if (Object.keys(s).length) yoEsc.sup[id] = s; else delete yoEsc.sup[id];
+      // Mover el arranque mueve los meses que ya habías escrito
+      if (k === 'arranque' && yoEsc.vol[id]) delete yoEsc.vol[id];
+      if (!new Set(yoEsc.incluidos).has(id)) yoEsc.incluidos.push(id);
+      guardarEscenario('Ajustó supuestos de prospección'); pintarPlaneador();
+    }));
+  });
+}
+
+// ---------- captura semanal ----------
+function menuCaptura(btn) {
+  const ya = document.getElementById('men-cap-menu');
+  if (ya) { ya.remove(); return; }
+  const r = btn.getBoundingClientRect();
+  const m = document.createElement('div');
+  m.id = 'men-cap-menu'; m.className = 'men-menu';
+  m.style.top = (r.bottom + 6) + 'px'; m.style.right = (window.innerWidth - r.right) + 'px';
+  m.innerHTML = `<button type="button" data-c="bajar"><b>Descargar plantilla</b><span>Obras en ejecución y contratadas, con su volumen por mes (m³) prellenado</span></button>
+    <label><b>Subir la captura</b><span>Lo que escribas reemplaza el volumen de ese mes; lo que dejes vacío no se toca</span><input type="file" accept=".xlsx" hidden></label>`;
+  document.body.appendChild(m);
+  m.querySelector('[data-c="bajar"]').addEventListener('click', () => { m.remove(); plantillaCaptura(); });
+  m.querySelector('input').addEventListener('change', e => { m.remove(); if (e.target.files[0]) subirCaptura(e.target.files[0]); });
+  setTimeout(() => document.addEventListener('click', function cerrar(e) { if (!m.contains(e.target)) { m.remove(); document.removeEventListener('click', cerrar); } }), 0);
+}
+
+async function plantillaCaptura() {
+  if (!await asegurarLibreria('excel')) return;
+  const meses = Array.from({ length: 10 }, (_, i) => mesSuma(mesHoy(), i - 3));
+  const wb = new ExcelJS.Workbook();
+  const ws = wb.addWorksheet('Captura', { views: [{ state: 'frozen', xSplit: 4, ySplit: 3 }] });
+  ws.getCell('A1').value = 'Captura semanal de volumen (m³) · pipeline de Construcción';
+  ws.getCell('A1').font = { name: 'Outfit', size: 14, bold: true, color: { argb: 'FF0003AA' } };
+  ws.getCell('A2').value = 'Meses pasados: lo suministrado. Meses que vienen: lo programado. En gris itálica va el estimado: sobrescríbelo con el dato real. No cambies la columna ID.';
+  ws.getCell('A2').font = { size: 9, color: { argb: 'FF565B85' } };
+  const enc = ['ID', 'Cliente', 'Proyecto', 'Estatus', ...meses];
+  ws.getRow(3).values = enc;
+  ws.getRow(3).eachCell((c, i) => { c.font = { bold: true, color: { argb: 'FFFFFFFF' } }; c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: i > 4 && meses[i - 5] < mesHoy() ? 'FF565B85' : 'FF0003AA' } }; });
+  ws.columns = [{ width: 14 }, { width: 28 }, { width: 44 }, { width: 14 }, ...meses.map(() => ({ width: 11 }))];
+  const obras = state.projects.filter(p => ['sum', 'arr'].includes(etapaMen(p)))
+    .sort((a, b) => String(a.cliente || '').localeCompare(String(b.cliente || ''), 'es') || String(a.proyecto).localeCompare(String(b.proyecto), 'es'));
+  obras.forEach((p, i) => {
+    const b = baseObra(p);
+    const row = ws.getRow(4 + i);
+    row.values = [p.id, p.cliente || '', p.proyecto, statusShortName(p.estatus), ...meses.map(ym => b.meses[ym] ? Math.round(b.meses[ym].vol) : null)];
+    meses.forEach((ym, j) => {
+      const c = row.getCell(5 + j); c.numFmt = '#,##0';
+      // Gris: estimado; negro: ya capturado
+      if (b.meses[ym] && b.meses[ym].fuente !== 'captura') c.font = { color: { argb: 'FF9AA0C4' }, italic: true };
+    });
+    row.getCell(1).font = { color: { argb: 'FF8A8FB0' }, size: 9 };
+  });
+  const buf = await wb.xlsx.writeBuffer();
+  download(new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), `Captura_semanal_volumen_${new Date().toISOString().slice(0, 10)}.xlsx`);
+  toast('Plantilla descargada');
+}
+
+async function subirCaptura(file) {
+  try {
+    if (!await asegurarLibreria('xlsx')) return;
+    const wb = XLSX.read(await file.arrayBuffer(), { type: 'array', cellDates: true });
+    const filas = filasAbsolutas(wb.Sheets[wb.SheetNames[0]]);
+    const iEnc = filas.findIndex(r => r && normEq(r[0]) === 'id');
+    if (iEnc < 0) throw new Error('No encontré la columna ID: usa la plantilla de Captura semanal');
+    const enc = filas[iEnc].map(v => {
+      if (v instanceof Date) return `${v.getFullYear()}-${String(v.getMonth() + 1).padStart(2, '0')}`;
+      const t = String(v || '').trim(); return mesValido(t) ? t : null;
+    });
+    const cap = mensualizado().captura;
+    let n = 0, obras = 0;
+    filas.slice(iEnc + 1).forEach(r => {
+      if (!r || !r[0]) return;
+      const p = state.projects.find(x => x.id === String(r[0]).trim());
+      if (!p) return;
+      let toco = false;
+      const base = baseObra(p).meses;
+      const previa = cap[p.id] || {};
+      enc.forEach((ym, c) => {
+        if (!ym) return;
+        const v = r[c];
+        if (v === null || v === undefined || v === '' || !isFinite(Number(v))) return;
+        // Lo que venía prellenado y no se cambió no cuenta como captura
+        if (previa[ym] === undefined && base[ym] && Math.round(base[ym].vol) === Math.round(Number(v))) return;
+        if (!cap[p.id]) cap[p.id] = {};
+        cap[p.id][ym] = Number(v); n++; toco = true;
+      });
+      if (toco) obras++;
+    });
+    mensualizado().captura_meta = { fecha: new Date().toISOString(), por: yo(), archivo: file.name };
+    saveState(`Subió la captura semanal de volumen: ${obras} obras`);
+    renderMensualizado();
+    toast(`Captura cargada: ${n} meses de ${obras} obras`);
+  } catch (e) { toast('No se pudo leer: ' + e.message, 'error'); }
+}
+
+// ---------- Excel ----------
+async function exportarMensualizado() {
+  if (!await asegurarLibreria('excel')) return;
+  const R = calcularMensualizado();
+  const wb = new ExcelJS.Workbook();
+  wb.creator = 'CEMEX · Concretos y Construcción';
+  const AZUL = 'FF0003AA';
+  MEN_METRICAS.filter(m => m.k !== 'margen').forEach(m => {
+    const ws = wb.addWorksheet(m.et, { views: [{ state: 'frozen', xSplit: 4, ySplit: 3 }] });
+    ws.getCell('A1').value = `${m.et} mensualizado (${m.u}) · escenario de ${nombrePersona(R.verDe)} · ${new Date().toLocaleDateString('es-MX')}`;
+    ws.getCell('A1').font = { name: 'Outfit', size: 13, bold: true, color: { argb: AZUL } };
+    ws.columns = [{ width: 30 }, { width: 44 }, { width: 14 }, { width: 14 }, ...R.meses.map(() => ({ width: 11 })), { width: 13 }];
+    const enc = ws.getRow(3);
+    enc.values = ['Cliente', 'Proyecto', 'Etapa', 'Fuente', ...R.meses.map(etqMes), 'Total'];
+    enc.eachCell(c => { c.font = { bold: true, color: { argb: 'FFFFFFFF' } }; c.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: AZUL } }; });
+    const fmt = m.k === 'vol' ? '#,##0' : '#,##0.0';
+    const filas = R.filas.slice().sort((a, b) => String(a.p.cliente || '').localeCompare(String(b.p.cliente || ''), 'es'));
+    filas.forEach((f, i) => {
+      const row = ws.getRow(4 + i);
+      const fuentes = [...new Set(f.celdas.filter(Boolean).map(c => ({ captura: 'Captura', ppto: 'Ppto. 2027', reparto: 'Reparto', escenario: 'Escenario' }[c.fuente])))].join(', ');
+      row.values = [f.p.cliente || 'Sin cliente', f.p.proyecto, MEN_ETAPAS.find(e => e.k === f.etapa).et, fuentes, ...f.celdas.map(c => c ? c[m.k] : null), f.tot[m.k]];
+      R.meses.forEach((_, j) => { row.getCell(5 + j).numFmt = fmt; });
+      row.getCell(5 + R.meses.length).numFmt = fmt;
+    });
+    const t = ws.getRow(5 + filas.length);
+    t.values = ['Total', '', '', '', ...R.meses.map((_, i) => R.filas.reduce((a, f) => a + (f.celdas[i] ? f.celdas[i][m.k] || 0 : 0), 0)), R.tot[m.k]];
+    t.eachCell((c, j) => { c.font = { bold: true, color: { argb: AZUL } }; if (j > 4) c.numFmt = fmt; });
+  });
+  const buf = await wb.xlsx.writeBuffer();
+  download(new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), `Mensualizado_${new Date().toISOString().slice(0, 10)}.xlsx`);
+  toast('Excel descargado');
+}
+
+// ==========================================================================
 // PDM · PARTICIPACIÓN DE MERCADO
 // Lee del pipeline: volumen total de cada obra, lo que trae CEMEX y lo que
 // traen los competidores. El "mercado mapeado" son las obras que ya tienen
@@ -12557,6 +13300,12 @@ const VIEW_META = {
     icon: '<path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/><circle cx="20" cy="9" r="1.5" fill="currentColor"/>',
     showFilters: true
   },
+  men: {
+    title: 'Mensualizado',
+    subtitle: 'Volumen, ingreso y EBITDA por mes, por cliente y por proyecto',
+    icon: '<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/>',
+    showFilters: true
+  },
   vp: {
     title: 'Presentación VP',
     subtitle: 'Solo las obras marcadas para presentar · mismo formato del BPR',
@@ -12615,6 +13364,7 @@ function switchView(name) {
   if (name === 'cap') renderCapturaTab();
   if (name === 'eq') renderEquiposTab();
   if (name === 'lic') renderLicTab();
+  if (name === 'men') renderMensualizado();
 }
 
 // ==========================================================================
@@ -13630,6 +14380,7 @@ function construirHtmlActualizado() {
     oportunidades: state.oportunidades || [],
     radarPrefs: state.radarPrefs || {},
     presupuestos: state.presupuestos || {},
+    mensualizado: state.mensualizado || {},
     _metadata: state._metadata || null
   }).replace(/<\//g, '<\\/');   // evita que un comentario cierre la etiqueta de datos
 
