@@ -724,6 +724,35 @@ body {
   font-size: 9px; font-weight: 700; vertical-align: middle;
 }
 .chip-toggle.chip-ppto.active { background: #e8f6ee; border-color: #b7e2c8; color: #15803d; }
+.men-ayuda i.f-bo { background: #dbeafe; border-color: #93c5fd; }
+.men-tabla td.f-bo { background: #eff6ff; }
+.be-bo { font-size: 11.5px; color: var(--text-3); }
+.be-titulo { font-size: 17px; font-weight: 600; color: var(--accent-4); }
+.be-titulo span { font-size: 12px; font-weight: 400; color: var(--text-3); }
+.be-graf3 { display: grid; grid-template-columns: 1fr 1fr 2.2fr; gap: 10px; }
+.be-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; height: 270px; }
+.be-ppto { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: end; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; font-size: 11.5px; }
+.be-ppto label { display: grid; gap: 2px; color: var(--text-3); text-transform: capitalize; }
+.be-ppto input { width: 58px; font-family: inherit; font-size: 12px; padding: 3px 5px; border: 1px solid var(--border-2); border-radius: 6px; text-align: right; }
+.be-ppto small { color: var(--text-3); margin-left: auto; }
+.be-tablas { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.be-tabla { background: #fff; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.be-th { background: var(--accent-4); color: #fff; font-weight: 600; font-size: 12.5px; padding: 6px 10px; }
+.be-tabla table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.be-tabla th { font-size: 10px; text-transform: uppercase; color: var(--text-3); text-align: left; padding: 5px 10px; border-bottom: 1px solid var(--border); }
+.be-tabla th:last-child, .be-tabla td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+.be-tabla td { padding: 4px 10px; border-bottom: 1px solid #f0f1f8; max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.be-tabla tr.tot td { font-weight: 700; background: #f7f8fc; }
+.bo-chip { display: flex; gap: 6px; align-items: center; font-size: 11.5px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 6px; padding: 2px 6px; margin-bottom: 3px; }
+.bo-chip small { color: var(--text-3); }
+.bo-chip button { margin-left: auto; border: 0; background: none; cursor: pointer; color: #c0121d; }
+.bo-sug { font-size: 11.5px; margin-bottom: 3px; }
+.bo-sug small { color: var(--text-3); }
+.bo-sug button { font-family: inherit; font-size: 11px; border: 1px solid var(--border-2); background: #fff; border-radius: 6px; padding: 1px 6px; cursor: pointer; color: var(--accent-4); }
+@media (max-width: 1200px) { .be-graf3 { grid-template-columns: 1fr 1fr; } .be-ancha { grid-column: 1 / -1; } .be-tablas { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.aviso-filtros { display: inline-flex; gap: 8px; align-items: center; background: #fff4e6; border: 1px solid #f5cf9a; color: #8a4b07; border-radius: 14px; padding: 2px 4px 2px 10px; font-size: 11.5px; margin-right: 10px; }
+.aviso-filtros.vacio { background: #fde8ea; border-color: #f5a3aa; color: #c0121d; font-weight: 600; }
+.aviso-filtros button { font-family: inherit; font-size: 11px; font-weight: 600; border: 0; background: #fff; color: var(--accent-4); border-radius: 10px; padding: 2px 9px; cursor: pointer; }
 .men { display: flex; flex-direction: column; gap: 10px; }
 .men-barra { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; }
 .men-seg { display: inline-flex; background: #f3f4fb; border-radius: 8px; padding: 2px; }
@@ -4164,7 +4193,7 @@ let shaRemoto = null;     // sha del data.json que tenemos cargado
 let commitRemoto = null;  // último commit visto, para detectar cambios de otros
 let pollTimer = null;
 let guardando = false;
-const APP_VERSION = '2026-10-30';
+const APP_VERSION = '2026-11-07';
 let versionVieja = false;
 let conteoRemoto = null;
 let fotoRemota = new Map();   // cómo estaba cada obra la última vez que se leyó de GitHub
@@ -4762,16 +4791,40 @@ function toast(msg, type='success') {
 // ==========================================================================
 // FILTERING & SORTING
 // ==========================================================================
+
+// Aviso de filtros activos: que nunca parezca que se perdieron obras
+function filtrosActivos() {
+  const f = state.filters, l = [];
+  const sel = (k, et) => { if ((f[k] || []).length) l.push(`${et} (${f[k].length})`); };
+  if (f.search) l.push(`Búsqueda "${f.search}"`);
+  sel('estatusSel', 'Estatus'); sel('clienteSel', 'Cliente'); sel('segmentoSel', 'Segmento'); sel('subsegSel', 'Subsegmento');
+  sel('direccionSel', 'Dirección'); sel('regionSel', 'Región'); sel('modalidadSel', 'Modalidad'); sel('licitacionSel', 'Tipo de licitación'); sel('respSel', 'Responsable');
+  if (f.highlight) l.push('Presentación VP'); if (f.seguimiento) l.push('Seguimiento'); if (f.ppto) l.push('Ppto. 2027');
+  if (f.importante) l.push('Importantes'); if (f.conversion) l.push('Conversión técnica'); if (f.prospeccion) l.push('Prospección');
+  return l;
+}
+function pintarAvisoFiltros(n) {
+  const box = document.getElementById('filter-summary');
+  if (!box) return;
+  const l = filtrosActivos(), total = state.projects.length;
+  if (!l.length) return;
+  const vacio = n === 0;
+  box.insertAdjacentHTML('afterbegin', `<span class="aviso-filtros ${vacio ? 'vacio' : ''}">${vacio ? 'Ningún proyecto cumple los filtros' : 'Filtrado'}: ${escapeHtml(l.join(' · '))}
+    <button type="button" onclick="document.getElementById('btn-clear').click()">Ver las ${total} obras</button></span>`);
+}
 function refrescarVistas() {
-  renderTable();
-  if (typeof actualizarCampana === 'function') actualizarCampana();
-  if (document.getElementById('view-cap').classList.contains('active')) renderCapturaTab();
-  if (document.getElementById('view-eq').classList.contains('active')) renderEquiposTab();
-  if (document.getElementById('view-men') && document.getElementById('view-men').classList.contains('active')) renderMensualizado();
-  if (document.getElementById('view-vp').classList.contains('active')) renderVP();
-  if (document.getElementById('view-bpr').classList.contains('active')) renderPdmTab();
-  if (document.getElementById('view-dashboard').classList.contains('active')) renderDashboard();
-  if (document.getElementById('view-map').classList.contains('active')) renderMap();
+  // Cada vista se dibuja por separado: si una falla con algún dato raro, las demás siguen funcionando
+  const seguro = (nombre, fn) => { try { fn(); } catch (e) { console.error('Vista ' + nombre, e); if (!refrescarVistas._av) { refrescarVistas._av = 1; setTimeout(() => refrescarVistas._av = 0, 8000); toast(`No se pudo dibujar ${nombre}; lo demás sigue normal. Avísale a María José.`, 'warn'); } } };
+  const activa = id => { const el = document.getElementById(id); return el && el.classList.contains('active'); };
+  seguro('la tabla', renderTable);
+  if (typeof actualizarCampana === 'function') seguro('la campana', actualizarCampana);
+  if (activa('view-cap')) seguro('Captura', renderCapturaTab);
+  if (activa('view-eq')) seguro('Equipos', renderEquiposTab);
+  if (activa('view-men')) seguro('Mensualizado', renderMensualizado);
+  if (activa('view-vp')) seguro('Presentación VP', renderVP);
+  if (activa('view-bpr')) seguro('PDM', renderPdmTab);
+  if (activa('view-dashboard')) seguro('el Dashboard', renderDashboard);
+  if (activa('view-map')) seguro('el Mapa', renderMap);
 }
 
 function getFiltered() {
@@ -4994,6 +5047,8 @@ function renderTable() {
     ? ` · Ppto. 27: <strong>$${fmtNum(v27)}</strong> M venta · <strong>$${fmtNum(e27)}</strong> M EBITDA` : '';
   document.getElementById('filter-summary').innerHTML =
     `<strong>${sum.count}</strong> proyecto${sum.count===1?'':'s'} · <strong>${fmtNum(sum.concreto)}</strong> K m³ de concreto · <strong>${sum.imp}</strong> para presentación VP ${extra27} <span style="color:var(--text-soft);margin-left:8px">· doble clic para ver la ficha</span>`;
+
+  pintarAvisoFiltros(sum.count);
 
   const cols = colsVisibles();
   document.getElementById('pipeline-head').innerHTML = `
@@ -11521,6 +11576,7 @@ function baseObra(p, sup) {
     const vol = Number(v);
     meses[ym] = { vol, ing: vol * precio, ebitda: vol * precio * margen, fuente: 'captura' };
   });
+  aplicarBO(p, meses, precio, margen);
   return { meses, precio, margen, precioObra, margenObra, arranque, dur, avisos };
 }
 
@@ -11594,6 +11650,8 @@ function calcularMensualizado() {
 
 // ---------- pestaña ----------
 function renderMensualizado() {
+  if (!BO && boEstado === 'sin cargar') cargarBO().then(b => { if (b) renderMensualizado(); });
+  if (menVista === 'be') return renderBE();
   const cont = document.getElementById('men-cont');
   if (!cont) return;
   const esc = escapeHtml;
@@ -11635,7 +11693,7 @@ function renderMensualizado() {
     const m$ = v => '$' + (v || 0).toLocaleString('es-MX', { maximumFractionDigits: 1 }) + ' M';
     const tip = c ? (cambiada
       ? `Tu cambio: ${fmtMet(c.vol, 'vol')} m³ → ingreso ${m$(c.ing)}, EBITDA ${m$(c.ebitda)}` + (c.base ? `\nBase: ${fmtMet(c.base.vol, 'vol')} m³ → ingreso ${m$(c.base.ing)}, EBITDA ${m$(c.base.ebitda)}` : '\nBase: sin volumen ese mes')
-      : ({ captura: 'Captura semanal', ppto: 'Presupuesto 2027', reparto: 'Total de la obra repartido entre sus meses' }[c.fuente] || '') + ` · ${fmtMet(c.vol, 'vol')} m³ → ingreso ${m$(c.ing)}, EBITDA ${m$(c.ebitda)}`)
+      : ({ bo: 'Real BO', captura: 'Captura semanal', ppto: 'Presupuesto 2027', reparto: 'Total de la obra repartido entre sus meses' }[c.fuente] || '') + ` · ${fmtMet(c.vol, 'vol')} m³ → ingreso ${m$(c.ing)}, EBITDA ${m$(c.ebitda)}`)
       : (editable ? 'Escribe el volumen de este mes' : '');
     return `<td class="num ${clase}" data-o="${esc(f.p.id)}" data-m="${ym}" title="${esc(tip)}">${c ? fmtMet(v, k) : (editable ? '<span class="men-mas">+</span>' : '')}${cambiada && bv !== null && Math.abs((v || 0) - (bv || 0)) > 0.0001 ? `<small>base ${fmtMet(bv, k)}</small>` : ''}</td>`;
   };
@@ -11696,7 +11754,7 @@ function renderMensualizado() {
     <div class="men-barra">
       <div class="men-seg">${MEN_METRICAS.map(m => `<button type="button" class="${menMetrica === m.k ? 'on' : ''}" data-men-met="${m.k}">${m.et}</button>`).join('')}</div>
       <select class="men-sel" data-men="horizonte">${MEN_HORIZONTES.map(h => `<option value="${h.k}" ${menHorizonte === h.k ? 'selected' : ''}>${h.et}</option>`).join('')}</select>
-      <div class="men-seg">${[['cliente', 'Por cliente'], ['proyecto', 'Por proyecto']].map(([v, et]) => `<button type="button" class="${menVista === v ? 'on' : ''}" data-men-vista="${v}">${et}</button>`).join('')}</div>
+      <div class="men-seg">${[['cliente', 'Por cliente'], ['proyecto', 'Por proyecto'], ['be', 'BE comercial']].map(([v, et]) => `<button type="button" class="${menVista === v ? 'on' : ''}" data-men-vista="${v}">${et}</button>`).join('')}</div>
       <label class="men-esc">Escenario de
         <select class="men-sel" data-men="verde">${personasConEsc.map(i => `<option value="${esc(i)}" ${R.verDe === i ? 'selected' : ''}>${i === yo() ? 'mí' : esc(nombreCorto(i))}</option>`).join('')}</select>
       </label>
@@ -11709,7 +11767,7 @@ function renderMensualizado() {
     <div class="men-kpis">${MEN_METRICAS.map(m => tarjeta(m.k, m.et, m.k === 'margen' ? '' : m.u)).join('')}</div>
     <div class="men-graf"><canvas id="men-canvas"></canvas></div>
     <div class="men-ayuda">
-      <span><i class="f-captura"></i>Captura semanal</span><span><i class="f-ppto"></i>Presupuesto 2027</span><span><i class="f-reparto"></i>Total repartido entre los meses</span><span><i class="f-escenario"></i>Tu cambio</span>
+      <span><i class="f-bo"></i>Real BO</span><span><i class="f-captura"></i>Captura semanal</span><span><i class="f-ppto"></i>Presupuesto 2027</span><span><i class="f-reparto"></i>Total repartido entre los meses</span><span><i class="f-escenario"></i>Tu cambio</span>
       ${editable ? '<b>Haz clic en un mes para escribir el volumen (m³); el ingreso y el EBITDA se recalculan con el precio por m³ y el margen de la obra.</b>' : k !== 'vol' && esMio() ? '<b>Para editar, cambia a Volumen.</b>' : ''}
       ${R.sinFecha.length ? `<button type="button" data-men-acc="sinfecha" class="men-sinfecha">${R.sinFecha.length} sin fecha de arranque: no aparecen</button>` : ''}
       ${capMeta ? `<span class="men-cap">Última captura: ${new Date(capMeta.fecha).toLocaleDateString('es-MX', { day: 'numeric', month: 'short' })} · ${esc(nombreCorto(capMeta.por || ''))}</span>` : ''}
@@ -12006,7 +12064,7 @@ async function exportarMensualizado() {
     const filas = R.filas.slice().sort((a, b) => String(a.p.cliente || '').localeCompare(String(b.p.cliente || ''), 'es'));
     filas.forEach((f, i) => {
       const row = ws.getRow(4 + i);
-      const fuentes = [...new Set(f.celdas.filter(Boolean).map(c => ({ captura: 'Captura', ppto: 'Ppto. 2027', reparto: 'Reparto', escenario: 'Escenario' }[c.fuente])))].join(', ');
+      const fuentes = [...new Set(f.celdas.filter(Boolean).map(c => ({ bo: 'BO', captura: 'Captura', ppto: 'Ppto. 2027', reparto: 'Reparto', escenario: 'Escenario' }[c.fuente])))].join(', ');
       row.values = [f.p.cliente || 'Sin cliente', f.p.proyecto, MEN_ETAPAS.find(e => e.k === f.etapa).et, fuentes, ...f.celdas.map(c => c ? c[m.k] : null), f.tot[m.k]];
       R.meses.forEach((_, j) => { row.getCell(5 + j).numFmt = fmt; });
       row.getCell(5 + R.meses.length).numFmt = fmt;
@@ -12018,6 +12076,309 @@ async function exportarMensualizado() {
   const buf = await wb.xlsx.writeBuffer();
   download(new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }), `Mensualizado_${new Date().toISOString().slice(0, 10)}.xlsx`);
   toast('Excel descargado');
+}
+
+// ==========================================================================
+// BO · ventas reales de concreto (Datacreto) y vista BE comercial
+// La BO llega diaria. Mientras Alan la conecta en Datacreto, el pipeline la
+// lee de pipeline-datos/bo/bo_mensual.json (o de window.PIPELINE_CONFIG.urlBO).
+// Formato: { version, corte:'AAAA-MM-DD', campos:[mes, frente, obra, holding,
+// solicitante, region, plaza, canal, subcanal, especialidad, gerencia, grupo,
+// vol (m³), venta (MXN)], filas:[[...]], totales:[[mes,canal,grupo,region,vol,venta]] }
+// Cada obra del pipeline se liga a uno o varios "Frente Clave" de la BO
+// (campo bo_frentes). Los meses ya cerrados toman el volumen real de la BO.
+// ==========================================================================
+const BO_RUTA = 'bo/bo_mensual.json';
+const BE_ETAPAS = [
+  { k: 'cdi', et: 'Ejecución CDI', c: '#0003aa' },
+  { k: 'filial', et: 'Ejecución Filial', c: '#4f55d9' },
+  { k: 'neg', et: 'Negociación', c: '#8f94ec' },
+  { k: 'lic', et: 'Licitación', c: '#f5a524' },
+  { k: 'pro', et: 'Prospección', c: '#f8cf7d' }
+];
+let BO = null, boEstado = 'sin cargar', boError = '';
+
+async function cargarBO(forzar) {
+  if (BO && !forzar) return BO;
+  if (boEstado === 'cargando') return null;
+  boEstado = 'cargando';
+  try {
+    let txt;
+    const cfg = window.PIPELINE_CONFIG || {};
+    if (cfg.urlBO) {                       // conexión directa de Datacreto
+      const r = await fetch(cfg.urlBO, { cache: 'no-store', credentials: 'include' });
+      if (!r.ok) throw new Error('Datacreto respondió ' + r.status);
+      txt = await r.text();
+    } else {
+      if (!userAuth) throw new Error('Sin sesión');
+      const r = await fetch(`https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/${BO_RUTA}?ref=${GH.branch}`,
+        { headers: { Authorization: `Bearer ${userAuth.token}`, Accept: 'application/vnd.github.raw+json' }, cache: 'no-store' });
+      if (r.status === 404) { boEstado = 'sin archivo'; BO = null; return null; }
+      if (!r.ok) throw new Error('GitHub respondió ' + r.status);
+      txt = await r.text();
+    }
+    BO = indexarBO(JSON.parse(txt));
+    boEstado = 'ok';
+    return BO;
+  } catch (e) { boEstado = 'error'; boError = e.message; BO = null; return null; }
+}
+
+function indexarBO(d) {
+  const c = d.campos || [];
+  const i = k => c.indexOf(k);
+  const I = { mes: i('mes'), frente: i('frente'), obra: i('obra'), holding: i('holding'), sol: i('solicitante'), region: i('region'),
+    plaza: i('plaza'), canal: i('canal'), grupo: i('grupo'), gerencia: i('gerencia'), vol: i('vol'), venta: i('venta') };
+  if (I.mes < 0 || I.frente < 0 || I.vol < 0) throw new Error('El archivo de la BO no trae mes, frente y vol');
+  const porFrente = new Map(), info = new Map(), meses = new Set();
+  (d.filas || []).forEach(f => {
+    const fr = String(f[I.frente]), ym = String(f[I.mes]).slice(0, 7), v = +f[I.vol] || 0, s = I.venta >= 0 ? +f[I.venta] || 0 : 0;
+    meses.add(ym);
+    if (!porFrente.has(fr)) porFrente.set(fr, new Map());
+    const m = porFrente.get(fr), cur = m.get(ym) || { vol: 0, venta: 0, filial: 0 };
+    cur.vol += v; cur.venta += s;
+    if (I.grupo >= 0 && /filial/i.test(f[I.grupo] || '')) cur.filial += v;
+    m.set(ym, cur);
+    const inf = info.get(fr) || { frente: fr, obra: f[I.obra] || fr, holding: f[I.holding] || '', solicitante: I.sol >= 0 ? f[I.sol] || '' : '',
+      region: f[I.region] || '', plaza: I.plaza >= 0 ? f[I.plaza] || '' : '', canal: f[I.canal] || '', grupo: f[I.grupo] || '', gerencia: f[I.gerencia] || '', vol: 0 };
+    inf.vol += v; info.set(fr, inf);
+  });
+  const lista = [...meses].sort();
+  // Mes cerrado: si el corte cae antes del día 25, ese mes todavía va con el pronóstico del pipeline
+  const cc = String(d.corte || ''), ultimo = lista[lista.length - 1] || '';
+  const corteMes = /^\d{4}-\d{2}-\d{2}/.test(cc) ? (+cc.slice(8, 10) >= 25 ? cc.slice(0, 7) : mesSuma(cc.slice(0, 7), -1)) : ultimo;
+  return { porFrente, info, corte: cc, corteMes,
+    primerMes: lista[0] || '', generado: d.generado || '', filtro: d.filtro || '', n: (d.filas || []).length };
+}
+
+// Volumen real (m³) de una obra en un mes, según sus frentes ligados
+function boVolObra(p, ym) {
+  if (!BO || !Array.isArray(p.bo_frentes) || !p.bo_frentes.length) return null;
+  let v = 0, filial = 0;
+  p.bo_frentes.forEach(fr => { const m = BO.porFrente.get(String(fr)); const x = m && m.get(ym); if (x) { v += x.vol; filial += x.filial; } });
+  return { vol: v, filial };
+}
+// Se llama desde baseObra: los meses cerrados de una obra ligada toman la BO
+function aplicarBO(p, meses, precio, margen) {
+  if (!BO || !Array.isArray(p.bo_frentes) || !p.bo_frentes.length) return;
+  let ym = BO.primerMes;
+  while (ym && ym <= BO.corteMes) {
+    const r = boVolObra(p, ym);
+    if (r && (r.vol || meses[ym])) meses[ym] = { vol: r.vol, ing: r.vol * precio, ebitda: r.vol * precio * margen, fuente: 'bo' };
+    ym = mesSuma(ym, 1);
+  }
+}
+
+// ---------- ligar obras con la BO ----------
+const BO_VACIAS = new Set(['de', 'del', 'la', 'las', 'los', 'el', 'y', 'en', 'obra', 'proyecto', 'sa', 'cv', 'km', 'etapa', 'fase', 'construccion', 'sapi', 'rl', 'mexico']);
+const boTokens = v => normEq(v).split(' ').filter(t => t.length > 2 && !BO_VACIAS.has(t));
+function sugerenciasBO(p, n) {
+  if (!BO) return [];
+  const A = new Set(boTokens(p.proyecto)), C = new Set(boTokens(p.cliente));
+  const usados = new Set(p.bo_frentes || []);
+  const res = [];
+  BO.info.forEach(inf => {
+    if (usados.has(inf.frente)) return;
+    const B = boTokens(inf.obra);
+    let s = 0; B.forEach(t => { if (A.has(t)) s += 2; });
+    boTokens(inf.holding + ' ' + inf.solicitante).forEach(t => { if (C.has(t)) s += 1; });
+    if (s >= 3) res.push({ inf, s: s + Math.log10(1 + Math.max(0, inf.vol)) / 3 });
+  });
+  return res.sort((a, b) => b.s - a.s).slice(0, n || 3).map(x => x.inf);
+}
+let boLigarQ = '', boLigarSolo = 'activas';
+async function abrirLigarBO() {
+  await cargarBO();
+  let ov = document.getElementById('bo-overlay');
+  if (!ov) {
+    ov = document.createElement('div'); ov.id = 'bo-overlay'; ov.className = 'modal-overlay';
+    document.body.appendChild(ov);
+    ov.addEventListener('click', e => { if (e.target === ov) { ov.classList.remove('active'); renderMensualizado(); } });
+  }
+  pintarLigarBO(); ov.classList.add('active');
+}
+function pintarLigarBO() {
+  const ov = document.getElementById('bo-overlay'), esc = escapeHtml;
+  const k = v => (v / 1000).toLocaleString('es-MX', { maximumFractionDigits: 1 });
+  let obras = state.projects.filter(p => !esCotizacionAlterna(p) && !/^0[78]/.test(String(p.estatus)));
+  if (boLigarSolo === 'activas') obras = obras.filter(p => /^0[456]/.test(String(p.estatus)));
+  if (boLigarSolo === 'sin') obras = obras.filter(p => !(p.bo_frentes || []).length);
+  if (boLigarQ) obras = obras.filter(p => normEq(p.proyecto + ' ' + p.cliente).includes(normEq(boLigarQ)));
+  obras = obras.sort((a, b) => ((b.bo_frentes || []).length > 0) - ((a.bo_frentes || []).length > 0) || String(a.proyecto).localeCompare(String(b.proyecto), 'es')).slice(0, 120);
+  const ligadas = state.projects.filter(p => (p.bo_frentes || []).length).length;
+  ov.innerHTML = `<div class="modal men-modal"><div class="modal-header"><h2>Ligar obras con la BO</h2><button class="modal-close" data-x>×</button></div>
+    <div class="modal-body men-body">
+      ${!BO ? `<p class="men-intro">${boEstado === 'sin archivo' ? 'Todavía no hay BO cargada.' : 'No se pudo leer la BO: ' + esc(boError)} Súbela con el botón "Cargar BO".</p>` : `
+      <p class="men-intro">Cada obra del pipeline se liga con uno o varios <b>frentes</b> de la BO (Frente Clave). Así, los meses ya cerrados toman el volumen real vendido. BO al <b>${esc(BO.corte)}</b> · ${BO.info.size.toLocaleString('es-MX')} frentes · ${ligadas} obras ligadas.</p>
+      <div class="men-pl-acc"><input type="search" id="boQ" placeholder="Buscar obra…" value="${esc(boLigarQ)}" style="font:inherit;font-size:12px;padding:5px 9px;border:1px solid var(--border-2);border-radius:7px;min-width:220px">
+        ${[['activas', 'Contratadas, en ejecución y terminadas'], ['sin', 'Sin ligar'], ['todas', 'Todas']].map(([v, et]) => `<button type="button" data-solo="${v}" style="${boLigarSolo === v ? 'background:#eef0ff;font-weight:600' : ''}">${et}</button>`).join('')}</div>
+      <div class="men-pl-wrap"><table class="men-pl"><thead><tr><th>Obra del pipeline</th><th>Frentes ligados</th><th>Sugerencias de la BO</th></tr></thead><tbody>
+      ${obras.map(p => {
+        const fr = (p.bo_frentes || []).map(f => BO.info.get(String(f)) || { frente: f, obra: '(no está en esta BO)', vol: 0 });
+        return `<tr data-p="${esc(p.id)}"><td><b>${esc(p.proyecto)}</b><small>${esc(p.cliente || '')} · ${esc(statusShortName(p.estatus))}</small></td>
+          <td>${fr.map(f => `<div class="bo-chip">${esc(f.obra)} <small>${esc(f.frente)} · ${k(f.vol)} K m³</small><button type="button" data-quita="${esc(f.frente)}" title="Quitar">×</button></div>`).join('') || '<small>—</small>'}
+            <input type="search" data-busca placeholder="Buscar frente por nombre o clave…" style="margin-top:4px;font:inherit;font-size:11.5px;padding:3px 6px;border:1px solid var(--border-2);border-radius:6px;width:100%"><div data-res></div></td>
+          <td>${sugerenciasBO(p, 3).map(s => `<div class="bo-sug"><button type="button" data-liga="${esc(s.frente)}">+ Ligar</button> ${esc(s.obra)} <small>${esc(s.holding)} · ${esc(s.region)} · ${k(s.vol)} K m³</small></div>`).join('') || '<small>Sin sugerencias</small>'}</td></tr>`;
+      }).join('')}</tbody></table></div>`}
+    </div><div class="modal-footer"><span style="flex:1"></span><button class="btn btn-primary" data-x>Listo</button></div></div>`;
+  ov.querySelectorAll('[data-x]').forEach(b => b.onclick = () => { ov.classList.remove('active'); renderMensualizado(); });
+  if (!BO) return;
+  const q = ov.querySelector('#boQ'); q.oninput = () => { boLigarQ = q.value; clearTimeout(q._t); q._t = setTimeout(() => { pintarLigarBO(); const n = document.getElementById('boQ'); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }, 250); };
+  ov.querySelectorAll('[data-solo]').forEach(b => b.onclick = () => { boLigarSolo = b.dataset.solo; pintarLigarBO(); });
+  const cambia = (id, fn) => { const p = state.projects.find(x => x.id === id); p.bo_frentes = fn(p.bo_frentes || []); if (!p.bo_frentes.length) delete p.bo_frentes;
+    p.fecha_update = new Date().toISOString().slice(0, 10); clearTimeout(cambia._t); cambia._t = setTimeout(() => saveState('Ligó obras con la BO'), 1500); pintarLigarBO(); };
+  ov.querySelectorAll('tr[data-p]').forEach(tr => {
+    const id = tr.dataset.p;
+    tr.querySelectorAll('[data-liga]').forEach(b => b.onclick = () => cambia(id, l => [...new Set(l.concat(b.dataset.liga))]));
+    tr.querySelectorAll('[data-quita]').forEach(b => b.onclick = () => cambia(id, l => l.filter(x => String(x) !== b.dataset.quita)));
+    const inp = tr.querySelector('[data-busca]'), res = tr.querySelector('[data-res]');
+    inp.oninput = () => {
+      const t = normEq(inp.value); if (t.length < 3) { res.innerHTML = ''; return; }
+      const hits = [...BO.info.values()].filter(f => normEq(f.obra + ' ' + f.frente + ' ' + f.holding).includes(t)).sort((a, b) => b.vol - a.vol).slice(0, 6);
+      res.innerHTML = hits.map(s => `<div class="bo-sug"><button type="button" data-liga2="${escapeHtml(s.frente)}">+ Ligar</button> ${escapeHtml(s.obra)} <small>${escapeHtml(s.frente)} · ${k(s.vol)} K m³</small></div>`).join('') || '<small>Sin resultados</small>';
+      res.querySelectorAll('[data-liga2]').forEach(b => b.onclick = () => cambia(id, l => [...new Set(l.concat(b.dataset.liga2))]));
+    };
+  });
+}
+
+// Subir un bo_mensual.json al repositorio (mientras Datacreto no lo escriba solo)
+async function subirArchivoBO(file) {
+  try {
+    const txt = await file.text();
+    const d = JSON.parse(txt); indexarBO(d);             // valida el formato
+    const r0 = await fetch(`https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/${BO_RUTA}?ref=${GH.branch}`, { headers: { Authorization: `Bearer ${userAuth.token}`, Accept: 'application/vnd.github+json' }, cache: 'no-store' });
+    const sha = r0.ok ? (await r0.json()).sha : undefined;
+    const bytes = new TextEncoder().encode(txt); let bin = '';
+    for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    const r = await fetch(`https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/${BO_RUTA}`, { method: 'PUT',
+      headers: { Authorization: `Bearer ${userAuth.token}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: `${nombreCorto(userAuth.iniciales) || userAuth.iniciales}: cargó la BO al ${d.corte || ''}`, content: btoa(bin), branch: GH.branch, ...(sha ? { sha } : {}) }) });
+    if (!r.ok) throw new Error('GitHub respondió ' + r.status);
+    await cargarBO(true); toast(`BO cargada: corte ${d.corte || ''}`); renderMensualizado();
+  } catch (e) { toast('No se pudo cargar la BO: ' + e.message, 'warn'); }
+}
+
+// ---------- vista BE comercial (Reunión Comercial, slide 25) ----------
+let beAnio = null, beCharts = [];
+const k1 = v => (v / 1000).toLocaleString('es-MX', { maximumFractionDigits: 1 });
+const k0 = v => Math.round(v / 1000).toLocaleString('es-MX');
+function etapaBE(p) {
+  const n = String(p.estatus || '').slice(0, 2);
+  if (n === '04' || n === '05' || n === '06') return p.direccion === 'Construcción' ? 'filial' : 'cdi';
+  return { '03': 'neg', '02': 'lic', '01': 'pro' }[n] || null;
+}
+function pptoVolAnio(y) {   // k m³ por mes · captura manual o, para 2027, el presupuesto cargado
+  const man = ((mensualizado().ppto_vol || {})[y]);
+  if (Array.isArray(man) && man.some(v => v !== null && v !== '')) return man.map(v => (+v || 0) * 1000);
+  const pr = state.presupuestos && state.presupuestos[String(y)];
+  if (pr && pr.filas) return Array.from({ length: 12 }, (_, i) => pr.filas.reduce((a, f) => a + (((f.meses || {}).volumen || [])[i] || 0), 0) * 1000);
+  return null;
+}
+function calcularBE(y, sinPrevio) {
+  const meses = Array.from({ length: 12 }, (_, i) => `${y}-${String(i + 1).padStart(2, '0')}`);
+  const corte = BO ? BO.corteMes : '';
+  const serie = {}; BE_ETAPAS.forEach(e => serie[e.k] = Array(12).fill(0));
+  const proy = new Map();                            // nombre → { etapa, vol }
+  const suma = (et, nombre, i, v) => { serie[et][i] += v; const key = et + '|' + nombre; const o = proy.get(key) || { et, nombre, vol: 0 }; o.vol += v; proy.set(key, o); };
+  // 1) Meses cerrados: todo lo vendido en la BO (obras ligadas y no ligadas)
+  const ligado = new Map();
+  state.projects.forEach(p => (p.bo_frentes || []).forEach(f => ligado.set(String(f), p)));
+  if (BO) BO.porFrente.forEach((m, fr) => meses.forEach((ym, i) => {
+    if (ym > corte) return;
+    const x = m.get(ym); if (!x || !x.vol) return;
+    const p = ligado.get(fr), nombre = p ? p.proyecto : (BO.info.get(fr) || {}).obra || fr;
+    suma('filial', nombre, i, x.filial); suma('cdi', nombre, i, x.vol - x.filial);
+  }));
+  // 2) Meses por venir: el pipeline por etapa
+  state.projects.forEach(p => {
+    const et = etapaBE(p); if (!et || esCotizacionAlterna(p)) return;
+    const b = baseObra(p, {});
+    meses.forEach((ym, i) => { if (BO && ym <= corte) return; const c = b.meses[ym]; if (c && c.vol) suma(et, p.proyecto, i, c.vol); });
+  });
+  const total = serie => serie.reduce((a, v) => a + v, 0);
+  const porEtapa = {}; BE_ETAPAS.forEach(e => porEtapa[e.k] = total(serie[e.k]));
+  const real = yy => { if (!BO) return null; let t = 0; BO.porFrente.forEach(m => m.forEach((x, ym) => { if (ym.startsWith(yy + '-')) t += x.vol; })); return t || null; };
+  const realMes = yy => BO ? Array.from({ length: 12 }, (_, i) => { const ym = `${yy}-${String(i + 1).padStart(2, '0')}`; let t = 0; BO.porFrente.forEach(m => { const x = m.get(ym); if (x) t += x.vol; }); return t; }) : null;
+  return { y, meses, corte, serie, porEtapa, total: Object.values(porEtapa).reduce((a, b) => a + b, 0), proy: [...proy.values()],
+    real2: (y - 2 >= new Date().getFullYear() && !sinPrevio) ? calcularBE(y - 2, true).total : real(y - 2),
+    real1: (y - 1 >= new Date().getFullYear() && !sinPrevio) ? calcularBE(y - 1, true).total : real(y - 1),
+    real1Mes: (y - 1 >= new Date().getFullYear() && !sinPrevio) ? (() => { const r = calcularBE(y - 1, true); return r.meses.map((_, i) => BE_ETAPAS.reduce((a, e) => a + r.serie[e.k][i], 0)); })() : realMes(y - 1),
+    ppto: pptoVolAnio(y) };
+}
+async function renderBE() {
+  const cont = document.getElementById('men-cont');
+  if (!BO && boEstado !== 'sin archivo' && boEstado !== 'error') { cont.innerHTML = '<div class="men-vacio">Leyendo la BO…</div>'; await cargarBO(); }
+  beCharts.forEach(c => c.destroy()); beCharts = [];
+  const y = beAnio || new Date().getFullYear();
+  const R = calcularBE(y), esc = escapeHtml;
+  const pptoT = R.ppto ? R.ppto.reduce((a, b) => a + b, 0) : null;
+  const pct = (a, b) => (a && b) ? `${a >= b ? '+' : ''}${Math.round((a / b - 1) * 100)}%` : '';
+  const tablas = ['ejec', 'neg', 'lic', 'pro'].map(t => {
+    const ets = t === 'ejec' ? ['cdi', 'filial'] : [t];
+    const m = new Map(); R.proy.filter(x => ets.includes(x.et)).forEach(x => m.set(x.nombre, (m.get(x.nombre) || 0) + x.vol));
+    const l = [...m.entries()].sort((a, b) => b[1] - a[1]); const top = l.slice(0, 7), otros = l.slice(7).reduce((a, x) => a + x[1], 0), tot = l.reduce((a, x) => a + x[1], 0);
+    const titulo = { ejec: 'Ejecución', neg: 'Negociación', lic: 'Licitación', pro: 'Prospección' }[t];
+    return `<div class="be-tabla"><div class="be-th">${titulo}</div><table><thead><tr><th>Proyecto</th><th>${y}</th></tr></thead><tbody>
+      ${top.map(([n, v]) => `<tr><td title="${esc(n)}">${esc(n)}</td><td>${k1(v)}</td></tr>`).join('')}${otros ? `<tr><td>Otros proyectos</td><td>${k1(otros)}</td></tr>` : ''}
+      <tr class="tot"><td>Total</td><td>${k1(tot)}</td></tr></tbody></table></div>`;
+  }).join('');
+  const anios = [new Date().getFullYear(), new Date().getFullYear() + 1];
+  cont.innerHTML = `<div class="men">
+    <div class="men-barra">
+      <div class="men-seg">${[['cliente', 'Por cliente'], ['proyecto', 'Por proyecto'], ['be', 'BE comercial']].map(([v, et]) => `<button type="button" class="${menVista === v ? 'on' : ''}" data-men-vista="${v}">${et}</button>`).join('')}</div>
+      <div class="men-seg">${anios.map(a => `<button type="button" class="${a === y ? 'on' : ''}" data-be-anio="${a}">${a}</button>`).join('')}</div>
+      <span class="be-bo">${BO ? `BO al <b>${esc(BO.corte)}</b> · ${state.projects.filter(p => (p.bo_frentes || []).length).length} obras ligadas` : boEstado === 'error' ? 'BO: ' + esc(boError) : 'Sin BO cargada'}</span>
+      <span style="flex:1"></span>
+      <button type="button" class="btn btn-ghost btn-sm" data-be="ligar">Ligar obras con la BO</button>
+      <label class="btn btn-ghost btn-sm" style="cursor:pointer">Cargar BO<input type="file" accept=".json" hidden data-be-archivo></label>
+    </div>
+    <div class="be-titulo">BE ${y}${R.real1 ? `; ${pct(R.total, R.real1)} vs ${y - 1}` : ''} <span>| Volumen k m³ · real BO hasta ${esc(R.corte ? etqMes(R.corte) : '—')} (corte ${esc(BO ? BO.corte : '—')}), después pipeline por etapa</span></div>
+    <div class="be-graf3">
+      <div class="be-card"><canvas id="beAnual"></canvas></div>
+      <div class="be-card"><canvas id="beMix"></canvas></div>
+      <div class="be-card be-ancha"><canvas id="beMes"></canvas></div>
+    </div>
+    <div class="be-ppto"><b>Ppto ${y} (k m³)</b>${Array.from({ length: 12 }, (_, i) => `<label>${MES_ABR[i]}<input type="number" step="0.1" data-ppto="${i}" value="${R.ppto ? +(R.ppto[i] / 1000).toFixed(1) : ''}"></label>`).join('')}
+      <small>${(mensualizado().ppto_vol || {})[y] ? 'Captura manual' : R.ppto ? 'Del presupuesto cargado en el pipeline' : 'Sin presupuesto: captúralo aquí'}</small></div>
+    <div class="be-tablas">${tablas}</div>
+    <p class="nota" style="font-size:11.5px;color:var(--text-3)">Ejecución CDI = clientes; Ejecución Filial = obras de la Dirección de Construcción (en la BO, Grupo de clientes "Filiales"). Los meses cerrados vienen de la BO (lo vendido en todos los frentes del universo, ligados o no); los que vienen, del mensualizado de cada obra del pipeline sin escenarios.</p>
+  </div>`;
+  cont.querySelectorAll('[data-men-vista]').forEach(b => b.onclick = () => { menVista = b.dataset.menVista; renderMensualizado(); });
+  cont.querySelectorAll('[data-be-anio]').forEach(b => b.onclick = () => { beAnio = +b.dataset.beAnio; renderBE(); });
+  cont.querySelector('[data-be="ligar"]').onclick = abrirLigarBO;
+  cont.querySelector('[data-be-archivo]').onchange = e => e.target.files[0] && subirArchivoBO(e.target.files[0]);
+  cont.querySelectorAll('[data-ppto]').forEach(inp => inp.onchange = () => {
+    const m = mensualizado(); m.ppto_vol = m.ppto_vol || {};
+    const arr = m.ppto_vol[y] || Array.from({ length: 12 }, (_, i) => R.ppto ? +(R.ppto[i] / 1000).toFixed(1) : null);
+    arr[+inp.dataset.ppto] = inp.value === '' ? null : +inp.value; m.ppto_vol[y] = arr;
+    clearTimeout(renderBE._t); renderBE._t = setTimeout(() => { saveState(`Capturó el Ppto ${y} de volumen`); renderBE(); }, 1200);
+  });
+  if (typeof Chart === 'undefined') return;
+  const F = { family: 'Outfit', size: 11 };
+  const etq = { id: 'etq', afterDatasetsDraw(ch) { const { ctx } = ch; ctx.save(); ctx.font = '600 11px Outfit'; ctx.fillStyle = '#14173d'; ctx.textAlign = 'center';
+    (ch.options.plugins.etq || []).forEach(t => ctx.fillText(t.txt, ch.scales.x.getPixelForValue(t.i), ch.scales.y.getPixelForValue(t.v) - 6)); ctx.restore(); } };
+  // Anual
+  const barras = [R.real2, R.real1, R.total, pptoT];
+  beCharts.push(new Chart(document.getElementById('beAnual'), { type: 'bar', plugins: [etq],
+    data: { labels: [String(y - 2), (y - 1 >= new Date().getFullYear() ? 'BE ' : '') + (y - 1), `BE ${y}`, 'Ppto'], datasets: [{ data: barras.map(v => v ? v / 1000 : 0), backgroundColor: ['#b9bcd9', '#9aa0c4', '#0003aa', '#f22230'], borderRadius: 4 }] },
+    options: { maintainAspectRatio: false, plugins: { legend: { display: false }, title: { display: true, text: 'Volumen anual · k m³', font: F },
+      etq: barras.map((v, i) => ({ i, v: v ? v / 1000 : 0, txt: v ? `${k0(v)}${i === 2 && R.real1 ? ' (' + pct(R.total, R.real1) + ')' : ''}` : '—' })) },
+      scales: { x: { grid: { display: false }, ticks: { font: F } }, y: { ticks: { font: F }, grace: '12%' } } } }));
+  // Composición
+  beCharts.push(new Chart(document.getElementById('beMix'), { type: 'bar',
+    data: { labels: [`${y}`], datasets: BE_ETAPAS.map(e => ({ label: e.et, data: [R.porEtapa[e.k] / 1000], backgroundColor: e.c, stack: 's' })) },
+    options: { maintainAspectRatio: false, plugins: { title: { display: true, text: `Por etapa · total ${k0(R.total)} k m³`, font: F }, legend: { position: 'right', labels: { boxWidth: 10, font: F } },
+      tooltip: { callbacks: { label: c => `${c.dataset.label}: ${k1(c.parsed.y * 1000)} (${R.total ? Math.round(c.parsed.y * 1000 / R.total * 100) : 0}%)` } } },
+      scales: { x: { stacked: true, grid: { display: false } }, y: { stacked: true, ticks: { font: F } } } } }));
+  // Mensual
+  const totMes = R.meses.map((_, i) => BE_ETAPAS.reduce((a, e) => a + R.serie[e.k][i], 0));
+  beCharts.push(new Chart(document.getElementById('beMes'), { type: 'bar', plugins: [etq],
+    data: { labels: MES_ABR.map(m => m[0].toUpperCase() + m.slice(1)), datasets: [
+      ...BE_ETAPAS.map(e => ({ label: e.et, data: R.serie[e.k].map(v => v / 1000), backgroundColor: e.c, stack: 's', order: 2 })),
+      ...(R.real1Mes ? [{ type: 'line', label: String(y - 1), data: R.real1Mes.map(v => v / 1000), borderColor: '#565b85', backgroundColor: '#565b85', borderDash: [4, 4], pointRadius: 2, order: 1 }] : []),
+      ...(R.ppto ? [{ type: 'line', label: 'Ppto', data: R.ppto.map(v => v / 1000), borderColor: '#f22230', backgroundColor: '#f22230', pointRadius: 3, showLine: false, order: 0 }] : []) ] },
+    options: { maintainAspectRatio: false, plugins: { title: { display: true, text: 'Volumen mensual · k m³', font: F }, legend: { position: 'bottom', labels: { boxWidth: 10, font: F } },
+      etq: totMes.map((v, i) => ({ i, v: v / 1000, txt: v ? k0(v) : '' })) },
+      scales: { x: { stacked: true, grid: { display: false }, ticks: { font: F } }, y: { stacked: true, ticks: { font: F }, grace: '10%' } } } }));
 }
 
 // ==========================================================================
@@ -13434,9 +13795,9 @@ function exportData() {
       else if (fmt === 'equipos') exportarEquiposObra();
 
       else {
-        const blob = new Blob([JSON.stringify({ projects: state.projects, _exported: new Date().toISOString() }, null, 2)], { type: 'application/json' });
-        download(blob, `pipeline_backup_${new Date().toISOString().slice(0,10)}.json`);
-        toast('Backup JSON descargado');
+        const blob = new Blob([JSON.stringify(Object.assign(paquete(), { _exported: new Date().toISOString(), _respaldo: 'completo' }), null, 2)], { type: 'application/json' });
+        download(blob, `pipeline_respaldo_completo_${new Date().toISOString().slice(0,10)}.json`);
+        toast('Respaldo completo descargado: obras, fichas, radar, presupuesto 2027 y mensualizado');
       }
     });
   });
