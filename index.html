@@ -753,6 +753,107 @@ body {
 .aviso-filtros { display: inline-flex; gap: 8px; align-items: center; background: #fff4e6; border: 1px solid #f5cf9a; color: #8a4b07; border-radius: 14px; padding: 2px 4px 2px 10px; font-size: 11.5px; margin-right: 10px; }
 .aviso-filtros.vacio { background: #fde8ea; border-color: #f5a3aa; color: #c0121d; font-weight: 600; }
 .aviso-filtros button { font-family: inherit; font-size: 11px; font-weight: 600; border: 0; background: #fff; color: var(--accent-4); border-radius: 10px; padding: 2px 9px; cursor: pointer; }
+.mz { display: grid; grid-template-rows: auto auto minmax(0, 1fr) auto; gap: 10px; min-height: 560px; }
+.mz-cab { display: flex; justify-content: space-between; align-items: flex-end; gap: 14px; flex-wrap: wrap; }
+.mz-tit h2 { margin: 0; font-size: clamp(22px, 2.1vw, 30px); font-weight: 700; color: #0003aa; letter-spacing: -.01em; line-height: 1.1; }
+.mz-tit h2 span { font-size: .8em; }
+.mz-tit p { margin: 3px 0 0; font-size: 12.5px; color: var(--text-2); }
+.mz-ctl { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.mz-menu { position: relative; }
+.mz-pop { position: absolute; right: 0; top: calc(100% + 6px); z-index: 30; width: 330px; background: #fff; border: 1px solid var(--border-2); border-radius: 12px; box-shadow: 0 16px 40px rgba(20,23,61,.18); padding: 6px; }
+.mz-pop button, .mz-pop label { display: block; width: 100%; text-align: left; border: 0; background: none; padding: 8px 10px; border-radius: 8px; cursor: pointer; font-family: inherit; }
+.mz-pop button:hover, .mz-pop label:hover { background: #f3f4fb; }
+.mz-pop b { display: block; font-size: 12.5px; color: var(--text); }
+.mz-pop span { font-size: 11px; color: var(--text-3); }
+.mz-pop hr { border: 0; border-top: 1px solid var(--border); margin: 4px 6px; }
+.mz-kpis { display: grid; grid-template-columns: 1.15fr repeat(4, 1fr); gap: 10px; }
+.mz-kpi { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; cursor: default; position: relative; overflow: hidden; }
+.mz-kpi::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: #0003aa; }
+.mz-kpi.ejec::before { background: #3cbf72; } .mz-kpi.ganar::before { background: #ffb469; }
+.mz-kpi span { display: block; font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); font-weight: 700; }
+.mz-kpi b { display: block; font-size: clamp(20px, 1.9vw, 28px); color: #0003aa; font-variant-numeric: tabular-nums; line-height: 1.15; margin: 2px 0; }
+.mz-kpi p { margin: 0; font-size: 11.5px; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mz-kpi b.sube, .mz .sube { color: #15803d; } .mz-kpi b.baja, .mz .baja { color: #c0121d; }
+.mz-main { display: grid; grid-template-columns: minmax(0, 1fr) clamp(240px, 22vw, 320px); gap: 10px; min-height: 0; }
+.mz-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; min-height: 0; display: flex; flex-direction: column; }
+.mz-ley { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 11.5px; color: var(--text-2); }
+.mz-ley span { display: inline-flex; align-items: center; gap: 6px; }
+.mz-ley i.barra { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+.mz-ley i.linea { width: 20px; border-top: 2px dashed; display: inline-block; }
+.mz-charts { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) clamp(110px, 10vw, 150px); gap: 10px; }
+.mz-charts > div { position: relative; min-height: 0; }
+.mz-anual { border-left: 1px dashed var(--border-2); padding-left: 8px; }
+.mz-lado h3 { margin: 0 0 6px; font-size: 13px; }
+.mz-lado { overflow: auto; }
+.mz-cambio { display: flex; justify-content: space-between; gap: 8px; align-items: center; padding: 6px 2px; border-bottom: 1px solid #f0f1f8; font-size: 12px; cursor: default; }
+.mz-cambio div { min-width: 0; } .mz-cambio div b { display: block; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mz-cambio div span { font-size: 10.5px; color: var(--text-3); white-space: nowrap; }
+.mz-cambio > b { white-space: nowrap; font-size: 12px; }
+.mz-mas { margin-top: 6px; font-family: inherit; font-size: 11.5px; border: 1px dashed var(--border-2); background: #fff; color: var(--accent-4); border-radius: 8px; padding: 5px; cursor: pointer; font-weight: 600; }
+.mz-nota { font-size: 12px; color: var(--text-3); line-height: 1.5; }
+.mz-agrupa { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.mz-agrupa span { margin-left: auto; font-weight: 400; font-size: 11px; color: var(--text-3); }
+.mz-tabgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.mz-tab { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 8px 10px; }
+.mz-th { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.mz-th span { font-weight: 700; font-size: 12.5px; padding: 3px 12px; border-radius: 7px; }
+.mz-th em { font-style: normal; font-size: 11px; color: var(--text-3); }
+.mz-tab table { width: 100%; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; }
+.mz-tab td { padding: 3px 2px; border-bottom: 1px solid #f0f1f8; max-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: default; }
+.mz-tab td:last-child { text-align: right; width: 70px; max-width: none; }
+.mz-tab tr.otros td { color: var(--text-3); }
+.mz-tab tr.tot td { font-weight: 800; border-bottom: 0; border-top: 1px solid #14173d; }
+.mz-tab tr:hover td, .mz-cambio:hover { background: #f6f7ff; }
+.mz.bajo { gap: 8px; } .mz.bajo .mz-kpi { padding: 7px 12px; } .mz.bajo .mz-tab td { padding: 2px; font-size: 11.5px; }
+.men-volver { font-family: inherit; font-size: 12.5px; font-weight: 600; border: 1px solid var(--border-2); background: #fff; color: var(--accent-4); border-radius: 8px; padding: 5px 12px; cursor: pointer; }
+.men-volver:hover { background: #eef0ff; }
+.men-vtit { font-size: 14px; color: var(--text); }
+@media (max-width: 1100px) { .mz-kpis { grid-template-columns: repeat(3, 1fr); } .mz-main { grid-template-columns: 1fr; } .mz-tabgrid { grid-template-columns: repeat(2, 1fr); } .mz { height: auto !important; } }
+.men-barra { position: sticky; top: 0; z-index: 6; box-shadow: 0 4px 10px rgba(20,23,61,.06); }
+.men-barra { flex-direction: column; align-items: stretch; gap: 6px; }
+.men-fila { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.be2 { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; }
+.be2-cab { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.be2-cab h2 { margin: 0; font-size: 28px; font-weight: 700; color: #0003aa; letter-spacing: -.01em; }
+.be2-cab h2 span { color: #2b8cf0; }
+.be2-cab p { margin: 2px 0 0; font-size: 13px; color: var(--text-2); }
+.be2-ley { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 11.5px; color: var(--text-2); }
+.be2-ley span { display: inline-flex; align-items: center; gap: 6px; }
+.be2-ley i.barra { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+.be2-ley i.linea { width: 20px; border-top: 2px dashed; display: inline-block; }
+.be2-graf { display: grid; grid-template-columns: minmax(0, 1fr) 150px; gap: 14px; height: 340px; }
+.be2-mes, .be2-anual { position: relative; min-height: 0; }
+.be2-anual { border-left: 1px dashed var(--border-2); padding-left: 10px; }
+.be-tablas .be-tabla { border: 0; border-radius: 0; }
+.be-tablas .be-th { display: inline-block; margin: 0 auto 6px; padding: 5px 18px; border-radius: 8px; font-size: 14px; font-weight: 700; }
+.be-tablas .be-tabla { text-align: center; background: transparent; }
+.be-tablas table { text-align: left; background: #fff; }
+.be-tablas th { font-size: 11.5px; text-transform: none; color: #14173d; font-weight: 700; border-bottom: 1px solid #b9bcd9; }
+.be-tablas td { border-bottom: 1px solid #e3e5f3; }
+.be-tablas tr.otros td:first-child { text-align: right; color: var(--text-2); }
+.be-tablas tr.tot td { background: #fff; font-weight: 800; font-size: 13px; border-top: 1px solid #14173d; }
+.be-tablas tr.tot td:first-child { text-align: right; }
+.be-tablas tbody tr { cursor: default; }
+
+.men-nav button { font-weight: 600; }
+.men-pie { font-size: 11px; color: var(--text-3); margin: 2px 2px 0; }
+.men-tabla td small { display: block; font-size: 9.5px; color: var(--text-3); font-weight: 400; }
+.men-tabla .men-be { background: #eef0ff; font-weight: 700; }
+.men-tabla tr.men-sub td { background: #fbfbfe; font-weight: 600; font-size: 11.5px; }
+.men-tabla td { padding: 4px 8px; }
+.men-pron .sube, .var-tabla .sube, .men-kpi .sube { color: #15803d; font-weight: 600; }
+.men-pron .baja, .var-tabla .baja, .men-kpi .baja { color: #c0121d; font-weight: 600; }
+.var-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.var-tabla { background: #fff; border: 1px solid var(--border); border-radius: 10px; overflow: auto; max-height: 52vh; }
+.var-tabla table { width: 100%; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; }
+.var-tabla th { position: sticky; top: 0; background: #f7f8fc; font-size: 10px; text-transform: uppercase; color: var(--text-3); text-align: right; padding: 5px 8px; }
+.var-tabla th:first-child, .var-tabla td:first-child { text-align: left; }
+.var-tabla td { padding: 4px 8px; border-bottom: 1px solid #f0f1f8; text-align: right; white-space: nowrap; max-width: 260px; overflow: hidden; text-overflow: ellipsis; }
+.var-tabla td:nth-child(2), .var-tabla td:nth-child(3) { text-align: left; }
+.var-grid .var-tabla td:nth-child(2), .var-grid .var-tabla td:nth-child(3) { text-align: right; }
+.var-tabla tr.tot td { font-weight: 700; background: #f4f5fd; }
+.var-tabla tbody tr { cursor: default; }
+.var-tabla tbody tr:hover td, .be-tabla tbody tr:hover td { background: #f6f7ff; }
 .men { display: flex; flex-direction: column; gap: 10px; }
 .men-barra { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; }
 .men-seg { display: inline-flex; background: #f3f4fb; border-radius: 8px; padding: 2px; }
@@ -4200,7 +4301,7 @@ let shaRemoto = null;     // sha del data.json que tenemos cargado
 let commitRemoto = null;  // último commit visto, para detectar cambios de otros
 let pollTimer = null;
 let guardando = false;
-const APP_VERSION = '2026-11-07';
+const APP_VERSION = '2026-11-11';
 let versionVieja = false;
 let conteoRemoto = null;
 let fotoRemota = new Map();   // cómo estaba cada obra la última vez que se leyó de GitHub
@@ -11470,7 +11571,7 @@ async function exportarConciliacionPpto() {
 const MEN_ETAPAS = [
   { k: 'sum', et: 'Suministrando', c: '#0003aa' },
   { k: 'arr', et: 'Por arrancar', c: '#6b70e8' },
-  { k: 'pro', et: 'Prospección', c: '#f5a524' },
+  { k: 'pro', et: 'Por ganar', c: '#f5a524' },
   { k: 'ter', et: 'Terminadas', c: '#9aa0c4' }
 ];
 const MEN_METRICAS = [
@@ -11486,7 +11587,7 @@ const MEN_HORIZONTES = [
   { k: 'hist', et: 'Últimos 6 y próximos 6' }
 ];
 const MES_ABR = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
-let menMetrica = 'vol', menHorizonte = 'h6', menVista = 'cliente', menVerDe = null, menAbiertos = new Set(), menPanel = null, menChart = null;
+let menMetrica = 'vol', menHorizonte = 'h6', menVista = 'inicio', menVerDe = null, menAbiertos = new Set(), menPanel = null, menChart = null;
 let menGuardarTimer = null;
 
 function mensualizado() {
@@ -11658,7 +11759,11 @@ function calcularMensualizado() {
 // ---------- pestaña ----------
 function renderMensualizado() {
   if (!BO && boEstado === 'sin cargar') cargarBO().then(b => { if (b) renderMensualizado(); });
+  if (!FOTOS && userAuth && !fotosCargando) cargarFotos();
+  if (menVista === 'inicio') return renderResumen();
   if (menVista === 'be') return renderBE();
+  if (menVista === 'pron') return renderPron();
+  if (menVista === 'var') return renderVar();
   const cont = document.getElementById('men-cont');
   if (!cont) return;
   const esc = escapeHtml;
@@ -11686,7 +11791,7 @@ function renderMensualizado() {
     const pr = kk === 'margen' ? margenDe(R.pros) : R.pros[kk];
     return `<div class="men-kpi ${menMetrica === kk ? 'on' : ''}" data-men-met="${kk}">
       <span>${et}${u ? ` <small>${u}</small>` : ''}</span><b>${kk === 'ing' || kk === 'ebitda' ? '$' : ''}${fmtMet(v, kk)}</b>
-      <p>Asegurado ${fmtMet(a, kk)} · Prospección ${fmtMet(pr, kk)}</p>${delta(v, b, kk)}</div>`;
+      <p>Asegurado ${fmtMet(a, kk)} · Por ganar ${fmtMet(pr, kk)}</p>${delta(v, b, kk)}</div>`;
   };
 
   // Celdas de un renglón de obra
@@ -11713,7 +11818,7 @@ function renderMensualizado() {
         ${f.m.tocada && esMio() ? `<button type="button" class="men-reset" data-reset="${esc(f.p.id)}" title="Quitar tus cambios a esta obra">↺</button>` : ''}
       </td>
       ${R.meses.map((_, i) => celdaObra(f, i)).join('')}
-      <td class="num men-tot">${fmtMet(totFila(f.tot, k), k)}</td>
+      <td class="num men-tot">${fmtMet(totFila(f.tot, k), k)}${k === 'ebitda' && f.tot.ing ? `<small>${(f.tot.ebitda / f.tot.ing * 100).toFixed(1)}%</small>` : ''}</td>
     </tr>`;
   const sumaFilas = (lista, i) => {
     const o = lista.reduce((a, f) => { const c = f.celdas[i]; if (c) { a.vol += c.vol || 0; a.ing += c.ing || 0; a.ebitda += c.ebitda || 0; } return a; }, { vol: 0, ing: 0, ebitda: 0 });
@@ -11749,7 +11854,7 @@ function renderMensualizado() {
     <tr class="men-subt"><td class="men-nom"><i style="background:${e.c}"></i>${e.et}</td>
       ${R.porEtapa[e.k].meses.map(o => `<td class="num">${fmtMet(valorMet(o, k), k)}</td>`).join('')}
       <td class="num men-tot">${fmtMet(totLista(R.porEtapa[e.k].filas), k)}</td></tr>`).join('') + `
-    <tr class="men-total"><td class="men-nom">Total${R.pros.vol || R.pros.ing ? ' con prospección' : ''}</td>
+    <tr class="men-total"><td class="men-nom">Total${R.pros.vol || R.pros.ing ? ' con tu plan' : ''}</td>
       ${R.meses.map((_, i) => `<td class="num">${fmtMet(sumaFilas(R.filas, i), k)}</td>`).join('')}
       <td class="num men-tot">${fmtMet(totLista(R.filas), k)}</td></tr>`;
 
@@ -11759,22 +11864,22 @@ function renderMensualizado() {
   cont.innerHTML = `
   <div class="men">
     <div class="men-barra">
-      <div class="men-seg">${MEN_METRICAS.map(m => `<button type="button" class="${menMetrica === m.k ? 'on' : ''}" data-men-met="${m.k}">${m.et}</button>`).join('')}</div>
-      <select class="men-sel" data-men="horizonte">${MEN_HORIZONTES.map(h => `<option value="${h.k}" ${menHorizonte === h.k ? 'selected' : ''}>${h.et}</option>`).join('')}</select>
-      <div class="men-seg">${[['cliente', 'Por cliente'], ['proyecto', 'Por proyecto'], ['be', 'BE comercial']].map(([v, et]) => `<button type="button" class="${menVista === v ? 'on' : ''}" data-men-vista="${v}">${et}</button>`).join('')}</div>
-      <label class="men-esc">Escenario de
-        <select class="men-sel" data-men="verde">${personasConEsc.map(i => `<option value="${esc(i)}" ${R.verDe === i ? 'selected' : ''}>${i === yo() ? 'mí' : esc(nombreCorto(i))}</option>`).join('')}</select>
-      </label>
-      <span style="flex:1"></span>
-      <button type="button" class="btn btn-ghost btn-sm" data-men-acc="captura">Captura semanal</button>
-      <button type="button" class="btn btn-ghost btn-sm" data-men-acc="excel">Excel</button>
-      <button type="button" class="btn btn-primary btn-sm" data-men-acc="pros">Planear prospección · ${nPros}/${R.prospectos.length}</button>
+      <div class="men-fila">${navMen()}<span style="flex:1"></span>
+        <button type="button" class="btn btn-ghost btn-sm" data-men-acc="captura">Captura semanal</button>
+        <button type="button" class="btn btn-ghost btn-sm" data-men-acc="excel">Excel</button>
+        <button type="button" class="btn btn-primary btn-sm" data-men-acc="pros">Planear proyectos · ${nPros}/${R.prospectos.length}</button></div>
+      <div class="men-fila">
+        <div class="men-seg">${MEN_METRICAS.map(m => `<button type="button" class="${menMetrica === m.k ? 'on' : ''}" data-men-met="${m.k}">${m.et}</button>`).join('')}</div>
+        <select class="men-sel" data-men="horizonte">${MEN_HORIZONTES.map(h => `<option value="${h.k}" ${menHorizonte === h.k ? 'selected' : ''}>${h.et}</option>`).join('')}</select>
+        <label class="men-esc" ${personasConEsc.length > 1 ? '' : 'hidden'} title="Cada quien arma su propio plan; aquí puedes ver el de otra persona">Plan de
+          <select class="men-sel" data-men="verde">${personasConEsc.map(i => `<option value="${esc(i)}" ${R.verDe === i ? 'selected' : ''}>${i === yo() ? 'Mi plan' : esc(nombreCorto(i))}</option>`).join('')}</select>
+        </label></div>
     </div>
-    ${verOtro ? `<div class="men-aviso">Estás viendo el escenario de <b>${esc(nombrePersona(R.verDe))}</b>, solo lectura. <button type="button" data-men-acc="mio">Volver al mío</button> <button type="button" data-men-acc="copiar">Copiarlo como mío</button></div>` : ''}
+    ${verOtro ? `<div class="men-aviso">Estás viendo el plan de <b>${esc(nombrePersona(R.verDe))}</b>, solo lectura. <button type="button" data-men-acc="mio">Volver al mío</button> <button type="button" data-men-acc="copiar">Usarlo como mi plan</button></div>` : ''}
     <div class="men-kpis">${MEN_METRICAS.map(m => tarjeta(m.k, m.et, m.k === 'margen' ? '' : m.u)).join('')}</div>
     <div class="men-graf"><canvas id="men-canvas"></canvas></div>
     <div class="men-ayuda">
-      <span><i class="f-bo"></i>Real BO</span><span><i class="f-captura"></i>Captura semanal</span><span><i class="f-ppto"></i>Presupuesto 2027</span><span><i class="f-reparto"></i>Total repartido entre los meses</span><span><i class="f-escenario"></i>Tu cambio</span>
+      <span><i class="f-bo"></i>Real BO</span><span><i class="f-captura"></i>Captura semanal</span><span><i class="f-ppto"></i>Presupuesto 2027</span><span><i class="f-reparto"></i>Total repartido entre los meses</span><span><i class="f-escenario"></i>Tu plan</span>
       ${editable ? '<b>Haz clic en un mes para escribir el volumen (m³); el ingreso y el EBITDA se recalculan con el precio por m³ y el margen de la obra.</b>' : k !== 'vol' && esMio() ? '<b>Para editar, cambia a Volumen.</b>' : ''}
       ${R.sinFecha.length ? `<button type="button" data-men-acc="sinfecha" class="men-sinfecha">${R.sinFecha.length} sin fecha de arranque: no aparecen</button>` : ''}
       ${capMeta ? `<span class="men-cap">Última captura: ${new Date(capMeta.fecha).toLocaleDateString('es-MX', { day: 'numeric', month: 'short' })} · ${esc(nombreCorto(capMeta.por || ''))}</span>` : ''}
@@ -11822,11 +11927,22 @@ function renderMensualizado() {
       renderMensualizado();
     }
     if (a === 'sinfecha') {
-      toast('Captura su fecha de arranque en la obra (o muévela en Planear prospección)', 'warn');
+      toast('Captura su fecha de arranque en la obra (o muévela en Planear proyectos)', 'warn');
       openModal(R.sinFecha[0].id);
     }
   }));
   if (editable) cont.querySelectorAll('td.editable').forEach(td => td.addEventListener('click', () => editarCelda(td)));
+  // Doble clic en un cliente, una etapa o el total: qué obras lo forman
+  const um = k === 'vol' ? 'm³' : k === 'margen' ? '% EBITDA' : 'M MXN';
+  const drillFilas = (l, i) => l.map(f => { const c = i == null ? f.tot : f.celdas[i]; return { id: f.p.id, n: f.p.proyecto, c: f.p.cliente, et: MEN_ETAPAS.find(e => e.k === f.etapa).et, v: c ? (k === 'margen' ? (c.ing ? c.ebitda / c.ing * 100 : 0) : c[k] || 0) : 0 }; });
+  cont.querySelectorAll('.men-tabla tr.men-cli, .men-tabla tfoot tr').forEach(tr => tr.addEventListener('dblclick', e => {
+    const td = e.target.closest('td'); const idx = [...tr.children].indexOf(td); if (idx < 1) return;
+    const i = idx <= R.meses.length ? idx - 1 : null;
+    const nombre = tr.dataset.cli || tr.querySelector('.men-nom').textContent.trim();
+    const et = MEN_ETAPAS.find(x => nombre.startsWith(x.et));
+    const l = tr.dataset.cli ? R.filas.filter(f => (f.p.cliente || 'Sin cliente').trim() === tr.dataset.cli) : et ? R.filas.filter(f => f.etapa === et.k) : R.filas;
+    drillMen(`${nombre} · ${i == null ? 'total del periodo' : etqMes(R.meses[i])}`, drillFilas(l, i), um);
+  }));
   pintarGraficaMen(R);
 }
 
@@ -11928,14 +12044,14 @@ function pintarPlaneador() {
   };
   ov.innerHTML = `
     <div class="modal men-modal">
-      <div class="modal-header"><h2>Planear prospección</h2><button class="modal-close" data-x>×</button></div>
+      <div class="modal-header"><h2>Planear proyectos</h2><button class="modal-close" data-x>×</button></div>
       <div class="modal-body men-body">
-        <p class="men-intro">Marca los proyectos en prospección que entran a tu escenario. Puedes mover su arranque y duración y cambiar el ingreso por m³ o el margen; si los dejas vacíos se usan los de la obra o, si no tiene, los de toda la cartera ($${Math.round(cart.precio * 1e6).toLocaleString('es-MX')} por m³ y ${(cart.margen * 100).toFixed(1)}% de margen). El volumen de cada mes se ajusta en la tabla, con clic en el mes. Se respetan los filtros de arriba.</p>
+        <p class="men-intro">Marca los proyectos por ganar (Proyecto, Licitación y Negociación) que entran a tu plan. Puedes mover su arranque y duración y cambiar el ingreso por m³ o el margen; si los dejas vacíos se usan los de la obra o, si no tiene, los de toda la cartera ($${Math.round(cart.precio * 1e6).toLocaleString('es-MX')} por m³ y ${(cart.margen * 100).toFixed(1)}% de margen). El volumen de cada mes se ajusta en la tabla, con clic en el mes. Se respetan los filtros de arriba.</p>
         <div class="men-pl-acc"><button type="button" data-todos="1">Incluir todos</button><button type="button" data-todos="0">Quitar todos</button><span>${inc.size} de ${pros.length} incluidos</span></div>
         <div class="men-pl-wrap">
         <table class="men-pl">
           <thead><tr><th></th><th>Proyecto</th><th class="num">Vol. CEMEX m³</th><th>Arranque</th><th>Meses</th><th>Ingreso por m³ $</th><th>Margen %</th><th class="num">En tu escenario</th></tr></thead>
-          <tbody>${pros.map(fila).join('') || '<tr><td colspan="8" class="men-vacio">No hay proyectos en prospección con estos filtros.</td></tr>'}</tbody>
+          <tbody>${pros.map(fila).join('') || '<tr><td colspan="8" class="men-vacio">No hay proyectos por ganar con estos filtros.</td></tr>'}</tbody>
         </table>
         </div>
       </div>
@@ -12101,7 +12217,7 @@ const BE_ETAPAS = [
   { k: 'filial', et: 'Ejecución Filial', c: '#4f55d9' },
   { k: 'neg', et: 'Negociación', c: '#8f94ec' },
   { k: 'lic', et: 'Licitación', c: '#f5a524' },
-  { k: 'pro', et: 'Prospección', c: '#f8cf7d' }
+  { k: 'pro', et: 'Proyecto', c: '#2b45e0' }
 ];
 let BO = null, boEstado = 'sin cargar', boError = '';
 
@@ -12285,7 +12401,7 @@ function calcularBE(y, sinPrevio) {
   const corte = BO ? BO.corteMes : '';
   const serie = {}; BE_ETAPAS.forEach(e => serie[e.k] = Array(12).fill(0));
   const proy = new Map();                            // nombre → { etapa, vol }
-  const suma = (et, nombre, i, v) => { serie[et][i] += v; const key = et + '|' + nombre; const o = proy.get(key) || { et, nombre, vol: 0 }; o.vol += v; proy.set(key, o); };
+  const suma = (et, nombre, i, v, id) => { serie[et][i] += v; const key = et + '|' + nombre; const o = proy.get(key) || { et, nombre, vol: 0, m: Array(12).fill(0), id }; o.vol += v; o.m[i] += v; if (id) o.id = id; proy.set(key, o); };
   // 1) Meses cerrados: todo lo vendido en la BO (obras ligadas y no ligadas)
   const ligado = new Map();
   state.projects.forEach(p => (p.bo_frentes || []).forEach(f => ligado.set(String(f), p)));
@@ -12293,13 +12409,13 @@ function calcularBE(y, sinPrevio) {
     if (ym > corte) return;
     const x = m.get(ym); if (!x || !x.vol) return;
     const p = ligado.get(fr), nombre = p ? p.proyecto : (BO.info.get(fr) || {}).obra || fr;
-    suma('filial', nombre, i, x.filial); suma('cdi', nombre, i, x.vol - x.filial);
+    suma('filial', nombre, i, x.filial, p && p.id); suma('cdi', nombre, i, x.vol - x.filial, p && p.id);
   }));
   // 2) Meses por venir: el pipeline por etapa
   state.projects.forEach(p => {
     const et = etapaBE(p); if (!et || esCotizacionAlterna(p)) return;
     const b = baseObra(p, {});
-    meses.forEach((ym, i) => { if (BO && ym <= corte) return; const c = b.meses[ym]; if (c && c.vol) suma(et, p.proyecto, i, c.vol); });
+    meses.forEach((ym, i) => { if (BO && ym <= corte) return; const c = b.meses[ym]; if (c && c.vol) suma(et, p.proyecto, i, c.vol, p.id); });
   });
   const total = serie => serie.reduce((a, v) => a + v, 0);
   const porEtapa = {}; BE_ETAPAS.forEach(e => porEtapa[e.k] = total(serie[e.k]));
@@ -12308,9 +12424,11 @@ function calcularBE(y, sinPrevio) {
   return { y, meses, corte, serie, porEtapa, total: Object.values(porEtapa).reduce((a, b) => a + b, 0), proy: [...proy.values()],
     real2: (y - 2 >= new Date().getFullYear() && !sinPrevio) ? calcularBE(y - 2, true).total : real(y - 2),
     real1: (y - 1 >= new Date().getFullYear() && !sinPrevio) ? calcularBE(y - 1, true).total : real(y - 1),
+    real1Es: y - 1 >= new Date().getFullYear(),
     real1Mes: (y - 1 >= new Date().getFullYear() && !sinPrevio) ? (() => { const r = calcularBE(y - 1, true); return r.meses.map((_, i) => BE_ETAPAS.reduce((a, e) => a + r.serie[e.k][i], 0)); })() : realMes(y - 1),
     ppto: pptoVolAnio(y) };
 }
+let bePptoAbierto = false;
 async function renderBE() {
   const cont = document.getElementById('men-cont');
   if (!BO && boEstado !== 'sin archivo' && boEstado !== 'error') { cont.innerHTML = '<div class="men-vacio">Leyendo la BO…</div>'; await cargarBO(); }
@@ -12318,40 +12436,38 @@ async function renderBE() {
   const y = beAnio || new Date().getFullYear();
   const R = calcularBE(y), esc = escapeHtml;
   const pptoT = R.ppto ? R.ppto.reduce((a, b) => a + b, 0) : null;
-  const pct = (a, b) => (a && b) ? `${a >= b ? '+' : ''}${Math.round((a / b - 1) * 100)}%` : '';
-  const tablas = ['ejec', 'neg', 'lic', 'pro'].map(t => {
-    const ets = t === 'ejec' ? ['cdi', 'filial'] : [t];
-    const m = new Map(); R.proy.filter(x => ets.includes(x.et)).forEach(x => m.set(x.nombre, (m.get(x.nombre) || 0) + x.vol));
-    const l = [...m.entries()].sort((a, b) => b[1] - a[1]); const top = l.slice(0, 7), otros = l.slice(7).reduce((a, x) => a + x[1], 0), tot = l.reduce((a, x) => a + x[1], 0);
-    const titulo = { ejec: 'Ejecución', neg: 'Negociación', lic: 'Licitación', pro: 'Prospección' }[t];
-    return `<div class="be-tabla"><div class="be-th">${titulo}</div><table><thead><tr><th>Proyecto</th><th>${y}</th></tr></thead><tbody>
-      ${top.map(([n, v]) => `<tr><td title="${esc(n)}">${esc(n)}</td><td>${k1(v)}</td></tr>`).join('')}${otros ? `<tr><td>Otros proyectos</td><td>${k1(otros)}</td></tr>` : ''}
-      <tr class="tot"><td>Total</td><td>${k1(tot)}</td></tr></tbody></table></div>`;
-  }).join('');
+  const crec = R.real1 ? Math.round((R.total / R.real1 - 1) * 100) : null;
   const anios = [new Date().getFullYear(), new Date().getFullYear() + 1];
+  const COL = { cdi: '#3cbf72', filial: '#9ed27e', neg: '#ffb469', lic: '#f2858d', pro: '#2b45e0' };
+  const etName = k => (BE_ETAPAS.find(e => e.k === k) || {}).et || k;
+  const TAB = [['ejec', 'Ejecución', ['cdi', 'filial'], '#9ed27e', '#14173d'], ['neg', 'Negociación', ['neg'], '#ffb469', '#14173d'], ['lic', 'Licitación', ['lic'], '#f2858d', '#14173d'], ['pro', 'Prospección', ['pro'], '#2b45e0', '#fff']];
+  const tablas = TAB.map(([t, titulo, ets, bg, fg]) => {
+    const m = new Map(); R.proy.filter(x => ets.includes(x.et)).forEach(x => { const o = m.get(x.nombre) || { v: 0, id: x.id }; o.v += x.vol; m.set(x.nombre, o); });
+    const l = [...m.entries()].sort((a, b) => b[1].v - a[1].v), top = l.slice(0, 7), otros = l.slice(7).reduce((a, x) => a + x[1].v, 0), tot = l.reduce((a, x) => a + x[1].v, 0);
+    return `<div class="be-tabla" data-t="${t}"><div class="be-th" style="background:${bg};color:${fg}">${titulo}</div><table><thead><tr><th>Proyecto</th><th>${y}</th></tr></thead><tbody>
+      ${top.map(([n, o]) => `<tr data-id="${esc(o.id || '')}"><td title="${esc(n)}">${esc(n)}</td><td>${k1(o.v)}</td></tr>`).join('')}
+      ${otros ? `<tr class="otros"><td>Otros proyectos</td><td>${k1(otros)}</td></tr>` : ''}<tr class="tot"><td>Total</td><td>${k1(tot)}</td></tr></tbody></table></div>`;
+  }).join('');
+  const leyenda = [[`${y - 1}`, '#e0314b', 'linea'], ['Ppto', '#3b4a6b', 'linea'], ...BE_ETAPAS.map(e => [e.et, COL[e.k], 'barra'])]
+    .map(([t, c, tipo]) => `<span><i class="${tipo}" style="${tipo === 'linea' ? `border-top-color:${c}` : `background:${c}`}"></i>${t}</span>`).join('');
   cont.innerHTML = `<div class="men">
-    <div class="men-barra">
-      <div class="men-seg">${[['cliente', 'Por cliente'], ['proyecto', 'Por proyecto'], ['be', 'BE comercial']].map(([v, et]) => `<button type="button" class="${menVista === v ? 'on' : ''}" data-men-vista="${v}">${et}</button>`).join('')}</div>
-      <div class="men-seg">${anios.map(a => `<button type="button" class="${a === y ? 'on' : ''}" data-be-anio="${a}">${a}</button>`).join('')}</div>
-      <span class="be-bo">${BO ? `BO al <b>${esc(BO.corte)}</b> · ${state.projects.filter(p => (p.bo_frentes || []).length).length} obras ligadas` : boEstado === 'error' ? 'BO: ' + esc(boError) : 'Sin BO cargada'}</span>
-      <span style="flex:1"></span>
-      <button type="button" class="btn btn-ghost btn-sm" data-be="ligar">Ligar obras con la BO</button>
-      <label class="btn btn-ghost btn-sm" style="cursor:pointer">Cargar BO<input type="file" accept=".json" hidden data-be-archivo></label>
-    </div>
-    <div class="be-titulo">BE ${y}${R.real1 ? `; ${pct(R.total, R.real1)} vs ${y - 1}` : ''} <span>| Volumen k m³ · real BO hasta ${esc(R.corte ? etqMes(R.corte) : '—')} (corte ${esc(BO ? BO.corte : '—')}), después pipeline por etapa</span></div>
-    <div class="be-graf3">
-      <div class="be-card"><canvas id="beAnual"></canvas></div>
-      <div class="be-card"><canvas id="beMix"></canvas></div>
-      <div class="be-card be-ancha"><canvas id="beMes"></canvas></div>
-    </div>
-    <div class="be-ppto"><b>Ppto ${y} (k m³)</b>${Array.from({ length: 12 }, (_, i) => `<label>${MES_ABR[i]}<input type="number" step="0.1" data-ppto="${i}" value="${R.ppto ? +(R.ppto[i] / 1000).toFixed(1) : ''}"></label>`).join('')}
-      <small>${(mensualizado().ppto_vol || {})[y] ? 'Captura manual' : R.ppto ? 'Del presupuesto cargado en el pipeline' : 'Sin presupuesto: captúralo aquí'}</small></div>
-    <div class="be-tablas">${tablas}</div>
-    <p class="nota" style="font-size:11.5px;color:var(--text-3)">Ejecución CDI = clientes; Ejecución Filial = obras de la Dirección de Construcción (en la BO, Grupo de clientes "Filiales"). Los meses cerrados vienen de la BO (lo vendido en todos los frentes del universo, ligados o no); los que vienen, del mensualizado de cada obra del pipeline sin escenarios.</p>
-  </div>`;
+    <div class="men-barra"><div class="men-fila">${navMen()}<div class="men-seg">${anios.map(a => `<button type="button" class="${a === y ? 'on' : ''}" data-be-anio="${a}">${a}</button>`).join('')}</div>
+      <span style="flex:1"></span><span class="be-bo">${BO ? `BO al <b>${esc(BO.corte)}</b> · ${state.projects.filter(p => (p.bo_frentes || []).length).length} obras ligadas` : boEstado === 'error' ? 'BO: ' + esc(boError) : 'Sin BO cargada'}</span>
+      <button type="button" class="btn btn-ghost btn-sm" data-be="ppto">Ppto ${y}</button>
+      <button type="button" class="btn btn-ghost btn-sm" data-be="ligar">Ligar con la BO</button>
+      <label class="btn btn-ghost btn-sm" style="cursor:pointer">Cargar BO<input type="file" accept=".json" hidden data-be-archivo></label></div></div>
+    <div class="be2">
+      <div class="be2-cab"><div><h2>BE ${y}${crec != null ? `; <span>${crec >= 0 ? '+' : ''}${crec}% vs ${R.real1Es ? 'BE' : ''} ${y - 1}</span>` : ''}</h2><p>Volumen k m³ · real BO hasta ${esc(R.corte ? etqMes(R.corte) : '—')}, después pipeline por etapa</p></div>
+        <div class="be2-ley">${leyenda}</div></div>
+      <div class="be2-graf"><div class="be2-mes"><canvas id="beMes"></canvas></div><div class="be2-anual"><canvas id="beAnual"></canvas></div></div>
+      ${bePptoAbierto ? `<div class="be-ppto"><b>Ppto ${y} (k m³)</b>${Array.from({ length: 12 }, (_, i) => `<label>${MES_ABR[i]}<input type="number" step="0.1" data-ppto="${i}" value="${R.ppto ? +(R.ppto[i] / 1000).toFixed(1) : ''}"></label>`).join('')}
+        <small>${(mensualizado().ppto_vol || {})[y] ? 'Captura manual' : R.ppto ? 'Del presupuesto cargado' : 'Captúralo aquí'}</small></div>` : ''}
+      <div class="be-tablas">${tablas}</div>
+    </div></div>`;
   cont.querySelectorAll('[data-men-vista]').forEach(b => b.onclick = () => { menVista = b.dataset.menVista; renderMensualizado(); });
   cont.querySelectorAll('[data-be-anio]').forEach(b => b.onclick = () => { beAnio = +b.dataset.beAnio; renderBE(); });
   cont.querySelector('[data-be="ligar"]').onclick = abrirLigarBO;
+  cont.querySelector('[data-be="ppto"]').onclick = () => { bePptoAbierto = !bePptoAbierto; renderBE(); };
   cont.querySelector('[data-be-archivo]').onchange = e => e.target.files[0] && subirArchivoBO(e.target.files[0]);
   cont.querySelectorAll('[data-ppto]').forEach(inp => inp.onchange = () => {
     const m = mensualizado(); m.ppto_vol = m.ppto_vol || {};
@@ -12359,34 +12475,497 @@ async function renderBE() {
     arr[+inp.dataset.ppto] = inp.value === '' ? null : +inp.value; m.ppto_vol[y] = arr;
     clearTimeout(renderBE._t); renderBE._t = setTimeout(() => { saveState(`Capturó el Ppto ${y} de volumen`); renderBE(); }, 1200);
   });
+  const drillBE = (tit, l, i) => drillMen(tit, l.map(x => ({ id: x.id, n: x.nombre, et: etName(x.et), c: '', v: i == null ? x.vol : x.m[i] })), 'm³');
+  cont.querySelectorAll('.be-tabla').forEach(t => {
+    const ets = TAB.find(x => x[0] === t.dataset.t)[2];
+    t.querySelectorAll('tbody tr').forEach(tr => tr.addEventListener('dblclick', () => {
+      if (tr.dataset.id) { openModal(tr.dataset.id); return; }
+      drillBE(`${t.querySelector('.be-th').textContent} ${y}`, R.proy.filter(x => ets.includes(x.et)));
+    }));
+  });
   if (typeof Chart === 'undefined') return;
   const F = { family: 'Outfit', size: 11 };
-  const etq = { id: 'etq', afterDatasetsDraw(ch) { const { ctx } = ch; ctx.save(); ctx.font = '600 11px Outfit'; ctx.fillStyle = '#14173d'; ctx.textAlign = 'center';
-    (ch.options.plugins.etq || []).forEach(t => ctx.fillText(t.txt, ch.scales.x.getPixelForValue(t.i), ch.scales.y.getPixelForValue(t.v) - 6)); ctx.restore(); } };
-  // Anual
-  const barras = [R.real2, R.real1, R.total, pptoT];
-  beCharts.push(new Chart(document.getElementById('beAnual'), { type: 'bar', plugins: [etq],
-    data: { labels: [String(y - 2), (y - 1 >= new Date().getFullYear() ? 'BE ' : '') + (y - 1), `BE ${y}`, 'Ppto'], datasets: [{ data: barras.map(v => v ? v / 1000 : 0), backgroundColor: ['#b9bcd9', '#9aa0c4', '#0003aa', '#f22230'], borderRadius: 4 }] },
-    options: { maintainAspectRatio: false, plugins: { legend: { display: false }, title: { display: true, text: 'Volumen anual · k m³', font: F },
-      etq: barras.map((v, i) => ({ i, v: v ? v / 1000 : 0, txt: v ? `${k0(v)}${i === 2 && R.real1 ? ' (' + pct(R.total, R.real1) + ')' : ''}` : '—' })) },
-      scales: { x: { grid: { display: false }, ticks: { font: F } }, y: { ticks: { font: F }, grace: '12%' } } } }));
-  // Composición
-  beCharts.push(new Chart(document.getElementById('beMix'), { type: 'bar',
-    data: { labels: [`${y}`], datasets: BE_ETAPAS.map(e => ({ label: e.et, data: [R.porEtapa[e.k] / 1000], backgroundColor: e.c, stack: 's' })) },
-    options: { maintainAspectRatio: false, plugins: { title: { display: true, text: `Por etapa · total ${k0(R.total)} k m³`, font: F }, legend: { position: 'right', labels: { boxWidth: 10, font: F } },
-      tooltip: { callbacks: { label: c => `${c.dataset.label}: ${k1(c.parsed.y * 1000)} (${R.total ? Math.round(c.parsed.y * 1000 / R.total * 100) : 0}%)` } } },
-      scales: { x: { stacked: true, grid: { display: false } }, y: { stacked: true, ticks: { font: F } } } } }));
-  // Mensual
-  const totMes = R.meses.map((_, i) => BE_ETAPAS.reduce((a, e) => a + R.serie[e.k][i], 0));
-  beCharts.push(new Chart(document.getElementById('beMes'), { type: 'bar', plugins: [etq],
-    data: { labels: MES_ABR.map(m => m[0].toUpperCase() + m.slice(1)), datasets: [
-      ...BE_ETAPAS.map(e => ({ label: e.et, data: R.serie[e.k].map(v => v / 1000), backgroundColor: e.c, stack: 's', order: 2 })),
-      ...(R.real1Mes ? [{ type: 'line', label: String(y - 1), data: R.real1Mes.map(v => v / 1000), borderColor: '#565b85', backgroundColor: '#565b85', borderDash: [4, 4], pointRadius: 2, order: 1 }] : []),
-      ...(R.ppto ? [{ type: 'line', label: 'Ppto', data: R.ppto.map(v => v / 1000), borderColor: '#f22230', backgroundColor: '#f22230', pointRadius: 3, showLine: false, order: 0 }] : []) ] },
-    options: { maintainAspectRatio: false, plugins: { title: { display: true, text: 'Volumen mensual · k m³', font: F }, legend: { position: 'bottom', labels: { boxWidth: 10, font: F } },
-      etq: totMes.map((v, i) => ({ i, v: v / 1000, txt: v ? k0(v) : '' })) },
-      scales: { x: { stacked: true, grid: { display: false }, ticks: { font: F } }, y: { stacked: true, ticks: { font: F }, grace: '10%' } } } }));
+  // Etiquetas: valor dentro de cada tramo y total arriba de cada columna
+  const etiquetas = fmt => ({ id: 'etiquetas', afterDatasetsDraw(ch) {
+    const { ctx } = ch; ctx.save(); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const tot = []; let maxDs = -1;
+    ch.data.datasets.forEach((ds, di) => {
+      if (ds.type === 'line' || !ch.isDatasetVisible(di)) return;
+      ch.getDatasetMeta(di).data.forEach((el, i) => {
+        const v = ds.data[i]; if (!v) return;
+        tot[i] = (tot[i] || 0) + v; maxDs = Math.max(maxDs, di);
+        const h = Math.abs(el.base - el.y);
+        if (h >= 13) { ctx.font = '600 10.5px Outfit'; ctx.fillStyle = ds.texto || '#14173d'; ctx.fillText(fmt(v, i), el.x, (el.y + el.base) / 2); }
+      });
+    });
+    ctx.font = '700 12px Outfit'; ctx.fillStyle = '#14173d'; ctx.textBaseline = 'bottom';
+    tot.forEach((t, i) => { if (!t) return; let top = Infinity; ch.data.datasets.forEach((ds, di) => { if (ds.type !== 'line' && ch.isDatasetVisible(di) && ds.data[i]) top = Math.min(top, ch.getDatasetMeta(di).data[i].y); });
+      ctx.fillText(Math.round(t).toLocaleString('es-MX'), ch.getDatasetMeta(0).data[i].x, top - 4); });
+    ctx.restore();
+  } });
+  const sets = BE_ETAPAS.map(e => ({ label: e.et, data: R.serie[e.k].map(v => v / 1000), backgroundColor: COL[e.k], stack: 's', order: 2, texto: e.k === 'pro' ? '#fff' : '#14173d', barPercentage: .78, categoryPercentage: .86 }));
+  beCharts.push(new Chart(document.getElementById('beMes'), { type: 'bar', plugins: [etiquetas(v => Math.round(v))],
+    data: { labels: MES_ABR.map(m => m[0].toUpperCase() + m.slice(1)), datasets: [...sets,
+      ...(R.real1Mes ? [{ type: 'line', label: String(y - 1), data: R.real1Mes.map(v => v / 1000), borderColor: '#e0314b', borderDash: [7, 5], borderWidth: 2, pointRadius: 0, tension: .3, order: 0 }] : []),
+      ...(R.ppto ? [{ type: 'line', label: 'Ppto', data: R.ppto.map(v => v / 1000), borderColor: '#3b4a6b', borderDash: [7, 5], borderWidth: 2, pointRadius: 0, tension: .3, order: 0 }] : [])] },
+    options: { maintainAspectRatio: false, layout: { padding: { top: 18 } }, plugins: { legend: { display: false },
+      tooltip: { callbacks: { label: c => `${c.dataset.label}: ${k1(c.parsed.y * 1000)} k m³` } } },
+      scales: { x: { stacked: true, grid: { display: false }, ticks: { font: { family: 'Outfit', size: 12, weight: '600' } } }, y: { stacked: true, display: false, grace: '8%' } } } }));
+  // Columna anual con % por etapa
+  const anual = BE_ETAPAS.map(e => ({ label: e.et, data: [R.porEtapa[e.k] / 1000], backgroundColor: COL[e.k], stack: 's', texto: e.k === 'pro' ? '#fff' : '#14173d', barPercentage: .9, categoryPercentage: .9 }));
+  beCharts.push(new Chart(document.getElementById('beAnual'), { type: 'bar', plugins: [etiquetas(v => `${Math.round(v).toLocaleString('es-MX')}${R.total ? ` (${Math.round(v * 1000 / R.total * 100)}%)` : ''}`)],
+    data: { labels: [String(y)], datasets: anual },
+    options: { maintainAspectRatio: false, layout: { padding: { top: 18 } }, plugins: { legend: { display: false },
+      tooltip: { callbacks: { label: c => `${c.dataset.label}: ${k1(c.parsed.y * 1000)} k m³` } } },
+      scales: { x: { stacked: true, grid: { display: false }, ticks: { font: { family: 'Outfit', size: 13, weight: '700' } } }, y: { stacked: true, display: false, grace: '8%' } } } }));
+  // Doble clic en las gráficas
+  const [cMes, cA] = beCharts;
+  const hit = (ch, e) => ch.getElementsAtEventForMode(e, 'nearest', { intersect: true }, true)[0];
+  document.getElementById('beMes').ondblclick = e => { const h = hit(cMes, e); if (!h || h.datasetIndex >= BE_ETAPAS.length) return; const et = BE_ETAPAS[h.datasetIndex].k;
+    drillBE(`${etName(et)} · ${MES_ABR[h.index]} ${y}`, R.proy.filter(x => x.et === et && x.m[h.index]), h.index); };
+  document.getElementById('beAnual').ondblclick = e => { const h = hit(cA, e); if (!h) return; const et = BE_ETAPAS[h.datasetIndex].k; drillBE(`${etName(et)} ${y}`, R.proy.filter(x => x.et === et)); };
 }
+
+// ==========================================================================
+// MENSUALIZADO v2 · como la Reunión Comercial Semanal
+//  Resumen BE (slide 25) · Pronóstico (slides 12–14) · Variaciones (16–21 y
+//  cierre de mes 31–33) · Cliente/Proyecto. Doble clic en cualquier número o
+//  barra abre el desglose por obra; doble clic en una obra abre su ficha.
+//  Fotos semanales: cada semana se guarda el pronóstico (volumen y EBITDA por
+//  obra y mes) en pipeline-datos/mensualizado/fotos/AAAA-MM-DD.json, para
+//  comparar S-1, S-2, S-3 y el BE inicial sin cargar data.json.
+// ==========================================================================
+const FOTOS_DIR = 'mensualizado/fotos';
+const VISTAS_MEN = [['be', 'Resumen BE'], ['pron', 'Pronóstico'], ['var', 'Variaciones'], ['cliente', 'Por cliente'], ['proyecto', 'Por proyecto']];
+const ETQ_ETAPA = { cdi: 'Ejecución', filial: 'Ejecución', sum: 'Ejecución', arr: 'Ejecución', neg: 'Negociación', lic: 'Licitación', pro: 'Proyecto' };
+let FOTOS = null, fotosCargando = false, varA = '', varB = 'hoy', varAlcance = 'anio', varEtapa = '', pronAbiertos = new Set();
+
+function navMen() {
+  const tit = { be: 'BE comercial y Ppto', pron: 'Pronóstico semanal', var: 'Variaciones y cierres', cliente: 'Detalle mensual', proyecto: 'Detalle mensual' }[menVista] || '';
+  const fl = typeof filtrosActivos === 'function' ? filtrosActivos() : [];
+  return `<button type="button" class="men-volver" data-men-vista="inicio">← Resumen</button><b class="men-vtit">${tit}</b>
+    ${['cliente', 'proyecto'].includes(menVista) ? `<div class="men-seg">${[['cliente', 'Por cliente'], ['proyecto', 'Por proyecto']].map(([v, t]) => `<button type="button" class="${menVista === v ? 'on' : ''}" data-men-vista="${v}">${t}</button>`).join('')}</div>` : ''}
+    ${fl.length && menVista !== 'be' ? `<span class="aviso-filtros">Filtros del pipeline: ${escapeHtml(fl.join(' · '))}<button type="button" onclick="document.getElementById('btn-clear').click()">Quitar</button></span>` : ''}`;
+}
+const lunesDe = d => { const x = new Date(d); x.setHours(12); x.setDate(x.getDate() - ((x.getDay() + 6) % 7)); return x.toISOString().slice(0, 10); };
+const etapaDe = p => { const n = String(p.estatus || '').slice(0, 2); return { '05': 'Ejecución', '04': 'Ejecución', '06': 'Ejecución', '03': 'Negociación', '02': 'Licitación', '01': 'Proyecto' }[n] || null; };
+const ghHeaders = acc => ({ Authorization: `Bearer ${userAuth.token}`, Accept: acc || 'application/vnd.github+json' });
+const ghUrl = ruta => `https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/${ruta}`;
+
+// ---------- fotos semanales ----------
+function fotoActual() {
+  const anio = new Date().getFullYear(), meses = [];
+  for (let y = anio; y <= anio + 1; y++) for (let m = 1; m <= 12; m++) meses.push(`${y}-${String(m).padStart(2, '0')}`);
+  const obras = {};
+  state.projects.forEach(p => {
+    const et = etapaDe(p); if (!et || esCotizacionAlterna(p)) return;
+    const b = baseObra(p, {}), v = {}, e = {};
+    meses.forEach(ym => { const c = b.meses[ym]; if (c && (c.vol || c.ebitda)) { v[ym] = Math.round(c.vol); e[ym] = Math.round((c.ebitda || 0) * 100) / 100; } });
+    if (Object.keys(v).length) obras[p.id] = { n: p.proyecto, c: p.cliente || '', g: gerenteACargo(p) || '', et, v, e };
+  });
+  return { version: 1, semana: lunesDe(new Date()), fecha: new Date().toISOString(), por: userAuth ? userAuth.iniciales : '', obras };
+}
+async function cargarFotos(forzar) {
+  if ((FOTOS && !forzar) || fotosCargando || !userAuth) return FOTOS;
+  fotosCargando = true;
+  try {
+    const r = await fetch(ghUrl(FOTOS_DIR) + `?ref=${GH.branch}`, { headers: ghHeaders(), cache: 'no-store' });
+    const lista = r.ok ? (await r.json()).filter(f => /\.json$/.test(f.name)).map(f => f.name.replace('.json', '')).sort() : [];
+    const leer = async n => { const x = await fetch(ghUrl(`${FOTOS_DIR}/${n}.json`) + `?ref=${GH.branch}`, { headers: ghHeaders('application/vnd.github.raw+json'), cache: 'no-store' }); return x.ok ? x.json() : null; };
+    // Las de este año y la última del anterior (BE inicial)
+    const anio = String(new Date().getFullYear());
+    const usar = lista.filter((n, i) => n >= anio || i === lista.filter(x => x < anio).length - 1).slice(-30);
+    const fotos = await Promise.all(usar.map(leer));
+    FOTOS = fotos.filter(Boolean).sort((a, b) => a.semana.localeCompare(b.semana));
+    // Foto de esta semana: la toma el primero que entra
+    const semana = lunesDe(new Date());
+    if (!lista.includes(semana) && state.projects.length) {
+      const f = fotoActual();
+      const txt = JSON.stringify(f);
+      const bytes = new TextEncoder().encode(txt); let bin = '';
+      for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+      const w = await fetch(ghUrl(`${FOTOS_DIR}/${semana}.json`), { method: 'PUT', headers: { ...ghHeaders(), 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: `Foto semanal del mensualizado (${semana})`, content: btoa(bin), branch: GH.branch }) });
+      if (w.ok || w.status === 422) FOTOS.push(f);   // 422: otra persona la tomó al mismo tiempo
+    }
+  } catch (e) { FOTOS = FOTOS || []; }
+  fotosCargando = false;
+  return FOTOS;
+}
+const valFoto = (f, id, ym, k) => { const o = f && f.obras[id]; return o ? ((k === 'ebitda' ? o.e : o.v)[ym] || 0) : 0; };
+
+// ---------- desglose con doble clic ----------
+function drillMen(titulo, filas, unidad) {
+  let ov = document.getElementById('drill-men');
+  if (!ov) { ov = document.createElement('div'); ov.id = 'drill-men'; ov.className = 'modal-overlay'; document.body.appendChild(ov); ov.addEventListener('click', e => { if (e.target === ov) ov.classList.remove('active'); }); }
+  const tot = filas.reduce((a, f) => a + (f.v || 0), 0);
+  const l = filas.filter(f => Math.abs(f.v || 0) > 0.0001).sort((a, b) => Math.abs(b.v) - Math.abs(a.v));
+  ov.innerHTML = `<div class="modal men-modal" style="max-width:760px"><div class="modal-header"><h2>${escapeHtml(titulo)}</h2><button class="modal-close" data-x>×</button></div>
+    <div class="modal-body men-body"><p class="men-intro">${l.length} ${l.length === 1 ? 'obra' : 'obras'} · total <b>${fmtDrill(tot, unidad)}</b>. Doble clic en una obra para abrir su ficha.</p>
+    <div class="men-pl-wrap"><table class="men-pl"><thead><tr><th>Obra</th><th>Cliente</th><th>Etapa</th><th class="num">${escapeHtml(unidad)}</th><th class="num">%</th></tr></thead><tbody>
+    ${l.map(f => `<tr ${f.id ? `data-abre="${escapeHtml(f.id)}" style="cursor:pointer"` : ''}><td><b>${escapeHtml(f.n)}</b></td><td>${escapeHtml(f.c || '')}</td><td>${escapeHtml(f.et || '')}</td><td class="num">${fmtDrill(f.v, unidad)}</td><td class="num">${tot ? Math.round(f.v / tot * 100) : 0}%</td></tr>`).join('') || '<tr><td colspan="5" class="men-vacio">Sin obras con valor.</td></tr>'}
+    </tbody></table></div></div></div>`;
+  ov.querySelector('[data-x]').onclick = () => ov.classList.remove('active');
+  ov.querySelectorAll('[data-abre]').forEach(tr => tr.addEventListener('dblclick', () => { ov.classList.remove('active'); openModal(tr.dataset.abre); }));
+  ov.classList.add('active');
+}
+const fmtDrill = (v, u) => /m³/.test(u) ? Math.round(v).toLocaleString('es-MX') : (v || 0).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+// ---------- Pronóstico (slides 12–14) ----------
+async function renderPron() {
+  const cont = document.getElementById('men-cont');
+  if (!FOTOS) { cont.innerHTML = '<div class="men-vacio">Cargando las fotos semanales…</div>'; await cargarFotos(); }
+  if (!BO && boEstado === 'sin cargar') await cargarBO();
+  const k = menMetrica === 'ebitda' ? 'ebitda' : 'vol';
+  const u = k === 'vol' ? 'm³' : 'M MXN';
+  const hoy = mesHoy(), anio = hoy.slice(0, 4);
+  const sem = (FOTOS || []).filter(f => f.semana < lunesDe(new Date()));
+  const S = [sem[sem.length - 1], sem[sem.length - 2], sem[sem.length - 3]];
+  const ini = (FOTOS || []).find(f => f.semana >= anio + '-01-01') || null;
+  const prox = Array.from({ length: 6 }, (_, i) => mesSuma(hoy, i + 1));
+  const corteDia = BO && BO.corte && BO.corte.slice(0, 7) === hoy ? +BO.corte.slice(8, 10) : 0;
+  const diasMes = new Date(+hoy.slice(0, 4), +hoy.slice(5, 7), 0).getDate();
+  const filas = getFiltered().filter(p => etapaDe(p) && !esCotizacionAlterna(p)).map(p => {
+    const b = mesesObra(p, null).meses, val = ym => (b[ym] ? (k === 'vol' ? b[ym].vol : b[ym].ebitda) || 0 : 0);
+    const real = k === 'vol' && BO && (p.bo_frentes || []).length && corteDia ? (boVolObra(p, hoy) || {}).vol || 0 : null;
+    const fila = { p, et: etapaDe(p), ger: nombreCorto(gerenteACargo(p) || '') || 'Sin gerente', cli: (p.cliente || 'Sin cliente').trim(),
+      real, tend: real != null ? real * diasMes / corteDia : null, be: val(hoy), ini: ini ? valFoto(ini, p.id, hoy, k) : null,
+      s: S.map(f => f ? valFoto(f, p.id, hoy, k) : null), prox: prox.map(val), anio: Object.keys(b).filter(ym => ym.startsWith(anio)).reduce((a, ym) => a + val(ym), 0) };
+    return fila;
+  }).filter(f => f.be || f.anio || f.prox.some(Boolean) || (f.s[0] || 0) || f.real);
+  const suma = (l, fn) => l.reduce((a, f) => a + (fn(f) || 0), 0);
+  const F = v => v == null ? '<span class="cell-tbc">—</span>' : fmtMet(v, k);
+  const vr = (a, b) => (a == null || b == null) ? '' : `<span class="${a - b > 0.5 ? 'sube' : a - b < -0.5 ? 'baja' : ''}">${a - b > 0 ? '+' : ''}${fmtMet(a - b, k)}</span>`;
+  const pc = (a, b) => (a == null || !b) ? '' : `${Math.round((a / b - 1) * 100)}%`;
+  const cols = l => `<td class="num">${k === 'vol' && corteDia ? F(suma(l, f => f.real)) : '—'}</td><td class="num">${k === 'vol' && corteDia ? F(suma(l, f => f.tend)) : '—'}</td>
+    <td class="num">${ini ? F(suma(l, f => f.ini)) : '—'}</td>${[0, 1, 2].map(i => `<td class="num">${S[i] ? F(suma(l, f => f.s[i])) : '—'}</td>`).join('')}
+    <td class="num men-be">${F(suma(l, f => f.be))}</td><td class="num">${S[2] ? vr(suma(l, f => f.be), suma(l, f => f.s[2])) : ''}</td><td class="num">${S[2] ? pc(suma(l, f => f.be), suma(l, f => f.s[2])) : ''}</td>
+    ${prox.map((_, i) => `<td class="num" data-dm="${i}">${F(suma(l, f => f.prox[i]))}</td>`).join('')}<td class="num men-tot">${F(suma(l, f => f.anio))}</td>`;
+  const grupos = new Map();
+  filas.forEach(f => { if (!grupos.has(f.ger)) grupos.set(f.ger, new Map()); const g = grupos.get(f.ger); if (!g.has(f.cli)) g.set(f.cli, []); g.get(f.cli).push(f); });
+  const orden = [...grupos.entries()].sort((a, b) => suma([...b[1].values()].flat(), f => f.anio) - suma([...a[1].values()].flat(), f => f.anio));
+  let cuerpo = '';
+  orden.forEach(([ger, clis]) => {
+    const todas = [...clis.values()].flat(), abierto = pronAbiertos.has(ger);
+    cuerpo += `<tr class="men-cli ${abierto ? 'abierto' : ''}" data-ger="${escapeHtml(ger)}"><td class="men-nom"><span class="men-caret">${abierto ? '▾' : '▸'}</span><b>${escapeHtml(ger)}</b><small>${todas.length} obras</small></td>${cols(todas)}</tr>`;
+    if (abierto) [...clis.entries()].sort((a, b) => suma(b[1], f => f.anio) - suma(a[1], f => f.anio)).forEach(([cli, l]) => {
+      cuerpo += `<tr class="men-sub"><td class="men-nom" style="padding-left:22px"><b>${escapeHtml(cli)}</b></td>${cols(l)}</tr>`;
+      l.forEach(f => { cuerpo += `<tr class="men-obra" data-obra="${escapeHtml(f.p.id)}"><td class="men-nom" style="padding-left:38px"><span class="men-pnom">${escapeHtml(f.p.proyecto)}</span><small>${f.et}</small></td>${cols([f])}</tr>`; });
+    });
+  });
+  const tot = filas;
+  const etq = f => f ? new Date(f.semana + 'T12:00').toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit' }) : '—';
+  const mesNom = ym => MES_ABR[+ym.slice(5, 7) - 1].toUpperCase() + ' ' + ym.slice(2, 4);
+  const kpi = (t, v, s) => `<div class="men-kpi"><span>${t}</span><b>${v}</b><p>${s || ''}</p></div>`;
+  const beT = suma(tot, f => f.be), s3 = S[2] ? suma(tot, f => f.s[2]) : null, realT = suma(tot, f => f.real), tendT = suma(tot, f => f.tend);
+  cont.innerHTML = `<div class="men">
+    <div class="men-barra"><div class="men-fila">${navMen()}<div class="men-seg">${[['vol', 'Volumen'], ['ebitda', 'EBITDA']].map(([v, t]) => `<button type="button" class="${k === v ? 'on' : ''}" data-pm="${v}">${t}</button>`).join('')}</div>
+      <span class="be-bo">${MES_ABR[+hoy.slice(5, 7) - 1]} ${hoy.slice(0, 4)} · fotos: ${(FOTOS || []).length}${BO ? ' · BO al ' + escapeHtml(BO.corte) : ''}</span></div></div>
+    <div class="men-kpis">${kpi(`BE ${mesNom(hoy)} · ${u}`, fmtMet(beT, k), s3 != null ? `vs S-3: ${vr(beT, s3)} (${pc(beT, s3)})` : 'Sin fotos anteriores todavía')}
+      ${k === 'vol' ? kpi('Real del mes (BO)', corteDia ? fmtMet(realT, k) : '—', corteDia ? `al día ${corteDia} · obras ligadas` : 'El corte de la BO no es de este mes') : ''}
+      ${k === 'vol' ? kpi('Tendencia al cierre', corteDia ? fmtMet(tendT, k) : '—', corteDia && beT ? `${Math.round(tendT / beT * 100)}% del BE` : '') : ''}
+      ${kpi(`Año ${anio} · ${u}`, fmtMet(suma(tot, f => f.anio), k), `${tot.length} obras con pronóstico`)}</div>
+    <div class="men-tabla-wrap"><table class="men-tabla men-pron"><thead><tr><th class="men-nom">Gerente · cliente · proyecto <button type="button" data-pron-abrir>Abrir todos</button></th>
+      <th class="num">Real mes</th><th class="num">Tend.</th><th class="num">BE inicial</th><th class="num">S-1 ${etq(S[0])}</th><th class="num">S-2 ${etq(S[1])}</th><th class="num">S-3 ${etq(S[2])}</th>
+      <th class="num">BE ${mesNom(hoy)}</th><th class="num">BE vs S-3</th><th class="num">%</th>${prox.map(ym => `<th class="num">${mesNom(ym)}</th>`).join('')}<th class="num">Total ${anio}</th></tr></thead>
+      <tbody>${cuerpo || `<tr><td colspan="${11 + prox.length}" class="men-vacio">Sin obras con pronóstico con estos filtros.</td></tr>`}</tbody>
+      <tfoot><tr class="men-total"><td class="men-nom">Total</td>${cols(tot)}</tr></tfoot></table></div>
+    <p class="men-pie">Real mes y tendencia: BO de las obras ligadas (tendencia = real ÷ días con venta × días del mes). S-1, S-2 y S-3: fotos de las semanas anteriores. Doble clic en un número para ver qué obras lo forman.</p></div>`;
+  cont.querySelectorAll('[data-men-vista]').forEach(b => b.onclick = () => { menVista = b.dataset.menVista; renderMensualizado(); });
+  cont.querySelectorAll('[data-pm]').forEach(b => b.onclick = () => { menMetrica = b.dataset.pm; renderPron(); });
+  cont.querySelector('[data-pron-abrir]').onclick = () => { if (pronAbiertos.size) pronAbiertos.clear(); else orden.forEach(([g]) => pronAbiertos.add(g)); renderPron(); };
+  cont.querySelectorAll('tr[data-ger]').forEach(tr => tr.querySelector('.men-nom').onclick = () => { const g = tr.dataset.ger; pronAbiertos.has(g) ? pronAbiertos.delete(g) : pronAbiertos.add(g); renderPron(); });
+  // Doble clic: desglose
+  cont.querySelectorAll('.men-pron tbody tr, .men-pron tfoot tr').forEach(tr => tr.addEventListener('dblclick', e => {
+    if (tr.dataset.obra) { openModal(tr.dataset.obra); return; }
+    const td = e.target.closest('td'); const i = [...tr.children].indexOf(td);
+    const l = tr.dataset.ger ? filas.filter(f => f.ger === tr.dataset.ger) : tr.classList.contains('men-sub') ? filas.filter(f => f.cli === tr.querySelector('b').textContent) : filas;
+    const camp = [null, f => f.real, f => f.tend, f => f.ini, f => f.s[0], f => f.s[1], f => f.s[2], f => f.be, f => f.be - (f.s[2] || 0), null, ...prox.map((_, j) => f => f.prox[j]), f => f.anio][i];
+    if (!camp) return;
+    const tit = (tr.querySelector('.men-nom b') || tr.querySelector('.men-nom .men-pnom') || { textContent: 'Total' }).textContent.trim();
+    drillMen(`${tit} · ${tr.closest('table').querySelectorAll('thead th')[i].textContent.replace('Abrir todos', '').trim()}`, l.map(f => ({ id: f.p.id, n: f.p.proyecto, c: f.cli, et: f.et, v: camp(f) })), u);
+  }));
+}
+
+// ---------- Variaciones (slides 16–21) y cierre de mes (31–33) ----------
+async function renderVar() {
+  const cont = document.getElementById('men-cont');
+  if (!FOTOS) { cont.innerHTML = '<div class="men-vacio">Cargando las fotos semanales…</div>'; await cargarFotos(); }
+  const k = menMetrica === 'ebitda' ? 'ebitda' : 'vol', u = k === 'vol' ? 'm³' : 'M MXN';
+  const anio = String(new Date().getFullYear());
+  const fotos = FOTOS || [];
+  const vivo = { semana: 'hoy', obras: fotoActual().obras };
+  const porId = s => s === 'hoy' ? vivo : fotos.find(f => f.semana === s);
+  if (!varA || !porId(varA)) varA = (fotos.filter(f => f.semana < lunesDe(new Date())).slice(-1)[0] || fotos[0] || {}).semana || '';
+  const cierreMes = varAlcance !== 'anio' && BO && varAlcance <= BO.corteMes;
+  // En un cierre de mes, el plan es la última foto tomada antes de que empezara ese mes
+  const A = cierreMes ? (fotos.filter(f => f.semana < varAlcance + '-01').slice(-1)[0] || fotos[0]) : porId(varA), B = porId(varB) || vivo;
+  const etqF = f => !f ? '—' : f.semana === 'hoy' ? 'Hoy' : new Date(f.semana + 'T12:00').toLocaleDateString('es-MX', { day: '2-digit', month: 'short' });
+  // alcance: año en curso, mes en curso o un mes cerrado (plan vs real BO)
+  const meses = varAlcance === 'anio' ? Array.from({ length: 12 }, (_, i) => `${anio}-${String(i + 1).padStart(2, '0')}`) : [varAlcance];
+  const cierre = cierreMes;
+  const valor = (f, id) => meses.reduce((a, ym) => a + valFoto(f, id, ym, k), 0);
+  const ids = new Set([...Object.keys((A || {}).obras || {}), ...Object.keys(B.obras || {})]);
+  const filas = [...ids].map(id => {
+    const p = state.projects.find(x => x.id === id), oa = (A || {}).obras && A.obras[id], ob = B.obras[id];
+    const info = ob || oa;
+    let b = valor(B, id);
+    if (cierre && k === 'vol' && p && (p.bo_frentes || []).length) b = meses.reduce((a, ym) => a + ((boVolObra(p, ym) || {}).vol || 0), 0);
+    return { id, n: p ? p.proyecto : info.n, c: (p ? p.cliente : info.c) || '', g: nombreCorto(p ? gerenteACargo(p) : info.g) || 'Sin gerente', et: p ? etapaDe(p) || info.et : info.et, a: A ? valor(A, id) : 0, b };
+  }).filter(f => (Math.abs(f.a) > 0.5 || Math.abs(f.b) > 0.5) && (!varEtapa || f.et === varEtapa));
+  filas.forEach(f => { f.d = f.b - f.a; });
+  const agrupa = key => { const m = new Map(); filas.forEach(f => { const o = m.get(f[key]) || { k: f[key], a: 0, b: 0, l: [] }; o.a += f.a; o.b += f.b; o.l.push(f); m.set(f[key], o); }); return [...m.values()].sort((x, y) => y.b - x.b); };
+  const F = v => fmtMet(v, k);
+  const D = d => `<span class="${d > 0.5 ? 'sube' : d < -0.5 ? 'baja' : ''}">${d > 0.5 ? '▲ +' : d < -0.5 ? '▼ ' : ''}${F(d)}</span>`;
+  const tabla = (tit, l, nombre) => `<div class="var-tabla"><div class="be-th">${tit}</div><table><thead><tr><th>${nombre}</th><th>${etqF(A)}</th><th>${cierre ? 'Real BO' : etqF(B)}</th><th>Variación</th></tr></thead><tbody>
+    ${l.map((o, i) => `<tr data-g="${i}"><td title="${escapeHtml(o.k)}">${escapeHtml(o.k)}</td><td>${F(o.a)}</td><td>${F(o.b)}</td><td>${D(o.b - o.a)}</td></tr>`).join('')}
+    <tr class="tot"><td>Total</td><td>${F(l.reduce((a, o) => a + o.a, 0))}</td><td>${F(l.reduce((a, o) => a + o.b, 0))}</td><td>${D(l.reduce((a, o) => a + o.b - o.a, 0))}</td></tr></tbody></table></div>`;
+  const porEt = agrupa('et'), porGer = agrupa('g');
+  const top = filas.filter(f => Math.abs(f.d) > 0.5).sort((x, y) => Math.abs(y.d) - Math.abs(x.d)).slice(0, 60);
+  const opts = [...fotos.map(f => f.semana)].reverse();
+  const mesesSel = Array.from({ length: 12 }, (_, i) => `${anio}-${String(i + 1).padStart(2, '0')}`);
+  cont.innerHTML = `<div class="men">
+    <div class="men-barra"><div class="men-fila">${navMen()}<div class="men-seg">${[['vol', 'Volumen'], ['ebitda', 'EBITDA']].map(([v, t]) => `<button type="button" class="${k === v ? 'on' : ''}" data-pm="${v}">${t}</button>`).join('')}</div>
+      <label class="men-esc">Comparar <select class="men-sel" data-va>${opts.map(s => `<option value="${s}" ${s === varA ? 'selected' : ''}>Foto ${etqF({ semana: s })}</option>`).join('') || '<option>Sin fotos</option>'}</select>
+        contra <select class="men-sel" data-vb><option value="hoy">Hoy</option>${opts.map(s => `<option value="${s}" ${s === varB ? 'selected' : ''}>Foto ${etqF({ semana: s })}</option>`).join('')}</select></label>
+      <select class="men-sel" data-val><option value="anio">Año ${anio}</option>${mesesSel.map(ym => `<option value="${ym}" ${ym === varAlcance ? 'selected' : ''}>${MES_ABR[+ym.slice(5, 7) - 1]} ${ym.slice(0, 4)}${BO && ym <= BO.corteMes ? ' · cierre vs BO' : ''}</option>`).join('')}</select>
+      <select class="men-sel" data-vet><option value="">Todas las etapas</option>${['Ejecución', 'Negociación', 'Licitación', 'Proyecto'].map(e => `<option ${e === varEtapa ? 'selected' : ''}>${e}</option>`).join('')}</select></div></div>
+    ${!fotos.length ? '<div class="men-aviso">Todavía no hay fotos anteriores: la primera se tomó hoy. Desde la próxima semana aquí verás qué cambió en el pronóstico.</div>' : ''}
+    ${cierre ? `<div class="men-aviso">Cierre de ${MES_ABR[+varAlcance.slice(5, 7) - 1]}: plan de la foto del ${etqF(A)} contra lo vendido según la BO (obras ligadas). Las obras sin ligar muestran el pronóstico.</div>` : ''}
+    <div class="var-grid">${tabla('Por etapa', porEt, 'Etapa')}${tabla('Por gerente', porGer, 'Gerente')}</div>
+    <div class="var-tabla"><div class="be-th">Proyectos con cambios · ${top.length} de ${filas.length} (de mayor a menor)</div><table><thead><tr><th>Gerente</th><th>Proyecto</th><th>Cliente</th><th>Etapa</th><th>${etqF(A)}</th><th>${cierre ? 'Real BO' : etqF(B)}</th><th>Variación</th></tr></thead><tbody>
+      ${top.map(f => `<tr data-abre="${escapeHtml(f.id)}"><td>${escapeHtml(f.g)}</td><td title="${escapeHtml(f.n)}">${escapeHtml(f.n)}</td><td>${escapeHtml(f.c)}</td><td>${escapeHtml(f.et || '')}</td><td>${F(f.a)}</td><td>${F(f.b)}</td><td>${D(f.d)}</td></tr>`).join('') || '<tr><td colspan="7" class="men-vacio">Sin cambios entre las dos fotos.</td></tr>'}
+    </tbody></table></div>
+    <p class="men-pie">${u}. Doble clic en una etapa o gerente para ver sus obras; doble clic en un proyecto para abrir su ficha.</p></div>`;
+  cont.querySelectorAll('[data-men-vista]').forEach(b => b.onclick = () => { menVista = b.dataset.menVista; renderMensualizado(); });
+  cont.querySelectorAll('[data-pm]').forEach(b => b.onclick = () => { menMetrica = b.dataset.pm; renderVar(); });
+  const sel = (q, fn) => { const el = cont.querySelector(q); if (el) el.onchange = e => { fn(e.target.value); renderVar(); }; };
+  sel('[data-va]', v => varA = v); sel('[data-vb]', v => varB = v); sel('[data-val]', v => varAlcance = v); sel('[data-vet]', v => varEtapa = v);
+  const grupos = [porEt, porGer];
+  cont.querySelectorAll('.var-grid .var-tabla').forEach((t, gi) => t.querySelectorAll('tr[data-g]').forEach(tr => tr.addEventListener('dblclick', () => {
+    const o = grupos[gi][+tr.dataset.g]; drillMen(`${o.k} · variación ${etqF(A)} → ${cierre ? 'real' : etqF(B)}`, o.l.map(f => ({ id: f.id, n: f.n, c: f.c, et: f.et, v: f.d })), u);
+  })));
+  cont.querySelectorAll('tr[data-abre]').forEach(tr => tr.addEventListener('dblclick', () => openModal(tr.dataset.abre)));
+}
+
+// ==========================================================================
+// MENSUALIZADO · RESUMEN (vista principal)
+// Una sola pantalla, como la slide de la Reunión Comercial: lo que se lleva
+// del año, cómo cierra por etapa, qué cambió contra la semana pasada y los
+// proyectos que más pesan. Se ajusta al alto de la pantalla. Todo lo demás
+// (detalle mensual, pronóstico semanal, BO, Ppto, plan de proyectos) vive
+// en "Herramientas" y abre como vista secundaria con "← Resumen".
+// ==========================================================================
+let menGerente = '', menAgrupa = 'proyecto', mzCharts = [];
+const MZ_COL = { cdi: '#3cbf72', filial: '#9ed27e', neg: '#ffb469', lic: '#f2858d', pro: '#2b45e0' };
+const MZ_TAB = [['ejec', 'Ejecución', ['cdi', 'filial'], '#9ed27e', '#14173d'], ['neg', 'Negociación', ['neg'], '#ffb469', '#14173d'],
+  ['lic', 'Licitación', ['lic'], '#f2858d', '#14173d'], ['pro', 'Proyecto', ['pro'], '#2b45e0', '#fff']];
+
+function calcularResumen(y, met, ger, sinPrevio) {
+  const corte = BO ? BO.corteMes : '', usaBO = met === 'vol' && !ger && !!BO;
+  const meses = Array.from({ length: 12 }, (_, i) => `${y}-${String(i + 1).padStart(2, '0')}`);
+  const serie = {}; BE_ETAPAS.forEach(e => serie[e.k] = Array(12).fill(0));
+  const proy = new Map();
+  const suma = (et, p, nombre, cliente, i, v) => {
+    if (!v) return; serie[et][i] += v;
+    const key = et + '|' + nombre; const o = proy.get(key) || { et, nombre, cliente: cliente || '', id: p && p.id, vol: 0, m: Array(12).fill(0) };
+    o.vol += v; o.m[i] += v; proy.set(key, o);
+  };
+  const delGerente = p => !ger || (nombreCorto(gerenteACargo(p) || '') || 'Sin gerente') === ger;
+  // Meses cerrados en volumen: todo lo vendido según la BO (obras ligadas o no)
+  if (usaBO) {
+    const ligado = new Map(); state.projects.forEach(p => (p.bo_frentes || []).forEach(f => ligado.set(String(f), p)));
+    BO.porFrente.forEach((m, fr) => meses.forEach((ym, i) => {
+      if (ym > corte) return; const x = m.get(ym); if (!x || !x.vol) return;
+      const p = ligado.get(fr), inf = BO.info.get(fr) || {};
+      const n = p ? p.proyecto : inf.obra || fr, c = p ? p.cliente : inf.holding;
+      suma('filial', p, n, c, i, x.filial); suma('cdi', p, n, c, i, x.vol - x.filial);
+    }));
+  }
+  state.projects.forEach(p => {
+    const et = etapaBE(p); if (!et || esCotizacionAlterna(p) || !delGerente(p)) return;
+    const b = baseObra(p, {});
+    meses.forEach((ym, i) => {
+      const cerrado = corte && ym <= corte;
+      if (cerrado && (usaBO || !['cdi', 'filial'].includes(et))) return;   // lo pasado solo cuenta si se ejecutó
+      const c = b.meses[ym]; if (c) suma(et, p, p.proyecto, p.cliente, i, met === 'vol' ? c.vol : c.ebitda);
+    });
+  });
+  const tot = arr => arr.reduce((a, v) => a + v, 0);
+  const porEtapa = {}; BE_ETAPAS.forEach(e => porEtapa[e.k] = tot(serie[e.k]));
+  const total = tot(Object.values(porEtapa));
+  const realYTD = meses.reduce((a, ym, i) => a + (corte && ym <= corte ? serie.cdi[i] + serie.filial[i] : 0), 0);
+  let previo = null, previoMes = null;
+  if (!sinPrevio) {
+    const p = calcularResumen(y - 1, met, ger, true);
+    previo = p.total; previoMes = p.meses.map((_, i) => BE_ETAPAS.reduce((a, e) => a + p.serie[e.k][i], 0));
+  }
+  return { y, meses, corte, serie, porEtapa, total, realYTD, proy: [...proy.values()], previo, previoMes, ppto: pptoAnio(y, met) };
+}
+function pptoAnio(y, met) {
+  if (met === 'vol') return pptoVolAnio(y);
+  const pr = state.presupuestos && state.presupuestos[String(y)];
+  if (pr && pr.filas) return Array.from({ length: 12 }, (_, i) => pr.filas.reduce((a, f) => a + (((f.meses || {}).ebitda || [])[i] || 0), 0));
+  return null;
+}
+// Cambio contra la foto de la semana pasada (mismo criterio: pronóstico del pipeline)
+function cambiosSemana(y, met, ger) {
+  const sem = (FOTOS || []).filter(f => f.semana < lunesDe(new Date()));
+  const ant = sem[sem.length - 1]; if (!ant) return null;
+  const hoy = fotoActual(), k = met === 'ebitda' ? 'e' : 'v', pre = String(y);
+  const val = o => o ? Object.entries(o[k] || {}).reduce((a, [ym, v]) => a + (ym.startsWith(pre) ? v : 0), 0) : 0;
+  const ids = new Set([...Object.keys(ant.obras), ...Object.keys(hoy.obras)]);
+  const l = [...ids].map(id => {
+    const p = state.projects.find(x => x.id === id), a = ant.obras[id], b = hoy.obras[id];
+    if (ger && p && (nombreCorto(gerenteACargo(p) || '') || 'Sin gerente') !== ger) return null;
+    return { id, n: (b || a).n, c: (b || a).c, et: (b || a).et, a: val(a), b: val(b) };
+  }).filter(Boolean).map(f => ({ ...f, d: f.b - f.a })).filter(f => Math.abs(f.d) > (met === 'vol' ? 0.5 : 0.005));
+  return { semana: ant.semana, lista: l.sort((x, y2) => Math.abs(y2.d) - Math.abs(x.d)), neto: l.reduce((a, f) => a + f.d, 0) };
+}
+
+async function renderResumen() {
+  const cont = document.getElementById('men-cont');
+  if (!BO && boEstado === 'sin cargar') { cont.innerHTML = '<div class="men-vacio">Preparando el resumen…</div>'; await cargarBO(); }
+  if (!FOTOS && userAuth && !fotosCargando) cargarFotos().then(() => { if (menVista === 'inicio') renderResumen(); });
+  mzCharts.forEach(c => c.destroy()); mzCharts = [];
+  const met = menMetrica === 'ebitda' ? 'ebitda' : 'vol';
+  const y = beAnio || new Date().getFullYear(), esc = escapeHtml;
+  const R = calcularResumen(y, met, menGerente);
+  const CS = FOTOS ? cambiosSemana(y, met, menGerente) : null;
+  const U = met === 'vol' ? 'k m³' : 'M MXN';
+  const fv = v => met === 'vol' ? Math.round((v || 0) / 1000).toLocaleString('es-MX') : (v || 0).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const fv1 = v => met === 'vol' ? ((v || 0) / 1000).toLocaleString('es-MX', { maximumFractionDigits: 1 }) : (v || 0).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const esc1 = v => met === 'vol' ? (v || 0) / 1000 : (v || 0);
+  const pct = (a, b) => (a && b) ? Math.round((a / b - 1) * 100) : null;
+  const pptoT = R.ppto ? R.ppto.reduce((a, b) => a + b, 0) : null;
+  const aseg = R.porEtapa.cdi + R.porEtapa.filial, xGanar = R.porEtapa.neg + R.porEtapa.lic + R.porEtapa.pro;
+  const crec = pct(R.total, R.previo), vsPpto = pct(R.total, pptoT);
+  const gerentes = [...new Set(state.projects.filter(p => etapaBE(p)).map(p => nombreCorto(gerenteACargo(p) || '') || 'Sin gerente'))].sort((a, b) => a.localeCompare(b, 'es'));
+  const anios = [new Date().getFullYear(), new Date().getFullYear() + 1];
+  const flecha = d => d > 0 ? `<b class="sube">▲ ${fv1(d)}</b>` : d < 0 ? `<b class="baja">▼ ${fv1(-d)}</b>` : '<b>sin cambio</b>';
+  // Tablas por etapa (proyecto o cliente)
+  const tablas = MZ_TAB.map(([t, titulo, ets, bg, fg]) => {
+    const m = new Map();
+    R.proy.filter(x => ets.includes(x.et)).forEach(x => { const k = menAgrupa === 'cliente' ? (x.cliente || 'Sin cliente') : x.nombre; const o = m.get(k) || { v: 0, id: menAgrupa === 'cliente' ? null : x.id }; o.v += x.vol; m.set(k, o); });
+    const l = [...m.entries()].sort((a, b) => b[1].v - a[1].v), top = l.slice(0, 5), otros = l.slice(5).reduce((a, x) => a + x[1].v, 0), tot = l.reduce((a, x) => a + x[1].v, 0);
+    return `<div class="mz-tab" data-t="${t}"><div class="mz-th"><span style="background:${bg};color:${fg}">${titulo}</span><em>${R.total ? Math.round(tot / R.total * 100) : 0}% · ${l.length}</em></div>
+      <table>${top.map(([n, o]) => `<tr data-k="${esc(n)}" data-id="${esc(o.id || '')}"><td title="${esc(n)}">${esc(n)}</td><td>${fv1(o.v)}</td></tr>`).join('')}
+      ${otros ? `<tr class="otros" data-otros="1"><td>Otros ${l.length - 5}</td><td>${fv1(otros)}</td></tr>` : ''}<tr class="tot"><td>Total</td><td>${fv1(tot)}</td></tr></table></div>`;
+  }).join('');
+  const kpi = (t, v, s, cls, act) => `<div class="mz-kpi ${cls || ''}" ${act ? `data-kpi="${act}"` : ''}><span>${t}</span><b>${v}</b><p>${s}</p></div>`;
+  const leyenda = [...BE_ETAPAS.map(e => [e.et, MZ_COL[e.k], 'barra']), [String(y - 1), '#e0314b', 'linea'], ['Ppto', '#3b4a6b', 'linea']]
+    .map(([t, c, tipo]) => `<span><i class="${tipo}" style="${tipo === 'linea' ? `border-top-color:${c}` : `background:${c}`}"></i>${t}</span>`).join('');
+  cont.innerHTML = `<div class="mz" id="mz">
+    <div class="mz-cab">
+      <div class="mz-tit"><h2>BE ${y}${crec != null ? ` <span class="${crec >= 0 ? 'sube' : 'baja'}">${crec >= 0 ? '+' : ''}${crec}% vs ${y - 1}</span>` : ''}</h2>
+        <p>${met === 'vol' ? 'Volumen de concreto' : 'EBITDA'} · ${U} · ${R.corte ? `real hasta ${etqMes(R.corte)}${BO ? ' (BO al ' + esc(BO.corte) + ')' : ''}, después pronóstico del pipeline` : 'pronóstico del pipeline'}</p></div>
+      <div class="mz-ctl">
+        <div class="men-seg">${[['vol', 'Volumen'], ['ebitda', 'EBITDA']].map(([v, t]) => `<button type="button" class="${met === v ? 'on' : ''}" data-mz-met="${v}">${t}</button>`).join('')}</div>
+        <div class="men-seg">${anios.map(a => `<button type="button" class="${a === y ? 'on' : ''}" data-mz-anio="${a}">${a}</button>`).join('')}</div>
+        <select class="men-sel" data-mz-ger><option value="">Todos los gerentes</option>${gerentes.map(g => `<option ${g === menGerente ? 'selected' : ''}>${esc(g)}</option>`).join('')}</select>
+        <div class="mz-menu"><button type="button" class="btn btn-ghost btn-sm" data-mz-herr>Herramientas ▾</button><div class="mz-pop" hidden>
+          <button data-ir="cliente"><b>Detalle mensual</b><span>Tabla por cliente y proyecto, mes por mes</span></button>
+          <button data-ir="pron"><b>Pronóstico semanal</b><span>Real, tendencia, S-1 a S-3 y próximos meses por gerente</span></button>
+          <button data-ir="var"><b>Variaciones y cierres</b><span>Qué cambió entre semanas y plan contra real de cada mes</span></button>
+          <hr><button data-acc="pros"><b>Planear proyectos</b><span>Qué proyectos entran a tu plan y con qué volumen</span></button>
+          <button data-acc="ppto"><b>Ppto ${y}</b><span>Capturar o revisar el presupuesto mensual</span></button>
+          <button data-acc="ligar"><b>Ligar obras con la BO</b><span>Para que los meses cerrados tomen lo vendido</span></button>
+          <label><b>Cargar BO</b><span>Archivo bo_mensual.json</span><input type="file" accept=".json" hidden data-bo-arch></label>
+          <button data-acc="excel"><b>Exportar a Excel</b><span>Volumen, ingreso y EBITDA por obra y mes</span></button></div></div>
+      </div></div>
+    <div class="mz-kpis">
+      ${kpi(`BE ${y}`, fv(R.total), [crec != null ? `${crec >= 0 ? '+' : ''}${crec}% vs ${y - 1}` : '', vsPpto != null ? `${vsPpto >= 0 ? '+' : ''}${vsPpto}% vs Ppto` : ''].filter(Boolean).join(' · ') || U, '', 'total')}
+      ${kpi('Real a la fecha', R.realYTD ? fv(R.realYTD) : '—', R.corte ? `ene–${MES_ABR[+R.corte.slice(5, 7) - 1]} · ${R.total ? Math.round(R.realYTD / R.total * 100) : 0}% del BE` : 'Sin BO cargada', '', 'real')}
+      ${kpi('En ejecución', fv(aseg), `${R.total ? Math.round(aseg / R.total * 100) : 0}% asegurado`, 'ejec', 'ejec')}
+      ${kpi('Por ganar', fv(xGanar), `Negociación ${fv(R.porEtapa.neg)} · Licitación ${fv(R.porEtapa.lic)} · Proyecto ${fv(R.porEtapa.pro)}`, 'ganar', 'ganar')}
+      ${kpi('vs semana pasada', CS ? flecha(CS.neto) : '—', CS ? `${CS.lista.length} proyectos cambiaron desde el ${new Date(CS.semana + 'T12:00').toLocaleDateString('es-MX', { day: 'numeric', month: 'short' })}` : 'Se llena con la foto semanal', '', 'cambios')}
+    </div>
+    <div class="mz-main">
+      <div class="mz-card mz-graf"><div class="mz-ley">${leyenda}</div><div class="mz-charts"><div><canvas id="mzMes"></canvas></div><div class="mz-anual"><canvas id="mzAnual"></canvas></div></div></div>
+      <div class="mz-card mz-lado"><h3>Qué cambió esta semana</h3>
+        ${CS ? (CS.lista.slice(0, 7).map(f => `<div class="mz-cambio" data-id="${esc(f.id)}"><div><b title="${esc(f.n)}">${esc(f.n)}</b><span>${esc(f.c || '')} · ${esc(f.et || '')}</span></div>${flecha(f.d)}</div>`).join('') || '<p class="men-vacio">Sin cambios contra la semana pasada.</p>')
+          + (CS.lista.length > 7 ? `<button type="button" class="mz-mas" data-kpi="cambios">Ver los ${CS.lista.length}</button>` : '')
+        : '<p class="mz-nota">Cada semana el pipeline guarda una foto del pronóstico. Desde la próxima, aquí verás qué proyectos subieron o bajaron.</p>'}</div>
+    </div>
+    <div class="mz-tablas"><div class="mz-agrupa">Top por etapa · <div class="men-seg">${[['proyecto', 'Proyecto'], ['cliente', 'Cliente']].map(([v, t]) => `<button type="button" class="${menAgrupa === v ? 'on' : ''}" data-mz-agr="${v}">${t}</button>`).join('')}</div><span>${U} · doble clic en cualquier número para ver el detalle</span></div>
+      <div class="mz-tabgrid">${tablas}</div></div>
+  </div>`;
+  // ---- eventos
+  const re = () => renderResumen();
+  cont.querySelectorAll('[data-mz-met]').forEach(b => b.onclick = () => { menMetrica = b.dataset.mzMet; re(); });
+  cont.querySelectorAll('[data-mz-anio]').forEach(b => b.onclick = () => { beAnio = +b.dataset.mzAnio; re(); });
+  cont.querySelectorAll('[data-mz-agr]').forEach(b => b.onclick = () => { menAgrupa = b.dataset.mzAgr; re(); });
+  cont.querySelector('[data-mz-ger]').onchange = e => { menGerente = e.target.value; re(); };
+  const pop = cont.querySelector('.mz-pop');
+  cont.querySelector('[data-mz-herr]').onclick = e => { e.stopPropagation(); pop.hidden = !pop.hidden; };
+  document.addEventListener('click', function cierra(ev) { if (!pop.contains(ev.target)) { pop.hidden = true; document.removeEventListener('click', cierra); } });
+  pop.querySelectorAll('[data-ir]').forEach(b => b.onclick = () => { menVista = b.dataset.ir; renderMensualizado(); });
+  pop.querySelectorAll('[data-acc]').forEach(b => b.onclick = () => {
+    pop.hidden = true; const a = b.dataset.acc;
+    if (a === 'pros') abrirPlaneador(); if (a === 'ligar') abrirLigarBO(); if (a === 'excel') exportarMensualizado();
+    if (a === 'ppto') { menVista = 'be'; bePptoAbierto = true; renderMensualizado(); }
+  });
+  pop.querySelector('[data-bo-arch]').onchange = e => e.target.files[0] && subirArchivoBO(e.target.files[0]);
+  const U2 = met === 'vol' ? 'm³' : 'M MXN';
+  const drill = (tit, l, i) => drillMen(tit, l.map(x => ({ id: x.id, n: x.nombre, c: x.cliente, et: (BE_ETAPAS.find(e => e.k === x.et) || {}).et, v: i == null ? x.vol : x.m[i] })), U2);
+  cont.querySelectorAll('[data-kpi]').forEach(el => el.addEventListener(el.tagName === 'BUTTON' ? 'click' : 'dblclick', () => {
+    const k = el.dataset.kpi;
+    if (k === 'cambios' && CS) return drillMen(`Cambios vs semana del ${CS.semana}`, CS.lista.map(f => ({ id: f.id, n: f.n, c: f.c, et: f.et, v: f.d })), U2);
+    const ets = { total: null, real: ['cdi', 'filial'], ejec: ['cdi', 'filial'], ganar: ['neg', 'lic', 'pro'] }[k];
+    let l = R.proy.filter(x => !ets || ets.includes(x.et));
+    if (k === 'real') l = l.map(x => ({ ...x, vol: x.m.reduce((a, v, i) => a + (R.corte && R.meses[i] <= R.corte ? v : 0), 0) }));
+    drill(el.querySelector('span').textContent, l);
+  }));
+  cont.querySelectorAll('.mz-cambio').forEach(el => el.addEventListener('dblclick', () => openModal(el.dataset.id)));
+  cont.querySelectorAll('.mz-tab').forEach(t => {
+    const ets = MZ_TAB.find(x => x[0] === t.dataset.t)[2];
+    t.querySelectorAll('tr').forEach(tr => tr.addEventListener('dblclick', () => {
+      if (tr.dataset.id) return openModal(tr.dataset.id);
+      let l = R.proy.filter(x => ets.includes(x.et));
+      if (tr.dataset.k && menAgrupa === 'cliente') l = l.filter(x => (x.cliente || 'Sin cliente') === tr.dataset.k);
+      drill(`${t.querySelector('.mz-th span').textContent}${tr.dataset.k ? ' · ' + tr.dataset.k : ''} ${y}`, l);
+    }));
+  });
+  ajustarMz();
+  if (typeof Chart === 'undefined') return;
+  const etiquetas = fmt => ({ id: 'etq', afterDatasetsDraw(ch) {
+    const { ctx } = ch; ctx.save(); ctx.textAlign = 'center'; const tot = [];
+    ch.data.datasets.forEach((ds, di) => { if (ds.type === 'line') return;
+      ch.getDatasetMeta(di).data.forEach((el, i) => { const v = ds.data[i]; if (!v) return; tot[i] = (tot[i] || 0) + v;
+        if (Math.abs(el.base - el.y) >= 14) { ctx.font = '600 10.5px Outfit'; ctx.textBaseline = 'middle'; ctx.fillStyle = ds.texto; ctx.fillText(fmt(v), el.x, (el.y + el.base) / 2); } }); });
+    ctx.font = '700 11.5px Outfit'; ctx.fillStyle = '#14173d'; ctx.textBaseline = 'bottom';
+    tot.forEach((t, i) => { if (!t) return; let top = Infinity; ch.data.datasets.forEach((ds, di) => { if (ds.type !== 'line' && ds.data[i]) top = Math.min(top, ch.getDatasetMeta(di).data[i].y); });
+      ctx.fillText(fmt(t, true), ch.getDatasetMeta(0).data[i].x, top - 3); });
+    ctx.restore(); } });
+  const f0 = v => met === 'vol' ? Math.round(v).toLocaleString('es-MX') : v.toLocaleString('es-MX', { maximumFractionDigits: v >= 10 ? 0 : 1 });
+  const base = { maintainAspectRatio: false, layout: { padding: { top: 16 } }, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => `${c.dataset.label}: ${f0(c.parsed.y)} ${U}` } } } };
+  mzCharts.push(new Chart(document.getElementById('mzMes'), { type: 'bar', plugins: [etiquetas(f0)],
+    data: { labels: MES_ABR.map(m => m[0].toUpperCase() + m.slice(1)), datasets: [
+      ...BE_ETAPAS.map(e => ({ label: e.et, data: R.serie[e.k].map(esc1), backgroundColor: MZ_COL[e.k], stack: 's', order: 2, texto: e.k === 'pro' ? '#fff' : '#14173d', barPercentage: .8, categoryPercentage: .86 })),
+      ...(R.previoMes ? [{ type: 'line', label: String(y - 1), data: R.previoMes.map(esc1), borderColor: '#e0314b', borderDash: [7, 5], borderWidth: 2, pointRadius: 0, tension: .3, order: 0 }] : []),
+      ...(R.ppto ? [{ type: 'line', label: 'Ppto', data: R.ppto.map(esc1), borderColor: '#3b4a6b', borderDash: [7, 5], borderWidth: 2, pointRadius: 0, tension: .3, order: 0 }] : [])] },
+    options: { ...base, scales: { x: { stacked: true, grid: { display: false }, ticks: { font: { family: 'Outfit', size: 12, weight: '600' } } }, y: { stacked: true, display: false, grace: '6%' } } } }));
+  mzCharts.push(new Chart(document.getElementById('mzAnual'), { type: 'bar', plugins: [etiquetas((v, esTot) => esTot ? f0(v) : `${f0(v)} (${R.total ? Math.round(v / esc1(R.total) * 100) : 0}%)`)],
+    data: { labels: [String(y)], datasets: BE_ETAPAS.map(e => ({ label: e.et, data: [esc1(R.porEtapa[e.k])], backgroundColor: MZ_COL[e.k], stack: 's', texto: e.k === 'pro' ? '#fff' : '#14173d', barPercentage: .92, categoryPercentage: .92 })) },
+    options: { ...base, scales: { x: { stacked: true, grid: { display: false }, ticks: { font: { family: 'Outfit', size: 13, weight: '700' } } }, y: { stacked: true, display: false, grace: '6%' } } } }));
+  const [cM, cA] = mzCharts, hit = (ch, e) => ch.getElementsAtEventForMode(e, 'nearest', { intersect: true }, true)[0];
+  document.getElementById('mzMes').ondblclick = e => { const h = hit(cM, e); if (!h || h.datasetIndex >= BE_ETAPAS.length) return; const et = BE_ETAPAS[h.datasetIndex];
+    drill(`${et.et} · ${MES_ABR[h.index]} ${y}`, R.proy.filter(x => x.et === et.k && x.m[h.index]), h.index); };
+  document.getElementById('mzAnual').ondblclick = e => { const h = hit(cA, e); if (!h) return; const et = BE_ETAPAS[h.datasetIndex]; drill(`${et.et} ${y}`, R.proy.filter(x => x.et === et.k)); };
+}
+// Que el resumen quepa completo en la pantalla, sea cual sea su tamaño
+function ajustarMz() {
+  const mz = document.getElementById('mz'); if (!mz) return;
+  const top = mz.getBoundingClientRect().top + window.scrollY;
+  let alto = Math.max(560, window.innerHeight - top - 14);
+  mz.style.height = alto + 'px';
+  // Si la página todavía se desborda (márgenes de abajo), se descuenta lo que sobra
+  const sobra = document.documentElement.scrollHeight - window.innerHeight;
+  if (sobra > 0 && alto - sobra >= 560) { alto -= sobra; mz.style.height = alto + 'px'; }
+  mz.classList.toggle('bajo', window.innerHeight < 820);
+  mzCharts.forEach(c => c.resize());
+}
+window.addEventListener('resize', () => { clearTimeout(ajustarMz._t); ajustarMz._t = setTimeout(ajustarMz, 150); });
 
 // ==========================================================================
 // PDM · PARTICIPACIÓN DE MERCADO
@@ -13670,9 +14249,9 @@ const VIEW_META = {
   },
   men: {
     title: 'Mensualizado',
-    subtitle: 'Volumen, ingreso y EBITDA por mes, por cliente y por proyecto',
+    subtitle: 'Volumen y EBITDA por mes: real, pronóstico y lo que falta por ganar',
     icon: '<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/>',
-    showFilters: true
+    showFilters: false
   },
   vp: {
     title: 'Presentación VP',
