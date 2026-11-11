@@ -6,7 +6,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Pipeline Construcción · 2026</title>
+<title>Pipeline · 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -809,6 +809,39 @@ body {
 .men-volver:hover { background: #eef0ff; }
 .men-vtit { font-size: 14px; color: var(--text); }
 @media (max-width: 1100px) { .mz-kpis { grid-template-columns: repeat(3, 1fr); } .mz-main { grid-template-columns: 1fr; } .mz-tabgrid { grid-template-columns: repeat(2, 1fr); } .mz { height: auto !important; } }
+.mz { grid-template-rows: auto auto minmax(0, 1fr) auto !important; gap: 8px; }
+.mz-kpis { gap: 8px; }
+.mz-kpi { padding: 7px 12px; } .mz-kpi b { font-size: clamp(18px, 1.55vw, 24px); margin: 0; } .mz-kpi p { font-size: 11px; } .mz-kpi span { font-size: 10px; }
+.mz-main { grid-template-columns: minmax(0, 1fr) clamp(220px, 19vw, 290px); }
+.mz-graf { padding: 8px 12px 6px; }
+.mz-charts { min-height: 260px; }
+.mz-lado h3 small { font-weight: 400; color: var(--text-3); font-size: 11px; margin-left: 4px; }
+.mz-ger { padding: 5px 2px 6px; border-bottom: 1px solid #f0f1f8; cursor: default; }
+.mz-ger:hover { background: #f6f7ff; }
+.mz-ger-n { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 3px; } .mz-ger-n b { font-weight: 600; }
+.mz-ger-n > b:last-child, .mz-ger-ok { font-size: 11px; color: var(--text-3); font-weight: 400; }
+.mz-ger-b { display: flex; align-items: center; gap: 6px; height: 11px; margin-top: 2px; }
+.mz-ger-b i { display: block; height: 7px; border-radius: 4px; min-width: 2px; } .mz-ger-b i.ini { background: #c9ccf5; } .mz-ger-b i.hoy { background: #1414B8; }
+.mz-ger-b em { font-style: normal; font-size: 10.5px; color: var(--text-2); white-space: nowrap; }
+.mz-tab { padding: 6px 10px; } .mz-tab td { padding: 2px; font-size: 11.5px; }
+.mz-agrupa { margin-bottom: 4px; }
+.mz { grid-template-rows: auto auto minmax(0, 1fr) auto !important; gap: 6px !important; }
+.mz-cab { align-items: center; }
+.mz-tit { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.mz-tit h2 { font-size: clamp(20px, 1.7vw, 25px) !important; }
+.mz-tit p { margin: 0 !important; font-size: 11.5px !important; }
+.mz-kpis { gap: 6px !important; }
+.mz-kpi { padding: 5px 10px 5px 12px !important; display: grid; grid-template-columns: auto 1fr; column-gap: 10px; align-items: center; }
+.mz-kpi span { grid-column: 1 / -1; font-size: 9.5px !important; }
+.mz-kpi b { font-size: clamp(17px, 1.35vw, 21px) !important; }
+.mz-kpi p { font-size: 10.5px !important; }
+.mz-main { grid-template-columns: minmax(0, 1fr) clamp(200px, 16vw, 250px) !important; gap: 8px !important; }
+.mz-charts { min-height: 300px !important; grid-template-columns: minmax(0, 1fr) clamp(100px, 8.5vw, 130px) !important; }
+.mz-graf { padding: 6px 10px 4px !important; }
+.mz-ley { font-size: 11px !important; }
+.mz-tablas .mz-agrupa { margin-bottom: 3px !important; font-size: 11.5px; }
+.mz-tab { padding: 4px 9px !important; } .mz-tab td { padding: 1px 2px !important; font-size: 11px !important; }
+.mz-th span { font-size: 11.5px !important; padding: 2px 10px !important; }
 .men-barra { position: sticky; top: 0; z-index: 6; box-shadow: 0 4px 10px rgba(20,23,61,.06); }
 .men-barra { flex-direction: column; align-items: stretch; gap: 6px; }
 .men-fila { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
@@ -2999,6 +3032,44 @@ tr.row-highlighted {
   50% { opacity: .4; }
 }
 
+
+/* ===== Encabezado único, estilo Ppto 2027 (nov-2026) ===== */
+.app-header { background: #fff; backdrop-filter: none; -webkit-backdrop-filter: none; border-bottom: 1px solid var(--border); }
+.header-inner { max-width: none; padding: 0; gap: 0; grid-template-rows: 46px auto; background: linear-gradient(#1414B8 0 46px, #f22230 46px 49px, #fff 49px); }
+.brand { grid-column: 1; grid-row: 1; z-index: 1; padding: 0 18px; gap: 10px; }
+.header-actions { grid-column: 2; grid-row: 1; z-index: 1; padding: 0 18px; flex-direction: row !important; align-items: center !important; gap: 10px !important; }
+.brand-mark { width: 30px; height: 26px; border: 0; border-radius: 0; display: inline-flex; flex-direction: column; justify-content: center; gap: 4px; }
+.brand-mark i { display: block; height: 4px; border-radius: 2px; background: #fff; }
+.brand-mark i:nth-child(1) { width: 26px; background: #f22230; } .brand-mark i:nth-child(2) { width: 30px; } .brand-mark i:nth-child(3) { width: 20px; background: #a9acf2; }
+.brand-title { color: #fff; font-weight: 600; font-size: 17px; letter-spacing: .1px; line-height: 1.15; }
+.brand-sub { color: #d2d2f7; text-transform: none; letter-spacing: 0; font-size: 10.5px; margin-top: 0; }
+.app-header .header-actions .btn:not(.btn-primary) { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.35); color: #fff; }
+.app-header .header-actions .btn:not(.btn-primary):hover { background: rgba(255,255,255,.22); }
+.app-header .header-estado > * { background: rgba(255,255,255,.12) !important; color: #fff !important; border-color: rgba(255,255,255,.3) !important; }
+.app-header .header-estado * { color: #fff !important; }
+.app-header .header-actions .btn { padding: 4px 8px !important; font-size: 11.5px !important; min-height: 0; }
+.app-header .header-actions .btn svg { width: 14px; height: 14px; }
+.app-header .header-estado > * { padding: 3px 10px !important; font-size: 11px !important; }
+.brand-mark { transform: scale(.85); }
+.tabs { grid-row: 2; background: transparent; border: 0; border-radius: 0; padding: 3px 12px 0; gap: 0; }
+.tab { border-radius: 0; padding: 7px 12px 5px; font-size: 12.5px; font-weight: 600; color: var(--text-3); border-bottom: 3px solid transparent; }
+.tab:hover { background: transparent; color: #1414B8; }
+.tab.active { background: transparent; box-shadow: none; color: #1414B8; border-bottom-color: #f22230; }
+/* El nombre de la pestaña ya no se repite dentro del contenido */
+.view-title { display: none !important; }
+
+/* ===== Más información por pantalla (nov-2026): filtros y tabla compactos ===== */
+.filter-bar { padding: 5px 8px; margin-bottom: 6px; }
+.buscador-fila { margin-bottom: 4px; gap: 8px; }
+.buscador { padding: 3px 9px; }
+.filtros-multi { gap: 4px; }
+.filtros-multi .filter-field { padding: 0; border: 0; background: none; gap: 0; box-shadow: none; }
+.filtro-pill { padding: 3px 8px; }
+.chips-fila .chip-toggle { padding-top: 3px !important; padding-bottom: 3px !important; }
+.pipeline-table tbody td { padding-top: 5px !important; padding-bottom: 5px !important; }
+.pipeline-table thead th { padding-top: 7px !important; padding-bottom: 7px !important; }
+.pipeline-table tbody td [class*="pill"], .pipeline-table tbody td [class*="status"], .pipeline-table tbody td [class*="tag"], .pipeline-table tbody td [class*="badge"], .pipeline-table tbody td [class*="region"] { padding-top: 1px !important; padding-bottom: 1px !important; line-height: 1.35 !important; }
+.pipeline-table tbody td { padding-top: 3px !important; padding-bottom: 3px !important; }
 </style>
 </head>
 <body>
@@ -3007,10 +3078,10 @@ tr.row-highlighted {
 <header class="app-header">
   <div class="header-inner">
       <div class="brand">
-      <span class="brand-mark">P</span>
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
       <div>
-        <div class="brand-title">Pipeline <em>Construcción</em></div>
-        <div class="brand-sub">2026 · CEMEX Concretos MX</div>
+        <div class="brand-title">Pipeline</div>
+        <div class="brand-sub">Infraestructura Pesada · Cuentas Nacionales · Soluciones</div>
       </div>
     </div>
 
@@ -3120,7 +3191,7 @@ tr.row-highlighted {
     <div class="buscador-fila">
       <div class="buscador">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-        <input id="f-search" type="text" placeholder="Buscar proyecto, cliente o comentario…">
+        <input id="f-search" type="search" name="buscar-obra-pipeline" autocomplete="off" autocorrect="off" spellcheck="false" data-lpignore="true" data-1p-ignore placeholder="Buscar proyecto, cliente o comentario…">
       </div>
       <div class="filter-summary" id="filter-summary">—</div>
       <div class="chips-fila">
@@ -3871,19 +3942,22 @@ function migrarClasificacion(p) {
 // Dirección comercial: las cuentas nacionales cruzan las tres regiones
 // geográficas, por eso va aparte de la región.
 // Por ahora solo dos direcciones. Centro, Norte-Bajío y Pacífico se ven como región.
-const DIRECCIONES = ['Construcción', 'Cuentas Nacionales'];
+const DIRECCIONES = ['Infraestructura Pesada', 'Cuentas Nacionales', 'Soluciones'];
 // Qué le toca a CEMEX en la obra
 const MODALIDADES = ['Suministro', 'Suministro y colocación', 'Construcción'];
 // Cómo se concursa
 const LICITACIONES = ['Licitación de obra', 'Licitación llave en mano'];
 
 const RESPONSABLES = ['LCDC', 'DDLG', 'APC', 'JDDO', 'FRB', 'JMSS', 'YATG', 'MLR', 'ESRA', 'SAAH',
-                      'JMLG', 'HARH', 'MFRC', 'MJSA', 'ATC', 'JGPC', 'ECA', 'ASH', 'MHOM', 'ERQ', 'MMC',
+                      'JMLG', 'HARH', 'MFRC', 'MJSA', 'ATC', 'DRL', 'VHH', 'FEG', 'JGPC', 'ECA', 'ASH', 'MHOM', 'ERQ', 'MMC',
                       // Cuentas Nacionales e Institucionales
                       'AJC', 'EAGH', 'GILP', 'NLAL', 'CARG', 'UCA', 'AMFL', 'VEGN', 'GCG', 'MJCC', 'AAL', 'MASJ'];
 
 // Nombre completo de cada quien: se usa para la pantalla de acceso y el encabezado
 const NOMBRES = {
+  DRL: 'Daniela Reyna Lozano',
+  VHH: 'Valeria Hernandez Hinojosa',
+  FEG: 'Fernando Elizondo Garcia',
   JGPC: 'Jesús Guadalupe Piña Carrillo',
   ECA: 'Enrique Chirino Andalco',
   ASH: 'Alejandro Serrano Herrera',
@@ -3992,11 +4066,10 @@ function migrarCampos(p) {
   if (p.modalidad === undefined) p.modalidad = p.contrato ?? null;
   delete p.contrato;
   if (p.tipo_licitacion === undefined) p.tipo_licitacion = null;
-  // Las direcciones regionales quedaron fuera: esas obras son de Construcción
-  if (p.direccion && !DIRECCIONES.includes(p.direccion)) p.direccion = 'Construcción';
-  // Sin dirección = pipeline de Construcción (el original y lo capturado a mano).
-  // Lo de Cuentas Nacionales entró por Consolidar y ya trae su dirección.
-  if (!p.direccion) p.direccion = 'Construcción';
+  // Construcción ahora se llama Infraestructura Pesada (nov-2026); las direcciones regionales viejas también
+  if (p.direccion === 'Construcción' || (p.direccion && !DIRECCIONES.includes(p.direccion))) p.direccion = 'Infraestructura Pesada';
+  // Sin dirección = pipeline de Infraestructura Pesada (el original y lo capturado a mano).
+  if (!p.direccion) p.direccion = 'Infraestructura Pesada';
   if (p.jefatura === undefined) p.jefatura = null;
   if (p.gerente === undefined) p.gerente = null;
   if (p.obra_madre === undefined) p.obra_madre = null;
@@ -4301,7 +4374,7 @@ let shaRemoto = null;     // sha del data.json que tenemos cargado
 let commitRemoto = null;  // último commit visto, para detectar cambios de otros
 let pollTimer = null;
 let guardando = false;
-const APP_VERSION = '2026-11-11';
+const APP_VERSION = '2026-11-12';
 let versionVieja = false;
 let conteoRemoto = null;
 let fotoRemota = new Map();   // cómo estaba cada obra la última vez que se leyó de GitHub
@@ -5353,7 +5426,7 @@ function openModal(id = null) {
     responsable: '', estatus: '01 - Proyecto',
     seguimiento: false, prospeccion: false, proyecto: '', segmento: '', subsegmento: '',
     tipo: '', cliente: '', gerente: '', jefatura: '', asesor: '', gerente_comercial: '',
-    equipos: [], archivos: [], direccion: 'Construcción', modalidad: '',
+    equipos: [], archivos: [], direccion: 'Infraestructura Pesada', modalidad: '',
     tipo_licitacion: '', venta: null, ebitda: null,
     duracion_meses: null,
     region: '', estado: '', concreto_total: null,
@@ -6362,10 +6435,12 @@ function renderCaptura(todas) {
   // Infraestructura es la Dirección de Construcción. Las obras que no traen
   // dirección capturada vienen del pipeline de Construcción y cuentan ahí.
   const DIRS = [
-    { titulo: 'Infraestructura', sub: 'Dirección de Construcción',
-      es: p => !p.direccion || p.direccion === 'Construcción' },
+    { titulo: 'Infraestructura Pesada', sub: 'Dirección de Infraestructura Pesada',
+      es: p => !p.direccion || p.direccion === 'Infraestructura Pesada' },
     { titulo: 'Cuentas Nacionales', sub: 'Dirección de Cuentas Nacionales',
-      es: p => p.direccion === 'Cuentas Nacionales' }
+      es: p => p.direccion === 'Cuentas Nacionales' },
+    { titulo: 'Soluciones', sub: 'Dirección de Soluciones',
+      es: p => p.direccion === 'Soluciones' }
   ];
 
   const CAMPOS = [
@@ -10062,7 +10137,7 @@ function accionRadar(op, accion, card) {
     const hoy = new Date().toISOString().slice(0, 10);
     const p = {
       id: uid(), proyecto: op.titulo || 'Oportunidad del radar', cliente: op.dependencia || '', estado: estadoDelMapa(op.estado) || op.estado || '',
-      estatus: '02 - Licitación', direccion: 'Construcción',
+      estatus: '02 - Licitación', direccion: 'Infraestructura Pesada',
       tipo_licitacion: tipoOp(op) === 'obra' ? 'Licitación de obra' : '',
       comentario: [op.numero, op.link].filter(Boolean).join(' · '),
       fecha_update: hoy, fecha_registro: hoy,
@@ -11438,7 +11513,7 @@ function guardarPresupuesto() {
   // 1. Altas nuevas
   b.filas.filter(f => f._sel === '__nueva').forEach(f => {
     const p = {
-      id: uid(), proyecto: f.nombre, estatus: f._estatus, direccion: 'Construcción',
+      id: uid(), proyecto: f.nombre, estatus: f._estatus, direccion: 'Infraestructura Pesada',
       fecha_update: hoy, fecha_registro: hoy, ppto_2027: true,
       history: [{ ts: hoy, text: `Alta desde el presupuesto ${PPTO_ANIO}`, author: yo() }]
     };
@@ -12386,7 +12461,7 @@ const k1 = v => (v / 1000).toLocaleString('es-MX', { maximumFractionDigits: 1 })
 const k0 = v => Math.round(v / 1000).toLocaleString('es-MX');
 function etapaBE(p) {
   const n = String(p.estatus || '').slice(0, 2);
-  if (n === '04' || n === '05' || n === '06') return p.direccion === 'Construcción' ? 'filial' : 'cdi';
+  if (n === '04' || n === '05' || n === '06') return p.direccion === 'Infraestructura Pesada' ? 'filial' : 'cdi';
   return { '03': 'neg', '02': 'lic', '01': 'pro' }[n] || null;
 }
 function pptoVolAnio(y) {   // k m³ por mes · captura manual o, para 2027, el presupuesto cargado
@@ -12823,6 +12898,17 @@ function cambiosSemana(y, met, ger) {
   return { semana: ant.semana, lista: l.sort((x, y2) => Math.abs(y2.d) - Math.abs(x.d)), neto: l.reduce((a, f) => a + f.d, 0) };
 }
 
+function porGerente(y, met) {
+  const pre = String(y), k = met === 'ebitda' ? 'e' : 'v';
+  const fotosAnio = (FOTOS || []).filter(f => Object.values(f.obras).some(o => Object.keys(o[k] || {}).some(ym => ym.startsWith(pre))));
+  const ini = fotosAnio[0] || null, hoy = fotoActual();
+  const suma = (foto) => { const m = new Map(); Object.entries(foto.obras).forEach(([id, o]) => {
+    const g = nombreCorto(o.g || '') || 'Sin gerente', v = Object.entries(o[k] || {}).reduce((a, [ym, x]) => a + (ym.startsWith(pre) ? x : 0), 0);
+    if (!v) return; const e = m.get(g) || { g, v: 0, obras: [] }; e.v += v; e.obras.push({ id, n: o.n, c: o.c, et: o.et, v }); m.set(g, e); }); return m; };
+  const A = ini ? suma(ini) : new Map(), B = suma(hoy);
+  const gs = [...new Set([...A.keys(), ...B.keys()])].map(g => ({ g, ini: A.has(g) ? A.get(g).v : null, hoy: B.has(g) ? B.get(g).v : 0, obrasA: (A.get(g) || {}).obras || [], obrasB: (B.get(g) || {}).obras || [] }));
+  return { fecha: ini ? ini.semana : null, lista: gs.sort((a, b) => b.hoy - a.hoy) };
+}
 async function renderResumen() {
   const cont = document.getElementById('men-cont');
   if (!BO && boEstado === 'sin cargar') { cont.innerHTML = '<div class="men-vacio">Preparando el resumen…</div>'; await cargarBO(); }
@@ -12832,6 +12918,7 @@ async function renderResumen() {
   const y = beAnio || new Date().getFullYear(), esc = escapeHtml;
   const R = calcularResumen(y, met, menGerente);
   const CS = FOTOS ? cambiosSemana(y, met, menGerente) : null;
+  const PG = porGerente(y, met);
   const U = met === 'vol' ? 'k m³' : 'M MXN';
   const fv = v => met === 'vol' ? Math.round((v || 0) / 1000).toLocaleString('es-MX') : (v || 0).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
   const fv1 = v => met === 'vol' ? ((v || 0) / 1000).toLocaleString('es-MX', { maximumFractionDigits: 1 }) : (v || 0).toLocaleString('es-MX', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
@@ -12847,10 +12934,10 @@ async function renderResumen() {
   const tablas = MZ_TAB.map(([t, titulo, ets, bg, fg]) => {
     const m = new Map();
     R.proy.filter(x => ets.includes(x.et)).forEach(x => { const k = menAgrupa === 'cliente' ? (x.cliente || 'Sin cliente') : x.nombre; const o = m.get(k) || { v: 0, id: menAgrupa === 'cliente' ? null : x.id }; o.v += x.vol; m.set(k, o); });
-    const l = [...m.entries()].sort((a, b) => b[1].v - a[1].v), top = l.slice(0, 5), otros = l.slice(5).reduce((a, x) => a + x[1].v, 0), tot = l.reduce((a, x) => a + x[1].v, 0);
+    const l = [...m.entries()].sort((a, b) => b[1].v - a[1].v), top = l.slice(0, 3), otros = l.slice(3).reduce((a, x) => a + x[1].v, 0), tot = l.reduce((a, x) => a + x[1].v, 0);
     return `<div class="mz-tab" data-t="${t}"><div class="mz-th"><span style="background:${bg};color:${fg}">${titulo}</span><em>${R.total ? Math.round(tot / R.total * 100) : 0}% · ${l.length}</em></div>
       <table>${top.map(([n, o]) => `<tr data-k="${esc(n)}" data-id="${esc(o.id || '')}"><td title="${esc(n)}">${esc(n)}</td><td>${fv1(o.v)}</td></tr>`).join('')}
-      ${otros ? `<tr class="otros" data-otros="1"><td>Otros ${l.length - 5}</td><td>${fv1(otros)}</td></tr>` : ''}<tr class="tot"><td>Total</td><td>${fv1(tot)}</td></tr></table></div>`;
+      ${otros ? `<tr class="otros" data-otros="1"><td>Otros ${l.length - 3}</td><td>${fv1(otros)}</td></tr>` : ''}<tr class="tot"><td>Total</td><td>${fv1(tot)}</td></tr></table></div>`;
   }).join('');
   const kpi = (t, v, s, cls, act) => `<div class="mz-kpi ${cls || ''}" ${act ? `data-kpi="${act}"` : ''}><span>${t}</span><b>${v}</b><p>${s}</p></div>`;
   const leyenda = [...BE_ETAPAS.map(e => [e.et, MZ_COL[e.k], 'barra']), [String(y - 1), '#e0314b', 'linea'], ['Ppto', '#3b4a6b', 'linea']]
@@ -12882,10 +12969,12 @@ async function renderResumen() {
     </div>
     <div class="mz-main">
       <div class="mz-card mz-graf"><div class="mz-ley">${leyenda}</div><div class="mz-charts"><div><canvas id="mzMes"></canvas></div><div class="mz-anual"><canvas id="mzAnual"></canvas></div></div></div>
-      <div class="mz-card mz-lado"><h3>Qué cambió esta semana</h3>
-        ${CS ? (CS.lista.slice(0, 7).map(f => `<div class="mz-cambio" data-id="${esc(f.id)}"><div><b title="${esc(f.n)}">${esc(f.n)}</b><span>${esc(f.c || '')} · ${esc(f.et || '')}</span></div>${flecha(f.d)}</div>`).join('') || '<p class="men-vacio">Sin cambios contra la semana pasada.</p>')
-          + (CS.lista.length > 7 ? `<button type="button" class="mz-mas" data-kpi="cambios">Ver los ${CS.lista.length}</button>` : '')
-        : '<p class="mz-nota">Cada semana el pipeline guarda una foto del pronóstico. Desde la próxima, aquí verás qué proyectos subieron o bajaron.</p>'}</div>
+      <div class="mz-card mz-lado"><h3>Por gerente <small>BE inicial → hoy</small></h3>
+        ${PG.lista.length ? PG.lista.slice(0, 9).map(x => { const mx = Math.max(...PG.lista.map(z => Math.max(z.hoy, z.ini || 0)), 1); const d = x.ini != null ? x.hoy - x.ini : null;
+          return `<div class="mz-ger" data-ger="${esc(x.g)}"><div class="mz-ger-n"><b>${esc(x.g)}</b>${d != null && Math.abs(d) > (met === 'vol' ? 0.5 : 0.005) ? flecha(d) : '<span class="mz-ger-ok">sin cambio</span>'}</div>
+            <div class="mz-ger-b"><i class="ini" style="width:${x.ini != null ? x.ini / mx * 100 : 0}%"></i><em>${x.ini != null ? fv(x.ini) : '—'}</em></div>
+            <div class="mz-ger-b"><i class="hoy" style="width:${x.hoy / mx * 100}%"></i><em><b>${fv(x.hoy)}</b></em></div></div>`; }).join('') : '<p class="mz-nota">Sin pronóstico por gerente todavía.</p>'}
+        <p class="mz-nota">${PG.fecha ? `BE inicial: foto del ${new Date(PG.fecha + 'T12:00').toLocaleDateString('es-MX', { day: 'numeric', month: 'short' })}` : 'El BE inicial se toma de la primera foto semanal del año'} · doble clic para ver sus obras</p></div>
     </div>
     <div class="mz-tablas"><div class="mz-agrupa">Top por etapa · <div class="men-seg">${[['proyecto', 'Proyecto'], ['cliente', 'Cliente']].map(([v, t]) => `<button type="button" class="${menAgrupa === v ? 'on' : ''}" data-mz-agr="${v}">${t}</button>`).join('')}</div><span>${U} · doble clic en cualquier número para ver el detalle</span></div>
       <div class="mz-tabgrid">${tablas}</div></div>
@@ -12916,7 +13005,11 @@ async function renderResumen() {
     if (k === 'real') l = l.map(x => ({ ...x, vol: x.m.reduce((a, v, i) => a + (R.corte && R.meses[i] <= R.corte ? v : 0), 0) }));
     drill(el.querySelector('span').textContent, l);
   }));
-  cont.querySelectorAll('.mz-cambio').forEach(el => el.addEventListener('dblclick', () => openModal(el.dataset.id)));
+  cont.querySelectorAll('.mz-ger').forEach(el => el.addEventListener('dblclick', () => {
+    const x = PG.lista.find(z => z.g === el.dataset.ger); if (!x) return;
+    const m = new Map(); x.obrasA.forEach(o => m.set(o.id, { ...o, a: o.v, b: 0 })); x.obrasB.forEach(o => { const e = m.get(o.id) || { ...o, a: 0 }; e.b = o.v; m.set(o.id, e); });
+    drillMen(`${x.g} · BE inicial ${fv(x.ini || 0)} → hoy ${fv(x.hoy)} (${U}), variación por obra`, [...m.values()].map(o => ({ id: o.id, n: o.n, c: o.c, et: o.et, v: o.b - o.a })), met === 'vol' ? 'm³' : 'M MXN');
+  }));
   cont.querySelectorAll('.mz-tab').forEach(t => {
     const ets = MZ_TAB.find(x => x[0] === t.dataset.t)[2];
     t.querySelectorAll('tr').forEach(tr => tr.addEventListener('dblclick', () => {
@@ -12967,6 +13060,71 @@ function ajustarMz() {
 }
 window.addEventListener('resize', () => { clearTimeout(ajustarMz._t); ajustarMz._t = setTimeout(ajustarMz, 150); });
 
+
+// ==========================================================================
+// PROYECTOS ANCLA (Ppto. 2027 · Soluciones) → pipeline, Dirección de Soluciones
+// Se sincronizan solos al abrir el pipeline (lo hacen María José o José Miguel):
+// el Ppto. 2027 manda en estos campos; cada obra queda ligada por ancla_id.
+// ==========================================================================
+const ANCLA_REGION = { cs: { region: 'Centro Sur', ger: 'ECA' }, nb: { region: 'Norte - Bajío', ger: 'ASH' }, pa: { region: 'Pacífico', ger: 'MHOM' } };
+const ANCLA_ESTATUS = { prospecto: '01 - Proyecto', proyecto: '01 - Proyecto', licitacion: '02 - Licitación', negociacion: '03 - Negociación',
+  contratado: '04 - Contratado', ejecucion: '05 - Ejecución', perdido: '07 - Perdido' };
+const PLAZA_ESTADO = { cdmx: 'Ciudad de Mexico', 'ciudad de mexico': 'Ciudad de Mexico', cancun: 'Quintana Roo', 'playa del carmen': 'Quintana Roo', tulum: 'Quintana Roo', monterrey: 'Nuevo Leon',
+  guadalajara: 'Jalisco', queretaro: 'Queretaro', puebla: 'Puebla', toluca: 'Estado de Mexico', 'estado de mexico': 'Estado de Mexico', edomex: 'Estado de Mexico', merida: 'Yucatán', leon: 'Guanajuato',
+  tijuana: 'Baja California', mexicali: 'Baja California', hermosillo: 'Sonora', culiacan: 'Sinaloa', mazatlan: 'Sinaloa', 'los cabos': 'Baja California Sur', 'la paz': 'Baja California Sur',
+  saltillo: 'Coahuila', torreon: 'Coahuila', chihuahua: 'Chihuahua', 'ciudad juarez': 'Chihuahua', 'san luis potosi': 'San Luis Potosi', slp: 'San Luis Potosi', aguascalientes: 'Aguascalientes',
+  veracruz: 'Veracruz', villahermosa: 'Tabasco', oaxaca: 'Oaxaca', morelia: 'Michoacan', cuernavaca: 'Morelos', pachuca: 'Hidalgo', tampico: 'Tamaulipas', reynosa: 'Tamaulipas', durango: 'Durango',
+  zacatecas: 'Zacatecas', tepic: 'Nayarit', 'puerto vallarta': 'Jalisco', colima: 'Colima', manzanillo: 'Colima', campeche: 'Campeche', 'tuxtla gutierrez': 'Chiapas', acapulco: 'Guerrero', tlaxcala: 'Tlaxcala' };
+let anclaHecho = false;
+async function sincronizarAncla(manual) {
+  if (!userAuth) return;
+  try {
+    const r = await fetch(`https://api.github.com/repos/${GH.owner}/presupuesto-2027-datos/contents/presupuesto.json?ref=main`,
+      { headers: { Authorization: `Bearer ${userAuth.token}`, Accept: 'application/vnd.github.raw+json' }, cache: 'no-store' });
+    if (!r.ok) { if (manual) toast('No se pudo leer el Ppto. 2027 de Soluciones (' + r.status + ')', 'warn'); return; }
+    const st = await r.json(), hoy = new Date().toISOString().slice(0, 10);
+    let nuevos = 0, cambios = 0;
+    Object.entries(st.pipeline || {}).forEach(([k, filas]) => {
+      const reg = ANCLA_REGION[k]; if (!reg || !Array.isArray(filas)) return;
+      filas.forEach(f => {
+        if (!f || !f.id || !String(f.proyecto || '').trim()) return;
+        const plaza = String(f.plaza || '').trim();
+        const datos = { proyecto: String(f.proyecto).trim(), cliente: String(f.cliente || '').trim(), direccion: 'Soluciones', region: reg.region, plaza,
+          estado: PLAZA_ESTADO[normEq(plaza)] || estadoDelMapa(plaza) || null, estatus: ANCLA_ESTATUS[f.estatus] || '01 - Proyecto',
+          concreto_total: f.volCx ?? null, venta: f.venta ?? null, ebitda: f.ebitda ?? null, duracion_meses: f.duracion ?? null,
+          fecha_arranque: /^\d{4}-\d{2}$/.test(f.arranque || '') ? f.arranque : null, highlight: !!f.star, seguimiento: !!f.seg, ppto_2027: f.ppto !== false,
+          gerente: reg.ger, comentario_ancla: String(f.comentario || '').trim() };
+        let p = state.projects.find(x => x.ancla_id === f.id);
+        if (!p) {
+          p = { id: uid(), ancla_id: f.id, fecha_registro: hoy, fecha_update: hoy, history: [{ ts: hoy, text: 'Alta desde Proyectos Ancla (Ppto. 2027 · Soluciones)' + (datos.comentario_ancla ? ': ' + datos.comentario_ancla : ''), author: 'Sistema' }], ...datos };
+          sanearTipos(p); migrarEstatus(p); migrarClasificacion(p); migrarCompetidores(p); migrarCampos(p);
+          p.direccion = 'Soluciones'; state.projects.push(p); nuevos++;
+        } else {
+          let toco = false;
+          Object.entries(datos).forEach(([c, v]) => { if (v !== null && v !== '' && JSON.stringify(p[c]) !== JSON.stringify(v)) { p[c] = v; toco = true; } });
+          if (toco) { sanearTipos(p); p.fecha_update = hoy; cambios++; }
+        }
+      });
+    });
+    if (nuevos || cambios) {
+      saveState(`Sincronizó Proyectos Ancla de Soluciones: ${nuevos} nuevos, ${cambios} actualizados`);
+      populateFilters(); refrescarVistas();
+      toast(`Proyectos Ancla de Soluciones: ${nuevos} nuevos y ${cambios} actualizados en el pipeline`);
+    } else if (manual) toast('Proyectos Ancla al día');
+  } catch (e) { if (manual) toast('No se pudo sincronizar: ' + e.message, 'warn'); }
+}
+setInterval(() => {
+  if (anclaHecho || !userAuth || !state.projects.length || !['MJSA', 'JMLG'].includes(userAuth.iniciales)) return;
+  anclaHecho = true; sincronizarAncla(false);
+}, 4000);
+
+(function () {
+  const inp = document.getElementById('f-search'); if (!inp) return;
+  let tecleo = false; inp.addEventListener('keydown', () => { tecleo = true; });
+  const limpia = () => { if (!tecleo && inp.value) { inp.value = ''; if (state.filters.search) { state.filters.search = ''; try { refrescarVistas(); } catch (e) { /* sin acción */ } } } };
+  [300, 900, 1800, 3500, 6000].forEach(t => setTimeout(limpia, t));
+  inp.addEventListener('change', () => { if (!tecleo) limpia(); });
+})();
 // ==========================================================================
 // PDM · PARTICIPACIÓN DE MERCADO
 // Lee del pipeline: volumen total de cada obra, lo que trae CEMEX y lo que
