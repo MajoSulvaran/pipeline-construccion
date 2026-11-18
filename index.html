@@ -3071,6 +3071,21 @@ tr.row-highlighted {
 .pipeline-table tbody td [class*="pill"], .pipeline-table tbody td [class*="status"], .pipeline-table tbody td [class*="tag"], .pipeline-table tbody td [class*="badge"], .pipeline-table tbody td [class*="region"] { padding-top: 1px !important; padding-bottom: 1px !important; line-height: 1.35 !important; }
 .pipeline-table tbody td { padding-top: 3px !important; padding-bottom: 3px !important; }
 </style>
+<script>if (/[?&]embebido=1/.test(location.search)) document.documentElement.classList.add('embebido');</script>
+<style>
+/* Dentro de un negocio en NUBE: sin franja azul (el negocio ya tiene encabezado); pestañas y acciones en un renglón */
+.embebido .brand{display:none!important}
+.embebido .header-inner{grid-template-rows:auto!important;grid-template-columns:minmax(0,1fr) auto!important;background:#fff!important}
+.embebido .tabs{grid-row:1!important;grid-column:1!important;padding-top:0!important}
+.embebido .header-actions{grid-row:1!important;grid-column:2!important;padding:0 12px!important}
+.embebido .app-header .header-actions .btn:not(.btn-primary){background:#fff!important;border-color:var(--border-2)!important;color:var(--text-2)!important}
+.embebido .app-header .header-estado>*{background:#f3f4fb!important;color:var(--text-2)!important;border-color:var(--border)!important}
+.embebido .app-header .header-estado *{color:var(--text-2)!important}
+.embebido .tabs{flex-wrap:nowrap!important;overflow-x:auto;scrollbar-width:none}
+.embebido .tabs::-webkit-scrollbar{display:none}
+.embebido .tab{padding:7px 10px 5px!important;white-space:nowrap}
+.embebido .header-estado>:first-child{display:none!important}
+</style>
 </head>
 <body>
 
@@ -4374,7 +4389,7 @@ let shaRemoto = null;     // sha del data.json que tenemos cargado
 let commitRemoto = null;  // último commit visto, para detectar cambios de otros
 let pollTimer = null;
 let guardando = false;
-const APP_VERSION = '2026-11-17';
+const APP_VERSION = '2026-11-18';
 let versionVieja = false;
 let conteoRemoto = null;
 let fotoRemota = new Map();   // cómo estaba cada obra la última vez que se leyó de GitHub
