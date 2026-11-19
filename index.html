@@ -13153,6 +13153,140 @@ if (DIRECCION_FIJA) {
   const st = document.createElement('style'); st.textContent = '[data-filtro="direccion"]{display:none!important}'; document.head.appendChild(st);
 }
 // ==========================================================================
+// RADAR (Cuentas Nacionales) → pipeline
+// El equipo de Cuentas Nacionales registra sus proyectos en RADAR (Power BI).
+// Se exporta la tabla de detalle (Exportar datos → Datos con el diseño actual)
+// y aquí se carga: cada proyecto queda en la Dirección de Cuentas Nacionales,
+// ligado por radar_id. Se puede volver a cargar: actualiza, no duplica.
+// ==========================================================================
+const RADAR_ESTATUS = { cerrada: '04 - Contratado', negociacion: '03 - Negociación', licitacion: '02 - Licitación', prospeccion: '01 - Proyecto',
+  'perdida cliente': '07 - Perdido', 'perdida cemex': '07 - Perdido' };
+const RADAR_ORDEN = ['cerrada', 'negociacion', 'licitacion', 'prospeccion', 'perdida cliente', 'perdida cemex'];
+const RADAR_ESTADO = { cdmx: 'Ciudad de Mexico' };
+function inicialesDe(nombre) {
+  const n = normEq(nombre || ''); if (!n) return '';
+  const hit = Object.entries(NOMBRES).find(([, v]) => normEq(v) === n);
+  return hit ? hit[0] : String(nombre).trim();
+}
+async function leerRadar(file) {
+  await asegurarLibreria('xlsx');
+  const wb = XLSX.read(await file.arrayBuffer(), { type: 'array', cellDates: true });
+  const rows = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], { header: 1, raw: true, defval: null });
+  const hi = rows.findIndex(r => r && r.some(c => normEq(c) === 'proyecto') && r.some(c => normEq(c) === 'estatus'));
+  if (hi < 0) throw new Error('No encontré la tabla de RADAR (columnas Proyecto y Estatus). Exporta la tabla de detalle con "Datos con el diseño actual".');
+  const H = rows[hi].map(c => normEq(c || ''));
+  const col = (...ns) => H.findIndex(h => ns.includes(h));
+  const C = { fecha: col('fecha regsitro', 'fecha registro'), ger: col('gerencia'), ase: col('asesor'), cli: col('cliente'), pro: col('proyecto'), reg: col('region'),
+    edo: col('estado'), seg: col('segmento'), of: col('tipo oferta'), cat: col('categoria'), sub: col('subcategoria'), prod: col('producto'), odv: col('odv'),
+    vol: col('volumen'), uni: col('unidad'), est: col('estatus') };
+  const grupos = new Map();
+  rows.slice(hi + 1).forEach(r => {
+    const pro = String(r[C.pro] || '').trim(); if (!pro) return;
+    const cli = String(r[C.cli] || '').trim(), key = normEq(cli) + '|' + normEq(pro);
+    const g = grupos.get(key) || { key, proyecto: pro, cliente: cli, filas: [] };
+    g.filas.push(r); grupos.set(key, g);
+  });
+  return [...grupos.values()].map(g => {
+    const F = g.filas, v = (r, k) => C[k] >= 0 ? r[C[k]] : null;
+    const conc = F.filter(r => normEq(v(r, 'sub')) === 'concreto' && normEq(v(r, 'uni')) === 'm3');
+    const base = (conc.length ? conc : F);
+    const est = base.map(r => normEq(v(r, 'est'))).filter(e => RADAR_ORDEN.includes(e)).sort((a, b) => RADAR_ORDEN.indexOf(a) - RADAR_ORDEN.indexOf(b))[0] || '';
+    // Las fechas de RADAR llegan como número de serie de Excel (46203 = 30-jun-2026)
+    const aFecha = d => d instanceof Date ? d : (typeof d === 'number' && d > 30000 && d < 70000) ? new Date(Date.UTC(1899, 11, 30) + d * 864e5) : null;
+    const fechas = F.map(r => aFecha(v(r, 'fecha'))).filter(Boolean).sort((a, b) => a - b);
+    const m3 = conc.reduce((a, r) => a + (+v(r, 'vol') || 0), 0);
+    const r0 = base[0];
+    return { key: g.key, proyecto: g.proyecto, cliente: g.cliente, estatusRadar: est, estatus: RADAR_ESTATUS[est] || '01 - Proyecto',
+      gerente_comercial: inicialesDe(v(r0, 'ger')), responsable: inicialesDe(v(r0, 'ase')), region: String(v(r0, 'reg') || '').trim(),
+      estado: (() => { const e = String(v(r0, 'edo') || '').trim(); return RADAR_ESTADO[normEq(e)] || estadoDelMapa(e) || e || null; })(),
+      segmento: String(v(r0, 'seg') || '').trim(), concreto_total: m3 ? Math.round(m3) / 1000 : null,
+      fecha_registro: fechas[0] ? fechas[0].toISOString().slice(0, 10) : null,
+      radar: { oferta: v(r0, 'of') || '', productos: [...new Set(F.map(r => v(r, 'prod')).filter(Boolean))].join(' · '),
+        otros: F.filter(r => !conc.includes(r)).map(r => `${v(r, 'sub') || ''} ${v(r, 'vol') || ''} ${v(r, 'uni') || ''}`.trim()).join(' · '),
+        odv: F.some(r => v(r, 'odv') === true || normEq(v(r, 'odv')) === 'true'), estatus: est } };
+  });
+}
+function planRadar(lista) {
+  const cn = state.projects.filter(p => p.direccion === 'Cuentas Nacionales');
+  return lista.map(x => {
+    let p = state.projects.find(o => o.radar_id === x.key);
+    if (!p) p = cn.find(o => !o.radar_id && normEq(o.proyecto) === normEq(x.proyecto) && (!o.cliente || !x.cliente || normEq(o.cliente) === normEq(x.cliente)));
+    if (!p) return { tipo: 'nueva', x };
+    const cambios = [];
+    if (p.estatus !== x.estatus) cambios.push('estatus');
+    if (x.concreto_total && Math.abs((+p.concreto_total || 0) - x.concreto_total) > 0.0005) cambios.push('volumen');
+    if (x.gerente_comercial && p.gerente_comercial !== x.gerente_comercial) cambios.push('gerente');
+    if (x.responsable && p.responsable !== x.responsable) cambios.push('asesor');
+    return { tipo: cambios.length || !p.radar_id ? 'cambia' : 'igual', x, p, cambios };
+  });
+}
+function aplicarRadar(plan) {
+  const hoy = new Date().toISOString().slice(0, 10); let nuevas = 0, act = 0;
+  plan.forEach(it => {
+    const x = it.x;
+    if (it.tipo === 'nueva') {
+      const p = { id: uid(), radar_id: x.key, proyecto: x.proyecto, cliente: x.cliente, direccion: 'Cuentas Nacionales', estatus: x.estatus,
+        gerente_comercial: x.gerente_comercial, responsable: x.responsable, region: x.region, estado: x.estado, segmento: x.segmento,
+        concreto_total: x.concreto_total, fecha_registro: x.fecha_registro || hoy, fecha_update: hoy, radar: x.radar,
+        motivo_detalle: x.estatus === '07 - Perdido' ? 'RADAR: ' + x.estatusRadar : '',
+        history: [{ ts: hoy, text: `Alta desde RADAR (${x.estatusRadar || 'sin estatus'})`, author: 'RADAR' }] };
+      sanearTipos(p); migrarEstatus(p); migrarClasificacion(p); migrarCompetidores(p); migrarCampos(p); p.direccion = 'Cuentas Nacionales';
+      state.projects.push(p); nuevas++;
+    } else if (it.tipo === 'cambia') {
+      const p = it.p; p.radar_id = x.key; p.radar = x.radar;
+      if (p.estatus !== x.estatus) { (p.history = p.history || []).push({ ts: hoy, text: `RADAR: ${statusShortName(p.estatus)} → ${statusShortName(x.estatus)}`, author: 'RADAR' }); p.estatus = x.estatus; }
+      if (x.concreto_total) p.concreto_total = x.concreto_total;
+      if (x.gerente_comercial) p.gerente_comercial = x.gerente_comercial;
+      if (x.responsable) p.responsable = x.responsable;
+      ['region', 'estado', 'segmento'].forEach(c => { if (!p[c] && x[c]) p[c] = x[c]; });
+      if (x.estatus === '07 - Perdido' && !p.motivo_detalle) p.motivo_detalle = 'RADAR: ' + x.estatusRadar;
+      sanearTipos(p); p.fecha_update = hoy; act++;
+    }
+  });
+  saveState(`Cargó RADAR de Cuentas Nacionales: ${nuevas} nuevas, ${act} actualizadas`);
+  populateFilters(); refrescarVistas();
+  toast(`RADAR: ${nuevas} obras nuevas y ${act} actualizadas en Cuentas Nacionales`);
+}
+function abrirRadar() {
+  let ov = document.getElementById('radar-ov');
+  if (!ov) { ov = document.createElement('div'); ov.id = 'radar-ov'; ov.className = 'modal-overlay'; document.body.appendChild(ov); ov.addEventListener('click', e => { if (e.target === ov) ov.classList.remove('active'); }); }
+  ov.innerHTML = `<div class="modal men-modal" style="max-width:820px"><div class="modal-header"><h2>Cargar RADAR · Cuentas Nacionales</h2><button class="modal-close" data-x>×</button></div>
+    <div class="modal-body men-body"><p class="men-intro">Exporta en Power BI la tabla de detalle de RADAR (⋯ → Exportar datos → <b>Datos con el diseño actual</b>, sin filtros) y súbela aquí.
+      Cada proyecto entra a Cuentas Nacionales con su gerencia, asesor, cliente, estatus y volumen de concreto. Si ya existe, se actualiza; no se duplica.</p>
+      <input type="file" accept=".xlsx,.xls" id="radarArch"><div id="radarRes" style="margin-top:12px"></div></div>
+    <div class="modal-footer"><span style="flex:1"></span><button class="btn btn-ghost" data-x>Cancelar</button><button class="btn btn-primary" id="radarOk" disabled>Cargar al pipeline</button></div></div>`;
+  ov.querySelectorAll('[data-x]').forEach(b => b.onclick = () => ov.classList.remove('active'));
+  let plan = null;
+  ov.querySelector('#radarArch').onchange = async e => {
+    const f = e.target.files[0]; if (!f) return;
+    const res = ov.querySelector('#radarRes'); res.innerHTML = '<p class="men-intro">Leyendo…</p>';
+    try {
+      plan = planRadar(await leerRadar(f));
+      const n = t => plan.filter(x => x.tipo === t).length;
+      const porEst = {}; plan.forEach(it => { const e = statusShortName(it.x.estatus); porEst[e] = (porEst[e] || 0) + 1; });
+      res.innerHTML = `<p class="men-intro"><b>${plan.length}</b> proyectos en RADAR: <b>${n('nueva')}</b> nuevos, <b>${n('cambia')}</b> con cambios y ${n('igual')} sin cambios.
+        Por estatus: ${Object.entries(porEst).map(([k, v]) => `${escapeHtml(k)} ${v}`).join(' · ')}.</p>
+        <div class="men-pl-wrap" style="max-height:300px"><table class="men-pl"><thead><tr><th>Proyecto</th><th>Cliente</th><th>Estatus</th><th class="num">K m³</th><th>Qué pasa</th></tr></thead><tbody>
+        ${plan.filter(x => x.tipo !== 'igual').slice(0, 120).map(it => `<tr><td>${escapeHtml(it.x.proyecto)}</td><td>${escapeHtml(it.x.cliente)}</td><td>${escapeHtml(statusShortName(it.x.estatus))}</td>
+          <td class="num">${it.x.concreto_total != null ? fmtNum(it.x.concreto_total) : '—'}</td><td>${it.tipo === 'nueva' ? 'Nueva' : 'Actualiza ' + escapeHtml((it.cambios || []).join(', ') || 'liga con RADAR')}</td></tr>`).join('')}
+        </tbody></table></div>`;
+      ov.querySelector('#radarOk').disabled = !plan.some(x => x.tipo !== 'igual');
+    } catch (err) { res.innerHTML = `<p class="men-intro" style="color:#c0121d">${escapeHtml(err.message)}</p>`; }
+  };
+  ov.querySelector('#radarOk').onclick = () => { if (plan) { aplicarRadar(plan); ov.classList.remove('active'); } };
+  ov.classList.add('active');
+}
+// Botón en la vista de Cuentas Nacionales
+if (typeof DIRECCION_FIJA !== 'undefined' && DIRECCION_FIJA === 'Cuentas Nacionales') {
+  const acc = document.querySelector('.header-actions');
+  if (acc) {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'btn'; b.title = 'Cargar la tabla de RADAR'; b.textContent = '⇪ RADAR';
+    b.onclick = abrirRadar;
+    const ultimo = acc.querySelector('.btn-primary'); (ultimo ? ultimo.parentElement : acc).insertBefore(b, ultimo || null);
+  }
+}
+
+// ==========================================================================
 // PDM · PARTICIPACIÓN DE MERCADO
 // Lee del pipeline: volumen total de cada obra, lo que trae CEMEX y lo que
 // traen los competidores. El "mercado mapeado" son las obras que ya tienen
