@@ -3206,7 +3206,7 @@ tr.row-highlighted {
     <div class="buscador-fila">
       <div class="buscador">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-        <input id="f-search" type="search" name="buscar-obra-pipeline" autocomplete="off" autocorrect="off" spellcheck="false" data-lpignore="true" data-1p-ignore placeholder="Buscar proyecto, cliente o comentario…">
+        <input id="f-search" type="search" name="buscar-obra-pipeline" readonly autocomplete="off" autocorrect="off" spellcheck="false" data-lpignore="true" data-1p-ignore placeholder="Buscar proyecto, cliente o comentario…">
       </div>
       <div class="filter-summary" id="filter-summary">—</div>
       <div class="chips-fila">
@@ -3584,7 +3584,7 @@ tr.row-highlighted {
     <select id="auth-ini"></select>
 
     <label for="auth-token">Token de acceso</label>
-    <input id="auth-token" type="password" placeholder="github_pat_…" autocomplete="off">
+    <input id="auth-token" type="password" placeholder="github_pat_…" autocomplete="new-password">
     <p class="auth-ayuda">Te lo comparte Majo. Se guarda en este navegador, no hay que volver a pegarlo.</p>
 
     <button id="auth-btn">Conectar</button>
@@ -13140,11 +13140,19 @@ setInterval(() => {
 }, 4000);
 
 (function () {
+  // El navegador confundía el buscador con el campo de usuario del acceso y le ponía tu nombre.
+  // Ahora es de solo lectura hasta que lo enfocas, y cualquier texto que no venga del teclado se borra.
   const inp = document.getElementById('f-search'); if (!inp) return;
-  let tecleo = false; inp.addEventListener('keydown', () => { tecleo = true; });
-  const limpia = () => { if (!tecleo && inp.value) { inp.value = ''; if (state.filters.search) { state.filters.search = ''; try { refrescarVistas(); } catch (e) { /* sin acción */ } } } };
-  [300, 900, 1800, 3500, 6000].forEach(t => setTimeout(limpia, t));
-  inp.addEventListener('change', () => { if (!tecleo) limpia(); });
+  let tecleo = 0;
+  const marca = () => { tecleo = Date.now(); };
+  inp.addEventListener('focus', () => inp.removeAttribute('readonly'));
+  inp.addEventListener('blur', () => { if (!inp.value) inp.setAttribute('readonly', ''); });
+  ['keydown', 'paste', 'cut', 'drop'].forEach(ev => inp.addEventListener(ev, marca));
+  const limpia = () => { if (inp.value && Date.now() - tecleo > 1500) { inp.value = ''; if (state.filters.search) { state.filters.search = ''; try { refrescarVistas(); } catch (e) { /* sin acción */ } } } };
+  inp.addEventListener('input', () => { if (Date.now() - tecleo > 1500) limpia(); }, true);
+  [200, 600, 1200, 2500, 4000, 7000, 12000].forEach(t => setTimeout(limpia, t));
+  window.addEventListener('focus', () => setTimeout(limpia, 100));
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) setTimeout(limpia, 100); });
 })();
 if (DIRECCION_FIJA) {
   document.title = DIRECCION_FIJA + ' · Pipeline';
