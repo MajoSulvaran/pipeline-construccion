@@ -3070,6 +3070,21 @@ tr.row-highlighted {
 .pipeline-table thead th { padding-top: 7px !important; padding-bottom: 7px !important; }
 .pipeline-table tbody td [class*="pill"], .pipeline-table tbody td [class*="status"], .pipeline-table tbody td [class*="tag"], .pipeline-table tbody td [class*="badge"], .pipeline-table tbody td [class*="region"] { padding-top: 1px !important; padding-bottom: 1px !important; line-height: 1.35 !important; }
 .pipeline-table tbody td { padding-top: 3px !important; padding-bottom: 3px !important; }
+
+/* ===== Barra de filtros compacta (nov-2026): renglón 1 resumen y accesos; renglón 2 filtros y, al final, el buscador ===== */
+.filter-bar { display: flex !important; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding: 4px 8px !important; margin-bottom: 6px !important; }
+.buscador-fila { display: contents; }
+.filter-summary { order: 1; flex: 1 1 auto; font-size: 11.5px; }
+.chips-fila { order: 2; }
+.filtros-multi { order: 3; flex: 1 1 calc(100% - 190px); min-width: 0; display: flex !important; flex-wrap: nowrap; gap: 4px !important; }
+.buscador { order: 4; flex: 0 0 172px; padding: 2px 8px !important; margin: 0 !important; }
+.buscador input { font-size: 12px; min-width: 0; }
+.filtros-multi .filter-field { flex: 1 1 0; min-width: 0; }
+.filtros-multi .filter-field[data-filtro="direccion"] { flex: 0 0 auto; }
+.filtros-multi .filtro-pill { width: 100%; min-width: 0; overflow: hidden; }
+.chips-fila .chip-toggle { font-size: 11.5px !important; }
+.embebido .tab { padding: 5px 10px 4px !important; font-size: 12px !important; }
+.embebido .app-header .header-actions .btn { padding: 3px 7px !important; }
 </style>
 <script>if (/[?&]embebido=1/.test(location.search)) document.documentElement.classList.add('embebido');</script>
 <style>
@@ -4389,7 +4404,7 @@ let shaRemoto = null;     // sha del data.json que tenemos cargado
 let commitRemoto = null;  // último commit visto, para detectar cambios de otros
 let pollTimer = null;
 let guardando = false;
-const APP_VERSION = '2026-11-19';
+const APP_VERSION = '2026-11-26';
 let versionVieja = false;
 let conteoRemoto = null;
 let fotoRemota = new Map();   // cómo estaba cada obra la última vez que se leyó de GitHub
@@ -4994,7 +5009,7 @@ function filtrosActivos() {
   const sel = (k, et) => { if ((f[k] || []).length) l.push(`${et} (${f[k].length})`); };
   if (f.search) l.push(`Búsqueda "${f.search}"`);
   sel('estatusSel', 'Estatus'); sel('clienteSel', 'Cliente'); sel('segmentoSel', 'Segmento'); sel('subsegSel', 'Subsegmento');
-  sel('direccionSel', 'Dirección'); sel('regionSel', 'Región'); sel('modalidadSel', 'Modalidad'); sel('licitacionSel', 'Tipo de licitación'); sel('respSel', 'Responsable');
+  if (!DIRECCION_FIJA) sel('direccionSel', 'Dirección'); sel('regionSel', 'Región'); sel('modalidadSel', 'Modalidad'); sel('licitacionSel', 'Tipo de licitación'); sel('respSel', 'Responsable');
   if (f.highlight) l.push('Presentación VP'); if (f.seguimiento) l.push('Seguimiento'); if (f.ppto) l.push('Ppto. 2027');
   if (f.importante) l.push('Importantes'); if (f.conversion) l.push('Conversión técnica'); if (f.prospeccion) l.push('Prospección');
   return l;
@@ -5246,7 +5261,7 @@ function renderTable() {
   const extra27 = (state.filters.ppto || data.some(p => p.venta_27)) && (v27 || e27)
     ? ` · Ppto. 27: <strong>$${fmtNum(v27)}</strong> M venta · <strong>$${fmtNum(e27)}</strong> M EBITDA` : '';
   document.getElementById('filter-summary').innerHTML =
-    `<strong>${sum.count}</strong> proyecto${sum.count===1?'':'s'} · <strong>${fmtNum(sum.concreto)}</strong> K m³ de concreto · <strong>${sum.imp}</strong> para presentación VP ${extra27} <span style="color:var(--text-soft);margin-left:8px">· doble clic para ver la ficha</span>`;
+    `<strong>${sum.count}</strong> proyecto${sum.count===1?'':'s'} · <strong>${fmtNum(sum.concreto)}</strong> K m³ de concreto`;
 
   pintarAvisoFiltros(sum.count);
 
@@ -5317,6 +5332,7 @@ function renderTable() {
 // FILTROS — todos funcionan como las palomitas de Excel: varias opciones a la vez
 // ==========================================================================
 const FILTROS = [
+  { id: 'direccion', key: 'direccionSel', label: 'Dirección', campo: 'direccion', ops: () => DIRECCIONES },
   { id: 'estatus',   key: 'estatusSel',   label: 'Estatus',   campo: 'estatus',
     ops: () => ESTATUS, pastilla: true, atajo: { et: 'En curso', val: () => ESTATUS.slice(0, 5) } },
   { id: 'cliente',   key: 'clienteSel',   label: 'Cliente',   campo: 'cliente',
@@ -5328,7 +5344,6 @@ const FILTROS = [
       const base = seg.length ? seg : SEGMENTOS;
       return [...new Set(base.flatMap(sg => Object.keys(CLASIFICACION[sg] || {})))].sort();
     } },
-  { id: 'direccion', key: 'direccionSel', label: 'Dirección', campo: 'direccion', ops: () => DIRECCIONES },
   { id: 'region',    key: 'regionSel',    label: 'Región',    campo: 'region',
     ops: () => [...new Set(state.projects.map(p => p.region).filter(Boolean))].sort() },
   { id: 'modalidad', key: 'modalidadSel', label: 'Modalidad', campo: 'modalidad', ops: () => MODALIDADES },
@@ -13158,7 +13173,9 @@ if (DIRECCION_FIJA) {
   document.title = DIRECCION_FIJA + ' · Pipeline';
   const t = document.querySelector('.brand-title'), sb = document.querySelector('.brand-sub');
   if (t) t.textContent = DIRECCION_FIJA; if (sb) sb.textContent = 'Pipeline · Dirección de ' + DIRECCION_FIJA;
-  const st = document.createElement('style'); st.textContent = '[data-filtro="direccion"]{display:none!important}'; document.head.appendChild(st);
+  state.filters.direccionSel = [DIRECCION_FIJA];
+  const st = document.createElement('style'); st.textContent = '[data-filtro="direccion"]{pointer-events:none}[data-filtro="direccion"] .filtro-pill{background:#eef0ff;border-color:#1414B8;color:#1414B8}'; document.head.appendChild(st);
+  setTimeout(() => { try { pintarFiltros(); refrescarVistas(); } catch (e) { /* sin acción */ } }, 0);
 }
 // ==========================================================================
 // RADAR (Cuentas Nacionales) → pipeline
@@ -16353,7 +16370,7 @@ function wire() {
   });
 
   document.getElementById('btn-clear').addEventListener('click', () => {
-    state.filters = { search:'', estatusSel:[], clienteSel:[], segmentoSel:[], subsegSel:[], direccionSel:[],
+    state.filters = { search:'', estatusSel:[], clienteSel:[], segmentoSel:[], subsegSel:[], direccionSel: DIRECCION_FIJA ? [DIRECCION_FIJA] : [],
       regionSel:[], modalidadSel:[], licitacionSel:[], respSel:[],
       importante:false, conversion:false, highlight:false, seguimiento:false, prospeccion:false, ppto:false };
     document.getElementById('f-search').value = '';
